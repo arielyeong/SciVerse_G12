@@ -1,0 +1,624 @@
+﻿html, body {
+    height: 100%;
+    margin: 0; /* Remove body margin to eliminate left gap */
+}
+
+body {
+    font-family: Arial;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    color: #0066cc;
+    text-align: center;
+}
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#course-main .heading {
+    font-size: 35px;
+    color: var(--black);
+    border-bottom: var(--border);
+    padding-bottom: 16px;
+    margin-top: 100px;
+    text-align: center;
+}
+
+/* Site Master */
+.navbar,
+header,
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000; /* Make sure it's above any panel */
+}
+
+    .navbar .dropdown-menu {
+        margin-top: 10px; /* Push it down */
+    }
+
+.navbar-nav .nav-link {
+    font-family: "Poppins", sans-serif;
+}
+
+.body-content {
+    margin-top: 90px; /* Match navbar height */
+    padding-bottom: 60px; /* Space for footer */
+}
+
+/* Footer */
+.footer-wrapper {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.footer {
+    border-top: 1px solid #ccc; /* Line to separate footer from content */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%; /* Ensure full width */
+    position: relative; /* Follows content flow */
+    bottom: 0; /* Aligns to bottom of content */
+    background-color: transparent; /* No background color */
+}
+
+    .footer a {
+        color: #333; /* Dark text to match body */
+        transition: color 0.3s ease;
+        display: inline-block !important; /* Force inline-block for margin */
+        margin-right: 60px !important; /* Enforce custom gap size */
+    }
+
+        .footer a:hover {
+            color: #1abc9c; /* Teal hover color for contrast */
+            text-decoration: none;
+        }
+
+    .footer .fab {
+        font-size: 1.5rem;
+    }
+
+    .footer .mb-3 {
+        margin-bottom: 0.5rem !important; /* Reduced margin for compact layout */
+    }
+
+        .footer .mb-3 .footer-link:last-child {
+            margin-right: 0 !important; /* Remove margin from the last link */
+        }
+
+/*Login*/
+.login-container {
+    margin-top: -50px !important; /* adjust this value */
+}
+
+
+/*Forgot Password*/
+
+.form-container {
+    width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-container .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-container label {
+        font-weight: bold;
+    }
+
+    .form-container .btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+.message {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* === ADMIN SIDEBAR (Dark Theme) === */
+
+.admin-sidebar {
+    width: 220px;
+    background: #2c3e50;
+    color: white;
+    height: calc(100vh - 60px);
+    position: fixed;
+    top: 60px;
+    left: -220px; /* hidden by default */
+    transition: left 0.3s ease;
+    z-index: 1000;
+    padding-top: 20px;
+}
+
+    .admin-sidebar.active {
+        left: 0;
+    }
+
+.sidebar-header {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.sidebar-logo {
+    font-size: 16px;
+    line-height: 1.2;
+    text-align: center;
+    padding: 10px;
+    background: #34495e;
+    border-bottom: 1px solid #3d566e;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+}
+
+    .sidebar-nav a i {
+        margin-right: 10px;
+    }
+
+    .sidebar-nav a:hover {
+        background: #34495e;
+    }
+
+    .sidebar-nav a.active {
+        background: #1abc9c;
+        color: white;
+    }
+
+/* ===== Overlay for Outside Click ===== */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 60px; /* match header height */
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+}
+
+/* ===== Main Content ===== */
+.admin-content {
+    padding: 20px;
+    margin-top: 70px;
+    transition: margin-left 0.3s ease;
+}
+
+    .admin-content.shifted {
+        margin-left: 220px;
+    }
+
+/* ===== Toggle Button (Optional Extra Styling) ===== */
+.menu-toggle {
+    position: fixed;
+    top: 90px !important;
+    left: 15px;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    z-index: 2100;
+}
+
+/* ===== Responsive Sidebar (Auto-close for small screens) ===== */
+@media (max-width: 992px) {
+    .admin-sidebar {
+        left: -220px;
+    }
+
+        .admin-sidebar.active {
+            left: 0;
+        }
+
+    #sidebar-overlay {
+        display: block;
+    }
+}
+
+/* === USER SIDEBAR (Dark Theme) === */
+.user-sidebar {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 240px;
+    height: calc(100% - 70px);
+    background-color: #212529; /* dark background */
+    color: #f8f9fa; /* light text */
+    border-right: 1px solid #343a40;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    padding-top: 10px;
+}
+
+    /* Hide by default */
+    .user-sidebar.hidden {
+        transform: translateX(-100%);
+    }
+
+/* Sidebar title */
+.sidebar-title {
+    font-weight: 600;
+    color: #f8f9fa;
+}
+
+/* Sidebar links */
+.user-sidebar a {
+    color: #f8f9fa;
+    padding-left: 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+    .user-sidebar a:hover {
+        background-color: #495057;
+        text-decoration: none;
+    }
+
+/* When sidebar open, shift main content */
+.body-content.with-sidebar {
+    margin-left: 240px;
+    transition: margin-left 0.3s ease;
+}
+
+/* Sidebar scrollbar styling */
+.user-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.user-sidebar::-webkit-scrollbar-thumb {
+    background-color: #495057;
+    border-radius: 3px;
+}
+
+/* === DEFAULT PAGE === */
+
+/* home */
+
+#home h2 {
+    color: var(--white);
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+#home p {
+    width: 50%;
+    color: var(--white);
+    font-size: 0.9rem;
+    line-height: 25px;
+    text-align: center;
+}
+
+#home .button {
+    margin-top: 30px;
+}
+
+#home a {
+    text-decoration: none;
+    background-color: var(--white);
+    font-size: 0.9rem;
+    line-height: 25px;
+    padding: 13px 35px;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+    #home a.blue {
+        color: var(--background);
+        background: var(--white);
+    }
+
+        #home a.blue:hover {
+            color: var(--white);
+            background: var(--background);
+        }
+
+
+/* features */
+
+#about-us {
+    padding: 5vw 8vw 0 8vw;
+    text-align: center;
+}
+
+
+#features {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+    #features .fea-base {
+        display: flex;
+        align-items: center;
+        gap: 50px; /* Add space between the fea-boxes */
+        flex-direction: column; /* Display children in a column layout */
+    }
+
+    #features .fea-box {
+        display: flex;
+        width: 70%;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0px 2px 4px rgba(0,0,0,.2);
+    }
+
+        #features .fea-box .box-image img {
+            margin-right: 1.5rem;
+            display: block;
+            width: 200px; /* Adjust image width as needed */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px 0 0 8px; /* Rounded corners on the left side */
+        }
+
+        #features .fea-box .fea-content {
+            align-items: center;
+            padding: 20px;
+        }
+
+            #features .fea-box .fea-content h3 {
+                font-size: 26px;
+                text-transform: uppercase;
+                margin-top: 0; /* Remove default margin */
+            }
+
+            #features .fea-box .fea-content p {
+                font-size: 16px;
+                margin: 0.5rem 0;
+            }
+
+#fea-bullet {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 5vw 8vw 0 8vw;
+}
+
+    #fea-bullet .bullet-points {
+        max-width: 900px; /* Adjust as needed */
+        margin: 0 auto;
+    }
+
+    #fea-bullet h3 {
+        font-size: 30px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    #fea-bullet .bullet-points li {
+        list-style-type: disc; /* Set bullet point style */
+        font-size: 1.1rem;
+        margin-bottom: 10px; /* Add spacing between bullet points */
+    }
+
+/* course */
+
+#course {
+    padding: 5vw 8vw 0 8vw;
+    text-align: center;
+}
+
+.navbar {
+    background-color: #5483b3 !important; /* dark blue */
+}
+
+.navbar-logo {
+    height: 60px; /* Adjust size */
+    width: auto; /* Keeps proportions */
+    max-height: 70px; /* Prevent it from being too tall */
+}
+
+/* Popup Overlay (hidden by default) */
+.popup-overlay {
+    display: none; /* 🔹 Hidden until JavaScript makes it flex */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Popup Box */
+.popup-box {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+    .popup-box h2 {
+        margin: 0 0 10px;
+        font-weight: bold;
+    }
+
+    .popup-box button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+        .popup-box button:hover {
+            background: #0056b3;
+        }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/*******/
+/* Contact Us */
+/*******/
+
+#contact {
+    display: block;
+    padding: 20px 0;
+    min-height: calc(100vh - 150px);
+    position: relative;
+}
+
+    #contact .contact-form-container {
+        background-color: #ADD8E6;
+        padding: 25px;
+        width: 70%;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 0 auto 30px auto; /* Center the container */
+        position: relative;
+        text-align: center;
+    }
+
+    #contact .form-fields-wrapper {
+        width: 100%;
+    }
+
+    #contact label {
+        margin-bottom: 6px;
+        font-weight: bold;
+        width: 90%;
+        max-width: 600px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+    }
+
+    /* Force TextBox and TextArea width */
+    #contact input[type="text"],
+    #contact input[type="email"],
+    #contact textarea {
+        width: 90% !important; /* Fill most of the blue box */
+        max-width: 600px; /* Keep it readable */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin: 0 auto 15px auto; /* Center horizontally */
+        display: block;
+        text-align: left;
+        font-size: 1em;
+    }
+
+    #contact textarea {
+        height: 150px;
+        resize: vertical;
+    }
+
+    /* Submit button */
+    #contact input[type="submit"] {
+        background-color: #87CEEB;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 15px auto 0 auto;
+        display: block;
+        font-size: 1em;
+        transition: background 0.3s ease;
+    }
+
+        #contact input[type="submit"]:hover {
+            background-color: #00BFFF;
+        }
+
+    /* Validation error */
+    #contact .text-danger {
+        display: block;
+        margin: 5px auto 10px auto;
+        font-size: 0.9em;
+        color: #dc3545;
+        width: 90%;
+        max-width: 600px;
+        text-align: left;
+    }
+
+/* Responsive */
+@media (max-width: 768px) {
+    #contact .contact-form-container {
+        width: 95%;
+    }
+
+    #contact input[type="text"],
+    #contact input[type="email"],
+    #contact textarea {
+        width: 95% !important;
+        max-width: none;
+    }
+}
+
+
+/******/
+/*Admin View Message*/
+/******/
+
+/* Message Card Styling */
+.message-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.message-content p {
+    margin: 5px 0;
+}
+
+.message-actions {
+    display: flex;
+    align-items: center;
+}
+
+
+}
