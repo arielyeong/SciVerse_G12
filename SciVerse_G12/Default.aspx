@@ -1,11 +1,12 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="SciVerse_G12._Default" %>
 
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
-    <!-- Bootstrap -->
+     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Custom Homepage Style -->
-    <link href="~/Styles/Home.css" rel="stylesheet" type="text/css" />
+    <!-- Page-specific CSS -->
+    <link href="<%= ResolveUrl("~/Styles/Home.css") %>" rel="stylesheet" type="text/css" />
 </asp:Content>
+
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -125,39 +126,7 @@
             </div>
         </section>
 
-        <!-- Try It Yourself Section -->
-        <section id="try-it" class="try-it-section py-5 bg-light">
-            <div class="container text-center">
-                <h2 class="section-title mb-3">Try It Yourself</h2>
-                <p class="section-subtitle mb-5">Experience interactive science demos right now</p>
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="demo-card p-4 shadow-sm">
-                            <div class="demo-icon fs-1 mb-2">⚗️</div>
-                            <h3 class="demo-title">Chemical Reactions</h3>
-                            <p>Mix virtual chemicals and observe real-time reactions.</p>
-                            <a href="#" class="btn btn-primary btn-sm mt-3">Launch Demo</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="demo-card p-4 shadow-sm">
-                            <div class="demo-icon fs-1 mb-2">🔋</div>
-                            <h3 class="demo-title">Circuit Builder</h3>
-                            <p>Build and test electrical circuits interactively.</p>
-                            <a href="#" class="btn btn-primary btn-sm mt-3">Launch Demo</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="demo-card p-4 shadow-sm">
-                            <div class="demo-icon fs-1 mb-2">🌍</div>
-                            <h3 class="demo-title">Solar System</h3>
-                            <p>Explore planets and their orbits in 3D space.</p>
-                            <a href="#" class="btn btn-primary btn-sm mt-3">Launch Demo</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+       
 
         <!-- Featured Topics Section -->
         <section id="topics" class="topics-section">
