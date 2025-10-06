@@ -1,4 +1,5 @@
-﻿html, body {
+﻿
+html, body {
     height: 100%;
     margin: 0; /* Remove body margin to eliminate left gap */
 }
@@ -304,7 +305,7 @@ header,
 
 /* home */
 
-#home h2 {
+/*#home h2 {
     color: var(--white);
     font-size: 2.2rem;
     letter-spacing: 1px;
@@ -340,12 +341,12 @@ header,
         #home a.blue:hover {
             color: var(--white);
             background: var(--background);
-        }
+        }*/
 
 
 /* features */
 
-#about-us {
+/*#about-us {
     padding: 5vw 8vw 0 8vw;
     text-align: center;
 }
@@ -361,9 +362,9 @@ header,
     #features .fea-base {
         display: flex;
         align-items: center;
-        gap: 50px; /* Add space between the fea-boxes */
-        flex-direction: column; /* Display children in a column layout */
-    }
+        gap: 50px;*/ /* Add space between the fea-boxes */
+        /*flex-direction: column;*/ /* Display children in a column layout */
+    /*}
 
     #features .fea-box {
         display: flex;
@@ -376,10 +377,10 @@ header,
         #features .fea-box .box-image img {
             margin-right: 1.5rem;
             display: block;
-            width: 200px; /* Adjust image width as needed */
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 8px 0 0 8px; /* Rounded corners on the left side */
-        }
+            width: 200px;*/ /* Adjust image width as needed */
+            /*height: auto;*/ /* Maintain aspect ratio */
+            /*border-radius: 8px 0 0 8px;*/ /* Rounded corners on the left side */
+        /*}
 
         #features .fea-box .fea-content {
             align-items: center;
@@ -389,8 +390,8 @@ header,
             #features .fea-box .fea-content h3 {
                 font-size: 26px;
                 text-transform: uppercase;
-                margin-top: 0; /* Remove default margin */
-            }
+                margin-top: 0;*/ /* Remove default margin */
+            /*}
 
             #features .fea-box .fea-content p {
                 font-size: 16px;
@@ -405,8 +406,8 @@ header,
 }
 
     #fea-bullet .bullet-points {
-        max-width: 900px; /* Adjust as needed */
-        margin: 0 auto;
+        max-width: 900px;*/ /* Adjust as needed */
+        /*margin: 0 auto;
     }
 
     #fea-bullet h3 {
@@ -416,32 +417,32 @@ header,
     }
 
     #fea-bullet .bullet-points li {
-        list-style-type: disc; /* Set bullet point style */
-        font-size: 1.1rem;
-        margin-bottom: 10px; /* Add spacing between bullet points */
-    }
+        list-style-type: disc;*/ /* Set bullet point style */
+        /*font-size: 1.1rem;
+        margin-bottom: 10px;*/ /* Add spacing between bullet points */
+    /*}*/
 
 /* course */
 
-#course {
+/*#course {
     padding: 5vw 8vw 0 8vw;
     text-align: center;
 }
 
 .navbar {
-    background-color: #5483b3 !important; /* dark blue */
-}
+    background-color: #5483b3 !important;*/ /* dark blue */
+/*}
 
 .navbar-logo {
-    height: 60px; /* Adjust size */
-    width: auto; /* Keeps proportions */
-    max-height: 70px; /* Prevent it from being too tall */
-}
+    height: 60px;*/ /* Adjust size */
+    /*width: auto;*/ /* Keeps proportions */
+    /*max-height: 70px;*/ /* Prevent it from being too tall */
+/*}*/
 
 /* Popup Overlay (hidden by default) */
-.popup-overlay {
-    display: none; /* 🔹 Hidden until JavaScript makes it flex */
-    position: fixed;
+/*.popup-overlay {
+    display: none;*/ /* 🔹 Hidden until JavaScript makes it flex */
+    /*position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -450,10 +451,10 @@ header,
     justify-content: center;
     align-items: center;
     z-index: 1000;
-}
+}*/
 
 /* Popup Box */
-.popup-box {
+/*.popup-box {
     background: #fff;
     padding: 20px 30px;
     border-radius: 8px;
@@ -490,7 +491,7 @@ header,
         opacity: 1;
         transform: scale(1);
     }
-}
+}*/
 
 
 /*******/
