@@ -14,7 +14,7 @@
 
         <!-- Hero Section -->
         <section id="home" class="hero-section text-center py-5">
-            <div class="container position-relative">
+            <div class="container-fluid position-relative px-0">
                 <div class="hero-badge mb-3">🚀 Science Made Interactive</div>
                 <h1 class="hero-title mb-3">
                     Discover the Universe of <span class="gradient-text">Science</span>

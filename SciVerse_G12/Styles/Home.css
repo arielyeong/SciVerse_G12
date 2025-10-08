@@ -1,7 +1,6 @@
 ﻿@import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
 
 :root {
     --background: oklch(1 0 0);
@@ -119,6 +118,13 @@ body {
     padding: 0;
 }
 
+/* Remove the default container limit from MasterPage for homepage */
+body.homepage .body-content {
+    max-width: 100%;
+    padding: 0;
+}
+
+
 /* Button Styles */
 .btn {
     display: inline-flex;
@@ -176,13 +182,22 @@ body {
 /* Hero Section */
 .hero-section {
     position: relative;
-    min-height: 90vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
+    width: 100vw;s
     padding: 80px 0;
     overflow: hidden;
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
     background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+}
+
+.hero-section .container-fluid {
+    max-width: 100%;
+    padding: 0;
 }
 
 .hero-content {

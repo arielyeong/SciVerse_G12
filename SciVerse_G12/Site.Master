@@ -19,7 +19,7 @@
     <form runat="server">
 
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white px-3 shadow-sm border-bottom">
             <div class="container-fluid">
 
                 <!-- Sidebar Toggle Button (left side) -->
@@ -33,7 +33,7 @@
                 <a class="navbar-brand fw-bold d-flex align-items-center" runat="server" href="~/">
                     <asp:Image ID="LogoImg" runat="server" CssClass="me-2" ImageUrl="~/Images/WebLogo.png"
                         AlternateText="SciVerse Logo" Style="height:40px;" />
-                    <span>SciVerse</span>
+                    
                 </a>
 
                 <!-- Toggle (mobile) -->
@@ -110,7 +110,7 @@
             <div class="container text-center">
                 <div class="mb-2">
                     <a href="~/About" class="text-white text-decoration-none mx-2">Home</a>
-                    <a href="~/Contact.aspx" class="text-white text-decoration-none mx-2">Contact</a>
+                    <a href="<%= ResolveUrl("~/Contact.aspx") %>" class="text-white text-decoration-none mx-2">Contact</a>
                     <a href="#" class="text-white text-decoration-none mx-2">Terms & Conditions</a>
                 </div>
                 <p class="mb-0">&copy; <%: DateTime.Now.Year %> - SciVerse. All Rights Reserved.</p>

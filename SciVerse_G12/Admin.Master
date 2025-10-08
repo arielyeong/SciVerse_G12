@@ -29,36 +29,40 @@
         </asp:ScriptManager>
 
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 shadow-sm">
-            <div class="container-fluid d-flex justify-content-between align-items-center">
-                <!-- Sidebar Toggle Button -->
-                <button class="btn btn-outline-light me-2" type="button" id="menu-toggle" onclick="toggleSidebar()">
-                    <i class="fa fa-bars"></i>
-                </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-white px-3 shadow-sm border-bottom">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <!-- Sidebar Toggle Button -->
+        <button class="btn btn-outline-dark me-2" type="button" id="menu-toggle" onclick="toggleSidebar()">
+            <i class="fa fa-bars"></i>
+        </button>
 
-                <!-- Brand -->
-                <a class="navbar-brand fw-bold" href="~/Admin/ViewUserList.aspx" runat="server">
-                    SciVerse <span class="text-warning">Admin</span>
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold text-dark" href="~/Admin/ViewUserList.aspx" runat="server">
+            SciVerse <span class="text-warning">Admin</span>
+        </a>
+
+        <!-- Right Dropdown -->
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
+                    <i class="fa fa-user-circle"></i> <%= Session["Username"] %>
                 </a>
-
-                <!-- Right Dropdown -->
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
-                            <i class="fa fa-user-circle"></i> <%= Session["Username"] %>
+                <ul class="dropdown-menu dropdown-menu-end shadow">
+                    <li>
+                        <a class="dropdown-item" runat="server" href="~/Admin/AdminProfile.aspx">
+                            <i class="fa fa-id-badge"></i> Profile
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow">
-                            <li><a class="dropdown-item" runat="server" href="~/Admin/AdminProfile.aspx"><i class="fa fa-id-badge"></i> Profile</a></li>
-                            <li>
-                                <asp:LinkButton ID="btnLogout" runat="server" CssClass="dropdown-item" OnClick="btnLogout_Click">
-                                    <i class="fa fa-sign-out-alt"></i> Logout
-                                </asp:LinkButton>
-                            </li>
-                        </ul>
+                    </li>
+                    <li>
+                        <asp:LinkButton ID="btnLogout" runat="server" CssClass="dropdown-item" OnClick="btnLogout_Click">
+                            <i class="fa fa-sign-out-alt"></i> Logout
+                        </asp:LinkButton>
                     </li>
                 </ul>
-            </div>
-        </nav>
+            </li>
+        </ul>
+    </div>
+</nav>
 
         <!-- Sidebar + Content Wrapper -->
         <div class="d-flex">

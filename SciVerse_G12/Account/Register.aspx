@@ -348,37 +348,18 @@
             SelectCommand="SELECT * FROM [tblRegisteredUsers]" 
             UpdateCommand="UPDATE [tblRegisteredUsers] SET [fullName] = @fullName, [emailAddress] = @emailAddress, [username] = @username, [password] = @password, [age] = @age, [gender] = @gender, [country] = @country, [picture] = @picture, [dateRegister] = @dateRegister, [role] = @role WHERE [RID] = @RID">
 
-            <DeleteParameters>
-                <asp:Parameter Name="RID" Type="Int32" />
-            </DeleteParameters>
-
             <InsertParameters>
-                <asp:Parameter Name="fullName" Type="String" />
-                <asp:Parameter Name="emailAddress" Type="String" />
-                <asp:Parameter Name="username" Type="String" />
-                <asp:Parameter Name="password" Type="String" />
-                <asp:Parameter Name="age" Type="Int32" />
-                <asp:Parameter Name="gender" Type="String" />
-                <asp:Parameter Name="country" Type="String" />
+                <asp:ControlParameter Name="fullName" ControlID="txtFullname" PropertyName="Text" />
+                <asp:ControlParameter Name="emailAddress" ControlID="txtEmail" PropertyName="Text" />
+                <asp:ControlParameter Name="username" ControlID="TextBox1" PropertyName="Text" />
+                <asp:ControlParameter Name="password" ControlID="txtPassword" PropertyName="Text" />
+                <asp:ControlParameter Name="age" ControlID="txtAge" PropertyName="Text" />
+                <asp:ControlParameter Name="gender" ControlID="RadioButtonList1" PropertyName="SelectedValue" />
+                <asp:ControlParameter Name="country" ControlID="dlCountry" PropertyName="SelectedValue" />
                 <asp:Parameter Name="picture" Type="String" />
                 <asp:Parameter Name="dateRegister" Type="DateTime" />
-                <asp:Parameter Name="role" Type="String" />
+                <asp:Parameter Name="role" Type="String" DefaultValue="User" />
             </InsertParameters>
-
-
-            <UpdateParameters>
-                <asp:Parameter Name="fullName" Type="String" />
-                <asp:Parameter Name="emailAddress" Type="String" />
-                <asp:Parameter Name="username" Type="String" />
-                <asp:Parameter Name="password" Type="String" />
-                <asp:Parameter Name="age" Type="Int32" />
-                <asp:Parameter Name="gender" Type="String" />
-                <asp:Parameter Name="country" Type="String" />
-                <asp:Parameter Name="picture" Type="String" />
-                <asp:Parameter Name="dateRegister" Type="DateTime" />
-                <asp:Parameter Name="role" Type="String" />
-                <asp:Parameter Name="RID" Type="Int32" />
-            </UpdateParameters>
 
 
         </asp:SqlDataSource>
