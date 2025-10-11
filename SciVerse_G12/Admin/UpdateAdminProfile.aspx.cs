@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace SciVerse_G12
 {
-    public partial class UpdateProfile : System.Web.UI.Page
+    public partial class UpdateAdminProfile : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -94,7 +94,7 @@ namespace SciVerse_G12
                     imgPreview.ImageUrl = imagePath;
 
                 // ✅ Correct redirect path
-                string script = "setTimeout(function() { window.location.href = '" + ResolveUrl("~/Account/Profile.aspx") + "'; }, 2000);";
+                string script = "setTimeout(function() { window.location.href = '" + ResolveUrl("~/Admin/AdminProfile.aspx") + "'; }, 2000);";
                 ScriptManager.RegisterStartupScript(this, GetType(), "redirectAfterUpdate", script, true);
 
             }
@@ -103,7 +103,7 @@ namespace SciVerse_G12
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Account/Profile.aspx");
+            Response.Redirect("~/Admin/AdminProfile.aspx");
         }
 
         private void LoadUserDetails(string username)
@@ -143,4 +143,5 @@ namespace SciVerse_G12
         }
 
     }
+
 }

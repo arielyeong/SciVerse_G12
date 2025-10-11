@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UpdateProfile.aspx.cs" Inherits="SciVerse_G12.UpdateProfile" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="UpdateAdminProfile.aspx.cs" Inherits="SciVerse_G12.UpdateAdminProfile" %>
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
      <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -9,6 +9,13 @@
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">     
+
+<style>
+    .update-wrapper {
+        margin-top: -5px !important;
+    }
+ </style>
+
 <div class="update-wrapper">
     <div class="update-container">
         <div class="update-header">Update Profile</div>
@@ -362,6 +369,4 @@
             <asp:ControlParameter Name="username" ControlID="txtUsername" PropertyName="Text" />
         </UpdateParameters>
     </asp:SqlDataSource>
-
 </asp:Content>
-

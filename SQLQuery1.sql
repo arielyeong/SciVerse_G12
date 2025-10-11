@@ -43,31 +43,31 @@ CREATE TABLE [dbo].[tblRegisteredUsers] (
 );
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
-VALUES ('Kaja Rooney', 'Rooney', 'krooney0', 'iX4%ULx3', 15, 'Female', 'Colombia', 'https://robohash.org/suntquiet.png?size=50x50&set=set1', '2025-02-19 11:42:17', 'User');
+VALUES ('Kaja Rooney', 'Rooney', 'krooney0', 'wapp', 15, 'Female', 'Colombia', 'https://robohash.org/suntquiet.png?size=50x50&set=set1', '2025-02-19 11:42:17', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
-VALUES ('Ettore MacAnulty', 'MacAnulty', 'emacanulty1', 'hY7&H36{XI!C', 8, 'Male', 'New Zealand', 'https://robohash.org/inventoreliberosit.png?size=50x50&set=set1', '2024-11-05 06:14:41', 'User');
+VALUES ('Ettore MacAnulty', 'MacAnulty', 'emacanulty1', 'wapp', 8, 'Male', 'New Zealand', 'https://robohash.org/inventoreliberosit.png?size=50x50&set=set1', '2024-11-05 06:14:41', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
-VALUES ('Jorge Gerlts', 'Gerlts', 'jgerlts2', 'kT6%g0B9', 17, 'Male', 'Thailand', 'https://robohash.org/sapientenihilfugit.png?size=50x50&set=set1', '2025-06-12 07:32:32', 'User');
+VALUES ('Jorge Gerlts', 'Gerlts', 'jgerlts2', 'wapp', 17, 'Male', 'Thailand', 'https://robohash.org/sapientenihilfugit.png?size=50x50&set=set1', '2025-06-12 07:32:32', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
-VALUES ('Nancee Pegler', 'Pegler', 'npegler3', 'cF4@)c}(&Hq1|Y((', 15, 'Female', 'Iceland', 'https://robohash.org/earumabvoluptatem.png?size=50x50&set=set1', '2025-09-15 07:16:42', 'User');
+VALUES ('Nancee Pegler', 'Pegler', 'npegler3', 'wapp', 15, 'Female', 'Iceland', 'https://robohash.org/earumabvoluptatem.png?size=50x50&set=set1', '2025-09-15 07:16:42', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
-VALUES ('Aida Santarelli', 'Santarelli', 'asantarelli4', 'dM9{0_eL(_s3"', 16, 'Female', 'Indonesia', 'https://robohash.org/facerequivelit.png?size=50x50&set=set1', '2025-02-20 01:28:28', 'User');
+VALUES ('Aida Santarelli', 'Santarelli', 'aida', 'wapp"', 16, 'Female', 'Indonesia', 'https://robohash.org/facerequivelit.png?size=50x50&set=set1', '2025-02-20 01:28:28', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
-VALUES ('Mirilla Tefft', 'Tefft', 'mtefft5', 'sA1/!P)0.!I6l', 8, 'Female', 'China', 'https://robohash.org/magnamquiaeaque.png?size=50x50&set=set1', '2025-01-12 23:54:23', 'User');
+VALUES ('Mirilla Tefft', 'Tefft', 'mtefft5', 'wapp', 8, 'Female', 'China', 'https://robohash.org/magnamquiaeaque.png?size=50x50&set=set1', '2025-01-12 23:54:23', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
-VALUES ('Catlee Cobbled', 'Cobbled', 'ccobbled6', 'fO3|hCl`@', 11, 'Female', 'Czech Republic', 'https://robohash.org/voluptatemexet.png?size=50x50&set=set1', '2025-02-04 23:05:16', 'User');
+VALUES ('Catlee Cobbled', 'Cobbled', 'ccobbled6', 'wapp', 11, 'Female', 'Czech Republic', 'https://robohash.org/voluptatemexet.png?size=50x50&set=set1', '2025-02-04 23:05:16', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
-VALUES ('Brinna Cleaver', 'Cleaver', 'bcleaver7', 'xW3|=y?v16C{?', 8, 'Female', 'Canada', 'https://robohash.org/laborumquiain.png?size=50x50&set=set1', '2025-01-23 15:38:34', 'User');
+VALUES ('Brinna Cleaver', 'Cleaver', 'bcleaver7', 'wapp', 8, 'Female', 'Canada', 'https://robohash.org/laborumquiain.png?size=50x50&set=set1', '2025-01-23 15:38:34', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
-VALUES ('Milzie Joseff', 'Joseff', 'mjoseff8', 'zW4@x{M.c~<!ET', 18, 'Female', 'China', 'https://robohash.org/aspernaturvelrepudiandae.png?size=50x50&set=set1', '2025-07-26 20:58:16', 'User');
+VALUES ('Yeong Huey Yee', 'hueyyee@mail.com', 'hueyyee', 'wapp', 18, 'Female', 'China', 'https://robohash.org/aspernaturvelrepudiandae.png?size=50x50&set=set1', '2025-07-26 20:58:16', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
 VALUES ('System Admin', 'admin@example.com', 'admin', 'admin123', 30, 'Male', 'Malaysia', 'https://robohash.org/admin.png?size=50x50&set=set1', GETDATE(), 'Admin');

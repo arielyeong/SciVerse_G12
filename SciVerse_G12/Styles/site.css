@@ -34,12 +34,28 @@ header,
     z-index: 2000; /* Make sure it's above any panel */
 }
 
-    .navbar .dropdown-menu {
-        margin-top: 10px; /* Push it down */
-    }
+.navbar .dropdown-menu {
+    margin-top: 10px; /* Push it down */
+}
 
 .navbar-nav .nav-link {
     font-family: "Poppins", sans-serif;
+    padding: 0.5rem 1.25rem; /* adds space around each word */
+    font-weight: 600; /* slightly bold for visibility */
+    transition: all 0.2s ease-in-out; /* smooth hover effect */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #004c8c; /* darker blue tone on hover */
+    transform: scale(1.05); /* slight enlarge effect */
+}
+
+.navbar-nav .nav-item {
+    margin-right: 80px; /* adjust spacing between nav items */
+}
+
+.navbar-nav .nav-item:last-child {
+    margin-right: 0; /* remove margin on the last item */
 }
 
 .body-content {
@@ -211,16 +227,21 @@ header,
 
 /* ===== Toggle Button (Optional Extra Styling) ===== */
 .menu-toggle {
-    position: fixed;
-    top: 90px !important;
-    left: 15px;
-    background: #2c3e50;
-    color: white;
-    border: none;
+    background: transparent; /* visible on white header */
+    color: #007bff; /* blue icon/text */
+    border: 2px solid #007bff; /* blue border */
     padding: 8px 12px;
     cursor: pointer;
-    z-index: 2100;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
 }
+
+    /* Hover effect */
+    .menu-toggle:hover {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
 
 /* ===== Responsive Sidebar (Auto-close for small screens) ===== */
 @media (max-width: 992px) {

@@ -11,7 +11,7 @@ namespace SciVerse_G12
 {
 
 
-    public partial class UpdateProfile
+    public partial class UpdateAdminProfile
     {
 
         /// <summary>

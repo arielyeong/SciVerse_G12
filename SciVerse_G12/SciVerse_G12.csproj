@@ -131,6 +131,7 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\Profile.aspx" />
+    <Content Include="Styles\Profile.css" />
     <Content Include="Styles\Home.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -192,6 +193,7 @@
     <Content Include="Site.Master" />
     <Content Include="Account\UpdateProfile.aspx" />
     <Content Include="Admin\ViewMessage.aspx" />
+    <Content Include="Admin\UpdateAdminProfile.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Admin\ViewUserList.aspx" />
     <Content Include="Web.config" />
@@ -303,6 +305,13 @@
     <Compile Include="Admin\ViewMessage.aspx.designer.cs">
       <DependentUpon>ViewMessage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\UpdateAdminProfile.aspx.cs">
+      <DependentUpon>UpdateAdminProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UpdateAdminProfile.aspx.designer.cs">
+      <DependentUpon>UpdateAdminProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -318,7 +327,9 @@
       <DependentUpon>ViewUserList.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />

@@ -61,7 +61,7 @@ namespace SciVerse_G12
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Account/UpdateProfile.aspx");
+            Response.Redirect("~/Admin/UpdateAdminProfile.aspx");
         }
     }
 }

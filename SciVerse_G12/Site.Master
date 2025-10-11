@@ -24,15 +24,15 @@
 
                 <!-- Sidebar Toggle Button (left side) -->
                 <% if (Session["Username"] != null) { %>
-                    <button id="toggleUserSidebar" class="btn btn-outline-light me-3">
+                    <button id="toggleUserSidebar" class="menu-toggle me-3">
                         <i class="fa fa-bars"></i>
                     </button>
                 <% } %>
 
                 <!-- Brand -->
                 <a class="navbar-brand fw-bold d-flex align-items-center" runat="server" href="~/">
-                    <asp:Image ID="LogoImg" runat="server" CssClass="me-2" ImageUrl="~/Images/WebLogo.png"
-                        AlternateText="SciVerse Logo" Style="height:40px;" />
+                    <asp:Image ID="LogoImg" runat="server" CssClass="me-2" ImageUrl="~/Images/WAPP_Logo_Header.png"
+                        AlternateText="SciVerse Logo" Style="height:50px;" />
                     
                 </a>
 

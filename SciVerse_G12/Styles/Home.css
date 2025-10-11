@@ -187,7 +187,7 @@ body.homepage .body-content {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    width: 100vw;s
+    width: 100vw !important;
     padding: 80px 0;
     overflow: hidden;
     margin-left: calc(50% - 50vw); /* remove container margin restriction */
@@ -350,6 +350,11 @@ body.homepage .body-content {
 .did-you-know-section {
     padding: 100px 0;
     background: white;
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
+    width: 100vw !important;
+    padding: 80px 0;
+    display: flex;
 }
 
 .facts-grid {
@@ -399,6 +404,11 @@ body.homepage .body-content {
 .features-section {
     padding: 100px 0;
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
+    width: 100vw !important;
+    padding: 80px 0;
+    display: flex;
 }
 
 .features-grid {
@@ -527,6 +537,11 @@ body.homepage .body-content {
 .try-it-section {
     padding: 100px 0;
     background: white;
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
+    width: 100vw !important;
+    padding: 80px 0;
+    display: flex;
 }
 
 .demos-grid {
@@ -625,6 +640,11 @@ body.homepage .body-content {
 .topics-section {
     padding: 100px 0;
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
+    width: 100vw !important;
+    padding: 80px 0;
+    display: flex;
 }
 
 .topics-grid {
@@ -712,6 +732,11 @@ body.homepage .body-content {
 .why-choose-section {
     padding: 100px 0;
     background: white;
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
+    width: 100vw !important;
+    padding: 80px 0;
+    display: flex;
 }
 
 .why-choose-content {
@@ -814,6 +839,11 @@ body.homepage .body-content {
     position: relative;
     overflow: hidden;
     color: #1a1a2e;
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
+    width: 100vw !important;
+    padding: 80px 0;
+    display: flex;
 }
 
     .courses-section::before {
@@ -1044,6 +1074,11 @@ body.homepage .body-content {
     padding: 100px 0;
     background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
     text-align: center;
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
+    width: 100vw !important;
+    padding: 80px 0;
+    display: flex;
 }
 
 .cta-content {
