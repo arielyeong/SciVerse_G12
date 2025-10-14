@@ -4,7 +4,9 @@
      <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Page-specific CSS -->
-    <link href="<%= ResolveUrl("~/Styles/Home.css") %>" rel="stylesheet" type="text/css" />
+<%--    <link href="<%= ResolveUrl("~/Styles/Home.css") %>" rel="stylesheet" type="text/css" />--%>
+    <link href='<%= ResolveUrl("~/Styles/Home.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
+
 </asp:Content>
 
 
@@ -14,7 +16,7 @@
 
         <!-- Hero Section -->
         <section id="home" class="hero-section text-center py-5">
-            <div class="container position-relative">
+            <div class="container-fluid position-relative px-0">
                 <div class="hero-badge mb-3">🚀 Science Made Interactive</div>
                 <h1 class="hero-title mb-3">
                     Discover the Universe of <span class="gradient-text">Science</span>
@@ -25,18 +27,17 @@
                 </p>
                 <div class="d-flex justify-content-center gap-3">
                     <a href="#" class="btn btn-primary btn-lg">Start Learning Now →</a>
-                    <a href="#" class="btn btn-outline-primary btn-lg">Watch Demo</a>
                 </div>
                 <div class="row mt-5 hero-stats">
                     <div class="col-md-4">
                         <div class="stat-item">
-                            <div class="stat-number">10K+</div>
+                            <div class="stat-number">10</div>
                             <div class="stat-label">Active Students</div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="stat-item">
-                            <div class="stat-number">500+</div>
+                            <div class="stat-number">2</div>
                             <div class="stat-label">Experiments</div>
                         </div>
                     </div>

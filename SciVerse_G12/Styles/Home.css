@@ -1,7 +1,6 @@
 ﻿@import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
 
 :root {
     --background: oklch(1 0 0);
@@ -119,6 +118,13 @@ body {
     padding: 0;
 }
 
+/* Remove the default container limit from MasterPage for homepage */
+body.homepage .body-content {
+    max-width: 100%;
+    padding: 0;
+}
+
+
 /* Button Styles */
 .btn {
     display: inline-flex;
@@ -176,13 +182,22 @@ body {
 /* Hero Section */
 .hero-section {
     position: relative;
-    min-height: 90vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
+    width: 100vw !important;
     padding: 80px 0;
     overflow: hidden;
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
     background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+}
+
+.hero-section .container-fluid {
+    max-width: 100%;
+    padding: 0;
 }
 
 .hero-content {
@@ -335,6 +350,11 @@ body {
 .did-you-know-section {
     padding: 100px 0;
     background: white;
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
+    width: 100vw !important;
+    padding: 80px 0;
+    display: flex;
 }
 
 .facts-grid {
@@ -384,6 +404,11 @@ body {
 .features-section {
     padding: 100px 0;
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
+    width: 100vw !important;
+    padding: 80px 0;
+    display: flex;
 }
 
 .features-grid {
@@ -512,6 +537,11 @@ body {
 .try-it-section {
     padding: 100px 0;
     background: white;
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
+    width: 100vw !important;
+    padding: 80px 0;
+    display: flex;
 }
 
 .demos-grid {
@@ -610,6 +640,11 @@ body {
 .topics-section {
     padding: 100px 0;
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
+    width: 100vw !important;
+    padding: 80px 0;
+    display: flex;
 }
 
 .topics-grid {
@@ -697,6 +732,11 @@ body {
 .why-choose-section {
     padding: 100px 0;
     background: white;
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
+    width: 100vw !important;
+    padding: 80px 0;
+    display: flex;
 }
 
 .why-choose-content {
@@ -799,6 +839,11 @@ body {
     position: relative;
     overflow: hidden;
     color: #1a1a2e;
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
+    width: 100vw !important;
+    padding: 80px 0;
+    display: flex;
 }
 
     .courses-section::before {
@@ -1029,6 +1074,11 @@ body {
     padding: 100px 0;
     background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
     text-align: center;
+    margin-left: calc(50% - 50vw); /* remove container margin restriction */
+    margin-right: calc(50% - 50vw);
+    width: 100vw !important;
+    padding: 80px 0;
+    display: flex;
 }
 
 .cta-content {
