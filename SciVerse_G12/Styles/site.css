@@ -421,3 +421,81 @@ header,
 }
 
 
+/* Bootstrap spacing extensions */
+.m-7 {
+    margin: 4rem !important;
+}
+
+.mt-7 {
+    margin-top: 4rem !important;
+}
+
+.mb-7 {
+    margin-bottom: 4rem !important;
+}
+
+.my-7 {
+    margin-top: 4rem !important;
+    margin-bottom: 4rem !important;
+}
+
+.mx-7 {
+    margin-left: 4rem !important;
+    margin-right: 4rem !important;
+}
+
+
+.p-7 {
+    padding: 4rem !important;
+}
+
+.pt-7 {
+    padding-top: 4rem !important;
+}
+
+.pb-7 {
+    padding-bottom: 4rem !important;
+}
+
+.py-7 {
+    padding-top: 10rem !important;
+    padding-bottom: 10rem !important;
+}
+
+.px-7 {
+    padding-left: 4rem !important;
+    padding-right: 4rem !important;
+}
+
+
+/* FLASHCARD BOX */
+.quiz-card {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    aspect-ratio: 1 / 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.quiz-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-title {
+    flex-grow: 0; /* Prevents title from stretching vertically */
+    min-height: auto; /* No forced extra height */
+    text-align: center;
+}
+
+@media (max-width: 992px) {
+    .quiz-card {
+        width: 180px;
+        height: 180px;
+    }
+}
+
