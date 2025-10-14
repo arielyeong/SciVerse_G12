@@ -80,7 +80,7 @@ namespace SciVerse_G12.Quiz_and_Flashcard
             if (e.CommandArgument != null)
             {
                 int quizId = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect($"~/Quiz_Flashcard/ViewFlashcard.aspx?quiz_id={quizId}");
+                Response.Redirect($"~/Flashcard/ViewFlashcard.aspx?quiz_id={quizId}");
             }
         }
 

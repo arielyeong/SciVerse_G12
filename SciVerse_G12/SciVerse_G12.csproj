@@ -134,8 +134,8 @@
     <Content Include="Quiz\EditQuizPage.aspx" />
     <Content Include="Quiz\ViewQuizList.aspx" />
     <Content Include="Styles\Profile.css" />
-    <Content Include="Quiz_Flashcard\Flashcard.aspx" />
-    <Content Include="Quiz_Flashcard\ViewFlashcard.aspx" />
+    <Content Include="Flashcard\Flashcard.aspx" />
+    <Content Include="Flashcard\ViewFlashcard.aspx" />
     <Content Include="Styles\Home.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -309,18 +309,18 @@
     <Compile Include="Quiz\ViewQuizList.aspx.designer.cs">
       <DependentUpon>ViewQuizList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Quiz_Flashcard\Flashcard.aspx.cs">
+    <Compile Include="Flashcard\Flashcard.aspx.cs">
       <DependentUpon>Flashcard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Quiz_Flashcard\Flashcard.aspx.designer.cs">
+    <Compile Include="Flashcard\Flashcard.aspx.designer.cs">
       <DependentUpon>Flashcard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Quiz_Flashcard\ViewFlashcard.aspx.cs">
+    <Compile Include="Flashcard\ViewFlashcard.aspx.cs">
       <DependentUpon>ViewFlashcard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Quiz_Flashcard\ViewFlashcard.aspx.designer.cs">
+    <Compile Include="Flashcard\ViewFlashcard.aspx.designer.cs">
       <DependentUpon>ViewFlashcard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">

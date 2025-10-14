@@ -51,8 +51,8 @@
                             Quiz
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" runat="server" href="~/Quiz_Flashcard/Quiz">Quiz</a></li>
-                            <li><a class="dropdown-item" runat="server" href="~/Quiz_Flashcard/Flashcard">Flashcard</a></li>
+                            <li><a class="dropdown-item" runat="server" href="~/Quiz/ViewQuizList">Quiz</a></li>
+                            <li><a class="dropdown-item" runat="server" href="~/Flashcard/Flashcard">Flashcard</a></li>
                         </ul>
                     </li>
                         
