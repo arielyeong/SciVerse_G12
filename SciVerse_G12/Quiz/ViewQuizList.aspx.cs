@@ -22,11 +22,6 @@ namespace SciVerse_G12.Quiz
             {
                 GridView1.DataBind();
             }
-            //if (!IsPostBack)
-            //{
-            //    // When page first loads, show all quizzes (no filter)
-            //    //SqlDataSource1.SelectParameters["kw"].DefaultValue = "";
-            //}
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -70,23 +65,6 @@ namespace SciVerse_G12.Quiz
             GridView1.DataBind();
         }
 
-        // 📝 Row command handler (Edit/Delete)
-        //protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
-        //{
-        //    if (e.CommandName == "EditQuiz")
-        //    {
-        //        var quizId = e.CommandArgument.ToString();
-        //        Response.Redirect("EditQuizPage.aspx?quizId=" + quizId);
-        //    }
-        //    else if (e.CommandName == "DeleteQuiz")
-        //    {
-        //        // ⬇️ Put this line here:
-        //        SqlDataSource1.DeleteParameters["QuizID"].DefaultValue = e.CommandArgument.ToString();
-
-        //        SqlDataSource1.Delete();
-        //        GridView1.DataBind();
-        //    }
-        //}
 
         protected void btnEditMode_Click(object sender, EventArgs e)
         {
@@ -166,10 +144,6 @@ namespace SciVerse_G12.Quiz
             // optional: put row-level tweaks here
         }
 
-        //protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        //{
-        //    GridView1.PageIndex = e.NewPageIndex;
-        //    GridView1.DataBind();
-        //}
+
     }
 }

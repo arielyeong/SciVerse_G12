@@ -23,7 +23,8 @@ namespace SciVerse_G12.Quiz
         private void PrefillNextChapter()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            const string sql = @"SELECT ISNULL(MAX(Chapter), 0) FROM dbo.tblQuiz";
+            // Works whether Chapter is INT or NVARCHAR (will ignore non-numeric)
+            const string sql = @"SELECT ISNULL(MAX(TRY_CONVERT(int, Chapter)), 0) FROM dbo.tblQuiz";
 
             int next = 1;
 
@@ -58,25 +59,35 @@ namespace SciVerse_G12.Quiz
                 return;
             }
 
-            // 2) Save image (optional) into /Content/img and store a WEB path
-            string imageRelUrl = null;
+            // 2) Handle image upload (save to ~/Images, default if none)
+            string imageRelUrl = "~/Images/default.png";  // default image path (ensure the file exists)
+
             if (FileUploadPicture.HasFile)
             {
-                string ext = Path.GetExtension(FileUploadPicture.FileName).ToLowerInvariant();
-                if (ext != ".jpg" && ext != ".jpeg" && ext != ".png")
+                try
+                {
+                    string folderPath = Server.MapPath("~/Images/");
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+
+                    string fileName = Path.GetFileName(FileUploadPicture.FileName);
+                    // Optional: ensure uniqueness
+                    string uniqueName = $"{Path.GetFileNameWithoutExtension(fileName)}_{Guid.NewGuid():N}{Path.GetExtension(fileName)}";
+                    string fullPath = Path.Combine(folderPath, uniqueName);
+
+                    FileUploadPicture.SaveAs(fullPath);
+
+                    // Store virtual path for database
+                    imageRelUrl = "~/Images/" + uniqueName;
+                }
+                catch (Exception ex)
                 {
                     lblMessage.CssClass = "text-danger";
-                    lblMessage.Text = "Image must be .jpg, .jpeg or .png";
+                    lblMessage.Text = "⚠️ Image upload failed: " + ex.Message;
                     return;
                 }
-
-                string fileName = Guid.NewGuid().ToString("N") + ext;
-                string folder = Server.MapPath("~/Content/img/");
-                Directory.CreateDirectory(folder);               // safe if exists
-                string fullPath = Path.Combine(folder, fileName);
-                FileUploadPicture.SaveAs(fullPath);
-
-                imageRelUrl = "/Content/img/" + fileName;        // store web path
             }
 
             // 3) Insert into DB
@@ -100,7 +111,7 @@ namespace SciVerse_G12.Quiz
                     command.Parameters.AddWithValue("@Chapter", (object)chapter ?? DBNull.Value);
                     command.Parameters.AddWithValue("@TimeLimit", timeLimit);
                     command.Parameters.AddWithValue("@ImageURL", (object)imageRelUrl ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@CreatedBy", 1);              // TODO: set this from your logged-in admin ID
+                    command.Parameters.AddWithValue("@CreatedBy", 1);       // NEED MAKE CHANGES: set this from your logged-in admin ID
                     command.Parameters.AddWithValue("@AttemptLimit", attemptLimit);
 
                     con.Open();
@@ -115,11 +126,6 @@ namespace SciVerse_G12.Quiz
             }
 
             // 4) Redirect to next step (e.g., add questions or back to list)
-            //Response.Redirect("EditQuizPage.aspx?quizId=" + newQuizId, false);
-            //Context.ApplicationInstance.CompleteRequest();
-            //return;
-
-            // after inserting and getting: int newQuizId = (int)cmd.ExecuteScalar();
             Response.Redirect(ResolveUrl("~/Quiz/EditQuizPage.aspx?quizId=" + newQuizId), false);
             // IMPORTANT: stop the current request so no extra databinds run on this page
             Context.ApplicationInstance.CompleteRequest();

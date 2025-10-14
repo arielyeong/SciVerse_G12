@@ -36,8 +36,8 @@ namespace SciVerse_G12.Quiz
         private void LoadQuizHeader(int quizId)
         {
             // Fetch the quiz title to show in the H1
-            var cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (var con = new SqlConnection(cs))
+            var connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            using (var con = new SqlConnection(connectionString))
             using (var cmd = new SqlCommand("SELECT Title FROM dbo.tblQuiz WHERE QuizID = @id", con))
             {
                 cmd.Parameters.AddWithValue("@id", quizId);
@@ -112,69 +112,3 @@ namespace SciVerse_G12.Quiz
         }
     }
 }
-
-
-
-//using System;
-//using System.Collections.Generic;
-//using System.Data.SqlTypes;
-//using System.Linq;
-//using System.Web;
-//using System.Web.UI;
-//using System.Web.UI.WebControls;
-
-//namespace SciVerse_G12.Quiz
-//{
-//    public partial class EditQuizPage : System.Web.UI.Page
-//    {
-//        protected void Page_Load(object sender, EventArgs e)
-//        {
-//            if (!IsPostBack)
-//            {
-//                if (string.IsNullOrEmpty(Request.QueryString["quizId"]))
-//                {
-//                    Response.Redirect("ViewQuizList.aspx");
-//                }
-//            }
-//        }
-
-//        protected void btnNew_Click(object sender, EventArgs e)
-//        {
-
-//        }
-
-//        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-//        {
-//            //GridView grid = (GridView)sender;
-//            GridView1.PageIndex = e.NewPageIndex;
-//            GridView1.DataBind(); // rebind to reflect the new page
-//        }
-
-//        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-//        {
-//            if (e.Row.RowType == DataControlRowType.DataRow)
-//            {
-//                // Optional: example of per-row logic
-//                // var ageObj = DataBinder.Eval(e.Row.DataItem, "age");
-//                // int age;
-//                // if (ageObj != null && int.TryParse(ageObj.ToString(), out age) && age < 18)
-//                // {
-//                //     e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFF3CD");
-//                // }
-//            }
-//        }
-
-//        protected void btnEdit_Click(object sender, EventArgs e)
-//        {
-
-//        }
-
-//        protected void btnDelete_Click(object sender, EventArgs e)
-//        {
-//            // Use the SqlQuiz datasource DeleteCommand with @QuizID from QueryStringParameter
-//            SqlDataSource1.Delete();
-//            Response.Redirect("ViewQuizList.aspx");
-//        }
-//    }
-
-//}
