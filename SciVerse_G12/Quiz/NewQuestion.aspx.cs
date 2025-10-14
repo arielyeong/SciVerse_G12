@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace SciVerse_G12.Quiz
 {
-    public partial class AddQuestionMCQ : System.Web.UI.Page
+    public partial class NewQuestion : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -126,7 +131,7 @@ namespace SciVerse_G12.Quiz
                 lblMessage.CssClass = "text-danger";
                 lblMessage.Text = "Error saving question: " + ex.Message;
             }
-        
-    }
+
+        }
     }
 }

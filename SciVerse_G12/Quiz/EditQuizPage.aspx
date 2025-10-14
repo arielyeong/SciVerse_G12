@@ -38,7 +38,7 @@
         DataSourceID="SqlDataSource1"
         OnRowDataBound="GridView1_RowDataBound"
         OnPageIndexChanging="GridView1_PageIndexChanging"
-        CssClass="table table-bordered table-hover">
+        CssClass="table table-bordered table-hover" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
 
       <Columns>
         <asp:TemplateField HeaderText="Select" Visible="false">

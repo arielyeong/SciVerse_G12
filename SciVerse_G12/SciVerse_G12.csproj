@@ -129,9 +129,9 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\Profile.aspx" />
-    <Content Include="Quiz\AddQuestionMCQ.aspx" />
     <Content Include="Quiz\CreateNewQuizPage.aspx" />
     <Content Include="Quiz\EditQuizPage.aspx" />
+    <Content Include="Quiz\NewQuestion.aspx" />
     <Content Include="Quiz\ViewQuizList.aspx" />
     <Content Include="Styles\Profile.css" />
     <Content Include="Quiz_Flashcard\Flashcard.aspx" />
@@ -281,13 +281,6 @@
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Quiz\AddQuestionMCQ.aspx.cs">
-      <DependentUpon>AddQuestionMCQ.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Quiz\AddQuestionMCQ.aspx.designer.cs">
-      <DependentUpon>AddQuestionMCQ.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Quiz\CreateNewQuizPage.aspx.cs">
       <DependentUpon>CreateNewQuizPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -301,6 +294,13 @@
     </Compile>
     <Compile Include="Quiz\EditQuizPage.aspx.designer.cs">
       <DependentUpon>EditQuizPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quiz\NewQuestion.aspx.cs">
+      <DependentUpon>NewQuestion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz\NewQuestion.aspx.designer.cs">
+      <DependentUpon>NewQuestion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Quiz\ViewQuizList.aspx.cs">
       <DependentUpon>ViewQuizList.aspx</DependentUpon>
