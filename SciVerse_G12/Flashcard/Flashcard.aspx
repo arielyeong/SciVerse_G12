@@ -1,4 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Flashcard.aspx.cs" Inherits="SciVerse_G12.Quiz_and_Flashcard.Quiz" %>
+<asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href='<%= ResolveUrl("~/Styles/Flashcard.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
+
+</asp:Content>
+
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container my-5">
         <h2 class="text-center mb-4 fw-bold">Available Flashcards</h2>

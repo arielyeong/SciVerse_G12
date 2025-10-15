@@ -75,7 +75,7 @@ header,
     padding-top: 10px;
     padding-bottom: 10px;
     width: 100%; /* Ensure full width */
-    position: relative; /* Follows content flow */
+    position: fixed; /* Follows content flow */
     bottom: 0; /* Aligns to bottom of content */
     background-color: transparent; /* No background color */
 }
@@ -479,8 +479,8 @@ header,
 }
 
 .py-7 {
-    padding-top: 10rem !important;
-    padding-bottom: 10rem !important;
+    padding-top: 8rem !important;
+    padding-bottom: 8rem !important;
 }
 
 .px-7 {
@@ -488,35 +488,5 @@ header,
     padding-right: 4rem !important;
 }
 
-
-/* FLASHCARD BOX */
-.quiz-card {
-    width: 100%;
-    max-width: 250px;
-    border-radius: 12px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    display: flex;
-    aspect-ratio: 1 / 1;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.quiz-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-}
-
-.quiz-title {
-    flex-grow: 0; /* Prevents title from stretching vertically */
-    min-height: auto; /* No forced extra height */
-    text-align: center;
-}
-
-@media (max-width: 992px) {
-    .quiz-card {
-        width: 180px;
-        height: 180px;
-    }
 }
 

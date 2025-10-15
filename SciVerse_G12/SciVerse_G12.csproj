@@ -133,6 +133,7 @@
     <Content Include="Quiz\CreateNewQuizPage.aspx" />
     <Content Include="Quiz\EditQuizPage.aspx" />
     <Content Include="Quiz\ViewQuizList.aspx" />
+    <Content Include="Styles\Flashcard.css" />
     <Content Include="Styles\Profile.css" />
     <Content Include="Flashcard\Flashcard.aspx" />
     <Content Include="Flashcard\ViewFlashcard.aspx" />
