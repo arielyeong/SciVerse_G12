@@ -11,7 +11,7 @@ namespace SciVerse_G12.Quiz
 {
 
 
-    public partial class AddQuestionMCQ
+    public partial class NewQuestion
     {
 
         /// <summary>
