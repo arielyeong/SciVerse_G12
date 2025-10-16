@@ -52,7 +52,7 @@ namespace SciVerse_G12
                     if (!string.IsNullOrEmpty(reader["picture"].ToString()))
                         imgProfile.ImageUrl = reader["picture"].ToString();
                     else
-                        imgProfile.ImageUrl = "~/Images/default-avatar.png"; // fallback
+                        imgProfile.ImageUrl = "~/Images/Profile/default-avatar.png"; // fallback
                 }
 
                 reader.Close();

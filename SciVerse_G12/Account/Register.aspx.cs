@@ -26,12 +26,12 @@ namespace SciVerse_G12
             }
 
             // Handle image upload
-            string imagePath = "~/Images/default.png"; // default image if no upload
+            string imagePath = "~/Images/Profile/default.png"; // default image if no upload
             if (FileUploadPic.HasFile)
             {
                 try
                 {
-                    string folderPath = Server.MapPath("~/Images/");
+                    string folderPath = Server.MapPath("~/Images/Profile/");
                     string fileName = Path.GetFileName(FileUploadPic.FileName);
                     string fullPath = Path.Combine(folderPath, fileName);
 
@@ -39,7 +39,7 @@ namespace SciVerse_G12
                     FileUploadPic.SaveAs(fullPath);
 
                     // Store virtual path for database
-                    imagePath = "~/Images/" + fileName;
+                    imagePath = "~/Images/Profile/" + fileName;
                 }
                 catch (Exception ex)
                 {

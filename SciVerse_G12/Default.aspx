@@ -62,6 +62,8 @@
         <section id="did-you-know" class="did-you-know-section py-5 bg-light">
             <div class="container text-center">
                 <h2 class="section-title mb-4">Did You Know?</h2>
+                <p class="section-subtitle mb-5">Here are some amazing science facts related to what you’ll explore in our featured chapters!</p>
+
                 <div class="row g-4">
                     <div class="col-md-4">
                         <div class="fact-card p-4 h-100 shadow-sm">
@@ -105,8 +107,8 @@
                         <div class="feature-card p-4 h-100 shadow-sm featured position-relative">
                             <span class="featured-badge">Most Popular</span>
                             <div class="feature-icon fs-1 mb-3">🔬</div>
-                            <h3>Virtual Lab</h3>
-                            <p>Conduct experiments in a safe virtual environment and discover scientific principles.</p>
+                            <h3>Simulation</h3>
+                            <p>Experience real-world learning through interactive simulations.</p>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -119,8 +121,8 @@
                     <div class="col-md-3">
                         <div class="feature-card p-4 h-100 shadow-sm">
                             <div class="feature-icon fs-1 mb-3">🏆</div>
-                            <h3>Gamification</h3>
-                            <p>Earn badges and achievements while making learning fun and rewarding!</p>
+                            <h3>Flashcard</h3>
+                            <p>Boost your memory using AI-powered flashcards and quick reviews.</p>
                         </div>
                     </div>
                 </div>
@@ -132,80 +134,125 @@
         <!-- Featured Topics Section -->
         <section id="topics" class="topics-section">
             <div class="container">
-                <h2 class="section-title text-center">Featured Topics</h2>
+                <h2 class="section-title text-center">Featured Chapters</h2>
+                <p class="section-subtitle mb-5">Explore key science chapters through interactive learning and virtual experiments</p>
 
                 <div class="topics-grid">
-                    <!-- Physics -->
+
+                    <!-- Chapter 1 -->
                     <div class="topic-card topic-physics">
                         <div class="topic-header">
-                            <span class="topic-icon">⚛️</span>
+                            <span class="topic-icon">🏃‍♂️</span>
                             <span class="topic-badge">Physics</span>
                         </div>
-                        <h3 class="topic-title">Quantum Mechanics</h3>
-                        <p class="topic-description">Explore the fascinating world of subatomic particles.</p>
+                        <h3 class="topic-title">Forces and Motion</h3>
+                        <p class="topic-description">
+                            Understand Newton’s laws, acceleration, and how forces affect movement in our daily lives.
+                        </p>
                         <div class="topic-meta">
-                            <span class="topic-lessons">12 Lessons</span>
+                            <span class="topic-lessons">8 Lessons</span>
+                            <span class="topic-duration">5 hours</span>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 2 -->
+                    <div class="topic-card topic-chemistry">
+                        <div class="topic-header">
+                            <span class="topic-icon">⚛️</span>
+                            <span class="topic-badge">Chemistry</span>
+                        </div>
+                        <h3 class="topic-title">The Nature of Matter</h3>
+                        <p class="topic-description">
+                            Explore atoms, molecules, and how matter changes through chemical reactions.
+                        </p>
+                        <div class="topic-meta">
+                            <span class="topic-lessons">10 Lessons</span>
                             <span class="topic-duration">6 hours</span>
                         </div>
                     </div>
 
-                    <!-- Chemistry -->
-                    <div class="topic-card topic-chemistry">
+                    <!-- Chapter 3 -->
+                    <div class="topic-card topic-heat">
                         <div class="topic-header">
-                            <span class="topic-icon">🧪</span>
-                            <span class="topic-badge">Chemistry</span>
+                            <span class="topic-icon">🌡️</span>
+                            <span class="topic-badge">Physics</span>
                         </div>
-                        <h3 class="topic-title">Organic Chemistry</h3>
-                        <p class="topic-description">Master the chemistry of carbon compounds.</p>
+                        <h3 class="topic-title">Heat and Temperature</h3>
+                        <p class="topic-description">
+                            Learn how heat transfers between objects and how temperature affects energy and matter.
+                        </p>
                         <div class="topic-meta">
-                            <span class="topic-lessons">15 Lessons</span>
-                            <span class="topic-duration">8 hours</span>
+                            <span class="topic-lessons">7 Lessons</span>
+                            <span class="topic-duration">4 hours</span>
                         </div>
                     </div>
 
-                    <!-- Biology -->
+                    <!-- Chapter 4 -->
                     <div class="topic-card topic-biology">
                         <div class="topic-header">
                             <span class="topic-icon">🧬</span>
                             <span class="topic-badge">Biology</span>
                         </div>
-                        <h3 class="topic-title">Genetics & DNA</h3>
-                        <p class="topic-description">Understand heredity and genetic engineering.</p>
+                        <h3 class="topic-title">The Human Body Systems</h3>
+                        <p class="topic-description">
+                            Explore how organs work together to keep the human body alive and functioning.
+                        </p>
                         <div class="topic-meta">
-                            <span class="topic-lessons">10 Lessons</span>
+                            <span class="topic-lessons">9 Lessons</span>
                             <span class="topic-duration">5 hours</span>
                         </div>
                     </div>
 
-                    <!-- Earth Science -->
+                    <!-- Chapter 5 -->
                     <div class="topic-card topic-earth">
                         <div class="topic-header">
                             <span class="topic-icon">🌍</span>
-                            <span class="topic-badge">Earth Science</span>
+                            <span class="topic-badge">Astronomy</span>
                         </div>
-                        <h3 class="topic-title">Climate Change</h3>
-                        <p class="topic-description">Learn about our planet's changing climate.</p>
+                        <h3 class="topic-title">The Solar System</h3>
+                        <p class="topic-description">
+                            Journey through planets, moons, and the mysteries of our solar system.
+                        </p>
+                        <div class="topic-meta">
+                            <span class="topic-lessons">6 Lessons</span>
+                            <span class="topic-duration">3 hours</span>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 6 -->
+                    <div class="topic-card topic-pressure">
+                        <div class="topic-header">
+                            <span class="topic-icon">💨</span>
+                            <span class="topic-badge">Physics</span>
+                        </div>
+                        <h3 class="topic-title">Pressure and Density</h3>
+                        <p class="topic-description">
+                            Understand how forces act on surfaces and how density explains floating and sinking.
+                        </p>
                         <div class="topic-meta">
                             <span class="topic-lessons">8 Lessons</span>
                             <span class="topic-duration">4 hours</span>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
+
 
 
         <!-- Why Choose Section -->
         <section id="why-choose" class="why-choose-section py-5">
             <div class="container text-center">
                 <h2 class="section-title mb-4">Why Choose SciVerse?</h2>
+                <p class="text-center mb-5"> </p>
+
                 <div class="row justify-content-center">
                     <div class="col-md-6">
                         <ul class="list-unstyled text-start">
                             <li class="mb-3">✓ <strong>Personalized Learning:</strong> AI-powered recommendations.</li>
                             <li class="mb-3">✓ <strong>Expert Content:</strong> Designed by educators and scientists.</li>
                             <li class="mb-3">✓ <strong>Progress Tracking:</strong> Monitor learning with detailed insights.</li>
-                            <li class="mb-3">✓ <strong>Community Support:</strong> Connect with peers and mentors.</li>
                         </ul>
                     </div>
                     <div class="col-md-4">
@@ -224,7 +271,7 @@
             </div>
         </section>
 
-        <!-- Courses Section -->
+ <%--       <!-- Courses Section -->
         <section id="courses" class="courses-section py-5 bg-light">
             <div class="container text-center">
                 <h2 class="section-title mb-4">Start Your Journey</h2>
@@ -256,7 +303,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>--%>
 
 
 

@@ -53,7 +53,7 @@ namespace SciVerse_G12
                     dlCountry.SelectedValue = dr["country"].ToString();
 
                     if (dr["picture"] != DBNull.Value)
-                        imgPreview.ImageUrl = "~/Uploads/" + dr["picture"].ToString();
+                        imgPreview.ImageUrl = "~/Images/Profile/" + dr["picture"].ToString();
                 }
                 con.Close();
             }
@@ -68,7 +68,7 @@ namespace SciVerse_G12
             if (FileUploadPic.HasFile)
             {
                 pictureFileName = Path.GetFileName(FileUploadPic.PostedFile.FileName);
-                string savePath = Server.MapPath("~/Uploads/") + pictureFileName;
+                string savePath = Server.MapPath("~/Images/Profile/") + pictureFileName;
                 FileUploadPic.SaveAs(savePath);
             }
 

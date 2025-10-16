@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AboutUs.aspx" />
     <Content Include="Admin\AdminProfile.aspx" />
     <Content Include="App_Data\Database.mdf" />
     <Content Include="App_Data\Database_log.ldf">
@@ -198,6 +199,7 @@
     <Content Include="Account\UpdateProfile.aspx" />
     <Content Include="Admin\ViewMessage.aspx" />
     <Content Include="Admin\UpdateAdminProfile.aspx" />
+    <Content Include="User\UserHomePage.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Admin\ViewUserList.aspx" />
     <Content Include="Web.config" />
@@ -205,6 +207,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutUs.aspx.cs">
+      <DependentUpon>AboutUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AboutUs.aspx.designer.cs">
+      <DependentUpon>AboutUs.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -357,6 +366,13 @@
     </Compile>
     <Compile Include="Admin\UpdateAdminProfile.aspx.designer.cs">
       <DependentUpon>UpdateAdminProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\UserHomePage.aspx.cs">
+      <DependentUpon>UserHomePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\UserHomePage.aspx.designer.cs">
+      <DependentUpon>UserHomePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

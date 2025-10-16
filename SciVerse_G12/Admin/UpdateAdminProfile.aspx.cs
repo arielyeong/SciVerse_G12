@@ -39,7 +39,7 @@ namespace SciVerse_G12
             {
                 try
                 {
-                    string folderPath = Server.MapPath("~/Images/");
+                    string folderPath = Server.MapPath("~/Images/Profile/");
                     if (!Directory.Exists(folderPath))
                     {
                         Directory.CreateDirectory(folderPath);
@@ -50,7 +50,7 @@ namespace SciVerse_G12
                     FileUploadPic.SaveAs(fullPath);
 
                     // Save relative path for database
-                    imagePath = "~/Images/" + fileName;// we store only the file name
+                    imagePath = "~/Images/Profile/" + fileName;// we store only the file name
                 }
                 catch (Exception ex)
                 {
