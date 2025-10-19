@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="AddQuestionMCQ.aspx.cs" Inherits="SciVerse_G12.Quiz.AddQuestionMCQ" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="NewQuestion.aspx.cs" Inherits="SciVerse_G12.Quiz.NewQuestion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
   <div class="d-flex justify-content-center align-items-center" style="min-height:90vh;">
@@ -112,6 +112,4 @@
 
     </div>
   </div>
-
-
 </asp:Content>

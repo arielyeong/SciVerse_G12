@@ -64,7 +64,7 @@ namespace SciVerse_G12.Quiz
         protected void btnNew_Click(object sender, EventArgs e)
         {
             // go to your Add-Question page (create this page if you don't have one)
-            Response.Redirect("CreateQuestion.aspx?quizId=" + QuizId);
+            Response.Redirect("AddQuestionMCQ.aspx?quizId=" + QuizId);
         }
 
         protected void btnEdit_Click(object sender, EventArgs e)
@@ -109,6 +109,11 @@ namespace SciVerse_G12.Quiz
             }
 
             GridView1.DataBind();
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
