@@ -322,156 +322,157 @@ header,
     border-radius: 3px;
 }
 
-/*******/
-/* Contact Us */
-/*******/
+/*********/
+/*Contact Us*/
+/*********/
 
+/* ===== Contact Us Simplified (Fixed Alignment) ===== */
+#contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 3rem 1rem;
+}
+
+/* White box container */
+.contact-form-container {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-sizing: border-box;
+}
+
+/* Heading */
 #course-main {
     text-align: center;
-    margin-top: -140px !important;
-    margin-bottom: 3rem;
-    padding: 2rem 0;
+    margin-top: -80px;
+    margin-bottom: 2rem;
 }
 
     #course-main .heading {
-        font-size: 2.5rem;
+        font-size: 2rem;
         font-weight: 700;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #667eea, #764ba2);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        margin: 0;
     }
 
-/* Contact Section Layout */
-#contact {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin-top: -90px !important;
-    margin-bottom: 3rem;
-}
-
-/* Contact Form Container - Card Style */
-.contact-form-container {
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 10px 20px rgba(0, 0, 0, 0.05);
-    padding: 2.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-    .contact-form-container:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1), 0 16px 32px rgba(0, 0, 0, 0.08);
-    }
-
-/* Form Fields Wrapper */
+/* Form wrapper */
 .form-fields-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
-    /* Labels */
-    .form-fields-wrapper label,
-    .form-fields-wrapper asp\:Label {
+    /* Form labels */
+    .form-fields-wrapper label {
         display: block;
         font-weight: 600;
-        color: #2d3748;
         margin-bottom: 0.5rem;
-        font-size: 0.95rem;
-        letter-spacing: 0.3px;
+        color: #333;
+        text-align: left;
     }
 
-    /* Input Fields */
+    /* Form inputs - FIXED */
     .form-fields-wrapper input[type="text"],
     .form-fields-wrapper input[type="email"],
     .form-fields-wrapper textarea {
         width: 100%;
-        padding: 0.875rem 1.125rem;
+        padding: 0.8rem 1rem;
         border: 2px solid #e2e8f0;
-        border-radius: 10px;
+        border-radius: 8px;
         font-size: 1rem;
-        color: #2d3748;
-        background-color: #f7fafc;
-        transition: all 0.3s ease;
+        background-color: #f9f9ff;
+        color: #333;
         font-family: inherit;
+        transition: all 0.3s ease;
         box-sizing: border-box;
+        display: block;
+        margin-bottom: 0;
     }
 
-        .form-fields-wrapper input[type="text"]:focus,
-        .form-fields-wrapper input[type="email"]:focus,
+    /* Remove the duplicate margin-bottom that was causing spacing issues */
+    .form-fields-wrapper input[type="text"],
+    .form-fields-wrapper input[type="email"],
+    .form-fields-wrapper textarea {
+        margin-bottom: 0 !important;
+    }
+
+        /* Focus effects */
+        .form-fields-wrapper input:focus,
         .form-fields-wrapper textarea:focus {
             outline: none;
             border-color: #667eea;
-            background-color: #ffffff;
+            background: #fff;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            transform: translateY(-1px);
         }
 
+    /* Textarea specific styling */
+    .form-fields-wrapper textarea {
+        resize: vertical;
+        min-height: 120px;
+        line-height: 1.5;
+    }
+
+        /* Placeholder styling */
         .form-fields-wrapper input::placeholder,
         .form-fields-wrapper textarea::placeholder {
             color: #a0aec0;
+            opacity: 1;
         }
 
-    /* Textarea Specific */
-    .form-fields-wrapper textarea {
-        resize: vertical;
-        min-height: 140px;
-        line-height: 1.6;
-    }
-
-/* Validation Messages */
+/* Validation messages */
 .text-danger {
     color: #e53e3e;
-    font-size: 0.875rem;
-    margin-top: 0.375rem;
+    font-size: 0.9rem;
+    margin: 0.25rem 0 0 0;
     display: block;
+    text-align: left;
     font-weight: 500;
 }
 
-/* Submit Button - Gradient Tech Style */
-.form-fields-wrapper input[type="submit"],
-.form-fields-wrapper button,
-#btnSubmit {
-    width: 100%;
-    padding: 1rem 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #ffffff;
+/* Submit button */
+#MainContent_btnSubmit {
+    display: block;
+    width: 200px;
+    margin: 1.5rem auto 0;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
     border: none;
-    border-radius: 10px;
-    font-size: 1.05rem;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
     font-weight: 600;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 0.5rem;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
-    .form-fields-wrapper input[type="submit"]:hover,
-    .form-fields-wrapper button:hover,
-    #btnSubmit:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-        background: linear-gradient(135deg, #5568d3 0%, #6a3f8f 100%);
-    }
-
-    .form-fields-wrapper input[type="submit"]:active,
-    .form-fields-wrapper button:active,
-    #btnSubmit:active {
-        transform: translateY(0);
+    #MainContent_btnSubmit:hover {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        transform: translateY(-1px);
     }
 
 /* Status Message */
+#MainContent .contact-form-container #lblMessageStatus,
+.contact-form-container #lblMessageStatus,
 #lblMessageStatus {
-    margin-top: 1rem;
-    padding: 0.75rem;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: 500;
+    display: block !important;
+    width: 100% !important;
+    clear: both !important;
+    box-sizing: border-box !important;
+    margin: 1rem 0 0 0 !important;
+    padding: 0.75rem !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+    font-weight: 500 !important;
 }
+
+
 
 /* Contact Details Section - Card Style */
 address {
@@ -544,11 +545,11 @@ body {
 
     /* Side-by-side layout for larger screens */
     #contact {
-        display: grid;
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* ✅ keep centered even on wide screens */
         gap: 2rem;
     }
-}
 
 /* Accessibility Enhancements */
 *:focus-visible {
