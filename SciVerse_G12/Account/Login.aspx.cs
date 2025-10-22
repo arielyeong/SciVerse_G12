@@ -27,8 +27,8 @@ namespace SciVerse_G12
             {
                 conn.Open();
 
-                // Select username + role
-                string query = @"SELECT username, role 
+                // Include RID in the SELECT query
+                string query = @"SELECT RID, username, role 
                          FROM tblRegisteredUsers 
                          WHERE (username = @username OR emailAddress = @username) 
                          AND password = @password";
@@ -43,18 +43,21 @@ namespace SciVerse_G12
                 {
                     string loggedInUser = reader["username"].ToString();
                     string role = reader["role"].ToString();
+                    string rid = reader["RID"].ToString();   // ✅ get RID from the database
 
+                    // Save all values into session
                     Session["Username"] = loggedInUser;
                     Session["Role"] = role;
+                    Session["RID"] = rid;                    // ✅ store RID in session
 
                     // Redirect based on role
                     if (role == "Admin")
                     {
-                        Response.Redirect("~/Admin/ViewUserList.aspx", false); // 👈 create this page for admins
+                        Response.Redirect("~/Admin/ViewUserList.aspx", false);
                     }
                     else
                     {
-                        Response.Redirect("~/Default.aspx", false); // 👈 normal user homepage
+                        Response.Redirect("~/Default.aspx", false);
                     }
 
                     Context.ApplicationInstance.CompleteRequest();
@@ -66,5 +69,6 @@ namespace SciVerse_G12
                 }
             }
         }
+
     }
 }

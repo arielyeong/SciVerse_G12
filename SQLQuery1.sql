@@ -23,7 +23,8 @@ CREATE TABLE [dbo].[tblContactUs] (
     [CID]            INT            IDENTITY (1, 1) NOT NULL,
     [contactName]    NVARCHAR (50)  NULL,
     [contactEmail]   NVARCHAR (50)  NULL,
-    [contactMessage] NVARCHAR (MAX) NULL
+    [contactMessage] NVARCHAR (MAX) NULL, 
+    [RID] INT NULL
 );
 
 

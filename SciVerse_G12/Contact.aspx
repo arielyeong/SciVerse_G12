@@ -40,15 +40,19 @@
         </div>
     </section>
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                       ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-                       InsertCommand="INSERT INTO [tblContactUs] ([contactName], [contactEmail], [contactMessage]) VALUES (@contactName, @contactEmail, @contactMessage)">
-        <InsertParameters>
-            <asp:ControlParameter Name="contactName" ControlID="txtName" PropertyName="Text" Type="String" />
-            <asp:ControlParameter Name="contactEmail" ControlID="txtEmail" PropertyName="Text" Type="String" />
-            <asp:ControlParameter Name="contactMessage" ControlID="txtMessage" PropertyName="Text" Type="String" />
-        </InsertParameters>
-    </asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+    ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+    InsertCommand="INSERT INTO [tblContactUs] ([contactName], [contactEmail], [contactMessage], [RID]) 
+                   VALUES (@contactName, @contactEmail, @contactMessage, @RID)">
+    <InsertParameters>
+        <asp:ControlParameter Name="contactName" ControlID="txtName" PropertyName="Text" Type="String" />
+        <asp:ControlParameter Name="contactEmail" ControlID="txtEmail" PropertyName="Text" Type="String" />
+        <asp:ControlParameter Name="contactMessage" ControlID="txtMessage" PropertyName="Text" Type="String" />
+        <asp:SessionParameter Name="RID" SessionField="RID" Type="Int32" />
+    </InsertParameters>
+</asp:SqlDataSource>
+
+
 
     <address>
         <strong>📍 Address:</strong><br />
