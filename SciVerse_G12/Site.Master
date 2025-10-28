@@ -20,13 +20,14 @@
 
 <body>
     <form runat="server">
+        <asp:ScriptManager runat="server" EnablePartialRendering="true" />
 
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-white px-3 shadow-sm border-bottom">
             <div class="container-fluid">
 
                 <!-- Sidebar Toggle Button (only if logged in) -->
-                <% if (Session["Username"] != null) { %>
+                <% if (Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString())) { %>
                     <button id="toggleUserSidebar" class="menu-toggle me-3">
                         <i class="fa fa-bars"></i>
                     </button>
@@ -51,7 +52,7 @@
 
                         <!-- Learn -->
                         <li class="nav-item fw-bold">
-                            <% if (Session["Username"] != null) { %>
+                            <% if (Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString())) { %>
                                 <a class="nav-link" runat="server" href="~/">Learn</a>
                             <% } else { %>
                                 <a class="nav-link" runat="server" href="~/Account/Login.aspx">Learn</a>
@@ -60,7 +61,7 @@
 
                         <!-- Quiz Dropdown -->
                         <li class="nav-item dropdown fw-bold">
-                            <% if (Session["Username"] != null) { %>
+                            <% if (Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString())) { %>
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                    aria-expanded="false">Quiz</a>
                                 <ul class="dropdown-menu">
@@ -74,7 +75,7 @@
 
                         <!-- Simulations -->
                         <li class="nav-item fw-bold">
-                            <% if (Session["Username"] != null) { %>
+                            <% if (Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString())) { %>
                                 <a class="nav-link" runat="server" href="~/About">Simulations</a>
                             <% } else { %>
                                 <a class="nav-link" runat="server" href="~/Account/Login.aspx">Simulations</a>
@@ -83,12 +84,12 @@
 
                         <!-- User Login / Profile -->
                         <li class="nav-item dropdown fw-bold">
-                            <% if (Session["Username"] == null) { %>
+                            <% if (Session["Username"] == null || string.IsNullOrEmpty(Session["Username"].ToString())) { %>
                                 <a class="nav-link" runat="server" href="~/Account/Login.aspx">Login</a>
                             <% } else { %>
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-user-circle"></i> <%= Session["Username"] %>
+                                    <i class="fa fa-user-circle"></i> <%= Session["Username"].ToString() %>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
                                     <li>
@@ -98,7 +99,7 @@
                                     </li>
                                     <li>
                                         <asp:LinkButton ID="btnLogout" runat="server" CssClass="dropdown-item"
-                                                        OnClick="btnLogout_Click">
+                                                        OnClick="btnLogout_Click" CausesValidation="false">
                                             <i class="fa fa-sign-out-alt"></i> Logout
                                         </asp:LinkButton>
                                     </li>
@@ -111,10 +112,10 @@
         </nav>
 
         <!-- Sidebar (only for logged-in users) -->
-        <div id="userSidebar" class="user-sidebar hidden">
-            <% if (Session["Username"] != null) { %>
+        <% if (Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString())) { %>
+            <div id="userSidebar" class="user-sidebar hidden">
                 <h5 class="sidebar-title p-3 border-bottom mb-3">
-                    <i class="fa fa-user-circle"></i> <%= Session["Username"] %>
+                    <i class="fa fa-user-circle"></i> <%= Session["Username"].ToString() %>
                 </h5>
                 <ul class="list-unstyled px-3">
                     <li class="mb-2">
@@ -130,8 +131,8 @@
                         </a>
                     </li>
                 </ul>
-            <% } %>
-        </div>
+            </div>
+        <% } %>
 
         <!-- Main Content -->
         <div class="container body-content py-4">
@@ -144,14 +145,14 @@
             <div class="container text-center">
                 <div class="mb-2">
                     <!-- Home -->
-                    <% if (Session["Username"] != null) { %>
+                    <% if (Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString())) { %>
                         <a href="~/" class="text-white text-decoration-none mx-2">Home</a>
                     <% } else { %>
-                        <a href="<%= ResolveUrl("~/User/UserHomePage.aspx") %>" class="text-white text-decoration-none mx-2">Home</a>
+                        <a href="<%= ResolveUrl("~/Default.aspx") %>" class="text-white text-decoration-none mx-2">Home</a>
                     <% } %>
 
                     <!-- Contact (restricted) -->
-                    <% if (Session["Username"] != null) { %>
+                    <% if (Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString())) { %>
                         <a href="<%= ResolveUrl("~/Contact.aspx") %>" class="text-white text-decoration-none mx-2">Contact</a>
                     <% } else { %>
                         <a href="<%= ResolveUrl("~/Account/Login.aspx") %>" class="text-white text-decoration-none mx-2">Contact</a>
@@ -159,13 +160,6 @@
 
                     <!-- About Us (always accessible) -->
                     <a href="<%= ResolveUrl("~/About.aspx") %>" class="text-white text-decoration-none mx-2">About Us</a>
-
-                    <!-- Terms (restricted) -->
-                    <% if (Session["Username"] != null) { %>
-                        <a href="<%= ResolveUrl("~/Contact.aspx") %>" class="text-white text-decoration-none mx-2">Terms & Conditions</a>
-                    <% } else { %>
-                        <a href="<%= ResolveUrl("~/Account/Login.aspx") %>" class="text-white text-decoration-none mx-2">Terms & Conditions</a>
-                    <% } %>
                 </div>
                 <p class="mb-0">&copy; <%: DateTime.Now.Year %> - SciVerse. All Rights Reserved.</p>
             </div>
@@ -181,19 +175,25 @@
         const toggleBtn = document.getElementById('toggleUserSidebar');
         const mainContent = document.querySelector('.body-content');
 
-        if (toggleBtn) {
+        if (toggleBtn && sidebar) {
             toggleBtn.addEventListener('click', function (e) {
                 e.preventDefault();
                 sidebar.classList.toggle('hidden');
-                mainContent.classList.toggle('with-sidebar');
+                if (mainContent) {
+                    mainContent.classList.toggle('with-sidebar');
+                }
             });
         }
 
         // Close sidebar when clicking outside
         document.addEventListener('click', function (event) {
-            if (sidebar && !sidebar.contains(event.target) && !event.target.closest('#toggleUserSidebar')) {
+            if (sidebar && !sidebar.contains(event.target) &&
+                !event.target.closest('#toggleUserSidebar') &&
+                toggleBtn && !toggleBtn.contains(event.target)) {
                 sidebar.classList.add('hidden');
-                mainContent.classList.remove('with-sidebar');
+                if (mainContent) {
+                    mainContent.classList.remove('with-sidebar');
+                }
             }
         });
     </script>

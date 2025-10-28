@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="SciVerse_G12.Contact" %>
+
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
     <link href='<%= ResolveUrl("~/Styles/site.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
 </asp:Content>
-
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 <main aria-labelledby="title">
@@ -55,11 +55,13 @@
 
 
     <address>
-        <strong>📍 Address:</strong><br />
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br /><br />
-        <strong>📞 Phone:</strong><br />
-        <abbr title="Phone">P:</abbr> 425.555.0100
+        <div class="mapouter">
+            <div class="gmap_canvas">
+                <iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Jalan Teknologi 5, Taman Teknologi Malaysia, 57000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                <a href="https://wheremylocation.com/">where am i</a></div>
+                <style>.mapouter{position:relative;text-align:right;width:600px;height:400px;}.gmap_canvas {overflow:hidden;background:none!important;width:600px;height:400px;}.gmap_iframe {width:600px!important;height:400px!important;}
+                </style>
+             </div>
     </address>
 
     <address>

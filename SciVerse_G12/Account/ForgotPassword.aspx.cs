@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
-
 
 namespace SciVerse_G12
 {
@@ -19,12 +13,22 @@ namespace SciVerse_G12
 
         protected void btnReset_Click(object sender, EventArgs e)
         {
+            // ✅ Stop execution if page validators fail (RequiredField / CompareValidator)
+            if (!Page.IsValid)
+            {
+                lblMessage.Text = "❌ Please fix the errors before continuing.";
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
             string username = txtUsername.Text.Trim();
             string newPassword = txtPassword.Text.Trim();
+            string confirmPassword = txtConfirmPassword.Text.Trim();
 
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(newPassword))
+            // ✅ Double-check passwords match (for extra safety)
+            if (newPassword != confirmPassword)
             {
-                lblMessage.Text = "All fields are required!";
+                lblMessage.Text = "❌ Passwords do not match!";
                 lblMessage.ForeColor = System.Drawing.Color.Red;
                 return;
             }
@@ -46,7 +50,7 @@ namespace SciVerse_G12
                     lblMessage.Text = "✅ Password updated successfully! Redirecting to Login...";
                     lblMessage.ForeColor = System.Drawing.Color.Green;
 
-                    // Add JavaScript to redirect after 3 seconds
+                    // Redirect after 3 seconds
                     string script = "setTimeout(function(){ window.location='Login.aspx'; }, 3000);";
                     ClientScript.RegisterStartupScript(this.GetType(), "Redirect", script, true);
                 }

@@ -11,14 +11,32 @@ namespace SciVerse_G12
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // Check if user should be logged out (session timeout or manual logout)
+            if (!IsPostBack)
+            {
+                // Ensure session is properly maintained
+                if (Session["Username"] != null)
+                {
+                   
+                }
+            }
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
-            Session.Clear();   // Clear all session data
-            Session.Abandon(); // End session
-            Response.Redirect("~/Default.aspx"); // Go back to homepage
+            // Clear all session variables
+            Session.Clear();
+            Session.Abandon();
+
+            // Clear authentication cookie if using forms authentication
+            if (Response.Cookies["ASP.NET_SessionId"] != null)
+            {
+                Response.Cookies["ASP.NET_SessionId"].Value = string.Empty;
+                Response.Cookies["ASP.NET_SessionId"].Expires = DateTime.Now.AddMonths(-20);
+            }
+
+            // Redirect to login page
+            Response.Redirect("~/Account/Login.aspx");
         }
     }
 }

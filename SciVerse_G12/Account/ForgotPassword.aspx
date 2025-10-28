@@ -1,41 +1,55 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ForgotPassword.aspx.cs" Inherits="SciVerse_G12.ForgotPassword" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    
-    <div class="d-flex justify-content-center align-items-center login-container">
-        <div class="card p-4 shadow-lg" style="max-width:700px; width:100%; border-radius:10px;">
+﻿<%@ Page Title="Forgot Password" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ForgotPassword.aspx.cs" Inherits="SciVerse_G12.ForgotPassword" %>
 
+<asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Page-specific CSS -->
+    <link href='<%= ResolveUrl("~/Styles/site2.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
+</asp:Content>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <div class="d-flex justify-content-center align-items-center forgot-container">
+        <div class="card p-5 shadow-lg" style="width: 420px; border-radius: 12px;">
+            
             <!-- Title -->
-            <h1 class="text-center mb-3">Forgot Your Password?</h1>
+            <h1 class="text-center mb-3" style="font-size:1.9rem; font-weight:600; color:#0d47a1;">Forgot Your Password?</h1>
             <p class="text-center mb-4"><strong>Enter your username and new password</strong></p>
 
             <!-- Username -->
             <div class="mb-3">
                 <label for="txtUsername" class="form-label">Username:</label>
-                <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvUsername" runat="server" ControlToValidate="txtUsername" ErrorMessage="* Username is required" CssClass="text-danger" />
+                <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" placeholder="Enter your username"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvUsername" runat="server" ControlToValidate="txtUsername" 
+                    ErrorMessage="* Username is required" CssClass="text-danger small" Display="Dynamic" />
             </div>
 
             <!-- New Password -->
             <div class="mb-3">
                 <label for="txtPassword" class="form-label">New Password:</label>
-                <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ControlToValidate="txtPassword" ErrorMessage="* Password is required" CssClass="text-danger" />
+                <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" 
+                    placeholder="Enter new password"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ControlToValidate="txtPassword" 
+                    ErrorMessage="* Password is required" CssClass="text-danger small" Display="Dynamic" />
             </div>
 
             <!-- Confirm Password -->
             <div class="mb-3">
                 <label for="txtConfirmPassword" class="form-label">Confirm Password:</label>
-                <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvConfirmPassword" runat="server" ControlToValidate="txtConfirmPassword" ErrorMessage="* Confirm password is required" CssClass="text-danger" />
-                <asp:CompareValidator ID="cvPassword" runat="server" ControlToValidate="txtConfirmPassword" ControlToCompare="txtPassword" ErrorMessage="* Passwords do not match" CssClass="text-danger" />
+                <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" TextMode="Password" 
+                    placeholder="Confirm new password"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvConfirmPassword" runat="server" ControlToValidate="txtConfirmPassword" 
+                    ErrorMessage="* Confirm password is required" CssClass="text-danger small" Display="Dynamic" />
+                <asp:CompareValidator ID="cvPassword" runat="server" ControlToValidate="txtConfirmPassword" 
+                    ControlToCompare="txtPassword" ErrorMessage="* Passwords do not match" CssClass="text-danger small" Display="Dynamic" />
             </div>
 
             <!-- Message -->
-            <asp:Label ID="lblMessage" runat="server" CssClass="text-danger d-block mb-3 text-center"></asp:Label>
+            <asp:Label ID="lblMessage" runat="server" CssClass="text-danger d-block mb-3 text-center message" EnableViewState="false"></asp:Label>
 
             <!-- Reset Button -->
             <div class="d-grid mb-3">
-                <asp:Button ID="btnReset" runat="server" Text="Reset Password" CssClass="btn btn-primary" OnClick="btnReset_Click" />
+                <asp:Button ID="btnReset" runat="server" Text="Reset Password" CssClass="btn btn-primary" OnClick="btnReset_Click" CausesValidation="true" />
             </div>
 
             <!-- Links -->
@@ -47,38 +61,14 @@
         </div>
     </div>
 
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            DeleteCommand="DELETE FROM [tblRegisteredUsers] WHERE [RID] = @RID" 
-            InsertCommand="INSERT INTO [tblRegisteredUsers] ([fullName], [emailAddress], [username], [password], [age], [gender], [country], [picture], [dateRegister]) VALUES (@fullName, @emailAddress, @username, @password, @age, @gender, @country, @picture, @dateRegister)" 
-            SelectCommand="SELECT * FROM [tblRegisteredUsers]" 
-            UpdateCommand="UPDATE [tblRegisteredUsers] SET [fullName] = @fullName, [emailAddress] = @emailAddress, [username] = @username, [password] = @password, [age] = @age, [gender] = @gender, [country] = @country, [picture] = @picture, [dateRegister] = @dateRegister WHERE [RID] = @RID">
-            <DeleteParameters>
-                <asp:Parameter Name="RID" Type="Int32" />
-            </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="fullName" Type="String" />
-                <asp:Parameter Name="emailAddress" Type="String" />
-                <asp:Parameter Name="username" Type="String" />
-                <asp:Parameter Name="password" Type="String" />
-                <asp:Parameter Name="age" Type="Int32" />
-                <asp:Parameter Name="gender" Type="String" />
-                <asp:Parameter Name="country" Type="String" />
-                <asp:Parameter Name="picture" Type="String" />
-                <asp:Parameter Name="dateRegister" Type="DateTime" />
-            </InsertParameters>
-            <UpdateParameters>
-                <asp:Parameter Name="fullName" Type="String" />
-                <asp:Parameter Name="emailAddress" Type="String" />
-                <asp:Parameter Name="username" Type="String" />
-                <asp:Parameter Name="password" Type="String" />
-                <asp:Parameter Name="age" Type="Int32" />
-                <asp:Parameter Name="gender" Type="String" />
-                <asp:Parameter Name="country" Type="String" />
-                <asp:Parameter Name="picture" Type="String" />
-                <asp:Parameter Name="dateRegister" Type="DateTime" />
-                <asp:Parameter Name="RID" Type="Int32" />
-            </UpdateParameters>
-        </asp:SqlDataSource>
+    <!-- SQLDataSource for updating password -->
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+        ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+        UpdateCommand="UPDATE [tblRegisteredUsers] SET [password] = @password WHERE [username] = @username">
+        <UpdateParameters>
+            <asp:ControlParameter Name="password" ControlID="txtPassword" PropertyName="Text" Type="String" />
+            <asp:ControlParameter Name="username" ControlID="txtUsername" PropertyName="Text" Type="String" />
+        </UpdateParameters>
+    </asp:SqlDataSource>
 
 </asp:Content>
-

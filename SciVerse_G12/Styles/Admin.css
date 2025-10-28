@@ -89,3 +89,51 @@
     margin-bottom: 25px;
     color: #333;
 }
+
+
+/******/
+/*Admin View Message*/
+/******/
+
+/* Message Card Styling */
+.message-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
+}
+
+    .message-card:hover {
+        transform: scale(1.01);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+.message-content p {
+    margin: 5px 0;
+}
+
+.message-meta {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 8px;
+    border-top: 1px dashed #ccc;
+    padding-top: 5px;
+}
+
+.message-actions {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.admin-content h1 {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: #333;
+}

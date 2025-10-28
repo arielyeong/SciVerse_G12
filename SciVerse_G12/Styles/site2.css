@@ -1,0 +1,114 @@
+﻿/*Login*/
+.login-container {
+    
+}
+
+/* ======== Forgot Password Page Styles ======== */
+body {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.forgot-container {
+    margin-top: -90px !important; /* adjust this value */
+    padding: 30px 15px;
+}
+
+.forgot-password-card h1 {
+    font-size: 1.3rem !important; /* smaller title */
+    font-weight: 500;
+    color: #0d47a1;
+}
+
+.forgot-password-card {
+    max-width: 520px;
+    width: 100%;
+    border-radius: 25px;
+    background-color: #ffffff;
+    text-align: center;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+    .forgot-password-card h1 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #0d47a1;
+    }
+
+    .forgot-password-card p {
+        color: #555;
+        font-size: 1rem;
+    }
+
+/* Center form fields inside */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+    .form-field label {
+        width: 100%;
+        text-align: left;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .form-field .form-control {
+        width: 90%;
+        max-width: 300px;
+        border-radius: 8px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        transition: border-color 0.3s ease;
+        text-align: center;
+    }
+
+.form-control:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 0.2rem rgba(25, 118, 210, 0.25);
+}
+
+.btn-reset {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 10px;
+    background-color: #1976d2;
+    border: none;
+    transition: background-color 0.3s ease;
+    width: 90%;
+    max-width: 300px;
+}
+
+    .btn-reset:hover {
+        background-color: #1565c0;
+    }
+
+.text-danger.small {
+    display: block;
+    margin-top: 3px;
+}
+
+.message {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.back-link, .signup-link {
+    color: #1976d2;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+    .back-link:hover, .signup-link:hover {
+        text-decoration: underline;
+    }
+
+@media (max-width: 576px) {
+    .forgot-password-card {
+        padding: 20px;
+    }
+}
