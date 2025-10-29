@@ -109,4 +109,140 @@ body {
 }
 
 /* ======== Register Page Styles ======== */
+/* Register Page Container */
+.register-container {
+    min-height: 100vh;
+    border-radius: 20px;
+    margin-top: -100px !important; /* adjust this value */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.profile-header {
+    background: linear-gradient(to right, #007bff, #00b4d8);
+    color: #ffffff !important;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 2rem !important; /* Bigger text */
+    font-weight: 700 !important;
+    text-align: center;
+}
+
+    /* Main Card Styling */
+    .register-container .card {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 30px;
+        position: relative;
+        overflow: hidden; /* so image does not overflow the card */
+        border: 1.5px solid #e6e6e6;
+        width: 900px; /* <-- adjust this value */
+        max-width: 100%;
+    }
+
+    /* Header Text */
+    .register-container h1 {
+        font-weight: 600;
+        color: #0d47a1;
+        font-size: 1.8rem;
+    }
+
+    /* Background Decorative Image (Bottom Right) */
+    .register-container .card::after {
+        content: "";
+        background: url('../Images/science_register.png') no-repeat;
+        background-size: 160px; /* adjust image size */
+        opacity: 0.22; /* subtle transparent effect */
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 160px;
+        height: 160px;
+        pointer-events: none;
+    }
+
+    /* Form Labels */
+    .register-container label {
+        font-weight: 500;
+        color: #084298;
+    }
+
+    /* Form Controls */
+    .register-container .form-control,
+    .register-container .form-select {
+        border-radius: 8px;
+        border: 1px solid #b5c7e3;
+        transition: 0.3s;
+    }
+
+        .register-container .form-control:focus,
+        .register-container .form-select:focus {
+            border-color: #0d47a1;
+            box-shadow: 0 0 0 3px rgba(13,71,161,0.18);
+        }
+
+    /* Radio Buttons alignment */
+    .register-container .form-check-inline {
+        margin-right: 20px;
+    }
+
+    /* Register Button (Primary Blue) */
+.register-container .btn-register {
+    background-color: #3b82f6;
+    color: white;
+    padding: 12px 0;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    width: 80%; /* adjust size */
+    max-width: 280px; /* prevents becoming too wide */
+    display: block;
+    margin: 0 auto; /* centers the button */
+    transition: 0.3s ease;
+}
+
+    .register-container .btn-register:hover {
+        background-color: #2563eb;
+        transform: translateY(-2px);
+    }
+
+    /* Login Link */
+    .register-container a {
+        font-weight: 600;
+        margin-left: 5px;
+    }
+
+    .register-container .btn-register {
+        background-color: #3b82f6;
+        color: white;
+        padding: 12px 0;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border: none;
+        width: 100%;
+        transition: 0.3s ease;
+    }
+
+
+.section-title {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #044a9b;
+    border-left: 5px solid #3b82f6;
+    padding-left: 8px;
+}
+
+.img-preview {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 3px solid #bcd2ff;
+    border-radius: 12px;
+    background: #f8f9ff;
+}
 
