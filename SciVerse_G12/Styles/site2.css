@@ -1,9 +1,4 @@
-﻿/*Login*/
-.login-container {
-    
-}
-
-/* ======== Forgot Password Page Styles ======== */
+﻿/* ======== Forgot Password Page Styles ======== */
 body {
     background: linear-gradient(135deg, #e3f2fd, #bbdefb);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -112,3 +107,6 @@ body {
         padding: 20px;
     }
 }
+
+/* ======== Register Page Styles ======== */
+
