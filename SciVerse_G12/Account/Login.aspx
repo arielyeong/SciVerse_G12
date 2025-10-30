@@ -5,6 +5,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Page-specific CSS -->
     <link href='<%= ResolveUrl("~/Styles/site2.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
+    <!-- Bootstrap Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
@@ -24,7 +26,15 @@
             <!-- Password -->
             <div class="mb-3">
                 <label for="txtPassword" class="form-label">Password:</label>
-                <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+
+                <div class="input-group">
+                    <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password"
+                        AutoComplete="new-password"></asp:TextBox>
+
+                    <span class="input-group-text" id="togglePassword" style="cursor:pointer;">
+                        <i class="bi bi-eye-slash"></i>
+                    </span>
+                </div>
             </div>
 
             <!-- Message -->
@@ -43,5 +53,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById("togglePassword").addEventListener("click", function () {
+            var passwordField = document.getElementById("<%= txtPassword.ClientID %>");
+            var icon = this.querySelector("i");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                icon.classList.remove("bi-eye-slash");
+                icon.classList.add("bi-eye");
+            } else {
+                passwordField.type = "password";
+                icon.classList.remove("bi-eye");
+                icon.classList.add("bi-eye-slash");
+            }
+        });
+    </script>
+
 
 </asp:Content>

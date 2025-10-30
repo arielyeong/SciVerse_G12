@@ -15,17 +15,20 @@
         <!-- Hero Section -->
         <section id="home" class="hero-section text-center py-5">
             <div class="container-fluid position-relative px-0">
-                <div class="hero-badge mb-3">🚀Science Made Interactive</div>
-                <h1 class="hero-title mb-3">
-                    Discover the Universe of <span class="gradient-text">Science</span>
-                </h1>
-                <p class="hero-subtitle mb-4">
-                    Transform your learning journey with interactive experiments, engaging quizzes, and immersive virtual labs.
-                    Join thousands of students exploring physics, chemistry, and biology in a whole new way.
-                </p>
-                <div class="d-flex justify-content-center gap-3">
-                    <a href="#" class="btn btn-primary btn-lg">Start Learning Now →</a>
-                </div>
+                <div class="hero-badge mb-3">🌟Welcome to Your Learning Space</div>
+                    <h1 class="hero-title mb-3">
+                        Welcome, <span class="gradient-text"><asp:Label ID="lblFullName" runat="server"></asp:Label></span> 👋
+                    </h1>
+
+                    <p class="hero-subtitle mb-4">
+                        We’re glad to have you here again. Continue your learning journey and explore fresh science discoveries every day.
+                    </p>
+
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="Lessons.aspx" class="btn btn-primary btn-lg">Continue Learning →</a>
+                        <a href="<%= ResolveUrl("~/Account/Profile.aspx") %>" class="btn-view-profile">View Profile</a>
+                    </div>
+
                 <div class="row mt-5 hero-stats">
                     <div class="col-md-4">
                         <div class="stat-item">

@@ -47,7 +47,13 @@
                 <% } %>
 
                 <!-- Logo / Home Link -->
-                <a class="navbar-brand fw-bold d-flex align-items-center" runat="server" href="~/">
+                <% 
+                    string homeUrl = (Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString()))
+                        ? ResolveUrl("~/User/UserHomePage.aspx")
+                        : ResolveUrl("~/Default.aspx");
+                %>
+
+                <a class="navbar-brand fw-bold d-flex align-items-center" href="<%= homeUrl %>">
                     <asp:Image ID="LogoImg" runat="server" CssClass="me-2"
                         ImageUrl="~/Images/WAPP_Logo_Header.png"
                         AlternateText="SciVerse Logo" Style="height:50px;" />
@@ -127,10 +133,15 @@
         <!-- Sidebar (only for logged-in users) -->
         <% if (Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString())) { %>
             <div id="userSidebar" class="user-sidebar hidden">
-                <h5 class="sidebar-title p-3 border-bottom mb-3">
-                    <i class="fa fa-user-circle"></i> <%= Session["Username"].ToString() %>
-                </h5>
-                <ul class="list-unstyled px-3">
+                <div class="sidebar-header p-3 border-bottom">
+                    <div class="text-center mb-3">
+                        <asp:Image ID="ProfileImg" runat="server" ImageUrl='<%# ProfileImageUrl %>' CssClass="profile-img-sidebar" AlternateText="Profile Photo" />
+                    </div>
+                    <h5 class="sidebar-title mb-0 text-center">
+                        <%= Session["Username"].ToString() %>
+                    </h5>
+                </div>
+                <ul class="list-unstyled px-3 pt-3">
                     <li class="mb-2">
                         <a runat="server" href="~/Account/Profile.aspx"
                            class="text-light text-decoration-none d-block py-2">
@@ -159,7 +170,7 @@
                 <div class="mb-2">
                     <!-- Home -->
                     <% if (Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString())) { %>
-                        <a href="<%= ResolveUrl("~/User/UserHomePage.aspx") %>"  class="text-white text-decoration-none mx-2">Home</a>
+                        <a href="<%= ResolveUrl("~/UserHomePage.aspx") %>"  class="text-white text-decoration-none mx-2">Home</a>
                     <% } else { %>
                         <a href="<%= ResolveUrl("~/Default.aspx") %>" class="text-white text-decoration-none mx-2">Home</a>
                     <% } %>

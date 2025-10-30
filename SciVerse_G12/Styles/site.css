@@ -267,6 +267,61 @@ header,
 }
 
 /* === USER SIDEBAR (Dark Theme) === */
+/*.user-sidebar {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 240px;
+    height: calc(100% - 70px);
+    background-color: #212529;*/ /* dark background */
+    /*color: #f8f9fa;*/ /* light text */
+    /*border-right: 1px solid #343a40;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    padding-top: 10px;
+}*/
+
+    /* Hide by default */
+    /*.user-sidebar.hidden {
+        transform: translateX(-100%);
+    }*/
+
+/* Sidebar title */
+/*.sidebar-title {
+    font-weight: 600;
+    color: #f8f9fa;
+}*/
+
+/* Sidebar links */
+/*.user-sidebar a {
+    color: #f8f9fa;
+    padding-left: 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+    .user-sidebar a:hover {
+        background-color: #495057;
+        text-decoration: none;
+    }*/
+
+/* When sidebar open, shift main content */
+/*.body-content.with-sidebar {
+    margin-left: 240px;
+    transition: margin-left 0.3s ease;
+}*/
+
+/* Sidebar scrollbar styling */
+/*.user-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.user-sidebar::-webkit-scrollbar-thumb {
+    background-color: #495057;
+    border-radius: 3px;
+}*/
+
 .user-sidebar {
     position: fixed;
     top: 70px;
@@ -321,6 +376,7 @@ header,
     background-color: #495057;
     border-radius: 3px;
 }
+
 
 /*********/
 /*Contact Us*/

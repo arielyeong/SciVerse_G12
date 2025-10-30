@@ -179,6 +179,26 @@ body.homepage .body-content {
     transform: translateX(4px);
 }
 
+.btn-view-profile {
+    color: #1f2937 !important;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    padding: 14px 32px;
+    font-weight: 600;
+    border-radius: 12px;
+    border: 1px solid #93c5fd;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+}
+
+    .btn-view-profile:hover {
+        background: linear-gradient(135deg, #bae6fd 0%, #7dd3fc 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(125, 211, 252, 0.35);
+    }
+
+
+
 /* Hero Section */
 .hero-section {
     position: relative;

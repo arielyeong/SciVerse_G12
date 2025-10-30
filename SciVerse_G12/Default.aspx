@@ -24,7 +24,7 @@
                     Join thousands of students exploring physics, chemistry, and biology in a whole new way.
                 </p>
                 <div class="d-flex justify-content-center gap-3">
-                    <a href="<%= ResolveUrl("~/Account/Login.aspx") %>" class="btn btn-primary btn-lg">Start Learning Now →</a>
+                 <a href="<%= ResolveUrl("~/Account/Login.aspx") %>" class="btn btn-primary btn-lg">Start Learning Now →</a>
                 </div>
                 <div class="row mt-5 hero-stats">
                     <div class="col-md-4">
