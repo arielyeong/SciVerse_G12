@@ -83,7 +83,7 @@ header,
     padding-top: 10px;
     padding-bottom: 10px;
     width: 100%; /* Ensure full width */
-    position: relative;
+    position: fixed !important;
     bottom: 0; /* Aligns to bottom of content */
     background-color: transparent; /* No background color */
 }
@@ -755,7 +755,6 @@ address {
     margin-left: 4rem !important;
     margin-right: 4rem !important;
 }
-
 
 .p-7 {
     padding: 4rem !important;

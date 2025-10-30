@@ -129,6 +129,16 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\Profile.aspx" />
+    <Content Include="Images\About\charlotte.png" />
+    <Content Include="Images\About\chingying.png" />
+    <Content Include="Images\About\hueyyee.png" />
+    <Content Include="Images\About\yingxin.png" />
+    <Content Include="Images\down.png" />
+    <Content Include="Images\open air burning 1_4d398283297d45da980ae14f92221680.jpg" />
+    <Content Include="Images\Profile\science_register.jpg" />
+    <Content Include="Images\Profile\WAPP_Logo_Header.png" />
+    <Content Include="Images\science_register.png" />
+    <Content Include="Images\WAPP_Logo_Header.png" />
     <Content Include="Quiz\CreateNewQuizPage.aspx" />
     <Content Include="Quiz\EditQuizPage.aspx" />
     <Content Include="Quiz\NewQuestion.aspx" />

@@ -105,15 +105,6 @@ namespace SciVerse_G12
         protected global::System.Web.UI.WebControls.TextBox txtConPass;
 
         /// <summary>
-        /// btnRegister control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegister;
-
-        /// <summary>
         /// lblMessage control.
         /// </summary>
         /// <remarks>
@@ -121,6 +112,15 @@ namespace SciVerse_G12
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessage;
+
+        /// <summary>
+        /// btnRegister control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegister;
 
         /// <summary>
         /// SqlDataSource1 control.
