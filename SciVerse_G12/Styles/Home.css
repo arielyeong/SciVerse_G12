@@ -189,6 +189,7 @@ body.homepage .body-content {
     justify-content: center;
     width: 100vw !important;
     padding: 80px 0;
+    margin-top: -40px;
     overflow: hidden;
     margin-left: calc(50% - 50vw); /* remove container margin restriction */
     margin-right: calc(50% - 50vw);
@@ -399,6 +400,28 @@ body.homepage .body-content {
     line-height: 1.7;
     font-size: 1rem;
 }
+
+.fact-icon-img {
+    width: 110px; /* Adjust size here */
+    height: 110px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fact-card:hover .fact-icon-img {
+    transform: scale(1.08);
+    transition: transform 0.3s ease;
+}
+
+/* Brain icon only */
+.fact-icon-brain {
+    width: 140px; /* increase size */
+    height: 140px;
+}
+
 
 /* Features Section */
 .features-section {

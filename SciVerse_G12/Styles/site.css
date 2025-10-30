@@ -83,7 +83,7 @@ header,
     padding-top: 10px;
     padding-bottom: 10px;
     width: 100%; /* Ensure full width */
-    position: fixed !important;
+    position: relative;
     bottom: 0; /* Aligns to bottom of content */
     background-color: transparent; /* No background color */
 }

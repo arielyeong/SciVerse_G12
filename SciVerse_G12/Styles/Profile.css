@@ -120,7 +120,7 @@
     margin-top: 30px;
 }
 
-.btn-update {
+.btn-submit {
     background-color: #3b82f6;
     color: white;
     border: none;
@@ -132,10 +132,11 @@
     transition: background-color 0.3s ease;
 }
 
-    .btn-update:hover {
+    .btn-submit:hover {
         background-color: #2563eb;
     }
 
+/*Update Profile Page*/
 
 .update-wrapper {
     display: flex;
@@ -143,9 +144,11 @@
     align-items: center;
     min-height: 80vh;
     background: #f9fafc;
-    margin-top: -100px !important;
+    margin-top: -150px !important;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
+    padding: 60px 20px;
+    min-height: 100vh;
 }
 
 .update-container {
@@ -154,6 +157,17 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 900px;
     overflow: hidden;
+}
+
+
+.profile-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    animation: fadeUp 0.6s ease-out;
 }
 
 .update-header {
@@ -217,43 +231,54 @@
 }
 
 .update-button-container {
-    text-align: center;
+    display: flex !important;
+    justify-content: center !important; /* center buttons side-by-side */
+    align-items: center !important;
+    gap: 15px !important; /* spacing between buttons */
     margin-top: 30px;
 }
 
-.btn-update {
-    background: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s ease;
+/* Base Button Style */
+.update-button-container .btn-update,
+.update-button-container .btn-cancel {
+    padding: 12px 28px !important;
+    border-radius: 8px !important;
+    border: none !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: 0.3s ease !important;
+    display: inline-flex !important; /* VERY IMPORTANT */
+    justify-content: center !important; /* Fix alignment */
+    align-items: center !important;
+    margin: 0 !important; /* REMOVE leftover left margin */
 }
 
-    .btn-update:hover {
-        background: #0056b3;
+/* Save Button */
+.update-button-container .btn-update {
+    background: #007bff !important;
+    color: white !important;
+}
+
+    .update-button-container .btn-update:hover {
+        background: #0056b3 !important;
     }
 
-.btn-cancel {
-    background: #6c757d;
-    color: #fff;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 8px;
-    font-weight: 600;
-    margin-left: 15px;
-    transition: all 0.3s ease;
+/* Cancel Button */
+.update-button-container .btn-cancel {
+    background: #6c757d !important;
+    color: white !important;
 }
 
-    .btn-cancel:hover {
-        background: #5a6268;
+    .update-button-container .btn-cancel:hover {
+        background: #5a6268 !important;
     }
 
 .update-message {
-    color: #007bff;
+    text-align: center !important;
+    font-weight: 400 !important; /* remove bold */
+    color: #007bff !important;
     font-size: 16px;
+    margin-top: 15px;
     display: block;
     width: 100%;
-    text-align: center;
 }

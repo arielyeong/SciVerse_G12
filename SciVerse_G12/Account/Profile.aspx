@@ -57,7 +57,7 @@
             </div>
             
             <div class="button-container">
-                <asp:Button ID="btnUpdate" runat="server" OnClick="btnUpdate_Click" Text="Update Profile" CssClass="btn-update" />
+                <asp:Button ID="btnUpdate" runat="server" OnClick="btnUpdate_Click" Text="Update Profile" CssClass="btn-submit" />
             </div>
         </div>
     </div>

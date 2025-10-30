@@ -15,7 +15,7 @@
         <!-- Hero Section -->
         <section id="home" class="hero-section text-center py-5">
             <div class="container-fluid position-relative px-0">
-                <div class="hero-badge mb-3">🚀 Science Made Interactive</div>
+                <div class="hero-badge mb-3">🚀Science Made Interactive</div>
                 <h1 class="hero-title mb-3">
                     Discover the Universe of <span class="gradient-text">Science</span>
                 </h1>
@@ -24,7 +24,7 @@
                     Join thousands of students exploring physics, chemistry, and biology in a whole new way.
                 </p>
                 <div class="d-flex justify-content-center gap-3">
-                    <a href="#" class="btn btn-primary btn-lg">Start Learning Now →</a>
+                    <a href="<%= ResolveUrl("~/Account/Login.aspx") %>" class="btn btn-primary btn-lg">Start Learning Now →</a>
                 </div>
                 <div class="row mt-5 hero-stats">
                     <div class="col-md-4">
@@ -65,21 +65,23 @@
                 <div class="row g-4">
                     <div class="col-md-4">
                         <div class="fact-card p-4 h-100 shadow-sm">
-                            <div class="fact-icon fs-1">⚡</div>
+                            <img src="Images/lightning.png" alt="Lightning" class="fact-icon-img">
                             <h3 class="fact-title mt-3">Lightning Speed</h3>
                             <p>Lightning can heat the air around it to temperatures five times hotter than the sun's surface!</p>
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="fact-card p-4 h-100 shadow-sm">
-                            <div class="fact-icon fs-1">🌊</div>
+                            <img src="Images/water.png" alt="Water" class="fact-icon-img fact-icon-brain">
                             <h3 class="fact-title mt-3">Water Memory</h3>
                             <p>Water can remember substances that were once dissolved in it at the molecular level.</p>
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="fact-card p-4 h-100 shadow-sm">
-                            <div class="fact-icon fs-1">🧠</div>
+                            <img src="Images/brain.png" alt="Brain" class="fact-icon-img fact-icon-brain">
                             <h3 class="fact-title mt-3">Brain Power</h3>
                             <p>Your brain generates enough electricity to power a small light bulb while you’re awake!</p>
                         </div>
@@ -87,6 +89,7 @@
                 </div>
             </div>
         </section>
+
 
         <!-- Features Section -->
         <section id="features" class="features-section py-5">
@@ -310,7 +313,7 @@
             <div class="container">
                 <h2 class="cta-title mb-3">Ready to Transform Your Learning?</h2>
                 <p class="cta-subtitle mb-4">Join thousands of students exploring science in a whole new way.</p>
-                <a href="#" class="btn btn-lg btn-primary">Get Started Free</a>
+                <a href="<%= ResolveUrl("~/Account/Login.aspx") %>" class="btn btn-lg btn-primary">Get Started Free</a>
             </div>
         </section>
     </main>
