@@ -12,7 +12,7 @@
 
     <style>
         .profile-wrapper {
-            margin-top: -60px !important;
+            margin-top: -50px !important;
         }
      </style>
 

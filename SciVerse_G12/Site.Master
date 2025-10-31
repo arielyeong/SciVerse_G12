@@ -112,11 +112,6 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
                                     <li>
-                                        <a class="dropdown-item" runat="server" href="~/Account/Profile.aspx">
-                                            <i class="fa fa-id-badge"></i> Profile
-                                        </a>
-                                    </li>
-                                    <li>
                                         <asp:LinkButton ID="btnLogout" runat="server" CssClass="dropdown-item"
                                                         OnClick="btnLogout_Click" CausesValidation="false">
                                             <i class="fa fa-sign-out-alt"></i> Logout
@@ -170,7 +165,7 @@
                 <div class="mb-2">
                     <!-- Home -->
                     <% if (Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString())) { %>
-                        <a href="<%= ResolveUrl("~/UserHomePage.aspx") %>"  class="text-white text-decoration-none mx-2">Home</a>
+                        <a href="<%= ResolveUrl("~/User/UserHomePage.aspx") %>"  class="text-white text-decoration-none mx-2">Home</a>
                     <% } else { %>
                         <a href="<%= ResolveUrl("~/Default.aspx") %>" class="text-white text-decoration-none mx-2">Home</a>
                     <% } %>

@@ -21,7 +21,7 @@
                     </h1>
 
                     <p class="hero-subtitle mb-4">
-                        We’re glad to have you here again. Continue your learning journey and explore fresh science discoveries every day.
+                        We’re glad to have you here. Continue your learning journey and explore fresh science discoveries every day.
                     </p>
 
                     <div class="d-flex justify-content-center gap-3">

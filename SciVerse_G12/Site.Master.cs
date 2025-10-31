@@ -11,16 +11,19 @@ namespace SciVerse_G12
 {
     public partial class SiteMaster : MasterPage
     {
-        public string ProfileImageUrl { get; set; } = "~/Images/Profile/default.png";
+        protected string ProfileImageUrl = "~/Images/Profile/default.png"; // Declare property here
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // Check if user should be logged out (session timeout or manual logout)
-            if (!IsPostBack)
+            if (!IsPostBack && Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString()))
             {
-                // Ensure session is properly maintained
-                if (Session["Username"] != null)
+                LoadProfileImage(Session["Username"].ToString());
+                // Directly set ImageUrl to ensure display (bypasses binding issues in conditional blocks)
+                var profileImg = this.FindControl("ProfileImg") as Image;
+                if (profileImg != null)
                 {
-                    LoadProfileImage(Session["Username"].ToString());
+                    profileImg.ImageUrl = ProfileImageUrl;
                 }
             }
         }
@@ -57,20 +60,20 @@ namespace SciVerse_G12
                     object result = cmd.ExecuteScalar();
                     con.Close();
 
-                    if (result != null && !string.IsNullOrEmpty(result.ToString()))
+                    if (result != null && result != DBNull.Value && !string.IsNullOrEmpty(result.ToString().Trim()))
                     {
-                        ProfileImageUrl = result.ToString();
+                        ProfileImageUrl = result.ToString(); // e.g., "~/Images/Profile/user123.jpg"
                     }
                     else
                     {
-                        ProfileImageUrl = "~/Images/Profile/default.png";
+                        ProfileImageUrl = "~/Images/Profile/default.png"; // Ensure this file exists
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // Fallback on error
-                ProfileImageUrl = "~/Images/Profile/default.png";
+                // Log for debugging: Response.Write("<script>console.log('Image Load Error: " + ex.Message + "');</script>");
+                ProfileImageUrl = "~/Images/Profile/default.png"; // Fallback
             }
         }
     }

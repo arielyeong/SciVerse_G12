@@ -153,221 +153,257 @@ header,
     font-weight: bold;
 }
 
-/* === ADMIN SIDEBAR (Dark Theme) === */
-
+/* === ADMIN SIDEBAR (Dark Theme - Aligned with User Sidebar) === */
 .admin-sidebar {
-    width: 220px;
-    background: #2c3e50;
-    color: white;
-    height: calc(100vh - 60px);
     position: fixed;
-    top: 60px;
-    left: -220px; /* hidden by default */
-    transition: left 0.3s ease;
+    top: 0; /* No gap with navbar */
+    left: 0;
+    width: 260px; /* Consistent with user sidebar */
+    height: 100vh; /* Full height, no scroll gap */
+    background-color: #212529; /* Match user sidebar dark theme */
+    color: #f8f9fa;
+    border-right: 1px solid #343a40;
+    overflow-y: auto;
+    transition: transform 0.3s ease; /* Smooth slide like user sidebar */
     z-index: 1000;
-    padding-top: 20px;
-}
-
-    .admin-sidebar.active {
-        left: 0;
-    }
-
-.sidebar-header {
-    font-size: 18px;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #fff;
-    padding: 10px 0;
-}
-
-.sidebar-logo {
-    font-size: 16px;
-    line-height: 1.2;
-    text-align: center;
-    padding: 10px;
-    background: #34495e;
-    border-bottom: 1px solid #3d566e;
-}
-
-.sidebar-nav a {
     display: flex;
-    align-items: center;
-    padding: 12px;
-    color: white;
-    text-decoration: none;
+    flex-direction: column;
+    padding: 0;
+    transform: translateX(-100%); /* Hidden by default, like user sidebar */
 }
 
-    .sidebar-nav a i {
-        margin-right: 10px;
+.navbar {
+    z-index: 1001; /* Navbar above sidebar */
+}
+
+/* Show sidebar */
+.admin-sidebar.active {
+    transform: translateX(0); /* Slide in */
+}
+
+/* Sidebar Header (Adjusted for logo + ADMIN text: Centered, with padding) */
+.sidebar-header {
+    flex-shrink: 0;
+    padding: 30px 20px 20px; /* Balanced padding like user header */
+    border-bottom: 1px solid #343a40;
+    text-align: center;
+    background: linear-gradient(to bottom, #212529, #343a40); /* Subtle gradient like user */
+}
+
+/* Sidebar Logo Image (New: Circular logo, sized for header) */
+.sidebar-logo-img {
+    width: 80px; /* Sized like profile img in user sidebar */
+    height: 80px;
+    border-radius: 50%; /* Circle for consistency */
+    object-fit: cover; /* Maintain aspect ratio */
+    border: 3px solid #f8f9fa; /* Light border for contrast on dark bg */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    display: block;
+    margin: 0 auto 10px; /* Center with space below */
+}
+
+/* ADMIN Text (New: Bold, centered below logo) */
+.sidebar-header h5 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #f8f9fa;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Sidebar Nav Links (Aligned with user links: Padding, hover, icons) */
+.sidebar-nav {
+    flex: 1; /* Take remaining space like user ul */
+    list-style: none;
+    padding: 0 0 10px 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* Remove gap, use padding in links */
+}
+
+    .sidebar-nav a {
+        color: #f8f9fa;
+        padding: 15px 18px; /* Match user link padding */
+        border-radius: 8px; /* Softer corners like user */
+        transition: all 0.2s ease; /* Match user transition */
+        text-decoration: none;
+        display: flex; /* Flex for icon alignment */
+        align-items: center;
+        font-weight: 500; /* Medium weight like user */
     }
 
-    .sidebar-nav a:hover {
-        background: #34495e;
-    }
+        .sidebar-nav a i {
+            margin-right: 10px; /* Icon spacing */
+            font-size: 1.1em; /* Slightly larger icons */
+        }
 
-    .sidebar-nav a.active {
-        background: #1abc9c;
-        color: white;
-    }
+        .sidebar-nav a:hover {
+            background-color: #495057; /* Match user hover */
+            color: #ffffff;
+            transform: translateX(5px); /* Subtle slide like user */
+        }
 
-/* ===== Overlay for Outside Click ===== */
+        .sidebar-nav a.active {
+            background: #1abc9c; /* Keep original active color */
+            color: white;
+        }
+
+/* ===== Overlay for Outside Click (Aligned with user close logic) ===== */
 .sidebar-overlay {
     display: none;
     position: fixed;
-    top: 60px; /* match header height */
+    top: 0; /* Full top like user */
     left: 0;
     width: 100%;
-    height: calc(100vh - 60px);
+    height: 100vh; /* Full height */
     background-color: rgba(0, 0, 0, 0.3);
     z-index: 999;
 }
 
-/* ===== Main Content ===== */
+/* ===== Main Content Shift ===== */
 .admin-content {
     padding: 20px;
     margin-top: 70px;
-    transition: margin-left 0.3s ease;
+    transition: margin-left 0.3s ease; /* Match user transition */
 }
 
     .admin-content.shifted {
-        margin-left: 220px;
+        margin-left: 260px; /* Match sidebar width */
     }
 
-/* ===== Toggle Button (Optional Extra Styling) ===== */
+/* ===== Toggle Button (Match user styling) ===== */
 .menu-toggle {
-    background: transparent; /* visible on white header */
-    color: #007bff; /* blue icon/text */
-    border: 2px solid #007bff; /* blue border */
+    background: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
     padding: 8px 12px;
     cursor: pointer;
     border-radius: 6px;
     transition: all 0.3s ease-in-out;
 }
 
-    /* Hover effect */
     .menu-toggle:hover {
         background: #007bff;
         color: white;
         border-color: #0056b3;
     }
 
-/* ===== Responsive Sidebar (Auto-close for small screens) ===== */
+/* ===== Responsive (Aligned with user media query) ===== */
 @media (max-width: 992px) {
     .admin-sidebar {
-        left: -220px;
+        width: 280px; /* Wider for touch like user */
     }
 
-        .admin-sidebar.active {
-            left: 0;
-        }
+    .admin-content.shifted {
+        margin-left: 0; /* Overlay on mobile like user */
+    }
 
-    #sidebar-overlay {
-        display: block;
+    .sidebar-nav a {
+        padding: 18px 20px; /* Extra padding on mobile */
+    }
+
+    .sidebar-logo-img {
+        width: 70px;
+        height: 70px;
     }
 }
 
 /* === USER SIDEBAR (Dark Theme) === */
-/*.user-sidebar {
-    position: fixed;
-    top: 70px;
-    left: 0;
-    width: 240px;
-    height: calc(100% - 70px);
-    background-color: #212529;*/ /* dark background */
-    /*color: #f8f9fa;*/ /* light text */
-    /*border-right: 1px solid #343a40;
-    overflow-y: auto;
-    transition: transform 0.3s ease;
-    z-index: 1000;
-    padding-top: 10px;
-}*/
-
-    /* Hide by default */
-    /*.user-sidebar.hidden {
-        transform: translateX(-100%);
-    }*/
-
-/* Sidebar title */
-/*.sidebar-title {
-    font-weight: 600;
-    color: #f8f9fa;
-}*/
-
-/* Sidebar links */
-/*.user-sidebar a {
-    color: #f8f9fa;
-    padding-left: 10px;
-    border-radius: 5px;
-    transition: background-color 0.2s;
-}
-
-    .user-sidebar a:hover {
-        background-color: #495057;
-        text-decoration: none;
-    }*/
-
-/* When sidebar open, shift main content */
-/*.body-content.with-sidebar {
-    margin-left: 240px;
-    transition: margin-left 0.3s ease;
-}*/
-
-/* Sidebar scrollbar styling */
-/*.user-sidebar::-webkit-scrollbar {
-    width: 6px;
-}
-
-.user-sidebar::-webkit-scrollbar-thumb {
-    background-color: #495057;
-    border-radius: 3px;
-}*/
-
 .user-sidebar {
     position: fixed;
-    top: 70px;
+    top: 0; /* No gap with navbar */
     left: 0;
     width: 240px;
-    height: calc(100% - 70px);
-    background-color: #212529; /* dark background */
-    color: #f8f9fa; /* light text */
+    height: 100vh; /* Full height, no scroll gap */
+    background-color: #212529;
+    color: #f8f9fa;
     border-right: 1px solid #343a40;
     overflow-y: auto;
     transition: transform 0.3s ease;
     z-index: 1000;
-    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
 }
 
-    /* Hide by default */
-    .user-sidebar.hidden {
-        transform: translateX(-100%);
+.navbar {
+    z-index: 1001; /* Navbar above sidebar */
+}
+
+/* Hide by default */
+.user-sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+/* Sidebar Header (To lower the image: Increase padding-top here - e.g., from 35px to 50px or more) */
+.sidebar-header {
+    flex-shrink: 0;
+    padding: 110px 20px 15px; /* Increased top padding to 50px to push image lower (adjust this value as needed) */
+    border-bottom: 1px solid #343a40;
+    text-align: center;
+    background: linear-gradient(to bottom, #212529, #343a40); /* Subtle gradient for depth */
+}
+
+/* Profile Image (To lower further: Add/increase margin-top here) */
+.profile-img-sidebar {
+    width: 100px; /* Increased size for better visibility in sidebar */
+    height: 100px;
+    border-radius: 50%; /* Perfect circle */
+    object-fit: cover; /* Crop to fill circle without distortion */
+    border: 4px solid #3b82f6; /* Thicker blue border for pop */
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4); /* Stronger shadow for depth */
+    display: block;
+    margin: 90px auto 15px auto; /* Increased top margin to 20px for additional lowering (adjust this value) */
+    background-color: #e5e7eb; /* Fallback gray bg for loading/empty */
+    transition: transform 0.2s ease; /* Subtle hover lift */
+}
+
+    .profile-img-sidebar:hover {
+        transform: scale(1.05); /* Slight zoom on hover for interactivity */
     }
 
-/* Sidebar title */
+/* Sidebar Title (Adjusted: Larger font, better spacing) */
 .sidebar-title {
-    font-weight: 600;
+    font-weight: 700; /* Bolder for emphasis */
     color: #f8f9fa;
+    font-size: 1.1rem; /* Slightly larger */
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow for readability */
 }
 
-/* Sidebar links */
+/* Links Container */
+.user-sidebar ul {
+    flex: 1;
+    list-style: none;
+    padding: 0 0 20px 0;
+    margin: 0;
+}
+
+/* Sidebar Links (Adjusted: More padding for touch-friendly) */
 .user-sidebar a {
     color: #f8f9fa;
-    padding-left: 10px;
-    border-radius: 5px;
-    transition: background-color 0.2s;
+    padding: 15px 20px; /* Increased vertical padding */
+    border-radius: 8px; /* Softer corners */
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: block;
+    font-weight: 500; /* Medium weight */
 }
 
     .user-sidebar a:hover {
         background-color: #495057;
-        text-decoration: none;
+        color: #ffffff;
+        transform: translateX(5px); /* Subtle slide on hover */
     }
 
-/* When sidebar open, shift main content */
+/* Content Shift */
 .body-content.with-sidebar {
     margin-left: 240px;
     transition: margin-left 0.3s ease;
 }
 
-/* Sidebar scrollbar styling */
+/* Scrollbar */
 .user-sidebar::-webkit-scrollbar {
     width: 6px;
 }
@@ -376,7 +412,38 @@ header,
     background-color: #495057;
     border-radius: 3px;
 }
+    /* Toggle Button */
+    .menu-toggle {
+    background: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+}
 
+    .menu-toggle:hover {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .user-sidebar {
+        width: 280px;
+    }
+
+    .body-content.with-sidebar {
+        margin-left: 0; /* Overlay on mobile */
+    }
+
+    .profile-img-sidebar {
+        width: 70px;
+        height: 70px;
+    }
+}
 
 /*********/
 /*Contact Us*/
