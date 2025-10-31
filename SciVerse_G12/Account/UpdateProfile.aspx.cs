@@ -169,7 +169,7 @@ namespace SciVerse_G12
 
                 if (rowsAffected > 0)
                 {
-                    lblMessage.Text = "✅ Profile updated successfully!";
+                    lblMessage.Text = "Profile updated successfully!";
                     lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-success";
 
                     // Refresh image preview if new image

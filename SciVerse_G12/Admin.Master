@@ -51,11 +51,6 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end shadow">
                     <li>
-                        <a class="dropdown-item" runat="server" href="~/Admin/AdminProfile.aspx">
-                            <i class="fa fa-id-badge"></i> Profile
-                        </a>
-                    </li>
-                    <li>
                         <asp:LinkButton ID="btnLogout" runat="server" CssClass="dropdown-item" OnClick="btnLogout_Click">
                             <i class="fa fa-sign-out-alt"></i> Logout
                         </asp:LinkButton>
@@ -71,7 +66,7 @@
             <!-- Sidebar -->
             <aside class="admin-sidebar bg-dark text-white p-3" id="sidebar">
                 <div class="sidebar-header text-center mb-4">
-                    <img src="~/Images/WAPP_Logo__Circle.png" alt="SciVerse Logo" class="sidebar-logo-img" />
+                    <img src="<%= ResolveUrl("~/Images/WAPP_Logo__Circle.png") %>" alt="SciVerse Logo" class="sidebar-logo-img" />
                     <h5 class="fw-bold text-white mb-0">ADMIN</h5>
                 </div>
                 <nav class="sidebar-nav d-flex flex-column gap-2">

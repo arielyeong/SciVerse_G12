@@ -184,16 +184,17 @@ header,
 /* Sidebar Header (Adjusted for logo + ADMIN text: Centered, with padding) */
 .sidebar-header {
     flex-shrink: 0;
-    padding: 30px 20px 20px; /* Balanced padding like user header */
-    border-bottom: 1px solid #343a40;
+    padding: 20px;
+    border-bottom: none;
     text-align: center;
-    background: linear-gradient(to bottom, #212529, #343a40); /* Subtle gradient like user */
+    background: #212529; /* No gray */
+    margin-top: -50px;
 }
 
 /* Sidebar Logo Image (New: Circular logo, sized for header) */
 .sidebar-logo-img {
-    width: 80px; /* Sized like profile img in user sidebar */
-    height: 80px;
+    width: 120px; /* Sized like profile img in user sidebar */
+    height: 120px;
     border-radius: 50%; /* Circle for consistency */
     object-fit: cover; /* Maintain aspect ratio */
     border: 3px solid #f8f9fa; /* Light border for contrast on dark bg */
@@ -306,6 +307,11 @@ header,
     .sidebar-logo-img {
         width: 70px;
         height: 70px;
+    }
+
+    .sidebar-logo-img {
+        width: 140px;
+        height: 140px;
     }
 }
 
