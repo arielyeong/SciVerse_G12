@@ -35,7 +35,7 @@
             <div class="mode-buttons">
                 <asp:Button ID="btnEditMode" runat="server" CssClass="btn-custom btn-edit-mode me-2" Text="Edit Mode" OnClick="btnEditMode_Click" ToolTip="Enable edit selection" />
                 <asp:Button ID="btnDeleteMode" runat="server" CssClass="btn-custom btn-delete-mode me-2" Text="Delete Mode" OnClick="btnDeleteMode_Click" ToolTip="Enable delete selection" />
-                <asp:Button ID="btnConfirm" runat="server" CssClass="btn-custom btn-confirm me-2" Text="Confirm" Visible="false" OnClick="btnConfirm_Click" OnClientClick="return confirmAction();" ToolTip="Confirm selected actions" />
+                <asp:Button ID="btnConfirm" runat="server" CssClass="btn-custom btn-confirm me-2" Text="Confirm" Visible="false" OnClick="btnConfirm_Click" ToolTip="Confirm selected actions" />
                 <asp:Button ID="btnCancel" runat="server" CssClass="btn-custom btn-cancel" Text="Cancel" Visible="false" OnClick="btnCancel_Click" ToolTip="Cancel mode" />
             </div>
         </div>
@@ -123,10 +123,4 @@
             <p>Try adjusting your search criteria.</p>
         </div>
     </div>
-
-    <script type="text/javascript">
-        function confirmAction() {
-            return confirm('Are you sure you want to proceed with the selected action? This cannot be undone.');
-        }
-    </script>
 </asp:Content>

@@ -188,7 +188,7 @@ header,
     border-bottom: none;
     text-align: center;
     background: #000000; /* No gray */
-    margin-top: -50px;
+    margin-top: -40px;
 }
 
 /* Sidebar Logo Image (New: Circular logo, sized for header) */
@@ -225,7 +225,7 @@ header,
 
     .sidebar-nav a {
         color: #f8f9fa;
-        padding: 15px 18px; /* Match user link padding */
+        padding: 14px 17px; /* Match user link padding */
         border-radius: 8px; /* Softer corners like user */
         transition: all 0.2s ease; /* Match user transition */
         text-decoration: none;
