@@ -41,7 +41,6 @@ namespace SciVerse_G12
 
                 if (reader.Read())
                 {
-                    int userId = Convert.ToInt32(reader["userID"]);
                     string loggedInUser = reader["username"].ToString();
                     string role = reader["role"].ToString();
                     string rid = reader["RID"].ToString();   // ✅ get RID from the database
