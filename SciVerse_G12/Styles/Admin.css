@@ -1,95 +1,268 @@
 ﻿/******/
-/*Admin View User Liste*/
+/*Admin View User List*/
 /******/
-
-
-.admin-content {
-    padding: 20px;
-    margin-top: -30px !important;
-    transition: margin-left 0.3s ease;
+/* Page Header Redesign */
+.content-header {
+    background: #bbdefb;
+    color: #333; /* Changed to dark for better contrast on light blue */
+    padding: 15px 25px; /* Reduced from 25px for shorter header */
+    border-radius: 12px;
+    margin-bottom: 20px; /* Slightly less bottom margin */
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(179, 222, 251, 0.3); /* Adjusted shadow to light blue tint */
+    margin-top: -80px !important; /* Move up more */
 }
 
-    .admin-content.shifted {
-        margin-left: 220px;
-    }
+.page-title {
+    font-size: 1.8rem; /* Reduced from 2.2rem for compactness */
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Softer shadow for light theme */
+}
 
-/* Container for top controls */
+.page-subtitle {
+    font-size: 1rem; /* Slightly smaller */
+    opacity: 0.8; /* Slightly more opaque for readability */
+    margin: 3px 0 0; /* Less spacing */
+}
+
+/* Top Controls Redesign: Compact, icon-focused (Adjusted for better flow) */
 .top-controls {
     display: flex;
-    justify-content: space-between; /* separate left and right sections */
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-}
-
-/* Left section: search tools */
-.left-controls {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-/* Right section: action buttons */
-.right-controls {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.top-controls .form-control {
-    width: 250px;
-}
-
-/******/
-/*Admin View Message*/
-/******/
-
-/* Message Card Styling */
-.message-card {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    transition: 0.3s ease;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 12px 20px; /* Slightly less padding */
+    border-radius: 8px;
+    margin-bottom: 15px; /* Less bottom margin to tighten layout */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    flex-wrap: wrap;
+    gap: 12px; /* Slightly less gap */
 }
 
-    .message-card:hover {
-        transform: scale(1.01);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+/* Search & Clear Icon Buttons (FULL WORKING VERSION) */
+.btn-search-icon,
+.btn-clear-icon {
+    width: 40px;
+    height: 32px;
+    border: none;
+    border-radius: 0 6px 6px 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 0;
+}
+
+/* Search Button */
+.btn-search-icon {
+    background: #007bff;
+}
+
+    .btn-search-icon::before {
+        content: "\f002"; /* FontAwesome Search */
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: 15px;
+        color: #fff;
     }
 
-.message-content p {
-    margin: 5px 0;
+/* Clear Button */
+.btn-clear-icon {
+    background: #6c757d;
 }
 
-.message-meta {
-    font-size: 0.9em;
-    color: #666;
-    margin-top: 8px;
-    border-top: 1px dashed #ccc;
-    padding-top: 5px;
-}
+    .btn-clear-icon::before {
+        content: "\f00d"; /* FontAwesome Times (X) */
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: 15px;
+        color: #fff;
+    }
 
-.message-actions {
+    /* Hover Effects */
+    .btn-search-icon:hover,
+    .btn-clear-icon:hover {
+        opacity: 0.85;
+    }
+
+
+/* Custom Mode Buttons (Soft colors, no Bootstrap ugly) */
+.mode-buttons {
     display: flex;
-    align-items: center;
-    margin-left: 20px;
+    gap: 8px; /* Tighter gap */
+    flex-wrap: wrap;
 }
 
-.admin-content h1 {
-    margin-top: -50px !important;
-    font-size: 3rem;
-    margin-bottom: 25px;
+.btn-custom {
+    padding: 8px 18px; /* Slightly smaller for compact */
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.85rem; /* Smaller text */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 100px; /* Slightly smaller */
+    text-align: center;
+}
+
+.btn-edit-mode {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+    .btn-edit-mode:hover {
+        background: linear-gradient(135deg, #4299e1 0%, #00c6d7 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+    }
+
+.btn-delete-mode {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: white;
+}
+
+    .btn-delete-mode:hover {
+        background: linear-gradient(135deg, #e53e3e 0%, #fcba03 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(250, 112, 154, 0.3);
+    }
+
+.btn-confirm {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+}
+
+    .btn-confirm:hover {
+        background: linear-gradient(135deg, #0f8c7a 0%, #2dd86a 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(17, 153, 142, 0.3);
+    }
+
+.btn-cancel {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
     color: #333;
+    border: 1px solid #ddd;
 }
 
+    .btn-cancel:hover {
+        background: linear-gradient(135deg, #9adbd5 0%, #f5c5d0 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(168, 237, 234, 0.3);
+    }
+
+/* Responsive Table Redesign: Flexible, no cramped headers (Adjusted widths for better fit) */
+.table-responsive {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(179, 222, 251, 0.2); /* Adjusted shadow to light blue tint */
+    background: white;
+    margin-bottom: 20px; /* Space below table */
+}
+
+.user-table {
+    margin: 0;
+    font-size: 0.9rem;
+    min-width: 100%; /* Ensure full width */
+}
+
+    .user-table th {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb); /* Light blue theme */
+        color: #333; /* Dark text for contrast */
+        font-weight: 700;
+        text-align: center;
+        padding: 12px 6px; /* Less padding for compact headers */
+        white-space: nowrap;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border: none;
+        font-size: 0.85rem; /* Smaller font for fit */
+    }
+
+    .user-table td {
+        padding: 10px 6px; /* Less padding */
+        vertical-align: middle;
+        border-color: #e9ecef;
+        max-width: 120px; /* Tighter max for better fit */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .user-table .select-col, .user-table .id-col, .user-table .age-col, .user-table .gender-col, .user-table .date-col {
+        width: 50px; /* Tighter */
+        text-align: center;
+    }
+
+    .user-table .username-col, .user-table .name-col {
+        width: 140px; /* Slightly tighter */
+    }
+
+    .user-table .email-col, .user-table .country-col {
+        width: 160px; /* Slightly tighter */
+    }
+
+    .user-table .picture-col {
+        width: 90px; /* Tighter */
+    }
+
+    .user-table .user-avatar {
+        width: 45px; /* Smaller avatar */
+        height: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #dee2e6;
+    }
+
+/* Empty Data Styling */
+.no-results {
+    background: #f8f9fa;
+    border: 1px dashed #dee2e6;
+    border-radius: 8px;
+}
+
+/* Responsive: Stack on mobile (Improved for layout) */
+@media (max-width: 768px) {
+    .top-controls {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .search-section {
+        width: 100%;
+    }
+
+    .search-input {
+        border-radius: 25px 25px 25px 25px;
+        width: 100%;
+    }
+
+    .btn-search-icon, .btn-clear-icon {
+        border-radius: 25px;
+        width: auto;
+        min-width: 45px;
+    }
+
+    .user-table th, .user-table td {
+        padding: 6px 3px; /* Tighter for mobile */
+        font-size: 0.75rem;
+    }
+
+    .user-table .user-avatar {
+        width: 35px;
+        height: 35px;
+    }
+
+    .content-header {
+        padding: 12px 20px; /* Even shorter on mobile */
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+}
 
 /******/
 /*Admin View Message*/
