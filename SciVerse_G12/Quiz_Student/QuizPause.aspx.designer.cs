@@ -7,65 +7,74 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SciVerse_G12
+namespace SciVerse_G12.Quiz_Student
 {
 
 
-    public partial class SiteMaster
+    public partial class QuizPause
     {
 
         /// <summary>
-        /// HeadContent control.
+        /// litCounter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
+        protected global::System.Web.UI.WebControls.Literal litCounter;
 
         /// <summary>
-        /// LogoImg control.
+        /// capsuleFill control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image LogoImg;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl capsuleFill;
 
         /// <summary>
-        /// NavLinks control.
+        /// phScore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl NavLinks;
+        protected global::System.Web.UI.WebControls.PlaceHolder phScore;
 
         /// <summary>
-        /// btnLogout control.
+        /// litScore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnLogout;
+        protected global::System.Web.UI.WebControls.Literal litScore;
 
         /// <summary>
-        /// ProfileImg control.
+        /// phNoQuestions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ProfileImg;
+        protected global::System.Web.UI.WebControls.PlaceHolder phNoQuestions;
 
         /// <summary>
-        /// MainContent control.
+        /// btnResume control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Button btnResume;
+
+        /// <summary>
+        /// btnSaveExit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveExit;
     }
 }

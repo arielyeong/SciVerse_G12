@@ -78,13 +78,13 @@ namespace SciVerse_G12.Quiz
         protected global::System.Web.UI.WebControls.RadioButton radiobtnChoice1;
 
         /// <summary>
-        /// txtChoice1 control.
+        /// txtChoiceA control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChoice1;
+        protected global::System.Web.UI.WebControls.TextBox txtChoiceA;
 
         /// <summary>
         /// radiobtnChoice2 control.
@@ -96,13 +96,13 @@ namespace SciVerse_G12.Quiz
         protected global::System.Web.UI.WebControls.RadioButton radiobtnChoice2;
 
         /// <summary>
-        /// txtChoice2 control.
+        /// txtChoiceB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChoice2;
+        protected global::System.Web.UI.WebControls.TextBox txtChoiceB;
 
         /// <summary>
         /// radiobtnChoice3 control.
@@ -114,13 +114,13 @@ namespace SciVerse_G12.Quiz
         protected global::System.Web.UI.WebControls.RadioButton radiobtnChoice3;
 
         /// <summary>
-        /// txtChoice3 control.
+        /// txtChoiceC control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChoice3;
+        protected global::System.Web.UI.WebControls.TextBox txtChoiceC;
 
         /// <summary>
         /// radiobtnChoice4 control.
@@ -132,13 +132,13 @@ namespace SciVerse_G12.Quiz
         protected global::System.Web.UI.WebControls.RadioButton radiobtnChoice4;
 
         /// <summary>
-        /// txtChoice4 control.
+        /// txtChoiceD control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChoice4;
+        protected global::System.Web.UI.WebControls.TextBox txtChoiceD;
 
         /// <summary>
         /// panelTF control.
@@ -168,13 +168,13 @@ namespace SciVerse_G12.Quiz
         protected global::System.Web.UI.WebControls.Panel panelFill;
 
         /// <summary>
-        /// txtBlank1 control.
+        /// txtFillInBlank control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBlank1;
+        protected global::System.Web.UI.WebControls.TextBox txtFillInBlank;
 
         /// <summary>
         /// txtFeedback control.
@@ -195,13 +195,13 @@ namespace SciVerse_G12.Quiz
         protected global::System.Web.UI.WebControls.Button btnSave;
 
         /// <summary>
-        /// lnkBack control.
+        /// linkBack control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkBack;
+        protected global::System.Web.UI.WebControls.HyperLink linkBack;
 
         /// <summary>
         /// lblMessage control.

@@ -7,65 +7,74 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SciVerse_G12
+namespace SciVerse_G12.Quiz_Student
 {
 
 
-    public partial class SiteMaster
+    public partial class QuizDetailsPage
     {
 
         /// <summary>
-        /// HeadContent control.
+        /// titleLiteral control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
+        protected global::System.Web.UI.WebControls.Literal titleLiteral;
 
         /// <summary>
-        /// LogoImg control.
+        /// lblTimeLimit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image LogoImg;
+        protected global::System.Web.UI.WebControls.Label lblTimeLimit;
 
         /// <summary>
-        /// NavLinks control.
+        /// lblQuestions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl NavLinks;
+        protected global::System.Web.UI.WebControls.Label lblQuestions;
 
         /// <summary>
-        /// btnLogout control.
+        /// lblAttempts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnLogout;
+        protected global::System.Web.UI.WebControls.Label lblAttempts;
 
         /// <summary>
-        /// ProfileImg control.
+        /// litDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ProfileImg;
+        protected global::System.Web.UI.WebControls.Literal litDescription;
 
         /// <summary>
-        /// MainContent control.
+        /// rblTimeMode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.RadioButtonList rblTimeMode;
+
+        /// <summary>
+        /// btnStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnStart;
     }
 }

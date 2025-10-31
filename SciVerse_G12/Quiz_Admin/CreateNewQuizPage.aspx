@@ -66,7 +66,7 @@
             <asp:Button ID="btnSaveAndContinue" runat="server" Text="Save and Continue"
                 CssClass="btn btn-primary" OnClick="btnSaveAndContinue_Click" />
             <asp:HyperLink ID="lnkBack" runat="server" CssClass="btn btn-secondary"
-                NavigateUrl="~/Quiz/ViewQuizList.aspx" Text="Back to List" />
+                NavigateUrl="~/Quiz_Admin/ViewQuizList.aspx" Text="Back to List" />
           </div>
 
           <div class="text-center mt-3">

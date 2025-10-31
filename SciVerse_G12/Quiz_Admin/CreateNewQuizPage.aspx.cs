@@ -8,11 +8,18 @@ namespace SciVerse_G12.Quiz
 {
     public partial class CreateNewQuizPage : System.Web.UI.Page
     {
+        private const string UploadSubFolder = "~/Images/QuizList/";
         protected void Page_Load(object sender, EventArgs e)
         {
             // Ensure uploads work even if the form is defined in the master page
-            if (Page.Form != null)
-                Page.Form.Enctype = "multipart/form-data";
+            if (Page.Form != null) Page.Form.Enctype = "multipart/form-data";
+
+            // Require login
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("~/Account/Login.aspx");
+                return;
+            }
 
             if (!IsPostBack)
             {
@@ -28,17 +35,17 @@ namespace SciVerse_G12.Quiz
 
             int next = 1;
 
-            using (var con = new SqlConnection(connectionString))
-            using (var command = new SqlCommand(sql, con))
+            using (var connStr = new SqlConnection(connectionString))
+            using (var command = new SqlCommand(sql, connStr))
             {
-                con.Open();
-                object val = command.ExecuteScalar();
-                int max = (val == null || val == DBNull.Value) ? 0 : Convert.ToInt32(val);
+                connStr.Open();
+                object value = command.ExecuteScalar();
+                int max = (value == null || value == DBNull.Value) ? 0 : Convert.ToInt32(value);
                 next = max + 1;
             }
 
             txtChapter.Text = next.ToString();
-            txtChapter.ReadOnly = true; // optional: make it not editable
+            txtChapter.ReadOnly = true; //make it not editable
         }
 
 
@@ -52,6 +59,7 @@ namespace SciVerse_G12.Quiz
             int timeLimit = int.TryParse((txtTimeLimit.Text ?? "").Trim(), out var t) ? t : 0;
             int attemptLimit = int.TryParse((txtAttemptLimit.Text ?? "").Trim(), out var a) ? a : 0;
 
+            // validation for empty
             if (string.IsNullOrEmpty(title))
             {
                 lblMessage.CssClass = "text-danger";
@@ -60,13 +68,13 @@ namespace SciVerse_G12.Quiz
             }
 
             // 2) Handle image upload (save to ~/Images, default if none)
-            string imageRelUrl = "~/Images/default.png";  // default image path (ensure the file exists)
+            string imageRelUrl = UploadSubFolder + "default.png";  // default image path (ensure the file exists)
 
             if (FileUploadPicture.HasFile)
             {
                 try
                 {
-                    string folderPath = Server.MapPath("~/Images/");
+                    string folderPath = Server.MapPath(UploadSubFolder);
                     if (!Directory.Exists(folderPath))
                     {
                         Directory.CreateDirectory(folderPath);
@@ -80,7 +88,7 @@ namespace SciVerse_G12.Quiz
                     FileUploadPicture.SaveAs(fullPath);
 
                     // Store virtual path for database
-                    imageRelUrl = "~/Images/" + uniqueName;
+                    imageRelUrl = UploadSubFolder + uniqueName;
                 }
                 catch (Exception ex)
                 {
@@ -97,24 +105,33 @@ namespace SciVerse_G12.Quiz
 
             try
             {
-                using (var con = new SqlConnection(connectionString))
+                using (var connStr = new SqlConnection(connectionString))
                 using (var command = new SqlCommand(@"
                     INSERT INTO dbo.tblQuiz
                         (Title, Description, Chapter, TimeLimit, ImageURL, CreatedDate, CreatedBy, AttemptLimit)
                     OUTPUT INSERTED.QuizID
                     VALUES
                         (@Title, @Description, @Chapter, @TimeLimit, @ImageURL, GETDATE(), @CreatedBy, @AttemptLimit);
-                ", con))
+                ", connStr))
                 {
                     command.Parameters.AddWithValue("@Title", title);
                     command.Parameters.AddWithValue("@Description", (object)description ?? DBNull.Value);
                     command.Parameters.AddWithValue("@Chapter", (object)chapter ?? DBNull.Value);
                     command.Parameters.AddWithValue("@TimeLimit", timeLimit);
                     command.Parameters.AddWithValue("@ImageURL", (object)imageRelUrl ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@CreatedBy", 1);       // NEED MAKE CHANGES: set this from your logged-in admin ID
+
+                    // get current user id from session
+                    int createdBy = 0;
+                    if (Session["UserID"] is int uid) createdBy = uid;
+                    else if (!int.TryParse(Convert.ToString(Session["UserID"]), out createdBy))
+                    {
+                        Response.Redirect("~/Account/Login.aspx");
+                        return;
+                    }
+                    command.Parameters.AddWithValue("@CreatedBy", createdBy);
                     command.Parameters.AddWithValue("@AttemptLimit", attemptLimit);
 
-                    con.Open();
+                    connStr.Open();
                     newQuizId = (int)command.ExecuteScalar();
                 }
             }
@@ -126,10 +143,10 @@ namespace SciVerse_G12.Quiz
             }
 
             // 4) Redirect to next step (e.g., add questions or back to list)
-            Response.Redirect(ResolveUrl("~/Quiz/EditQuizPage.aspx?quizId=" + newQuizId), false);
+            Response.Redirect(ResolveUrl("~/Quiz_Admin/EditQuizPage.aspx?quizId=" + newQuizId), false);
             // IMPORTANT: stop the current request so no extra databinds run on this page
             Context.ApplicationInstance.CompleteRequest();
-            return;
+            //return;
 
         }
     }

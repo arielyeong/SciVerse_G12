@@ -38,43 +38,44 @@
             </div>
           </div>
 
-           <!-- ========== TYPE-SPECIFIC UIs ========== -->
+           <!-- ========== TYPE-SPECIFIC ========== -->
 
       <!-- MCQ -->
       <asp:Panel ID="panelMCQ" runat="server" Visible="false" CssClass="mb-3">
-        <label class="form-label d-block">Options:</label>
+          <label class="form-label d-block">Options:</label>
 
-        <div class="row g-3">
-          <div class="col-md-6">
-            <div class="d-flex gap-2 align-items-center">
-              <asp:RadioButton ID="radiobtnChoice1" runat="server" GroupName="mcqCorrect" />
-              <asp:TextBox ID="txtChoice1" runat="server" CssClass="form-control" Placeholder="Option 1" />
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="d-flex gap-2 align-items-center">
+                <asp:RadioButton ID="radiobtnChoice1" runat="server" GroupName="mcqCorrect" />
+                <asp:TextBox ID="txtChoiceA" runat="server" CssClass="form-control" Placeholder="Option A" />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="d-flex gap-2 align-items-center">
+                <asp:RadioButton ID="radiobtnChoice2" runat="server" GroupName="mcqCorrect" />
+                <asp:TextBox ID="txtChoiceB" runat="server" CssClass="form-control" Placeholder="Option B" />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="d-flex gap-2 align-items-center">
+                <asp:RadioButton ID="radiobtnChoice3" runat="server" GroupName="mcqCorrect" />
+                <asp:TextBox ID="txtChoiceC" runat="server" CssClass="form-control" Placeholder="Option C" />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="d-flex gap-2 align-items-center">
+                <asp:RadioButton ID="radiobtnChoice4" runat="server" GroupName="mcqCorrect" />
+                <asp:TextBox ID="txtChoiceD" runat="server" CssClass="form-control" Placeholder="Option D" />
+              </div>
             </div>
           </div>
 
-          <div class="col-md-6">
-            <div class="d-flex gap-2 align-items-center">
-              <asp:RadioButton ID="radiobtnChoice2" runat="server" GroupName="mcqCorrect" />
-              <asp:TextBox ID="txtChoice2" runat="server" CssClass="form-control" Placeholder="Option 2" />
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="d-flex gap-2 align-items-center">
-              <asp:RadioButton ID="radiobtnChoice3" runat="server" GroupName="mcqCorrect" />
-              <asp:TextBox ID="txtChoice3" runat="server" CssClass="form-control" Placeholder="Option 3" />
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="d-flex gap-2 align-items-center">
-              <asp:RadioButton ID="radiobtnChoice4" runat="server" GroupName="mcqCorrect" />
-              <asp:TextBox ID="txtChoice4" runat="server" CssClass="form-control" Placeholder="Option 4" />
-            </div>
-          </div>
-        </div>
-        <small class="text-muted d-block mt-2">Select the radio next to the correct option.</small>
-      </asp:Panel>
+          <small class="text-muted d-block mt-2">Select the radio next to the correct option.</small>
+        </asp:Panel>
 
       <!-- True/False -->
       <asp:Panel ID="panelTF" runat="server" Visible="false" CssClass="mb-3">
@@ -88,8 +89,8 @@
 
       <!-- Fill in the Blanks (start simple with 1 blank) -->
       <asp:Panel ID="panelFill" runat="server" Visible="false" CssClass="mb-3">
-        <asp:Label runat="server" AssociatedControlID="txtBlank1" CssClass="form-label" Text="Answer for Blank:" />
-        <asp:TextBox ID="txtBlank1" runat="server" CssClass="form-control" Placeholder="Correct answer" />
+        <asp:Label runat="server" AssociatedControlID="txtFillInBlank" CssClass="form-label" Text="Answer for Blank:" />
+        <asp:TextBox ID="txtFillInBlank" runat="server" CssClass="form-control" Placeholder="Correct answer" />
       </asp:Panel>
 
       <!-- Feedback -->
@@ -100,10 +101,11 @@
 
       <!-- Actions -->
       <div class="d-flex justify-content-center gap-3">
-        <asp:Button ID="btnSave" runat="server" Text="Save and continue" CssClass="btn btn-primary"
-                    OnClick="btnSave_Click" />
-        <asp:HyperLink ID="lnkBack" runat="server" CssClass="btn btn-secondary"
-                       NavigateUrl="~/Quiz/ViewQuizList.aspx" Text="Back to list" />
+        <asp:Button ID="btnSave" runat="server" Text="Save and continue" 
+            CssClass="btn btn-primary" OnClick="btnSave_Click" />
+        <asp:HyperLink ID="linkBack" runat="server"
+               Text="Back to List"
+               CssClass="btn btn-secondary" />
       </div>
 
       <div class="text-center mt-3">
@@ -112,4 +114,7 @@
 
     </div>
   </div>
+          </div>
+  </div>
+
 </asp:Content>

@@ -2,6 +2,71 @@
     CodeBehind="ViewQuizList.aspx.cs" Inherits="SciVerse_G12.Quiz.ViewQuizList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        .form-control {
+          min-width: 600px; /* wide search bar on large screens */
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+          /* For tablets or medium screens */
+          .form-control {
+            min-width: 100%;
+          }
+
+          .row.g-2.align-items-center.mb-3.text-start {
+            flex-wrap: wrap;
+          }
+
+          .col-lg-8,
+          .col-lg-4 {
+            width: 100%;
+            text-align: center;
+            justify-content: center !important;
+          }
+
+          .col-lg-4 .btn {
+            width: 100%;
+            margin-bottom: 5px;
+          }
+
+          .table {
+            font-size: 0.9rem;
+          }
+        }
+
+        @media (max-width: 768px) {
+          /* For mobile phones */
+          h1 {
+            font-size: 1.4rem;
+            text-align: center;
+          }
+
+          .form-control {
+            min-width: 100%;
+            font-size: 0.9rem;
+          }
+
+          .btn {
+            width: 100%;
+            margin-top: 6px;
+          }
+
+          .table {
+            font-size: 0.85rem;
+          }
+
+          /* Stack buttons vertically */
+          .col-lg-4 {
+            flex-direction: column;
+            align-items: stretch !important;
+          }
+        }  
+    </style>
     <h1>View Quiz List</h1>
     <br />
 
@@ -35,13 +100,12 @@
         </div>
     </div>
 
-
-
     <!-- Data source -->
     <asp:SqlDataSource ID="SqlDataSource1" runat="server"
         ConnectionString="<%$ ConnectionStrings:ConnectionString %>"
         SelectCommand="SELECT QuizID, Title, Description, Chapter, TimeLimit, ImageURL, CreatedDate, CreatedBy, AttemptLimit
-                       FROM dbo.tblQuiz"
+                       FROM dbo.tblQuiz
+                       ORDER BY CreatedDate DESC, QuizID DESC"
         UpdateCommand="
             UPDATE dbo.tblQuiz
             SET Title=@Title, Description=@Description, Chapter=@Chapter, TimeLimit=@TimeLimit,
@@ -89,5 +153,34 @@
         </EmptyDataTemplate>
     </asp:GridView>
 
+    <!-- Delete confirmation modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirm Deletion</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete the selected quiz(es)? This action cannot be undone.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            <asp:Button ID="btnConfirmDeleteYes" runat="server" Text="Yes, Delete"
+                        CssClass="btn btn-danger"
+                        OnClick="btnConfirmDeleteYes_Click" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function openDeleteModal() {
+        var modalEl = document.getElementById('deleteModal');
+        if (!modalEl) return;
+        var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+        modal.show();
+      }
+    </script>
 </asp:Content>
 
