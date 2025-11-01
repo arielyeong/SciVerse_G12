@@ -9,9 +9,24 @@ namespace SciVerse_G12
 {
     public partial class EditUserInfo : System.Web.UI.Page
     {
-        private string originalEmail;
-        private string originalUsername;
-        private int currentRid;
+        // Use ViewState to persist values between postbacks
+        private string OriginalEmail
+        {
+            get { return ViewState["OriginalEmail"] as string ?? string.Empty; }
+            set { ViewState["OriginalEmail"] = value; }
+        }
+
+        private string OriginalUsername
+        {
+            get { return ViewState["OriginalUsername"] as string ?? string.Empty; }
+            set { ViewState["OriginalUsername"] = value; }
+        }
+
+        private int CurrentRid
+        {
+            get { return ViewState["CurrentRid"] as int? ?? 0; }
+            set { ViewState["CurrentRid"] = value; }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,8 +34,8 @@ namespace SciVerse_G12
             {
                 if (Request.QueryString["rid"] != null && int.TryParse(Request.QueryString["rid"], out int rid))
                 {
-                    currentRid = rid; // Save RID of the user being edited
-                    LoadUserDetails(currentRid);
+                    CurrentRid = rid; // Store in ViewState
+                    LoadUserDetails(rid);
                 }
                 else
                 {
@@ -33,81 +48,75 @@ namespace SciVerse_G12
         {
             string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
 
-            // Track if fields have been changed
-            bool isEmailChanged = originalEmail != txtEmail.Text.Trim();
-            bool isUsernameChanged = originalUsername != txtUsername.Text.Trim();
+            // ** Track if fields have been changed ** - Use StringComparison for accuracy
+            bool isEmailChanged = !string.Equals(OriginalEmail, txtEmail.Text.Trim(), StringComparison.OrdinalIgnoreCase);
+            bool isUsernameChanged = !string.Equals(OriginalUsername, txtUsername.Text.Trim(), StringComparison.OrdinalIgnoreCase);
 
-            // *** Validation: Check Empty/Required Fields ***
+            // Required field validations
             if (string.IsNullOrWhiteSpace(txtFullname.Text))
             {
-                lblMessage.Text = "Full name is required.";
-                lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
+                ShowMessage("Full name is required.", false);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtEmail.Text))
             {
-                lblMessage.Text = "Email is required.";
-                lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
+                ShowMessage("Email is required.", false);
                 return;
             }
 
-            // Email Format Validation
-            if (!Regex.IsMatch(txtEmail.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            string trimmedEmail = txtEmail.Text.Trim();
+            if (!Regex.IsMatch(trimmedEmail, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
-                lblMessage.Text = "Please enter a valid email address.";
-                lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
+                ShowMessage("Please enter a valid email address.", false);
                 return;
             }
 
-            // Check for duplicate email if changed
-            if (isEmailChanged && IsDuplicate("emailAddress", txtEmail.Text.Trim()))
+            // ** Check for duplicate email if changed **
+            if (isEmailChanged && IsDuplicate("emailAddress", trimmedEmail))
             {
-                lblMessage.Text = "Email already registered. Please use another.";
-                lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
+                ShowMessage("Email already registered. Please use another.", false);
                 return;
             }
 
-            // Check for duplicate username if changed
-            if (isUsernameChanged && IsDuplicate("username", txtUsername.Text.Trim()))
+            string trimmedUsername = txtUsername.Text.Trim();
+
+            // ** Check for duplicate username if changed **
+            if (isUsernameChanged && IsDuplicate("username", trimmedUsername))
             {
-                lblMessage.Text = "Username already taken. Please use another.";
-                lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
+                ShowMessage("Username already taken. Please use another.", false);
                 return;
             }
 
             // Age Validation
             if (string.IsNullOrWhiteSpace(txtAge.Text) || !int.TryParse(txtAge.Text, out int age) || age < 1 || age > 90)
             {
-                lblMessage.Text = "Please enter a valid age (1-90).";
-                lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
+                ShowMessage("Please enter a valid age (1-90).", false);
                 return;
             }
 
             // Gender Validation
             if (string.IsNullOrWhiteSpace(rbGender.SelectedValue))
             {
-                lblMessage.Text = "Gender is required.";
-                lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
+                ShowMessage("Gender is required.", false);
                 return;
             }
 
             // Country Validation
             if (string.IsNullOrWhiteSpace(dlCountry.SelectedValue))
             {
-                lblMessage.Text = "Country is required.";
-                lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
+                ShowMessage("Country is required.", false);
                 return;
             }
 
-            // Handle image upload (if any)
+            // Handle image upload
             string imagePath = null;
             if (FileUploadPic.HasFile)
             {
-                if (FileUploadPic.PostedFile.ContentLength > 5 * 1024 * 1024 || !FileUploadPic.PostedFile.ContentType.StartsWith("image/"))
+                if (FileUploadPic.PostedFile.ContentLength > 5 * 1024 * 1024 ||
+                    !FileUploadPic.PostedFile.ContentType.StartsWith("image/"))
                 {
-                    lblMessage.Text = "Image must be <5MB and a valid image type.";
-                    lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
+                    ShowMessage("Image must be <5MB and a valid image type.", false);
                     return;
                 }
 
@@ -123,27 +132,27 @@ namespace SciVerse_G12
                 }
                 catch (Exception ex)
                 {
-                    lblMessage.Text = "Image upload failed: " + ex.Message;
-                    lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
+                    ShowMessage("Image upload failed: " + ex.Message, false);
                     return;
                 }
             }
 
-            // Proceed to update user information
+            // Update database
             using (SqlConnection con = new SqlConnection(cs))
             {
                 string query = imagePath != null
-                    ? "UPDATE tblRegisteredUsers SET fullName=@fullName, emailAddress=@email, age=@age, gender=@gender, country=@country, picture=@picture WHERE RID=@rid"
-                    : "UPDATE tblRegisteredUsers SET fullName=@fullName, emailAddress=@email, age=@age, gender=@gender, country=@country WHERE RID=@rid";
+                    ? "UPDATE tblRegisteredUsers SET username=@username, fullName=@fullName, emailAddress=@email, age=@age, gender=@gender, country=@country, picture=@picture WHERE RID=@rid"
+                    : "UPDATE tblRegisteredUsers SET username=@username, fullName=@fullName, emailAddress=@email, age=@age, gender=@gender, country=@country WHERE RID=@rid";
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
+                    cmd.Parameters.AddWithValue("@username", trimmedUsername);
                     cmd.Parameters.AddWithValue("@fullName", txtFullname.Text.Trim());
-                    cmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
+                    cmd.Parameters.AddWithValue("@email", trimmedEmail);
                     cmd.Parameters.AddWithValue("@age", age);
                     cmd.Parameters.AddWithValue("@gender", rbGender.SelectedValue);
                     cmd.Parameters.AddWithValue("@country", dlCountry.SelectedValue);
-                    cmd.Parameters.AddWithValue("@rid", currentRid);
+                    cmd.Parameters.AddWithValue("@rid", CurrentRid);
 
                     if (imagePath != null)
                         cmd.Parameters.AddWithValue("@picture", imagePath);
@@ -154,23 +163,23 @@ namespace SciVerse_G12
 
                     if (rows > 0)
                     {
-                        lblMessage.Text = "Profile updated successfully!";
-                        lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-success";
-
+                        ShowMessage("Profile updated successfully!", true);
                         if (imagePath != null) imgPreview.ImageUrl = imagePath;
+
+                        // Update the stored original values
+                        OriginalEmail = trimmedEmail;
+                        OriginalUsername = trimmedUsername;
 
                         string script = "setTimeout(function(){ window.location.href='" + ResolveUrl("~/Admin/ViewUserList.aspx") + "'; }, 2000);";
                         ScriptManager.RegisterStartupScript(this, GetType(), "Redirect", script, true);
                     }
                     else
                     {
-                        lblMessage.Text = "No changes were made or update failed.";
-                        lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
+                        ShowMessage("No changes were made or update failed.", false);
                     }
                 }
             }
         }
-
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
@@ -191,10 +200,13 @@ namespace SciVerse_G12
                 if (dr.Read())
                 {
                     txtFullname.Text = dr["fullName"].ToString().Trim();
-                    originalEmail = dr["emailAddress"].ToString().Trim();
-                    txtEmail.Text = originalEmail;
-                    originalUsername = dr["username"].ToString().Trim();
-                    txtUsername.Text = originalUsername;
+
+                    // Store original values in ViewState
+                    OriginalEmail = dr["emailAddress"].ToString().Trim();
+                    OriginalUsername = dr["username"].ToString().Trim();
+
+                    txtEmail.Text = OriginalEmail;
+                    txtUsername.Text = OriginalUsername;
                     txtAge.Text = dr["age"].ToString();
 
                     string gender = dr["gender"].ToString().Trim();
@@ -210,8 +222,7 @@ namespace SciVerse_G12
                 }
                 else
                 {
-                    lblMessage.Text = "User not found.";
-                    lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
+                    ShowMessage("User not found.", false);
                     Response.Redirect("~/Admin/ViewUserList.aspx");
                 }
                 con.Close();
@@ -227,8 +238,8 @@ namespace SciVerse_G12
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@value", value.Trim()); // Trim input
-                    cmd.Parameters.AddWithValue("@currentRid", currentRid);
+                    cmd.Parameters.AddWithValue("@value", value.Trim());
+                    cmd.Parameters.AddWithValue("@currentRid", CurrentRid);
 
                     conn.Open();
                     int count = (int)cmd.ExecuteScalar();
@@ -237,6 +248,15 @@ namespace SciVerse_G12
                     return count > 0;
                 }
             }
+        }
+
+        private void ShowMessage(string message, bool success)
+        {
+            lblMessage.Text = message;
+            lblMessage.CssClass = success
+                ? "update-message text-center fw-bold mt-3 text-success"
+                : "update-message text-center fw-bold mt-3 text-danger";
+            lblMessage.Visible = true;
         }
     }
 }
