@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SciVerse_G12.Quiz
+namespace SciVerse_G12.Quiz_Admin
 {
 
 

@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace SciVerse_G12.Quiz
+namespace SciVerse_G12.Quiz_Admin
 {
     public partial class ViewQuizList : System.Web.UI.Page
     {
@@ -13,20 +13,19 @@ namespace SciVerse_G12.Quiz
             get { return ViewState["Mode"] as string ?? ""; }
             set { ViewState["Mode"] = value; }
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Username"] != null)
+            // validate session
+            if (Session["RID"] == null)
             {
-                string username = Session["Username"].ToString();
-
-                // Load data
-                GridView1.DataBind();
-            }
-            else
-            {
-                // If not logged in, redirect to login page
                 Response.Redirect("~/Account/Login.aspx");
                 return;
+            }
+
+            if (!IsPostBack)
+            {
+                GridView1.DataBind();
             }
         }
 
@@ -71,13 +70,10 @@ namespace SciVerse_G12.Quiz
             GridView1.DataBind();
         }
 
-
         protected void btnEditMode_Click(object sender, EventArgs e)
         {
             Mode = "Edit";
             ToggleSelectionMode(true);
-
-            // Restore normal behavior
             btnConfirm.OnClientClick = null;
             btnConfirm.Text = "Confirm";
         }
@@ -86,8 +82,6 @@ namespace SciVerse_G12.Quiz
         {
             Mode = "Delete";
             ToggleSelectionMode(true);
-
-            // Open modal without postback
             btnConfirm.OnClientClick = "openDeleteModal(); return false;";
             btnConfirm.Text = "Confirm Deletion";
         }
@@ -96,8 +90,6 @@ namespace SciVerse_G12.Quiz
         {
             Mode = "";
             ToggleSelectionMode(false);
-
-            // Restore normal behavior
             btnConfirm.OnClientClick = null;
             btnConfirm.Text = "Confirm";
         }
@@ -121,7 +113,6 @@ namespace SciVerse_G12.Quiz
 
             if (Mode == "Delete")
             {
-                // just open the modal, NOT delete here.
                 ScriptManager.RegisterStartupScript(this, GetType(), "openDeleteModal", "openDeleteModal();", true);
                 return;
             }
@@ -141,7 +132,6 @@ namespace SciVerse_G12.Quiz
 
         private void ToggleSelectionMode(bool enable)
         {
-            // show/hide first column (checkboxes)
             GridView1.Columns[0].Visible = enable;
 
             btnConfirm.Visible = enable;
@@ -152,37 +142,46 @@ namespace SciVerse_G12.Quiz
             GridView1.DataBind();
         }
 
-        protected void btnConfirmDeleteYes_Click(object sender, EventArgs e)
+        protected void btnYesDelete_Click(object sender, EventArgs e)
         {
             int deleted = 0;
-            foreach (GridViewRow row in GridView1.Rows)
+            string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+            using (var con = new SqlConnection(connStr))
             {
-                var chk = row.FindControl("chkSelect") as CheckBox;
-                if (chk != null && chk.Checked)
+                con.Open();
+
+                foreach (GridViewRow row in GridView1.Rows)
                 {
+                    var check = row.FindControl("chkSelect") as CheckBox;
+                    if (check == null || !check.Checked) continue;
+
                     int quizId = Convert.ToInt32(GridView1.DataKeys[row.RowIndex].Value);
-                    DeleteQuiz(quizId);
-                    deleted++;
+
+                    // Delete all related questions first (optional, if cascade is not set)
+                    using (var cmd1 = new SqlCommand("DELETE FROM dbo.tblQuestion WHERE QuizID=@id", con))
+                    {
+                        cmd1.Parameters.AddWithValue("@id", quizId);
+                        cmd1.ExecuteNonQuery();
+                    }
+
+                    // Delete the quiz itself
+                    using (var cmd2 = new SqlCommand("DELETE FROM dbo.tblQuiz WHERE QuizID=@id", con))
+                    {
+                        cmd2.Parameters.AddWithValue("@id", quizId);
+                        deleted += cmd2.ExecuteNonQuery();
+                    }
                 }
             }
 
+            // Refresh grid and show message
             GridView1.DataBind();
-            Mode = "";
-            ToggleSelectionMode(false);
-
-            ScriptManager.RegisterStartupScript(
-                this, GetType(), "hideModalAndToast",
-                "var m=bootstrap.Modal.getInstance(document.getElementById('deleteModal')); if(m){m.hide();} " +
-                (deleted > 0 ? "alert('Deleted " + deleted + " quiz(es).');" : "alert('No quiz selected.');"),
-                true
-            );
+            //lblMessage.CssClass = "text-success";
+            //lblMessage.Text = $"{deleted} quiz(es) deleted successfully.";
         }
 
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-
         }
-
-
     }
 }

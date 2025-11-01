@@ -1,10 +1,12 @@
-﻿<%@ Page Title="Edit Quiz" Language="C#" MasterPageFile="~/Admin.Master"
-    AutoEventWireup="true" CodeBehind="EditQuizPage.aspx.cs"
-    Inherits="SciVerse_G12.Quiz.EditQuizPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="EditQuizPage.aspx.cs" Inherits="SciVerse_G12.Quiz_Admin.EditQuizPage" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
+    <!-- External CSS in <head> -->
+    <link rel="stylesheet" href='<%= ResolveUrl("~/Styles/AdminQuiz.css?v=" + DateTime.Now.Ticks) %>' />   
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-  <!-- keep the current mode for postbacks -->
+    <!-- keep the current mode for postbacks -->
   <asp:HiddenField ID="hiddenMode" runat="server" />
 
   <div class="quiz-question-content" id="contentArea">
@@ -93,22 +95,22 @@
 
   <!-- Bootstrap Delete Confirmation Modal -->
   <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="confirmDeleteLabel">Delete selected question(s)</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Are you sure you want to delete the selected question(s)? This action cannot be undone.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, cancel</button>
-          <asp:Button ID="btnYesDelete" runat="server" Text="Yes, delete"
-                      CssClass="btn btn-danger" OnClick="btnYesDelete_Click" />
+      <div class="modal-dialog modal-dialog-centered"> <!-- Centered vertically -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmDeleteLabel">Delete selected question(s)</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete the selected question(s)? This action cannot be undone.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, cancel</button>
+            <asp:Button ID="btnYesDelete" runat="server" Text="Yes, delete"
+                        CssClass="btn btn-danger" OnClick="btnYesDelete_Click" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
 </asp:Content>

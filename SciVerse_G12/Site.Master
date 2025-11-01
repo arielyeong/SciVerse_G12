@@ -94,7 +94,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                    aria-expanded="false">Quiz</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" runat="server" href="~/Quiz_Flashcard/Quiz">Quiz</a></li>
+                                    <li><a class="dropdown-item" runat="server" href="~/Quiz_Student/QuizDashboardPageStudent">Quiz</a></li>
                                     <li><a class="dropdown-item" runat="server" href="~/Quiz_Flashcard/Flashcard">Flashcard</a></li>
                                 </ul>
                             <% } else { %>
