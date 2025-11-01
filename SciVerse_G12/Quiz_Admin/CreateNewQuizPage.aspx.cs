@@ -1,23 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Web.UI;
 
-namespace SciVerse_G12.Quiz
+namespace SciVerse_G12.Quiz_Admin
 {
     public partial class CreateNewQuizPage : System.Web.UI.Page
     {
         private const string UploadSubFolder = "~/Images/QuizList/";
+        private string ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // Ensure uploads work even if the form is defined in the master page
             if (Page.Form != null) Page.Form.Enctype = "multipart/form-data";
 
             // Require login
-            if (Session["UserID"] == null)
+            if (Session["RID"] == null)
             {
-                Response.Redirect("~/Account/Login.aspx");
+                Response.Redirect("~/Account/Login.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
                 return;
             }
 
@@ -29,23 +34,26 @@ namespace SciVerse_G12.Quiz
 
         private void PrefillNextChapter()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             // Works whether Chapter is INT or NVARCHAR (will ignore non-numeric)
             const string sql = @"SELECT ISNULL(MAX(TRY_CONVERT(int, Chapter)), 0) FROM dbo.tblQuiz";
-
-            int next = 1;
-
-            using (var connStr = new SqlConnection(connectionString))
-            using (var command = new SqlCommand(sql, connStr))
+            try
             {
-                connStr.Open();
-                object value = command.ExecuteScalar();
-                int max = (value == null || value == DBNull.Value) ? 0 : Convert.ToInt32(value);
-                next = max + 1;
+                int next;
+                using (var conn = new SqlConnection(ConnectionString))
+                using (var cmd = new SqlCommand(sql, conn))
+                {
+                    conn.Open();
+                    object value = cmd.ExecuteScalar();
+                    int max = (value == null || value == DBNull.Value) ? 0 : Convert.ToInt32(value);
+                    next = max + 1;
+                }
+                txtChapter.Text = next.ToString();
+                txtChapter.ReadOnly = true; // make it not editable
             }
-
-            txtChapter.Text = next.ToString();
-            txtChapter.ReadOnly = true; //make it not editable
+            catch (Exception ex)
+            {
+                ShowMessage("Could not prefill Chapter: " + ex.Message, isError: true);
+            }
         }
 
 
@@ -60,94 +68,122 @@ namespace SciVerse_G12.Quiz
             int attemptLimit = int.TryParse((txtAttemptLimit.Text ?? "").Trim(), out var a) ? a : 0;
 
             // validation for empty
-            if (string.IsNullOrEmpty(title))
+            if (string.IsNullOrWhiteSpace(title))
             {
-                lblMessage.CssClass = "text-danger";
-                lblMessage.Text = "Please enter a title.";
+                ShowMessage("Please enter a title.", isError: true);
                 return;
             }
 
-            // 2) Handle image upload (save to ~/Images, default if none)
-            string imageRelUrl = UploadSubFolder + "default.png";  // default image path (ensure the file exists)
+            // 2) Handle image upload (save to ~/Images/QuizList, default if none)
+            string imageRelUrl = UploadSubFolder + "default.png";  // ensure this file exists
 
             if (FileUploadPicture.HasFile)
             {
+                // Validate size (<5 MB) and extension
+                var allowed = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
+
+                string originalName = Path.GetFileName(FileUploadPicture.FileName);
+                string ext = Path.GetExtension(originalName)?.ToLowerInvariant() ?? "";
+
+                if (FileUploadPicture.PostedFile.ContentLength > 5 * 1024 * 1024)
+                {
+                    ShowMessage("Image must be smaller than 5 MB.", isError: true);
+                    return;
+                }
+                if (!allowed.Contains(ext))
+                {
+                    ShowMessage("Only JPG, PNG, GIF or WEBP images are allowed.", isError: true);
+                    return;
+                }
+
                 try
                 {
                     string folderPath = Server.MapPath(UploadSubFolder);
-                    if (!Directory.Exists(folderPath))
+                    if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
+
+                    // Sanitize base name: keep letters, digits, dash, underscore
+                    string baseName = Path.GetFileNameWithoutExtension(originalName);
+                    var sb = new System.Text.StringBuilder();
+                    foreach (char c in baseName)
+                        if (char.IsLetterOrDigit(c) || c == '-' || c == '_') sb.Append(c);
+                    string safeBase = sb.Length == 0 ? "image" : sb.ToString();
+                    if (safeBase.Length > 80) safeBase = safeBase.Substring(0, 80);
+
+                    // Ensure unique name (dog.png → dog(1).png)
+                    string finalFileName = safeBase + ext;
+                    string fullPath = Path.Combine(folderPath, finalFileName);
+                    int i = 1;
+                    while (File.Exists(fullPath))
                     {
-                        Directory.CreateDirectory(folderPath);
+                        finalFileName = $"{safeBase}({i}){ext}";
+                        fullPath = Path.Combine(folderPath, finalFileName);
+                        i++;
                     }
 
-                    string fileName = Path.GetFileName(FileUploadPicture.FileName);
-                    // Optional: ensure uniqueness
-                    string uniqueName = $"{Path.GetFileNameWithoutExtension(fileName)}_{Guid.NewGuid():N}{Path.GetExtension(fileName)}";
-                    string fullPath = Path.Combine(folderPath, uniqueName);
-
                     FileUploadPicture.SaveAs(fullPath);
-
-                    // Store virtual path for database
-                    imageRelUrl = UploadSubFolder + uniqueName;
+                    imageRelUrl = UploadSubFolder + finalFileName; // ~/Images/QuizList/dog.png
                 }
                 catch (Exception ex)
                 {
-                    lblMessage.CssClass = "text-danger";
-                    lblMessage.Text = "⚠️ Image upload failed: " + ex.Message;
+                    ShowMessage("Image upload failed: " + ex.Message, isError: true);
                     return;
                 }
             }
 
-            // 3) Insert into DB
-            string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            int newQuizId;
+            // 3) Get RID (int) and insert
+            int creatorRid;
+            if (Session["RID"] is int ridInt) creatorRid = ridInt;
+            else if (!int.TryParse(Convert.ToString(Session["RID"]), out creatorRid))
+            {
+                Response.Redirect("~/Account/Login.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
+                return;
+            }
 
+            int newQuizId;
+            const string insertSql = @"
+                INSERT INTO dbo.tblQuiz
+                    (Title, Description, Chapter, TimeLimit, ImageURL, CreatedDate, CreatedBy, AttemptLimit)
+                OUTPUT INSERTED.QuizID
+                VALUES
+                    (@Title, @Description, @Chapter, @TimeLimit, @ImageURL, GETDATE(), @CreatedBy, @AttemptLimit);";
 
             try
             {
-                using (var connStr = new SqlConnection(connectionString))
-                using (var command = new SqlCommand(@"
-                    INSERT INTO dbo.tblQuiz
-                        (Title, Description, Chapter, TimeLimit, ImageURL, CreatedDate, CreatedBy, AttemptLimit)
-                    OUTPUT INSERTED.QuizID
-                    VALUES
-                        (@Title, @Description, @Chapter, @TimeLimit, @ImageURL, GETDATE(), @CreatedBy, @AttemptLimit);
-                ", connStr))
+                using (var conn = new SqlConnection(ConnectionString))
+                using (var cmd = new SqlCommand(insertSql, conn))
                 {
-                    command.Parameters.AddWithValue("@Title", title);
-                    command.Parameters.AddWithValue("@Description", (object)description ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@Chapter", (object)chapter ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@TimeLimit", timeLimit);
-                    command.Parameters.AddWithValue("@ImageURL", (object)imageRelUrl ?? DBNull.Value);
+                    cmd.Parameters.Add("@Title", SqlDbType.NVarChar, 200).Value = title;
+                    cmd.Parameters.Add("@Description", SqlDbType.NVarChar, -1).Value =
+                        string.IsNullOrEmpty(description) ? (object)DBNull.Value : description;
+                    cmd.Parameters.Add("@Chapter", SqlDbType.NVarChar, 100).Value =
+                        string.IsNullOrEmpty(chapter) ? (object)DBNull.Value : chapter;
+                    cmd.Parameters.Add("@TimeLimit", SqlDbType.Int).Value = timeLimit;
+                    // match NVARCHAR(255)
+                    cmd.Parameters.Add("@ImageURL", SqlDbType.NVarChar, 255).Value =
+                        string.IsNullOrEmpty(imageRelUrl) ? (object)DBNull.Value : imageRelUrl;
+                    cmd.Parameters.Add("@CreatedBy", SqlDbType.Int).Value = creatorRid; // RID int
+                    cmd.Parameters.Add("@AttemptLimit", SqlDbType.Int).Value = attemptLimit;
 
-                    // get current user id from session
-                    int createdBy = 0;
-                    if (Session["UserID"] is int uid) createdBy = uid;
-                    else if (!int.TryParse(Convert.ToString(Session["UserID"]), out createdBy))
-                    {
-                        Response.Redirect("~/Account/Login.aspx");
-                        return;
-                    }
-                    command.Parameters.AddWithValue("@CreatedBy", createdBy);
-                    command.Parameters.AddWithValue("@AttemptLimit", attemptLimit);
-
-                    connStr.Open();
-                    newQuizId = (int)command.ExecuteScalar();
+                    conn.Open();
+                    newQuizId = (int)cmd.ExecuteScalar();
                 }
             }
             catch (Exception ex)
             {
-                lblMessage.CssClass = "text-danger";
-                lblMessage.Text = "Error saving quiz: " + ex.Message;
+                ShowMessage("Error saving quiz: " + ex.Message, isError: true);
                 return;
             }
 
-            // 4) Redirect to next step (e.g., add questions or back to list)
+            // 4) Redirect
             Response.Redirect(ResolveUrl("~/Quiz_Admin/EditQuizPage.aspx?quizId=" + newQuizId), false);
-            // IMPORTANT: stop the current request so no extra databinds run on this page
             Context.ApplicationInstance.CompleteRequest();
-            //return;
-
+        }
+        private void ShowMessage(string text, bool isError = false)
+        {
+            lblMessage.CssClass = isError ? "text-danger" : "text-success";
+            lblMessage.Text = text;
         }
     }
 }

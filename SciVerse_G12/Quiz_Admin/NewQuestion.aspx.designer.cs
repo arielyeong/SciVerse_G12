@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SciVerse_G12.Quiz
+namespace SciVerse_G12.Quiz_Admin
 {
 
 
@@ -22,6 +22,15 @@ namespace SciVerse_G12.Quiz
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hiddenQuizID;
+
+        /// <summary>
+        /// valSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary valSummary;
 
         /// <summary>
         /// lblQuestionText control.
@@ -42,6 +51,15 @@ namespace SciVerse_G12.Quiz
         protected global::System.Web.UI.WebControls.TextBox txtQuestion;
 
         /// <summary>
+        /// rfvQuestion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvQuestion;
+
+        /// <summary>
         /// dropdownType control.
         /// </summary>
         /// <remarks>
@@ -51,6 +69,15 @@ namespace SciVerse_G12.Quiz
         protected global::System.Web.UI.WebControls.DropDownList dropdownType;
 
         /// <summary>
+        /// rfvType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvType;
+
+        /// <summary>
         /// txtMarks control.
         /// </summary>
         /// <remarks>
@@ -58,6 +85,24 @@ namespace SciVerse_G12.Quiz
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMarks;
+
+        /// <summary>
+        /// rfvMarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMarks;
+
+        /// <summary>
+        /// rngMarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rngMarks;
 
         /// <summary>
         /// panelMCQ control.
@@ -87,6 +132,15 @@ namespace SciVerse_G12.Quiz
         protected global::System.Web.UI.WebControls.TextBox txtChoiceA;
 
         /// <summary>
+        /// rfvA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvA;
+
+        /// <summary>
         /// radiobtnChoice2 control.
         /// </summary>
         /// <remarks>
@@ -103,6 +157,15 @@ namespace SciVerse_G12.Quiz
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtChoiceB;
+
+        /// <summary>
+        /// rfvB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvB;
 
         /// <summary>
         /// radiobtnChoice3 control.
@@ -123,6 +186,15 @@ namespace SciVerse_G12.Quiz
         protected global::System.Web.UI.WebControls.TextBox txtChoiceC;
 
         /// <summary>
+        /// rfvC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvC;
+
+        /// <summary>
         /// radiobtnChoice4 control.
         /// </summary>
         /// <remarks>
@@ -139,6 +211,24 @@ namespace SciVerse_G12.Quiz
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtChoiceD;
+
+        /// <summary>
+        /// rfvD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvD;
+
+        /// <summary>
+        /// cvMcqCorrect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvMcqCorrect;
 
         /// <summary>
         /// panelTF control.
@@ -159,6 +249,15 @@ namespace SciVerse_G12.Quiz
         protected global::System.Web.UI.WebControls.RadioButtonList radiobtnTF;
 
         /// <summary>
+        /// rfvTF control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTF;
+
+        /// <summary>
         /// panelFill control.
         /// </summary>
         /// <remarks>
@@ -177,13 +276,31 @@ namespace SciVerse_G12.Quiz
         protected global::System.Web.UI.WebControls.TextBox txtFillInBlank;
 
         /// <summary>
-        /// txtFeedback control.
+        /// rfvFill control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFeedback;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFill;
+
+        /// <summary>
+        /// txtExplanation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtExplanation;
+
+        /// <summary>
+        /// rfvExplanation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvExplanation;
 
         /// <summary>
         /// btnSave control.

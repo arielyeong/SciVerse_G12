@@ -133,16 +133,17 @@
     <Content Include="Images\About\chingying.png" />
     <Content Include="Images\About\hueyyee.png" />
     <Content Include="Images\About\yingxin.png" />
-    <Content Include="Images\down.png" />
-    <Content Include="Images\open air burning 1_4d398283297d45da980ae14f92221680.jpg" />
     <Content Include="Images\Profile\science_register.jpg" />
     <Content Include="Images\Profile\WAPP_Logo_Header.png" />
     <Content Include="Images\science_register.png" />
     <Content Include="Images\WAPP_Logo_Header.png" />
-    <Content Include="Quiz\CreateNewQuizPage.aspx" />
-    <Content Include="Quiz\EditQuizPage.aspx" />
-    <Content Include="Quiz\NewQuestion.aspx" />
-    <Content Include="Quiz\ViewQuizList.aspx" />
+    <Content Include="Quiz_Admin\CreateNewQuizPage.aspx" />
+    <Content Include="Quiz_Admin\EditQuizPage.aspx" />
+    <Content Include="Quiz_Admin\NewQuestion.aspx" />
+    <Content Include="Quiz_Admin\QuizReport.aspx" />
+    <Content Include="Quiz_Admin\ViewQuizList.aspx" />
+    <Content Include="Quiz_Student\QuizDashboardPageStudent.aspx" />
+    <Content Include="Styles\AdminQuiz.css" />
     <Content Include="Styles\site2.css" />
     <Content Include="Styles\Admin.css" />
     <Content Include="Styles\Flashcard.css" />
@@ -211,6 +212,7 @@
     <Content Include="Account\UpdateProfile.aspx" />
     <Content Include="Admin\ViewMessage.aspx" />
     <Content Include="Admin\UpdateAdminProfile.aspx" />
+    <Content Include="Styles\StudentQuiz.css" />
     <Content Include="User\UserHomePage.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Admin\ViewUserList.aspx" />
@@ -302,6 +304,20 @@
     <Compile Include="Quiz_Admin\CreateNewQuizPage.aspx.designer.cs">
       <DependentUpon>CreateNewQuizPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Flashcard\Flashcard.aspx.cs">
+      <DependentUpon>Flashcard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Flashcard\Flashcard.aspx.designer.cs">
+      <DependentUpon>Flashcard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Flashcard\ViewFlashcard.aspx.cs">
+      <DependentUpon>ViewFlashcard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Flashcard\ViewFlashcard.aspx.designer.cs">
+      <DependentUpon>ViewFlashcard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Quiz_Admin\EditQuizPage.aspx.cs">
       <DependentUpon>EditQuizPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -316,26 +332,19 @@
     <Compile Include="Quiz_Admin\NewQuestion.aspx.designer.cs">
       <DependentUpon>NewQuestion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Quiz_Admin\QuizReport.aspx.cs">
+      <DependentUpon>QuizReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Admin\QuizReport.aspx.designer.cs">
+      <DependentUpon>QuizReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Quiz_Admin\ViewQuizList.aspx.cs">
       <DependentUpon>ViewQuizList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Quiz_Admin\ViewQuizList.aspx.designer.cs">
       <DependentUpon>ViewQuizList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Flashcard\Flashcard.aspx.cs">
-      <DependentUpon>Flashcard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Flashcard\Flashcard.aspx.designer.cs">
-      <DependentUpon>Flashcard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Flashcard\ViewFlashcard.aspx.cs">
-      <DependentUpon>ViewFlashcard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Flashcard\ViewFlashcard.aspx.designer.cs">
-      <DependentUpon>ViewFlashcard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Quiz_Student\AnswersReview.aspx.cs">
       <DependentUpon>AnswersReview.aspx</DependentUpon>

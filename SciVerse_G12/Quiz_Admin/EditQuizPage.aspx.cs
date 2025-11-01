@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace SciVerse_G12.Quiz
+namespace SciVerse_G12.Quiz_Admin
 {
     public partial class EditQuizPage : System.Web.UI.Page
     {
@@ -24,6 +28,14 @@ namespace SciVerse_G12.Quiz
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // ✅ Session gate: require integer RID
+            if (!TryGetRid(out _))
+            {
+                Response.Redirect("~/Account/Login.aspx", false);
+                Context.ApplicationInstance?.CompleteRequest();
+                return;
+            }
+
             if (QuizId <= 0)
             {
                 Response.Redirect("~/Quiz_Admin/ViewQuizList.aspx", false);
@@ -48,10 +60,9 @@ namespace SciVerse_G12.Quiz
                 con.Open();
                 var titleObj = command.ExecuteScalar();
                 var title = (titleObj == null || titleObj == DBNull.Value) ? "(Untitled Quiz)" : titleObj.ToString();
-                headQuizTitle.InnerText = $"Edit Quiz: {title} (ID {quizId})";
+                headQuizTitle.InnerText = $"Edit Quiz: {title}";
             }
         }
-
 
         protected void btnNew_Click(object sender, EventArgs e)
         {
@@ -108,7 +119,7 @@ namespace SciVerse_G12.Quiz
                     int questionid = Convert.ToInt32(GridView1.DataKeys[row.RowIndex].Value);
 
                     // delete options first
-                    using (var cmdOpt = new SqlCommand("DELETE FROM dbo.tblOption WHERE QuestionID=@questionid", con))
+                    using (var cmdOpt = new SqlCommand("DELETE FROM dbo.tblOptions WHERE QuestionID=@questionid", con))
                     {
                         cmdOpt.Parameters.AddWithValue("@questionid", questionid);
                         cmdOpt.ExecuteNonQuery();
@@ -130,7 +141,6 @@ namespace SciVerse_G12.Quiz
             lblMessage.CssClass = "text-success";
             lblMessage.Text = $"{deleted} question(s) deleted.";
         }
-
 
         private void SetUiForMode(string mode)
         {
@@ -183,20 +193,29 @@ namespace SciVerse_G12.Quiz
 
             if (e.Row.RowType == DataControlRowType.Header)
             {
-                // Hide/show first column in the header
                 if (e.Row.Cells.Count > 0)
                     e.Row.Cells[0].Visible = showSelect;
             }
             else if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                // Hide/show first column in each data row
                 if (e.Row.Cells.Count > 0)
                     e.Row.Cells[0].Visible = showSelect;
 
-                // Also toggle the checkbox control itself 
                 var check = e.Row.FindControl("chkSelect") as CheckBox;
                 if (check != null) check.Visible = showSelect;
             }
+        }
+
+        // --- read RID from session as int ---
+        private bool TryGetRid(out int rid)
+        {
+            rid = 0;
+            if (Session["RID"] is int r1)
+            {
+                rid = r1;
+                return true;
+            }
+            return int.TryParse(Convert.ToString(Session["RID"]), out rid);
         }
     }
 }

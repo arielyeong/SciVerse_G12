@@ -1,10 +1,12 @@
-﻿<%@ Page Title="Create Quiz" Language="C#" MasterPageFile="~/Admin.Master"
-    AutoEventWireup="true" CodeBehind="CreateNewQuizPage.aspx.cs"
-    Inherits="SciVerse_G12.Quiz.CreateNewQuizPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="CreateNewQuizPage.aspx.cs" Inherits="SciVerse_G12.Quiz_Admin.CreateNewQuizPage" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-  <div class="d-flex justify-content-center align-items-center" style="min-height:90vh;">
+    <!-- External CSS in <head> -->
+    <link rel="stylesheet" href='<%= ResolveUrl("~/Styles/AdminQuiz.css?v=" + DateTime.Now.Ticks) %>' />
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="d-flex justify-content-center align-items-center" style="min-height:90vh;">
     <div class="card p-4 shadow-lg" style="max-width:1000px; width:100%; border-radius:10px;">
       <h1 class="text-center mb-4">Create New Quiz</h1>
 
