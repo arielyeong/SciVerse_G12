@@ -37,14 +37,14 @@ namespace SciVerse_G12
             // *** Validation: Check Empty/Required Fields ***
             if (string.IsNullOrWhiteSpace(txtFullname.Text))
             {
-                lblMessage.Text = "⚠️ Full name is required.";
+                lblMessage.Text = "Full name is required.";
                 lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtEmail.Text))
             {
-                lblMessage.Text = "⚠️ Email is required.";
+                lblMessage.Text = "Email is required.";
                 lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
                 return;
             }
@@ -52,7 +52,7 @@ namespace SciVerse_G12
             // Email Format Validation
             if (!Regex.IsMatch(txtEmail.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
-                lblMessage.Text = "⚠️ Please enter a valid email address.";
+                lblMessage.Text = "Please enter a valid email address.";
                 lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
                 return;
             }
@@ -60,14 +60,14 @@ namespace SciVerse_G12
             // Check for duplicate email if changed
             if (txtEmail.Text != originalEmail && IsDuplicate("emailAddress", txtEmail.Text))
             {
-                lblMessage.Text = "❌ Email already registered. Please use another.";
+                lblMessage.Text = "Email already registered. Please use another.";
                 lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(txtAge.Text))
             {
-                lblMessage.Text = "⚠️ Age is required.";
+                lblMessage.Text = "Age is required.";
                 lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
                 return;
             }
@@ -75,21 +75,21 @@ namespace SciVerse_G12
             // Age Validation
             if (!int.TryParse(txtAge.Text, out int age) || age < 1 || age > 90)
             {
-                lblMessage.Text = "⚠️ Please enter a valid age (1-90).";
+                lblMessage.Text = "Please enter a valid age (1-90).";
                 lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(rbGender.SelectedValue))
             {
-                lblMessage.Text = "⚠️ Gender is required.";
+                lblMessage.Text = "Gender is required.";
                 lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(dlCountry.SelectedValue))
             {
-                lblMessage.Text = "⚠️ Country is required.";
+                lblMessage.Text = "Country is required.";
                 lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
                 return;
             }
@@ -182,7 +182,7 @@ namespace SciVerse_G12
                 }
                 else
                 {
-                    lblMessage.Text = "❌ No changes were made or update failed.";
+                    lblMessage.Text = "No changes were made or update failed.";
                     lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
                 }
             }

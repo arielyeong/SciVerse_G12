@@ -265,50 +265,73 @@
     }
 }
 
-/******/
-/*Admin View Message*/
-/******/
+/***********************************************************
+   ADMIN - VIEW MESSAGES PAGE (Improved Reviewed Badge)
+***********************************************************/
 
-/* Message Card Styling */
-.message-card {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    transition: 0.3s ease;
-}
-
-    .message-card:hover {
-        transform: scale(1.01);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-.message-content p {
-    margin: 5px 0;
-}
-
-.message-meta {
-    font-size: 0.9em;
-    color: #666;
-    margin-top: 8px;
-    border-top: 1px dashed #ccc;
-    padding-top: 5px;
-}
-
-.message-actions {
+/* Right Side - Reviewed Section */
+.message-right {
     display: flex;
     align-items: center;
-    margin-left: 20px;
+    justify-content: flex-end;
+    gap: 8px;
+    min-width: 130px;
+    margin-top: 0.5rem;
 }
 
-.admin-content h1 {
-    font-size: 1.8rem;
-    margin-bottom: 25px;
-    color: #333;
+    /* Checkbox alignment */
+    .message-right input[type="checkbox"] {
+        transform: scale(1.2);
+        accent-color: #4CAF50; /* modern green checkmark */
+        cursor: pointer;
+    }
 
+    /* Reviewed Label Text */
+    .message-right label,
+    .message-right span {
+        font-size: 0.95rem;
+        color: #4CAF50; /* green text for Reviewed */
+        font-weight: 600;
+    }
+
+    /* For unchecked state, use lighter gray color */
+    .message-right.unchecked span {
+        color: #999;
+        font-weight: 500;
+    }
+
+/* Add a subtle background tag style (optional but nice) */
+.reviewed-badge {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+    .reviewed-badge i {
+        font-size: 0.9rem;
+    }
+
+    /* Optional hover effect */
+    .reviewed-badge:hover {
+        background-color: rgba(76, 175, 80, 0.2);
+    }
+
+/* Make layout responsive */
+@media (max-width: 768px) {
+    .message-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .message-right {
+        margin-top: 1rem;
+        align-self: flex-end;
+    }
 }

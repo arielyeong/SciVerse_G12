@@ -8,8 +8,26 @@ CREATE TABLE [dbo].[tblContactUs] (
     [contactEmail]   NVARCHAR (50)  NULL,
     [contactMessage] NVARCHAR (MAX) NULL,
     [RID]            INT            NULL,
+    [isReviewed]     BIT            DEFAULT ((0)) NOT NULL,
     PRIMARY KEY CLUSTERED ([CID] ASC)
 );
+
+/*----------------------------------------------------
+ Insert Sample Contact Messages
+----------------------------------------------------*/
+
+INSERT INTO [dbo].[tblContactUs] (contactName, contactEmail, contactMessage, RID, isReviewed)
+VALUES 
+('Charlotte Chen Zi Shan', 'charlotte@mail.com', 'Hi admin! I wanted to ask if you will be adding new science quizzes soon?', 2, 0),
+
+('Chong Ching Ying', 'chingying@mail.com', 'Hello! I think the simulation game is really fun, keep it up!', 3, 1),
+
+('Ong Ying Xin', 'yingxin@mail.com', 'I encountered a small issue when submitting the quiz. The loading screen got stuck.', 4, 0),
+
+('Yeong Huey Yee', 'hueyyee@mail.com', 'HILO, just testing the contact form. Everything works great so far!', 5, 1),
+
+('Chen Jia Wei', 'chenjiawei@example.com', 'Good afternoon! Will there be any upcoming events for registered users?', 6, 0);
+
 
 /*----------------------------------------------------
  Create Registered Users Table
