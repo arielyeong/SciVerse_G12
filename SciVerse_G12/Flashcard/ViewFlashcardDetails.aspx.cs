@@ -8,18 +8,18 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace SciVerse_G12.Quiz_and_Flashcard
+namespace SciVerse_G12.Flashcard
 {
-    public partial class ViewFlashcard : System.Web.UI.Page
+    public partial class ViewFlashcardDetails : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["quiz_id"] != null)
+                if (Request.QueryString["flashcard_id"] != null)
                 {
-                    int quizId = Convert.ToInt32(Request.QueryString["quiz_id"]);
-                    LoadQuiz(quizId);
+                    int flashcardId = Convert.ToInt32(Request.QueryString["flashcard_id"]);
+                    LoadFlashcards(flashcardId);
                     Session["CurrentIndex"] = 0;
                     Session["IsShowingAnswer"] = false;
                     ShowFlashcard(0, false);
@@ -27,26 +27,27 @@ namespace SciVerse_G12.Quiz_and_Flashcard
             }
         }
 
-        private void LoadQuiz(int quizId)
+        private void LoadFlashcards(int flashcardId)
         {
             string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 string query = @"
                 SELECT 
-                    qz.quizID,
-                    qz.title AS quizTitle,
-                    qs.questionID,
-                    qs.questionType,
-                    qs.questionText,
+                    qz.QuizID,
+                    qz.Title AS flashcardTitle,
+                    qz.Chapter,
+                    qs.QuestionID,
+                    qs.QuestionType,
+                    qs.QuestionText,
                     op.optionText AS answer
                 FROM tblQuiz qz
-                JOIN tblQuestion qs ON qz.quizID = qs.quizID
-                JOIN tblOptions op ON qs.questionID = op.questionID
-                WHERE qz.quizID = @quizID AND op.isCorrect = 1";
+                JOIN tblQuestion qs ON qz.QuizID = qs.QuizID
+                JOIN tblOptions op ON qs.QuestionID = op.QuestionID
+                WHERE qz.QuizID = @FlashcardID AND op.isCorrect = 1";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@quizID", quizId);
+                cmd.Parameters.AddWithValue("@FlashcardID", flashcardId);
 
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -54,13 +55,15 @@ namespace SciVerse_G12.Quiz_and_Flashcard
                 List<string> questions = new List<string>();
                 List<string> answers = new List<string>();
                 List<string> questionTypes = new List<string>();
-                string quizTitle = "";
+                string flashcardTitle = "";
+                string chapter = "";
 
                 while (reader.Read())
                 {
-                    if (string.IsNullOrEmpty(quizTitle))
+                    if (string.IsNullOrEmpty(flashcardTitle))
                     {
-                        quizTitle = reader["quizTitle"].ToString();
+                        flashcardTitle = reader["FlashcardTitle"].ToString();
+                        chapter = reader["Chapter"].ToString();
 
                     }
                         questions.Add(reader["questionText"].ToString());
@@ -71,13 +74,14 @@ namespace SciVerse_G12.Quiz_and_Flashcard
                 reader.Close();
 
                 // Store in session
-                Session["QuizTitle"] = quizTitle;
+                Session["FlashcardTitle"] = flashcardTitle;
+                Session["Chapter"] = chapter;
                 Session["Questions"] = questions;
                 Session["Answers"] = answers;
                 Session["QuestionTypes"] = questionTypes;
 
                 System.Diagnostics.Debug.WriteLine($"Loaded {questions.Count} flashcards");
-                System.Diagnostics.Debug.WriteLine($"Quiz Title: {quizTitle}");
+                System.Diagnostics.Debug.WriteLine($"Flashcard Title: {flashcardTitle}");
             }
         }
 
@@ -90,7 +94,7 @@ namespace SciVerse_G12.Quiz_and_Flashcard
 
             if (questions == null || questions.Count == 0)
             {
-                lblQuizName.Text = "ERROR: No flashcards found";
+                lblFlashcardTitle.Text = "ERROR: No flashcards found";
                 lblQuestion.Text = "No questions loaded";
                 lblIndex.Text = "Debug: Questions list is empty or null";
                 lblQuestionType.Text = ""; 
@@ -99,14 +103,24 @@ namespace SciVerse_G12.Quiz_and_Flashcard
 
             if (index < 0 || index >= questions.Count)
             {
-                lblQuizName.Text = "ERROR: Invalid index";
+                lblFlashcardTitle.Text = "ERROR: Invalid index";
                 lblQuestion.Text = $"Index {index} out of range";
                 lblIndex.Text = $"Debug: Valid range 0-{questions.Count - 1}";
                 lblQuestionType.Text = ""; 
                 return;
             }
 
-            lblQuizName.Text = Session["QuizTitle"]?.ToString() ?? "Quiz";
+            string title = Session["FlashcardTitle"]?.ToString() ?? "Flashcard";
+            string chapter = Session["Chapter"]?.ToString();
+
+            if (!string.IsNullOrEmpty(chapter))
+            {
+                lblFlashcardTitle.Text = $"{chapter}: {title}";
+            }
+            else
+            {
+                lblFlashcardTitle.Text = title;
+            }
 
             string questionText = questions[index];
             string answerText = answers[index];
@@ -125,13 +139,13 @@ namespace SciVerse_G12.Quiz_and_Flashcard
                     typeDisplay = "Fill in the Blanks";
                     break;
                 default:
-                    typeDisplay = "Unknown Type";
+                    typeDisplay = "Type";
                     break;
             }
 
             lblQuestionType.Text = typeDisplay;
             // Show question or answer
-            lblQuestion.Text = ""; // clear first
+            lblQuestion.Text = ""; 
             lblQuestion.Controls.Clear();
 
             if (showAnswer)

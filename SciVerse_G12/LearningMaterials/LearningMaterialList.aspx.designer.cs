@@ -7,38 +7,38 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SciVerse_G12.Quiz_and_Flashcard
+namespace SciVerse_G12.LearningMaterials
 {
 
 
-    public partial class Quiz
+    public partial class LearningMaterialList
     {
 
         /// <summary>
-        /// rptQuizzes control.
+        /// rptLearningMaterials control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptQuizzes;
+        protected global::System.Web.UI.WebControls.Repeater rptLearningMaterials;
 
         /// <summary>
-        /// noQuizzesSection control.
+        /// noMaterialsSection control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl noQuizzesSection;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl noMaterialsSection;
 
         /// <summary>
-        /// lblNoQuizzes control.
+        /// lblNoMaterials control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoQuizzes;
+        protected global::System.Web.UI.WebControls.Label lblNoMaterials;
     }
 }
