@@ -11,10 +11,21 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    position: relative; /* Add this */
 }
 
-.body-content {
-    flex: 1; /* pushes footer to bottom when content is short */
+.container.body-content {
+    flex: 1 0 auto;
+    min-height: calc(100vh - 200px); /* Ensure minimum height */
+    padding-bottom: 40px; /* Add space at bottom */
+}
+
+/* Footer - FIXED */
+footer.footer {
+    flex-shrink: 0;
+    width: 100%;
+    background-color: #343a40 !important; /* Ensure background color */
+    margin-top: auto; /* Push to bottom */
 }
 
 h1 {
@@ -68,7 +79,6 @@ header,
 
 .body-content {
     margin-top: 90px; /* Match navbar height */
-    padding-bottom: 60px; /* Space for footer */
 }
 
 /* Footer */
@@ -89,23 +99,23 @@ header,
 }
 
     .footer a {
-        color: #333; /* Dark text to match body */
+        color: #333;
         transition: color 0.3s ease;
-        display: inline-block !important; /* Force inline-block for margin */
-        margin-right: 60px !important; /* Enforce custom gap size */
+        display: inline-block !important;
+        margin-right: 20px !important; /* Tighter spacing */
     }
 
         .footer a:hover {
-            color: #1abc9c; /* Teal hover color for contrast */
+            color: #1abc9c;
             text-decoration: none;
         }
 
-    .footer .fab {
-        font-size: 1.5rem;
+    .footer .mb-3 .footer-link:last-child {
+        margin-right: 0 !important;
     }
 
-    .footer .mb-3 {
-        margin-bottom: 0.5rem !important; /* Reduced margin for compact layout */
+    .footer .fab {
+        font-size: 1.5rem;
     }
 
         .footer .mb-3 .footer-link:last-child {
@@ -182,29 +192,28 @@ header,
 }
 
 /* Sidebar Header (Adjusted for logo + ADMIN text: Centered, with padding) */
-.sidebar-header {
+.admin-sidebar-header {
     flex-shrink: 0;
-    padding: 20px;
-    border-bottom: none;
+    padding: 50px 20px 15px !important; /* Increased top padding to 50px to push image lower (adjust this value as needed) */
+    border-bottom: 1px solid #343a40;
     text-align: center;
-    background: #000000; /* No gray */
-    margin-top: -40px;
+    background: linear-gradient(to bottom, #212529, #343a40); /* Subtle gradient for depth */
 }
 
 /* Sidebar Logo Image (New: Circular logo, sized for header) */
-.sidebar-logo-img {
-    width: 120px; /* Sized like profile img in user sidebar */
-    height: 120px;
+.admin-sidebar-logo-img {
+    width: 110px; /* Sized like profile img in user sidebar */
+    height: auto;
     border-radius: 50%; /* Circle for consistency */
     object-fit: cover; /* Maintain aspect ratio */
     border: 3px solid #f8f9fa; /* Light border for contrast on dark bg */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow */
     display: block;
-    margin: 0 auto 10px; /* Center with space below */
+    margin: 30px auto 10px auto; /* Center with space below */
 }
 
 /* ADMIN Text (New: Bold, centered below logo) */
-.sidebar-header h5 {
+.admin-sidebar-header h5 {
     font-size: 1.2rem;
     font-weight: 700;
     color: #f8f9fa;
@@ -213,7 +222,7 @@ header,
 }
 
 /* Sidebar Nav Links (Aligned with user links: Padding, hover, icons) */
-.sidebar-nav {
+.admin-sidebar-nav {
     flex: 1; /* Take remaining space like user ul */
     list-style: none;
     padding: 0 0 10px 0;
@@ -223,7 +232,7 @@ header,
     gap: 0; /* Remove gap, use padding in links */
 }
 
-    .sidebar-nav a {
+    .admin-sidebar-nav a {
         color: #f8f9fa;
         padding: 14px 17px; /* Match user link padding */
         border-radius: 8px; /* Softer corners like user */
@@ -234,18 +243,18 @@ header,
         font-weight: 500; /* Medium weight like user */
     }
 
-        .sidebar-nav a i {
+        .admin-sidebar-nav a i {
             margin-right: 10px; /* Icon spacing */
             font-size: 1.1em; /* Slightly larger icons */
         }
 
-        .sidebar-nav a:hover {
+        .admin-sidebar-nav a:hover {
             background-color: #495057; /* Match user hover */
             color: #ffffff;
             transform: translateX(5px); /* Subtle slide like user */
         }
 
-        .sidebar-nav a.active {
+        .admin-sidebar-nav a.active {
             background: #1abc9c; /* Keep original active color */
             color: white;
         }
@@ -310,8 +319,8 @@ header,
     }
 
     .sidebar-logo-img {
-        width: 140px;
-        height: 140px;
+        width: 120px;
+        height: 120px;
     }
 }
 
@@ -320,7 +329,7 @@ header,
     position: fixed;
     top: 0; /* No gap with navbar */
     left: 0;
-    width: 240px;
+    width: 200px;
     height: 100vh; /* Full height, no scroll gap */
     background-color: #212529;
     color: #f8f9fa;
@@ -345,7 +354,7 @@ header,
 /* Sidebar Header (To lower the image: Increase padding-top here - e.g., from 35px to 50px or more) */
 .sidebar-header {
     flex-shrink: 0;
-    padding: 110px 20px 15px; /* Increased top padding to 50px to push image lower (adjust this value as needed) */
+    padding: 50px 20px 15px !important; /* Increased top padding to 50px to push image lower (adjust this value as needed) */
     border-bottom: 1px solid #343a40;
     text-align: center;
     background: linear-gradient(to bottom, #212529, #343a40); /* Subtle gradient for depth */
@@ -353,16 +362,14 @@ header,
 
 /* Profile Image (To lower further: Add/increase margin-top here) */
 .profile-img-sidebar {
-    width: 100px; /* Increased size for better visibility in sidebar */
-    height: 100px;
-    border-radius: 50%; /* Perfect circle */
-    object-fit: cover; /* Crop to fill circle without distortion */
-    border: 4px solid #3b82f6; /* Thicker blue border for pop */
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4); /* Stronger shadow for depth */
+    width: 120px !important; /* bigger */
+    height: 120px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #3b82f6;
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
     display: block;
-    margin: 90px auto 15px auto; /* Increased top margin to 20px for additional lowering (adjust this value) */
-    background-color: #e5e7eb; /* Fallback gray bg for loading/empty */
-    transition: transform 0.2s ease; /* Subtle hover lift */
+    margin: 120px auto 15px auto !important; /* was 90px → moved up */
 }
 
     .profile-img-sidebar:hover {
@@ -403,10 +410,9 @@ header,
         transform: translateX(5px); /* Subtle slide on hover */
     }
 
-/* Content Shift */
+/* Content Shift - REMOVED to prevent right-side gap; sidebar now overlays content */
 .body-content.with-sidebar {
-    margin-left: 240px;
-    transition: margin-left 0.3s ease;
+    /* No margin-left; overlay instead */
 }
 
 /* Scrollbar */
@@ -418,8 +424,8 @@ header,
     background-color: #495057;
     border-radius: 3px;
 }
-    /* Toggle Button */
-    .menu-toggle {
+/* Toggle Button */
+.menu-toggle {
     background: transparent;
     color: #007bff;
     border: 2px solid #007bff;
@@ -442,7 +448,7 @@ header,
     }
 
     .body-content.with-sidebar {
-        margin-left: 0; /* Overlay on mobile */
+        /* Already overlay on mobile; no change needed */
     }
 
     .profile-img-sidebar {

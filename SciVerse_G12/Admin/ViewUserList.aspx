@@ -6,6 +6,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <!-- Page-specific CSS -->
     <link href='<%= ResolveUrl("~/Styles/Admin.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
+
+    <!-- FOOTER FIX STYLES -->
+    <style>
+        .admin-content {
+            position: relative;
+        }
+       
+        
+        /* Ensure the main content wrapper pushes footer down */
+        #contentArea {
+            flex: 1;
+        }
+        
+        /* Add padding to bottom of content */
+        .container.body-content {
+            padding-bottom: 60px;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
@@ -57,6 +75,7 @@
                 CssClass="user-table table table-striped table-hover"
                 EmptyDataText="No users found matching your criteria."
                 EnableViewState="true">
+
 
                 <Columns>
                     <asp:TemplateField HeaderText="Select" Visible="false">

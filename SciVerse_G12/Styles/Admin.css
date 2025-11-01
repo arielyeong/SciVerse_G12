@@ -158,7 +158,7 @@
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(179, 222, 251, 0.2); /* Adjusted shadow to light blue tint */
     background: white;
-    margin-bottom: 20px; /* Space below table */
+    margin-bottom: 190px; /* Space below table */
 }
 
 .user-table {
@@ -221,6 +221,7 @@
     background: #f8f9fa;
     border: 1px dashed #dee2e6;
     border-radius: 8px;
+    margin-top: -80px; /* move upward */
 }
 
 /* Responsive: Stack on mobile (Improved for layout) */
@@ -309,4 +310,5 @@
     font-size: 1.8rem;
     margin-bottom: 25px;
     color: #333;
+
 }
