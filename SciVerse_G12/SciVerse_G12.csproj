@@ -130,9 +130,6 @@
     <Content Include="Images\About\chingying.png" />
     <Content Include="Images\About\hueyyee.png" />
     <Content Include="Images\About\yingxin.png" />
-    <Content Include="Images\down.png" />
-    <Content Include="Images\myface.jpg" />
-    <Content Include="Images\open air burning 1_4d398283297d45da980ae14f92221680.jpg" />
     <Content Include="Images\Quiz\force-and-motion.png" />
     <Content Include="Images\Quiz\heat-and-temp.png" />
     <Content Include="Images\Quiz\solar-system.png" />
