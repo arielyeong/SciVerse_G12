@@ -87,7 +87,7 @@
                     <a href="~/Account/LearningMaterial.aspx" runat="server" class="sidebar-item text-white text-decoration-none">
                         <i class="fa fa-book"></i> Learning Material
                     </a>
-                    <a href="~/Account/ExperimentSimulation.aspx" runat="server" class="sidebar-item text-white text-decoration-none">
+                    <a href="~/Simulation/AdminSimulation.aspx" runat="server" class="sidebar-item text-white text-decoration-none">
                         <i class="fa fa-flask"></i> Experiment Simulation
                     </a>
                     <a href="~/Account/UserPerformance.aspx" runat="server" class="sidebar-item text-white text-decoration-none">
