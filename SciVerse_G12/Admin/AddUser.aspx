@@ -35,7 +35,87 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Country</label>
-                        <asp:TextBox ID="txtCountry" runat="server" CssClass="form-control" Required="true"></asp:TextBox>
+                        <asp:DropDownList ID="dlCountry" runat="server" CssClass="form-control">
+                            <asp:ListItem Value="Åland Islands">Åland Islands</asp:ListItem>
+                            <asp:ListItem Value="Albania">Albania</asp:ListItem>
+                            <asp:ListItem Value="Algeria">Algeria</asp:ListItem>
+                            <asp:ListItem Value="American Samoa">American Samoa</asp:ListItem>
+                            <asp:ListItem Value="Andorra">Andorra</asp:ListItem>
+                            <asp:ListItem Value="Angola">Angola</asp:ListItem>
+                            <asp:ListItem Value="Anguilla">Anguilla</asp:ListItem>
+                            <asp:ListItem Value="Antarctica">Antarctica</asp:ListItem>
+                            <asp:ListItem Value="Antigua and Barbuda">Antigua and Barbuda</asp:ListItem>
+                            <asp:ListItem Value="Argentina">Argentina</asp:ListItem>
+                            <asp:ListItem Value="Armenia">Armenia</asp:ListItem>
+                            <asp:ListItem Value="Aruba">Aruba</asp:ListItem>
+                            <asp:ListItem Value="Australia">Australia</asp:ListItem>
+                            <asp:ListItem Value="Austria">Austria</asp:ListItem>
+                            <asp:ListItem Value="Azerbaijan">Azerbaijan</asp:ListItem>
+                            <asp:ListItem Value="Bahamas">Bahamas</asp:ListItem>
+                            <asp:ListItem Value="Bahrain">Bahrain</asp:ListItem>
+                            <asp:ListItem Value="Bangladesh">Bangladesh</asp:ListItem>
+                            <asp:ListItem Value="Barbados">Barbados</asp:ListItem>
+                            <asp:ListItem Value="Belarus">Belarus</asp:ListItem>
+                            <asp:ListItem Value="Belgium">Belgium</asp:ListItem>
+                            <asp:ListItem Value="Belize">Belize</asp:ListItem>
+                            <asp:ListItem Value="Benin">Benin</asp:ListItem>
+                            <asp:ListItem Value="Bermuda">Bermuda</asp:ListItem>
+                            <asp:ListItem Value="Bhutan">Bhutan</asp:ListItem>
+                            <asp:ListItem Value="Bolivia">Bolivia</asp:ListItem>
+                            <asp:ListItem Value="Bosnia and Herzegovina">Bosnia and Herzegovina</asp:ListItem>
+                            <asp:ListItem Value="Botswana">Botswana</asp:ListItem>
+                            <asp:ListItem Value="Bouvet Island">Bouvet Island</asp:ListItem>
+                            <asp:ListItem Value="Brazil">Brazil</asp:ListItem>
+                            <asp:ListItem Value="British Indian Ocean Territory">British Indian Ocean Territory</asp:ListItem>
+                            <asp:ListItem Value="Brunei Darussalam">Brunei Darussalam</asp:ListItem>
+                            <asp:ListItem Value="Bulgaria">Bulgaria</asp:ListItem>
+                            <asp:ListItem Value="Burkina Faso">Burkina Faso</asp:ListItem>
+                            <asp:ListItem Value="Burundi">Burundi</asp:ListItem>
+                            <asp:ListItem Value="Cambodia">Cambodia</asp:ListItem>
+                            <asp:ListItem Value="Cameroon">Cameroon</asp:ListItem>
+                            <asp:ListItem Value="Canada">Canada</asp:ListItem>
+                            <asp:ListItem Value="Cape Verde">Cape Verde</asp:ListItem>
+                            <asp:ListItem Value="Cayman Islands">Cayman Islands</asp:ListItem>
+                            <asp:ListItem Value="Central African Republic">Central African Republic</asp:ListItem>
+                            <asp:ListItem Value="Chad">Chad</asp:ListItem>
+                            <asp:ListItem Value="Chile">Chile</asp:ListItem>
+                            <asp:ListItem Value="China">China</asp:ListItem>
+                            <asp:ListItem Value="Christmas Island">Christmas Island</asp:ListItem>
+                            <asp:ListItem Value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</asp:ListItem>
+                            <asp:ListItem Value="Colombia">Colombia</asp:ListItem>
+                            <asp:ListItem Value="Comoros">Comoros</asp:ListItem>
+                            <asp:ListItem Value="Tajikistan">Tajikistan</asp:ListItem>
+                            <asp:ListItem Value="Tanzania, United Republic of">Tanzania, United Republic of</asp:ListItem>
+                            <asp:ListItem Value="Thailand">Thailand</asp:ListItem>
+                            <asp:ListItem Value="Timor-leste">Timor-leste</asp:ListItem>
+                            <asp:ListItem Value="Togo">Togo</asp:ListItem>
+                            <asp:ListItem Value="Tokelau">Tokelau</asp:ListItem>
+                            <asp:ListItem Value="Tonga">Tonga</asp:ListItem>
+                            <asp:ListItem Value="Trinidad and Tobago">Trinidad and Tobago</asp:ListItem>
+                            <asp:ListItem Value="Tunisia">Tunisia</asp:ListItem>
+                            <asp:ListItem Value="Turkey">Turkey</asp:ListItem>
+                            <asp:ListItem Value="Turkmenistan">Turkmenistan</asp:ListItem>
+                            <asp:ListItem Value="Turks and Caicos Islands">Turks and Caicos Islands</asp:ListItem>
+                            <asp:ListItem Value="Tuvalu">Tuvalu</asp:ListItem>
+                            <asp:ListItem Value="Uganda">Uganda</asp:ListItem>
+                            <asp:ListItem Value="Ukraine">Ukraine</asp:ListItem>
+                            <asp:ListItem Value="United Arab Emirates">United Arab Emirates</asp:ListItem>
+                            <asp:ListItem Value="United Kingdom">United Kingdom</asp:ListItem>
+                            <asp:ListItem Value="United States">United States</asp:ListItem>
+                            <asp:ListItem Value="United States Minor Outlying Islands">United States Minor Outlying Islands</asp:ListItem>
+                            <asp:ListItem Value="Uruguay">Uruguay</asp:ListItem>
+                            <asp:ListItem Value="Uzbekistan">Uzbekistan</asp:ListItem>
+                            <asp:ListItem Value="Vanuatu">Vanuatu</asp:ListItem>
+                            <asp:ListItem Value="Venezuela">Venezuela</asp:ListItem>
+                            <asp:ListItem Value="Viet Nam">Viet Nam</asp:ListItem>
+                            <asp:ListItem Value="Virgin Islands, British">Virgin Islands, British</asp:ListItem>
+                            <asp:ListItem Value="Virgin Islands, U.S.">Virgin Islands, U.S.</asp:ListItem>
+                            <asp:ListItem Value="Wallis and Futuna">Wallis and Futuna</asp:ListItem>
+                            <asp:ListItem Value="Western Sahara">Western Sahara</asp:ListItem>
+                            <asp:ListItem Value="Yemen">Yemen</asp:ListItem>
+                            <asp:ListItem Value="Zambia">Zambia</asp:ListItem>
+                            <asp:ListItem Value="Zimbabwe">Zimbabwe</asp:ListItem>
+                        </asp:DropDownList>
                     </div>
                 </div>
 
@@ -59,7 +139,7 @@
                 </div>
             </div>
 
-            <!-- ACCOUNT DETAILS (Admin-only: No password) -->
+            <!-- ACCOUNT DETAILS -->
             <h4 class="section-title">Account Details</h4>
             <div class="row add-user-form">
                 <div class="col-md-6">
@@ -71,8 +151,8 @@
                     <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control" Required="true"></asp:TextBox>
                 </div>
             </div>
-            <div class="row add-user-form"> <!-- New row for password -->
-                <div class="col-md-6 offset-md-3"> <!-- Centered single field -->
+            <div class="row add-user-form">
+                <div class="col-md-6">
                     <label class="form-label">Password</label>
                     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control" Required="true"></asp:TextBox>
                     <asp:RegularExpressionValidator runat="server" 
@@ -81,6 +161,16 @@
                                                     ErrorMessage="Password must be at least 4 characters." 
                                                     Display="Dynamic" 
                                                     ValidationExpression="^.{4,}$" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Role</label>
+                    <asp:DropDownList ID="ddlRole" runat="server" CssClass="form-select" Required="true">
+                        <asp:ListItem Text="Select Role" Value=""></asp:ListItem>
+                        <asp:ListItem Text="User" Value="User" Selected="True"></asp:ListItem>
+                        <asp:ListItem Text="Admin" Value="Admin"></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+            </div>
 
             <asp:Label ID="lblMessage" runat="server" CssClass="lblMessage"></asp:Label>
 

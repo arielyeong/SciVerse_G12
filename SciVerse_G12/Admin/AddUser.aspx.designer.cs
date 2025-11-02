@@ -42,13 +42,13 @@ namespace SciVerse_G12
         protected global::System.Web.UI.WebControls.DropDownList ddlGender;
 
         /// <summary>
-        /// txtCountry control.
+        /// dlCountry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCountry;
+        protected global::System.Web.UI.WebControls.DropDownList dlCountry;
 
         /// <summary>
         /// fileUploadPicture control.
@@ -85,6 +85,15 @@ namespace SciVerse_G12
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
+
+        /// <summary>
+        /// ddlRole control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlRole;
 
         /// <summary>
         /// lblMessage control.

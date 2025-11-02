@@ -16,7 +16,7 @@ namespace SciVerse_G12
             // ✅ Stop execution if page validators fail (RequiredField / CompareValidator)
             if (!Page.IsValid)
             {
-                lblMessage.Text = "❌ Please fix the errors before continuing.";
+                lblMessage.Text = "Please fix the errors before continuing.";
                 lblMessage.ForeColor = System.Drawing.Color.Red;
                 return;
             }
@@ -28,7 +28,7 @@ namespace SciVerse_G12
             // ✅ Double-check passwords match (for extra safety)
             if (newPassword != confirmPassword)
             {
-                lblMessage.Text = "❌ Passwords do not match!";
+                lblMessage.Text = "Passwords do not match!";
                 lblMessage.ForeColor = System.Drawing.Color.Red;
                 return;
             }
@@ -47,7 +47,7 @@ namespace SciVerse_G12
 
                 if (rows > 0)
                 {
-                    lblMessage.Text = "✅ Password updated successfully! Redirecting to Login...";
+                    lblMessage.Text = "Password updated successfully! Redirecting to Login...";
                     lblMessage.ForeColor = System.Drawing.Color.Green;
 
                     // Redirect after 3 seconds
@@ -56,7 +56,7 @@ namespace SciVerse_G12
                 }
                 else
                 {
-                    lblMessage.Text = "❌ Username not found!";
+                    lblMessage.Text = "Username not found!";
                     lblMessage.ForeColor = System.Drawing.Color.Red;
                 }
             }

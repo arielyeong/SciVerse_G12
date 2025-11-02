@@ -32,8 +32,9 @@ namespace SciVerse_G12
                 string.IsNullOrWhiteSpace(txtEmail.Text) ||
                 string.IsNullOrWhiteSpace(txtAge.Text) ||
                 string.IsNullOrWhiteSpace(ddlGender.SelectedValue) ||
-                string.IsNullOrWhiteSpace(txtCountry.Text) ||
-                string.IsNullOrWhiteSpace(txtPassword.Text))
+                string.IsNullOrWhiteSpace(dlCountry.SelectedValue) ||
+                string.IsNullOrWhiteSpace(txtPassword.Text) ||
+                string.IsNullOrWhiteSpace(ddlRole.SelectedValue))
             {
                 ShowMessage("Please fill in all required fields.", "error");
                 return;
@@ -51,8 +52,9 @@ namespace SciVerse_G12
             string email = txtEmail.Text.Trim();
             string age = txtAge.Text.Trim();
             string gender = ddlGender.SelectedValue;
-            string country = txtCountry.Text.Trim();
+            string country = dlCountry.SelectedValue; // Fixed: Use SelectedValue, not Text
             string password = txtPassword.Text.Trim(); // New: Password
+            string role = ddlRole.SelectedValue; // New: Role from dropdown
 
             // *** Password Validation ***
             if (password.Length < 4)
@@ -139,7 +141,7 @@ namespace SciVerse_G12
                     cmd.Parameters.AddWithValue("@country", country);
                     cmd.Parameters.AddWithValue("@picture", picture);
                     cmd.Parameters.AddWithValue("@dateRegister", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@role", "User"); // Default role for new users
+                    cmd.Parameters.AddWithValue("@role", role); // New: Dynamic role from dropdown
                     cmd.Parameters.AddWithValue("@password", password); // New: Plain text password (as requested; consider hashing in production)
 
                     try
