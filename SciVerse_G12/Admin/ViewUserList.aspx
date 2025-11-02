@@ -1,143 +1,145 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="ViewUserList.aspx.cs" Inherits="SciVerse_G12.ViewUserList" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+<asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <!-- Page-specific CSS -->
+    <link href='<%= ResolveUrl("~/Styles/Admin.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
+
+    <!-- FOOTER FIX STYLES -->
     <style>
         .admin-content {
-            padding: 20px;
-            margin-top: -30px !important;
-            transition: margin-left 0.3s ease;
+            position: relative;
         }
-
-        .admin-content.shifted {
-            margin-left: 220px;
+       
+        
+        /* Ensure the main content wrapper pushes footer down */
+        #contentArea {
+            flex: 1;
         }
-
-        /* Container for top controls */
-        .top-controls {
-            display: flex;
-            justify-content: space-between; /* separate left and right sections */
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        /* Left section: search tools */
-        .left-controls {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        /* Right section: action buttons */
-        .right-controls {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .top-controls .form-control {
-            width: 250px;
+        
+        /* Add padding to bottom of content */
+        .container.body-content {
+            padding-bottom: 60px;
         }
     </style>
+</asp:Content>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <!-- Main Content -->
     <div class="admin-content" id="contentArea">
+        <!-- Redesigned Header: Bold with icon and subtle underline -->
         <div class="content-header">
-            <h1>View User List</h1>
+            <h1 class="page-title">
+                <i class="fa fa-users me-2"></i>View User List
+            </h1>
+            <p class="page-subtitle">Manage and monitor registered users</p>
         </div>
 
-        <!-- Search + Action buttons -->
+        <!-- Redesigned Top Controls: Compact row with icon search button -->
         <div class="top-controls">
-            <!-- Left side: Search + Clear -->
-            <div class="left-controls">
-                <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" Placeholder="Search by Username or Email"></asp:TextBox>
-                <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
-                <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-secondary" OnClick="btnClear_Click" />
+            <!-- Left: Search Input + Icon Button -->
+            <div class="search-section">
+                <div class="input-group input-group-sm" style="width: 300px;">
+                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control search-input" Placeholder="Search..."></asp:TextBox>
+                    <button type="submit" runat="server" id="btnSearch" class="btn-search-icon" onserverclick="btnSearch_Click"></button>
+                    <button type="submit" runat="server" id="btnClear" class="btn-clear-icon ms-1" onserverclick="btnClear_Click"></button>
+
+                </div>
             </div>
 
-            <!-- Right side: Edit/Delete/Confirm/Cancel -->
-            <div class="right-controls">
-                <asp:Button ID="btnEditMode" runat="server" Text="Edit Mode" CssClass="btn btn-warning" OnClick="btnEditMode_Click" />
-                <asp:Button ID="btnDeleteMode" runat="server" Text="Delete Mode" CssClass="btn btn-danger" OnClick="btnDeleteMode_Click" />
-                <asp:Button ID="btnConfirm" runat="server" Text="Confirm Action" CssClass="btn btn-success" Visible="false" OnClick="btnConfirm_Click" />
-                <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-secondary" Visible="false" OnClick="btnCancel_Click" />
+            <!-- Right: Custom Mode Buttons (No Bootstrap colors - custom soft palette) -->
+            <div class="mode-buttons">
+                <asp:Button ID="btnEditMode" runat="server" CssClass="btn-custom btn-edit-mode me-2" Text="Edit Mode" OnClick="btnEditMode_Click" ToolTip="Enable edit selection" />
+                <asp:Button ID="btnDeleteMode" runat="server" CssClass="btn-custom btn-delete-mode me-2" Text="Delete Mode" OnClick="btnDeleteMode_Click" ToolTip="Enable delete selection" />
+                <asp:Button ID="btnConfirm" runat="server" CssClass="btn-custom btn-confirm me-2" Text="Confirm" Visible="false" OnClick="btnConfirm_Click" ToolTip="Confirm selected actions" />
+                <asp:Button ID="btnCancel" runat="server" CssClass="btn-custom btn-cancel" Text="Cancel" Visible="false" OnClick="btnCancel_Click" ToolTip="Cancel mode" />
             </div>
         </div>
 
-        <!-- GridView -->
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-            ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            SelectCommand="SELECT * FROM [tblRegisteredUsers]">
-        </asp:SqlDataSource>
+        <!-- Responsive Table Wrapper -->
+        <div class="table-responsive">
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+                SelectCommand="SELECT * FROM [tblRegisteredUsers]">
+            </asp:SqlDataSource>
 
-        <asp:GridView ID="GridView1" runat="server" 
-            AllowPaging="True" 
-            AutoGenerateColumns="False"
-            DataKeyNames="username" 
-            DataSourceID="SqlDataSource1"
-            OnRowDataBound="GridView1_RowDataBound"
-            OnPageIndexChanging="GridView1_PageIndexChanging"
-            CssClass="table table-bordered table-hover"
-            BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" 
-            CellPadding="4" CellSpacing="2" ForeColor="Black">
+            <asp:GridView ID="GridView1" runat="server" 
+                AllowPaging="True" PageSize="10"
+                AutoGenerateColumns="False"
+                DataKeyNames="RID" 
+                DataSourceID="SqlDataSource1"
+                OnRowDataBound="GridView1_RowDataBound"
+                OnPageIndexChanging="GridView1_PageIndexChanging"
+                CssClass="user-table table table-striped table-hover"
+                EmptyDataText="No users found matching your criteria."
+                EnableViewState="true">
 
-            <Columns>
-                <asp:TemplateField HeaderText="Select" Visible="false">
-                    <ItemTemplate>
-                        <asp:CheckBox ID="chkSelect" runat="server" />
-                    </ItemTemplate>
-                    <ItemStyle Width="40px" HorizontalAlign="Center" />
-                    <HeaderStyle Width="40px" />
-                </asp:TemplateField>
 
-                <asp:BoundField DataField="RID" HeaderText="RID">
-                    <ItemStyle Width="60px" HorizontalAlign="Center" />
-                </asp:BoundField>
+                <Columns>
+                    <asp:TemplateField HeaderText="Select" Visible="false">
+                        <ItemTemplate>
+                            <asp:CheckBox ID="chkSelect" runat="server" />
+                        </ItemTemplate>
+                        <ItemStyle CssClass="select-col" />
+                        <HeaderStyle CssClass="select-col" />
+                    </asp:TemplateField>
 
-                <asp:BoundField DataField="username" HeaderText="Username">
-                    <ItemStyle Width="150px" />
-                </asp:BoundField>
+                    <asp:BoundField DataField="RID" HeaderText="ID" HeaderStyle-CssClass="id-col">
+                        <ItemStyle CssClass="id-col text-center" />
+                    </asp:BoundField>
 
-                <asp:BoundField DataField="fullName" HeaderText="Full Name">
-                    <ItemStyle Width="180px" />
-                </asp:BoundField>
+                    <asp:BoundField DataField="username" HeaderText="Username" HeaderStyle-CssClass="username-col">
+                        <ItemStyle CssClass="username-col" />
+                    </asp:BoundField>
 
-                <asp:BoundField DataField="emailAddress" HeaderText="Email Address">
-                    <ItemStyle Width="220px" />
-                </asp:BoundField>
+                    <asp:BoundField DataField="fullName" HeaderText="Full Name" HeaderStyle-CssClass="name-col">
+                        <ItemStyle CssClass="name-col text-truncate" />
+                    </asp:BoundField>
 
-                <asp:BoundField DataField="age" HeaderText="Age">
-                    <ItemStyle Width="60px" HorizontalAlign="Center" />
-                </asp:BoundField>
+                    <asp:BoundField DataField="emailAddress" HeaderText="Email" HeaderStyle-CssClass="email-col">
+                        <ItemStyle CssClass="email-col text-truncate" />
+                    </asp:BoundField>
 
-                <asp:BoundField DataField="gender" HeaderText="Gender">
-                    <ItemStyle Width="100px" HorizontalAlign="Center" />
-                </asp:BoundField>
+                    <asp:BoundField DataField="age" HeaderText="Age" HeaderStyle-CssClass="age-col">
+                        <ItemStyle CssClass="age-col text-center" />
+                    </asp:BoundField>
 
-                <asp:BoundField DataField="country" HeaderText="Country">
-                    <ItemStyle Width="120px" />
-                </asp:BoundField>
+                    <asp:BoundField DataField="gender" HeaderText="Gender" HeaderStyle-CssClass="gender-col">
+                        <ItemStyle CssClass="gender-col text-center" />
+                    </asp:BoundField>
 
-                <asp:ImageField DataImageUrlField="picture" HeaderText="Picture">
-                    <ControlStyle Width="80px" Height="80px" />
-                    <ItemStyle Width="100px" HorizontalAlign="Center" />
-                </asp:ImageField>
+                    <asp:BoundField DataField="country" HeaderText="Country" HeaderStyle-CssClass="country-col">
+                        <ItemStyle CssClass="country-col text-truncate" />
+                    </asp:BoundField>
 
-                <asp:BoundField DataField="dateRegister" HeaderText="Date Register">
-                    <ItemStyle Width="150px" />
-                </asp:BoundField>
-            </Columns>
+                    <asp:TemplateField HeaderText="Picture" HeaderStyle-CssClass="picture-col">
+                        <ItemTemplate>
+                            <asp:Image ID="imgUser" runat="server" ImageUrl='<%# Eval("picture") ?? "~/Images/Profile/default.png" %>' CssClass="user-avatar" AlternateText="Profile Picture" ToolTip="Profile Picture" OnError="imgUser_Error" />
+                        </ItemTemplate>
+                        <ItemStyle CssClass="picture-col text-center" />
+                    </asp:TemplateField>
 
-            <FooterStyle BackColor="#CCCCCC" />
-            <HeaderStyle BackColor="#007bff" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Left" />
-            <RowStyle BackColor="White" />
-            <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-            <SortedAscendingCellStyle BackColor="#F1F1F1" />
-            <SortedAscendingHeaderStyle BackColor="#808080" />
-            <SortedDescendingCellStyle BackColor="#CAC9C9" />
-            <SortedDescendingHeaderStyle BackColor="#383838" />
-        </asp:GridView>
+                    <asp:BoundField DataField="dateRegister" HeaderText="Joined" HeaderStyle-CssClass="date-col" DataFormatString="{0:MMM dd, yyyy}" HtmlEncode="false">
+                        <ItemStyle CssClass="date-col text-center" />
+                    </asp:BoundField>
+                </Columns>
+
+                <EmptyDataRowStyle CssClass="text-center text-muted py-4" />
+                <PagerStyle CssClass="d-flex justify-content-center" />
+                <PagerSettings Mode="NumericFirstLast" PageButtonCount="5" />
+            </asp:GridView>
+        </div>
+
+        <!-- Error Label -->
+        <asp:Label ID="lblError" runat="server" CssClass="alert alert-danger mt-3" Visible="false"></asp:Label>
+
+        <!-- No-Results Message (Handled by EmptyDataText, but enhanced via CSS) -->
+        <div id="noResults" class="no-results text-center py-5 text-muted" runat="server" visible="false">
+            <i class="fa fa-search fa-3x mb-3"></i>
+            <h4>No Users Found</h4>
+            <p>Try adjusting your search criteria.</p>
+        </div>
     </div>
 </asp:Content>

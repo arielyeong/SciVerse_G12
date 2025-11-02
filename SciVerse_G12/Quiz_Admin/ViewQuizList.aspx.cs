@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace SciVerse_G12.Quiz
+namespace SciVerse_G12.Quiz_Admin
 {
     public partial class ViewQuizList : System.Web.UI.Page
     {
@@ -16,8 +13,16 @@ namespace SciVerse_G12.Quiz
             get { return ViewState["Mode"] as string ?? ""; }
             set { ViewState["Mode"] = value; }
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            // validate session
+            if (Session["RID"] == null)
+            {
+                Response.Redirect("~/Account/Login.aspx");
+                return;
+            }
+
             if (!IsPostBack)
             {
                 GridView1.DataBind();
@@ -65,70 +70,68 @@ namespace SciVerse_G12.Quiz
             GridView1.DataBind();
         }
 
-
         protected void btnEditMode_Click(object sender, EventArgs e)
         {
             Mode = "Edit";
             ToggleSelectionMode(true);
+            btnConfirm.OnClientClick = null;
+            btnConfirm.Text = "Confirm";
         }
 
         protected void btnDeleteMode_Click(object sender, EventArgs e)
         {
             Mode = "Delete";
             ToggleSelectionMode(true);
+            btnConfirm.OnClientClick = "openDeleteModal(); return false;";
+            btnConfirm.Text = "Confirm Deletion";
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             Mode = "";
             ToggleSelectionMode(false);
+            btnConfirm.OnClientClick = null;
+            btnConfirm.Text = "Confirm";
         }
 
         protected void btnConfirm_Click(object sender, EventArgs e)
         {
-            foreach (GridViewRow row in GridView1.Rows)
+            if (Mode == "Edit")
             {
-                var chk = row.FindControl("chkSelect") as CheckBox;
-                if (chk != null && chk.Checked)
+                foreach (GridViewRow row in GridView1.Rows)
                 {
-                    int quizId = Convert.ToInt32(GridView1.DataKeys[row.RowIndex].Value);
-
-                    if (Mode == "Edit")
+                    var check = row.FindControl("chkSelect") as CheckBox;
+                    if (check != null && check.Checked)
                     {
-                        Response.Redirect("EditQuizPage.aspx?quizId=" + quizId);
-                        return; // stop here; redirect ends the request
-                    }
-                    else if (Mode == "Delete")
-                    {
-                        DeleteQuiz(quizId);
+                        int quizId = Convert.ToInt32(GridView1.DataKeys[row.RowIndex].Value);
+                        Response.Redirect(ResolveUrl("~/Quiz_Admin/EditQuizPage.aspx?quizId=" + quizId), false);
+                        return;
                     }
                 }
+                return;
             }
 
             if (Mode == "Delete")
             {
-                GridView1.DataBind();
-                Mode = "";
-                ToggleSelectionMode(false);
+                ScriptManager.RegisterStartupScript(this, GetType(), "openDeleteModal", "openDeleteModal();", true);
+                return;
             }
         }
 
         private void DeleteQuiz(int quizId)
         {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(cs))
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM dbo.tblQuiz WHERE QuizID = @id", con))
+            string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlCommand command = new SqlCommand("DELETE FROM dbo.tblQuiz WHERE QuizID = @id", conn))
             {
-                cmd.Parameters.AddWithValue("@id", quizId);
-                con.Open();
-                cmd.ExecuteNonQuery();
+                command.Parameters.AddWithValue("@id", quizId);
+                conn.Open();
+                command.ExecuteNonQuery();
             }
-            // If you have FK CASCADE from tblQuestion to tblQuiz, its questions will auto-delete.
         }
 
         private void ToggleSelectionMode(bool enable)
         {
-            // show/hide first column (checkboxes)
             GridView1.Columns[0].Visible = enable;
 
             btnConfirm.Visible = enable;
@@ -139,11 +142,46 @@ namespace SciVerse_G12.Quiz
             GridView1.DataBind();
         }
 
-        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void btnYesDelete_Click(object sender, EventArgs e)
         {
-            // optional: put row-level tweaks here
+            int deleted = 0;
+            string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+            using (var con = new SqlConnection(connStr))
+            {
+                con.Open();
+
+                foreach (GridViewRow row in GridView1.Rows)
+                {
+                    var check = row.FindControl("chkSelect") as CheckBox;
+                    if (check == null || !check.Checked) continue;
+
+                    int quizId = Convert.ToInt32(GridView1.DataKeys[row.RowIndex].Value);
+
+                    // Delete all related questions first (optional, if cascade is not set)
+                    using (var cmd1 = new SqlCommand("DELETE FROM dbo.tblQuestion WHERE QuizID=@id", con))
+                    {
+                        cmd1.Parameters.AddWithValue("@id", quizId);
+                        cmd1.ExecuteNonQuery();
+                    }
+
+                    // Delete the quiz itself
+                    using (var cmd2 = new SqlCommand("DELETE FROM dbo.tblQuiz WHERE QuizID=@id", con))
+                    {
+                        cmd2.Parameters.AddWithValue("@id", quizId);
+                        deleted += cmd2.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            // Refresh grid and show message
+            GridView1.DataBind();
+            //lblMessage.CssClass = "text-success";
+            //lblMessage.Text = $"{deleted} quiz(es) deleted successfully.";
         }
 
-
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+        }
     }
 }

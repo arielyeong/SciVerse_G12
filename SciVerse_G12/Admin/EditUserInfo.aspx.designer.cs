@@ -15,6 +15,24 @@ namespace SciVerse_G12
     {
 
         /// <summary>
+        /// imgPreview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgPreview;
+
+        /// <summary>
+        /// FileUploadPic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadPic;
+
+        /// <summary>
         /// txtFullname control.
         /// </summary>
         /// <remarks>
@@ -69,24 +87,6 @@ namespace SciVerse_G12
         protected global::System.Web.UI.WebControls.DropDownList dlCountry;
 
         /// <summary>
-        /// FileUploadPic control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUploadPic;
-
-        /// <summary>
-        /// imgPreview control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgPreview;
-
-        /// <summary>
         /// btnSubmit control.
         /// </summary>
         /// <remarks>
@@ -114,12 +114,12 @@ namespace SciVerse_G12
         protected global::System.Web.UI.WebControls.Label lblMessage;
 
         /// <summary>
-        /// SqlDataSource1 control.
+        /// SqlDataSource2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
     }
 }

@@ -7,146 +7,137 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SciVerse_G12.Quiz
+namespace SciVerse_G12.Quiz_Student
 {
 
 
-    public partial class CreateNewQuizPage
+    public partial class QuizHistory
     {
 
         /// <summary>
-        /// lblQuizTitle control.
+        /// btnBack control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblQuizTitle;
+        protected global::System.Web.UI.WebControls.Button btnBack;
 
         /// <summary>
-        /// txtQuizTitle control.
+        /// litTotalQuizzes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQuizTitle;
+        protected global::System.Web.UI.WebControls.Literal litTotalQuizzes;
 
         /// <summary>
-        /// lblDescription control.
+        /// litAvgScore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDescription;
+        protected global::System.Web.UI.WebControls.Literal litAvgScore;
 
         /// <summary>
-        /// txtDescription control.
+        /// litPassed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescription;
+        protected global::System.Web.UI.WebControls.Literal litPassed;
 
         /// <summary>
-        /// lblChapter control.
+        /// ddlQuiz control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblChapter;
+        protected global::System.Web.UI.WebControls.DropDownList ddlQuiz;
 
         /// <summary>
-        /// txtChapter control.
+        /// ddlChapter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChapter;
+        protected global::System.Web.UI.WebControls.DropDownList ddlChapter;
 
         /// <summary>
-        /// lblTimeLimit control.
+        /// txtDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTimeLimit;
+        protected global::System.Web.UI.WebControls.TextBox txtDate;
 
         /// <summary>
-        /// txtTimeLimit control.
+        /// btnFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTimeLimit;
+        protected global::System.Web.UI.WebControls.Button btnFilter;
 
         /// <summary>
-        /// lblAttemptLimit control.
+        /// gvAttempts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAttemptLimit;
+        protected global::System.Web.UI.WebControls.GridView gvAttempts;
 
         /// <summary>
-        /// txtAttemptLimit control.
+        /// litScore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAttemptLimit;
+        protected global::System.Web.UI.WebControls.Literal litScore;
 
         /// <summary>
-        /// lblPicture control.
+        /// litTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPicture;
+        protected global::System.Web.UI.WebControls.Literal litTime;
 
         /// <summary>
-        /// FileUploadPicture control.
+        /// lnkView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUploadPicture;
+        protected global::System.Web.UI.WebControls.HyperLink lnkView;
 
         /// <summary>
-        /// btnSaveAndContinue control.
+        /// litEmpty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveAndContinue;
+        protected global::System.Web.UI.WebControls.Literal litEmpty;
 
         /// <summary>
-        /// lnkBack control.
+        /// hidRID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkBack;
-
-        /// <summary>
-        /// lblMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessage;
+        protected global::System.Web.UI.WebControls.HiddenField hidRID;
     }
 }

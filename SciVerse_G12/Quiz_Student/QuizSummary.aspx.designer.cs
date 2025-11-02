@@ -7,101 +7,92 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SciVerse_G12.Quiz
+namespace SciVerse_G12.Quiz_Student
 {
 
 
-    public partial class ViewQuizList
+    public partial class QuizSummary
     {
 
         /// <summary>
-        /// txtSearch control.
+        /// litQuizTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+        protected global::System.Web.UI.WebControls.Literal litQuizTitle;
 
         /// <summary>
-        /// btnSearch control.
+        /// litTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
+        protected global::System.Web.UI.WebControls.Literal litTime;
 
         /// <summary>
-        /// btnClear control.
+        /// litIncorrect control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClear;
+        protected global::System.Web.UI.WebControls.Literal litIncorrect;
 
         /// <summary>
-        /// btnEditMode control.
+        /// litCorrect control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEditMode;
+        protected global::System.Web.UI.WebControls.Literal litCorrect;
 
         /// <summary>
-        /// btnDeleteMode control.
+        /// btnShowAnswers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeleteMode;
+        protected global::System.Web.UI.WebControls.Button btnShowAnswers;
 
         /// <summary>
-        /// btnConfirm control.
+        /// btnFlashcards control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnConfirm;
+        protected global::System.Web.UI.WebControls.Button btnFlashcards;
 
         /// <summary>
-        /// btnCancel control.
+        /// btnStartAgain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.Button btnStartAgain;
 
         /// <summary>
-        /// btnAdd control.
+        /// hidQuizId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
+        protected global::System.Web.UI.WebControls.HiddenField hidQuizId;
 
         /// <summary>
-        /// SqlDataSource1 control.
+        /// hidAttemptId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
-
-        /// <summary>
-        /// GridView1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.HiddenField hidAttemptId;
     }
 }

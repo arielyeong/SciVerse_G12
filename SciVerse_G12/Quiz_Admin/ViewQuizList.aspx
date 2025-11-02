@@ -1,7 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true"
-    CodeBehind="ViewQuizList.aspx.cs" Inherits="SciVerse_G12.Quiz.ViewQuizList" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="ViewQuizList.aspx.cs" Inherits="SciVerse_G12.Quiz_Admin.ViewQuizList" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <!-- Page-specific CSS -->
+    <link href='<%= ResolveUrl("~/Styles/AdminQuiz.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="view-quiz-list">
     <h1>View Quiz List</h1>
     <br />
 
@@ -35,13 +41,12 @@
         </div>
     </div>
 
-
-
     <!-- Data source -->
     <asp:SqlDataSource ID="SqlDataSource1" runat="server"
         ConnectionString="<%$ ConnectionStrings:ConnectionString %>"
         SelectCommand="SELECT QuizID, Title, Description, Chapter, TimeLimit, ImageURL, CreatedDate, CreatedBy, AttemptLimit
-                       FROM dbo.tblQuiz"
+                       FROM dbo.tblQuiz
+                       ORDER BY CreatedDate DESC, QuizID DESC"
         UpdateCommand="
             UPDATE dbo.tblQuiz
             SET Title=@Title, Description=@Description, Chapter=@Chapter, TimeLimit=@TimeLimit,
@@ -89,5 +94,33 @@
         </EmptyDataTemplate>
     </asp:GridView>
 
+    <!-- Delete confirmation modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"> <!-- Centered vertically -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmDeleteLabel">Delete selected question(s)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete the selected question(s)? This action cannot be undone.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, cancel</button>
+          <asp:Button ID="btnYesDelete" runat="server" Text="Yes, delete"
+                      CssClass="btn btn-danger" OnClick="btnYesDelete_Click" />
+        </div>
+      </div>
+    </div>
+  </div>
+    
+    <script type="text/javascript">
+        function openDeleteModal() {
+            var modalEl = document.getElementById('deleteModal');
+            if (!modalEl) return;
+            var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+            modal.show();
+        }
+    </script>
+    </div>
 </asp:Content>
-

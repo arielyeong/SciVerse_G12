@@ -7,192 +7,129 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SciVerse_G12.Quiz
+namespace SciVerse_G12.Quiz_Admin
 {
 
 
-    public partial class NewQuestion
+    public partial class CreateNewQuizPage
     {
 
         /// <summary>
-        /// hiddenQuizID control.
+        /// lblQuizTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hiddenQuizID;
+        protected global::System.Web.UI.WebControls.Label lblQuizTitle;
 
         /// <summary>
-        /// lblQuestionText control.
+        /// txtQuizTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblQuestionText;
+        protected global::System.Web.UI.WebControls.TextBox txtQuizTitle;
 
         /// <summary>
-        /// txtQuestion control.
+        /// lblDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQuestion;
+        protected global::System.Web.UI.WebControls.Label lblDescription;
 
         /// <summary>
-        /// dropdownType control.
+        /// txtDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dropdownType;
+        protected global::System.Web.UI.WebControls.TextBox txtDescription;
 
         /// <summary>
-        /// txtMarks control.
+        /// lblChapter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMarks;
+        protected global::System.Web.UI.WebControls.Label lblChapter;
 
         /// <summary>
-        /// panelMCQ control.
+        /// txtChapter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelMCQ;
+        protected global::System.Web.UI.WebControls.TextBox txtChapter;
 
         /// <summary>
-        /// radiobtnChoice1 control.
+        /// lblTimeLimit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton radiobtnChoice1;
+        protected global::System.Web.UI.WebControls.Label lblTimeLimit;
 
         /// <summary>
-        /// txtChoice1 control.
+        /// txtTimeLimit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChoice1;
+        protected global::System.Web.UI.WebControls.TextBox txtTimeLimit;
 
         /// <summary>
-        /// radiobtnChoice2 control.
+        /// lblAttemptLimit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton radiobtnChoice2;
+        protected global::System.Web.UI.WebControls.Label lblAttemptLimit;
 
         /// <summary>
-        /// txtChoice2 control.
+        /// txtAttemptLimit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChoice2;
+        protected global::System.Web.UI.WebControls.TextBox txtAttemptLimit;
 
         /// <summary>
-        /// radiobtnChoice3 control.
+        /// lblPicture control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton radiobtnChoice3;
+        protected global::System.Web.UI.WebControls.Label lblPicture;
 
         /// <summary>
-        /// txtChoice3 control.
+        /// FileUploadPicture control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChoice3;
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadPicture;
 
         /// <summary>
-        /// radiobtnChoice4 control.
+        /// btnSaveAndContinue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton radiobtnChoice4;
-
-        /// <summary>
-        /// txtChoice4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChoice4;
-
-        /// <summary>
-        /// panelTF control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelTF;
-
-        /// <summary>
-        /// radiobtnTF control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList radiobtnTF;
-
-        /// <summary>
-        /// panelFill control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelFill;
-
-        /// <summary>
-        /// txtBlank1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBlank1;
-
-        /// <summary>
-        /// txtFeedback control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFeedback;
-
-        /// <summary>
-        /// btnSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
+        protected global::System.Web.UI.WebControls.Button btnSaveAndContinue;
 
         /// <summary>
         /// lnkBack control.

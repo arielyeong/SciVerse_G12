@@ -57,7 +57,7 @@ namespace SciVerse_G12
                     }
                     else
                     {
-                        Response.Redirect("~/Default.aspx", false);
+                        Response.Redirect("~/User/UserHomePage.aspx", false);
                     }
 
                     Context.ApplicationInstance.CompleteRequest();

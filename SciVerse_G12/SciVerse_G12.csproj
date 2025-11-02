@@ -125,15 +125,26 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\Profile.aspx" />
-    <Content Include="Quiz\CreateNewQuizPage.aspx" />
-    <Content Include="Quiz\EditQuizPage.aspx" />
-    <Content Include="Quiz\NewQuestion.aspx" />
-    <Content Include="Quiz\ViewQuizList.aspx" />
-    <Content Include="Simulation\AdminSimulation.aspx" />
-    <Content Include="Simulation\EditSimulation.aspx" />
-    <Content Include="Simulation\Experiment.aspx" />
-    <Content Include="Simulation\SimulationDashboard.aspx" />
-    <Content Include="Simulation\StartSimulation.aspx" />
+	  <Content Include="Images\About\charlotte.png" />
+	  <Content Include="Images\About\chingying.png" />
+	  <Content Include="Images\About\hueyyee.png" />
+	  <Content Include="Images\About\yingxin.png" />
+	  <Content Include="Images\Profile\science_register.jpg" />
+	  <Content Include="Images\Profile\WAPP_Logo_Header.png" />
+	  <Content Include="Images\science_register.png" />
+	  <Content Include="Images\WAPP_Logo_Header.png" />
+	  <Content Include="Quiz_Admin\CreateNewQuizPage.aspx" />
+	  <Content Include="Quiz_Admin\EditQuizPage.aspx" />
+	  <Content Include="Quiz_Admin\NewQuestion.aspx" />
+	  <Content Include="Quiz_Admin\QuizReport.aspx" />
+	  <Content Include="Quiz_Admin\ViewQuizList.aspx" />
+	  <Content Include="Quiz_Student\QuizDashboardPageStudent.aspx" />
+	  <Content Include="Styles\AdminQuiz.css" />
+	  <Content Include="Simulation\AdminSimulation.aspx" />
+	  <Content Include="Simulation\EditSimulation.aspx" />
+	  <Content Include="Simulation\Experiment.aspx" />
+	  <Content Include="Simulation\SimulationDashboard.aspx" />
+	  <Content Include="Simulation\StartSimulation.aspx" />
     <Content Include="Styles\site2.css" />
     <Content Include="Styles\Admin.css" />
     <Content Include="Styles\Flashcard.css" />
@@ -202,6 +213,7 @@
     <Content Include="Account\UpdateProfile.aspx" />
     <Content Include="Admin\ViewMessage.aspx" />
     <Content Include="Admin\UpdateAdminProfile.aspx" />
+    <Content Include="Styles\StudentQuiz.css" />
     <Content Include="User\UserHomePage.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Admin\ViewUserList.aspx" />
@@ -286,33 +298,12 @@
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Quiz\CreateNewQuizPage.aspx.cs">
+    <Compile Include="Quiz_Admin\CreateNewQuizPage.aspx.cs">
       <DependentUpon>CreateNewQuizPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Quiz\CreateNewQuizPage.aspx.designer.cs">
+    <Compile Include="Quiz_Admin\CreateNewQuizPage.aspx.designer.cs">
       <DependentUpon>CreateNewQuizPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Quiz\EditQuizPage.aspx.cs">
-      <DependentUpon>EditQuizPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Quiz\EditQuizPage.aspx.designer.cs">
-      <DependentUpon>EditQuizPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Quiz\NewQuestion.aspx.cs">
-      <DependentUpon>NewQuestion.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Quiz\NewQuestion.aspx.designer.cs">
-      <DependentUpon>NewQuestion.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Quiz\ViewQuizList.aspx.cs">
-      <DependentUpon>ViewQuizList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Quiz\ViewQuizList.aspx.designer.cs">
-      <DependentUpon>ViewQuizList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Flashcard\Flashcard.aspx.cs">
       <DependentUpon>Flashcard.aspx</DependentUpon>
@@ -327,6 +318,90 @@
     </Compile>
     <Compile Include="Flashcard\ViewFlashcard.aspx.designer.cs">
       <DependentUpon>ViewFlashcard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quiz_Admin\EditQuizPage.aspx.cs">
+      <DependentUpon>EditQuizPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Admin\EditQuizPage.aspx.designer.cs">
+      <DependentUpon>EditQuizPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quiz_Admin\NewQuestion.aspx.cs">
+      <DependentUpon>NewQuestion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Admin\NewQuestion.aspx.designer.cs">
+      <DependentUpon>NewQuestion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quiz_Admin\QuizReport.aspx.cs">
+      <DependentUpon>QuizReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Admin\QuizReport.aspx.designer.cs">
+      <DependentUpon>QuizReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quiz_Admin\ViewQuizList.aspx.cs">
+      <DependentUpon>ViewQuizList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Admin\ViewQuizList.aspx.designer.cs">
+      <DependentUpon>ViewQuizList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quiz_Student\AnswersReview.aspx.cs">
+      <DependentUpon>AnswersReview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Student\AnswersReview.aspx.designer.cs">
+      <DependentUpon>AnswersReview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quiz_Student\Quiz.aspx.cs">
+      <DependentUpon>Quiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Student\Quiz.aspx.designer.cs">
+      <DependentUpon>Quiz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quiz_Student\QuizDashboardPageStudent.aspx.cs">
+      <DependentUpon>QuizDashboardPageStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Student\QuizDashboardPageStudent.aspx.designer.cs">
+      <DependentUpon>QuizDashboardPageStudent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quiz_Student\QuizDetailsPage.aspx.cs">
+      <DependentUpon>QuizDetailsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Student\QuizDetailsPage.aspx.designer.cs">
+      <DependentUpon>QuizDetailsPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quiz_Student\QuizHistory.aspx.cs">
+      <DependentUpon>QuizHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Student\QuizHistory.aspx.designer.cs">
+      <DependentUpon>QuizHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quiz_Student\QuizPause.aspx.cs">
+      <DependentUpon>QuizPause.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Student\QuizPause.aspx.designer.cs">
+      <DependentUpon>QuizPause.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quiz_Student\QuizResultPage.aspx.cs">
+      <DependentUpon>QuizResultPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Student\QuizResultPage.aspx.designer.cs">
+      <DependentUpon>QuizResultPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Quiz_Student\QuizSummary.aspx.cs">
+      <DependentUpon>QuizSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Student\QuizSummary.aspx.designer.cs">
+      <DependentUpon>QuizSummary.aspx</DependentUpon>
     </Compile>
     <Compile Include="Simulation\AdminSimulation.aspx.cs">
       <DependentUpon>AdminSimulation.aspx</DependentUpon>
