@@ -42,11 +42,8 @@ namespace SciVerse_G12.Simulation
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
-                // Check if there's a URL field in the database, otherwise use default
-                // For now, using the default PhET simulation URL
-                // TODO: Add URL field to database if needed
                 string query = @"
-                    SELECT SimulationID, Title
+                    SELECT SimulationID, Title, URL
                     FROM tblExperimentSimulation
                     WHERE SimulationID = @SimulationID";
 
@@ -61,20 +58,8 @@ namespace SciVerse_G12.Simulation
                         
                         if (reader.Read())
                         {
-                            // If URL field exists in database, use it:
-                            // iframeUrl = reader["URL"] != DBNull.Value ? reader["URL"].ToString() : iframeUrl;
-                            
-                            // For now, using default URL
-                            // You can map different simulations to different URLs based on SimulationID
-                            if (simulationId == 1)
-                            {
-                                iframeUrl = "https://phet.colorado.edu/sims/html/under-pressure/latest/under-pressure_en.html";
-                            }
-                            else if (simulationId == 2)
-                            {
-                                iframeUrl = "https://phet.colorado.edu/sims/html/ph-scale/latest/ph-scale_en.html";
-                            }
-                            // Add more mappings as needed
+                            // Get URL from database if it exists
+                            iframeUrl = reader["URL"] != DBNull.Value ? reader["URL"].ToString() : iframeUrl;
                         }
                         else
                         {
@@ -89,6 +74,14 @@ namespace SciVerse_G12.Simulation
                         System.Diagnostics.Debug.WriteLine($"Error loading simulation URL: {ex.Message}");
                     }
                 }
+            }
+
+            // Convert relative URLs to absolute server URLs
+            if (!string.IsNullOrEmpty(iframeUrl) && !iframeUrl.StartsWith("http"))
+            {
+                // Remove leading slash if present in database value to avoid double slash
+                string cleanUrl = iframeUrl.StartsWith("/") ? iframeUrl.Substring(1) : iframeUrl;
+                iframeUrl = ResolveUrl("~/" + cleanUrl);
             }
 
             experimentIframe.Src = iframeUrl;

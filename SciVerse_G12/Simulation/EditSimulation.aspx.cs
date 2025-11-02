@@ -90,7 +90,24 @@ namespace SciVerse_G12.Simulation
                             
                             // Load the simulation URL for preview
                             string simulationUrl = reader["URL"] != DBNull.Value ? reader["URL"].ToString() : "";
-                            previewIframe.Src = string.IsNullOrEmpty(simulationUrl) ? "" : simulationUrl;
+                            if (!string.IsNullOrEmpty(simulationUrl))
+                            {
+                                // Convert relative URLs to absolute server URLs
+                                if (!simulationUrl.StartsWith("http"))
+                                {
+                                    // Remove leading slash if present in database value to avoid double slash
+                                    string cleanUrl = simulationUrl.StartsWith("/") ? simulationUrl.Substring(1) : simulationUrl;
+                                    previewIframe.Src = ResolveUrl("~/" + cleanUrl);
+                                }
+                                else
+                                {
+                                    previewIframe.Src = simulationUrl;
+                                }
+                            }
+                            else
+                            {
+                                previewIframe.Src = "";
+                            }
                         }
                         else
                         {

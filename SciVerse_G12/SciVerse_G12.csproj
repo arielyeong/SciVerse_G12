@@ -125,26 +125,26 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\Profile.aspx" />
-	  <Content Include="Images\About\charlotte.png" />
-	  <Content Include="Images\About\chingying.png" />
-	  <Content Include="Images\About\hueyyee.png" />
-	  <Content Include="Images\About\yingxin.png" />
-	  <Content Include="Images\Profile\science_register.jpg" />
-	  <Content Include="Images\Profile\WAPP_Logo_Header.png" />
-	  <Content Include="Images\science_register.png" />
-	  <Content Include="Images\WAPP_Logo_Header.png" />
-	  <Content Include="Quiz_Admin\CreateNewQuizPage.aspx" />
-	  <Content Include="Quiz_Admin\EditQuizPage.aspx" />
-	  <Content Include="Quiz_Admin\NewQuestion.aspx" />
-	  <Content Include="Quiz_Admin\QuizReport.aspx" />
-	  <Content Include="Quiz_Admin\ViewQuizList.aspx" />
-	  <Content Include="Quiz_Student\QuizDashboardPageStudent.aspx" />
-	  <Content Include="Styles\AdminQuiz.css" />
-	  <Content Include="Simulation\AdminSimulation.aspx" />
-	  <Content Include="Simulation\EditSimulation.aspx" />
-	  <Content Include="Simulation\Experiment.aspx" />
-	  <Content Include="Simulation\SimulationDashboard.aspx" />
-	  <Content Include="Simulation\StartSimulation.aspx" />
+    <Content Include="Images\About\charlotte.png" />
+    <Content Include="Images\About\chingying.png" />
+    <Content Include="Images\About\hueyyee.png" />
+    <Content Include="Images\About\yingxin.png" />
+    <Content Include="Images\Profile\science_register.jpg" />
+    <Content Include="Images\Profile\WAPP_Logo_Header.png" />
+    <Content Include="Images\science_register.png" />
+    <Content Include="Images\WAPP_Logo_Header.png" />
+    <Content Include="Quiz_Admin\CreateNewQuizPage.aspx" />
+    <Content Include="Quiz_Admin\EditQuizPage.aspx" />
+    <Content Include="Quiz_Admin\NewQuestion.aspx" />
+    <Content Include="Quiz_Admin\QuizReport.aspx" />
+    <Content Include="Quiz_Admin\ViewQuizList.aspx" />
+    <Content Include="Quiz_Student\QuizDashboardPageStudent.aspx" />
+    <Content Include="Styles\AdminQuiz.css" />
+    <Content Include="Simulation\AdminSimulation.aspx" />
+    <Content Include="Simulation\EditSimulation.aspx" />
+    <Content Include="Simulation\Experiment.aspx" />
+    <Content Include="Simulation\SimulationDashboard.aspx" />
+    <Content Include="Simulation\StartSimulation.aspx" />
     <Content Include="Styles\site2.css" />
     <Content Include="Styles\Admin.css" />
     <Content Include="Styles\Flashcard.css" />
@@ -497,6 +497,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Simulation\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -4,8 +4,6 @@
     [Description]  NVARCHAR (MAX) NULL,
     [Chapter]      NVARCHAR (100) NULL,
     [Instruction]  NVARCHAR (MAX) NULL,
-    [Username]     NVARCHAR (MAX) NULL,
-    [LastModify]   DATETIME       NULL,
     [URL]          NVARCHAR (MAX) NULL,
     [Image]        NVARCHAR (MAX) NULL,
     PRIMARY KEY CLUSTERED ([SimulationID] ASC),
@@ -23,13 +21,15 @@ VALUES
  'https://phet.colorado.edu/sims/html/under-pressure/latest/under-pressure-600.png'),
 
 ('Reaction of acid and reactive metal','Observe how reactive metals like magnesium react with acids to produce hydrogen gas and form salts.','Chapter 2', 
-'1. Add the metal pieces into the virtual test tube. 
- 2. Pour dilute acid into the test tube to start the reaction. 
- 3. Observe the bubbling and record the amount of hydrogen gas produced. 
- 4. Use the "Test Hydrogen" button to perform the pop test for hydrogen. 
- 5. Repeat with different metals or acid strengths to compare reaction rates.'
- ,'https://phet.colorado.edu/sims/html/ph-scale/latest/ph-scale_en.html',
- 
+'1. Drag the Hydrochloric acid bottle to the test tube. 
+ 2. Drag the Magnesium ribbon to the test tube. 
+ 3. Click the Bunsen burner to light it. 
+ 4. Drag the wooden splint into the lit Bunsen flame to ignite it. 
+ 5. Drag the lit splint to the test tube to show the pop image.
+ 6. Drag the reacted test tube to the dish above the Bunsen.
+ 7. Click the lit Bunsen to heat the dish mixture to see the product.'
+ ,'Images/Simulation/reaction.html',
+ 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8nAOSyvPZMwgdn_pVbqDbIFhp4MuhRPllmQ&s'
  )
 
  CREATE TABLE [dbo].[tblAccessSimulation]

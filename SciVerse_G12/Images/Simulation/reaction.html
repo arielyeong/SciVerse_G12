@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:Arial, sans-serif;
+    background:transparent;
+  }
+
+  /* ===== Title ===== */
+  h1{
+    text-align:center;
+    font-size:1.8rem;
+    font-weight:700;
+    color:#222;
+    margin-top:10px;
+    margin-bottom:10px;
+    text-shadow:0 1px 3px rgba(0,0,0,0.1);
+  }
+  .formula{
+    font-family:"Cambria Math","Times New Roman",serif;
+    color:#222;
+  }
+  sub{font-size:0.7em;}
+
+  .chem-exp-wrap{
+    width:100%;
+    background:transparent;
+    padding:12px 0;
+    display:flex;justify-content:center;align-items:flex-start;
+  }
+
+  /* --- SCALING WRAPPER --- */
+  .scale-outer{
+    width:100%;
+    position:relative;
+  }
+  .scale-inner{
+    width:1280px;
+    height:520px;
+    transform-origin: top left;
+  }
+
+  .experiment-container{
+    display:flex; flex-direction:row; align-items:flex-start; justify-content:center;
+    gap:28px; width:100%; height:100%;
+    background:rgba(255,255,255,.95);
+    border-radius:16px; padding:24px;
+    box-shadow:0 8px 30px rgba(0,0,0,.12);
+  }
+
+  .zone{
+    position:relative; width:320px; height:420px;
+    border:none; border-radius:12px;
+    display:flex; align-items:center; justify-content:center; padding:10px;
+    background:transparent;
+  }
+  .zone.highlight{outline:3px dashed #4CAF50; outline-offset:4px; border-radius:12px}
+
+  #testtube{max-width:100%; max-height:100%; object-fit:contain}
+  .testtube-disabled{pointer-events:none}
+
+  .pop-img{
+    position:absolute; right:8px; top:8px; width:120px; height:auto;
+    display:none; pointer-events:none; filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))
+  }
+
+  .bunsen-wrap{position:relative; display:flex; flex-direction:column; align-items:center; gap:10px}
+  #bunsen{width:220px; height:auto; object-fit:contain; cursor:pointer; filter:drop-shadow(0 4px 8px rgba(0,0,0,.2))}
+  .hint{font-size:.9rem; color:#555; text-align:center}
+
+  /* Dish above the burner */
+  #dish{
+    position:absolute; width:240px; height:auto; bottom:185px;
+    pointer-events:auto; filter:drop-shadow(0 4px 8px rgba(0,0,0,.2))
+  }
+
+  .side-col{display:flex; flex-direction:column; gap:22px; align-items:center}
+  .row{display:flex; gap:22px; flex-wrap:wrap; justify-content:center}
+
+  .reagent-container{text-align:center}
+  .reagent-label{margin-top:8px; font-weight:bold; color:#333; font-size:1rem}
+
+  .draggable{
+    cursor:grab; width:150px; height:150px; object-fit:contain;
+    transition:transform .2s, opacity .2s; filter:drop-shadow(0 4px 8px rgba(0,0,0,.2))
+  }
+  .draggable:hover{transform:scale(1.05)}
+  .draggable:active{cursor:grabbing; opacity:.7}
+  .draggable.used{opacity:.3; cursor:not-allowed; pointer-events:none}
+
+  .status{
+    margin:10px auto 0; padding:10px 16px; background:rgba(255,255,255,.9);
+    border-radius:10px; font-size:1rem; font-weight:bold; color:#667eea;
+    text-align:center; min-height:42px; width:100%; max-width:640px;
+    display:flex; align-items:center; justify-content:center
+  }
+  .reset-btn{
+    margin:10px auto 0; padding:10px 20px; background:#667eea; color:#fff; border:none;
+    border-radius:8px; font-size:1rem; font-weight:bold; cursor:pointer; display:block
+  }
+  .reset-btn:hover{background:#764ba2}
+</style>
+</head>
+<body>
+
+<!-- === Title === -->
+<h1 class="formula">2HCl + Mg → MgCl<sub>2</sub> + H<sub>2</sub></h1>
+
+<div class="chem-exp-wrap">
+  <div class="scale-outer" id="scaleOuter">
+    <div class="scale-inner" id="scaleInner">
+      <div class="experiment-container">
+        <!-- Test tube area -->
+        <div class="zone" id="dropZone">
+          <img id="testtube" class="testtube-disabled" src="testtube.png" alt="Test Tube">
+          <img id="popImg" class="pop-img" src="pop.png" alt="Pop!">
+        </div>
+
+        <!-- Bunsen + Dish area -->
+        <div class="zone" id="bunsenZone">
+          <div class="bunsen-wrap">
+            <img id="dish" src="dish.png" alt="Evaporating Dish">
+            <img id="bunsen" src="bunsen.png" alt="Bunsen Burner">
+            <div class="hint">Click to toggle flame</div>
+          </div>
+        </div>
+
+        <!-- Reagents + splint -->
+        <div class="side-col">
+          <div class="row">
+            <div class="reagent-container">
+              <img id="hcl" class="draggable" draggable="true" src="hcl.png" alt="Hydrochloric Acid">
+              <div class="reagent-label">Hydrochloric Acid</div>
+            </div>
+
+            <div class="reagent-container">
+              <img id="mg" class="draggable" draggable="true" src="mg.png" alt="Magnesium Ribbon">
+              <div class="reagent-label">Magnesium Ribbon</div>
+            </div>
+          </div>
+
+          <div class="reagent-container">
+            <img id="splint" class="draggable" draggable="true" src="splint.png" alt="Wooden Splint">
+            <div class="reagent-label">Wooden Splint</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="status" id="status">Drag the HCl bottle to the test tube to begin</div>
+<button class="reset-btn" id="resetBtn">Reset Experiment</button>
+
+<script>
+  // ===== AUTO-SCALE to fit iframe horizontally =====
+  function rescale() {
+    const outer = document.getElementById('scaleOuter');
+    const inner = document.getElementById('scaleInner');
+    if (!outer || !inner) return;
+    const baseWidth  = inner.offsetWidth;
+    const baseHeight = inner.offsetHeight;
+    const avail = outer.clientWidth;
+    const scale = Math.max(0.4, Math.min(1, avail / baseWidth));
+    inner.style.transform = 'scale(' + scale + ')';
+    outer.style.height = (baseHeight * scale) + 'px';
+  }
+  window.addEventListener('load', rescale);
+  window.addEventListener('resize', rescale);
+
+  // ===== State =====
+  let currentState = 'empty';
+  let bunsenOn = false;
+  let splintLit = false;
+  let dishState = 'empty';
+  let draggedElement = null;
+
+  // ===== Elements =====
+  const testtube = document.getElementById('testtube');
+  const hclElement = document.getElementById('hcl');
+  const mgElement = document.getElementById('mg');
+  const splintElement = document.getElementById('splint');
+
+  const dropZone = document.getElementById('dropZone');
+  const bunsenZone = document.getElementById('bunsenZone');
+  const bunsen = document.getElementById('bunsen');
+  const popImg = document.getElementById('popImg');
+  const dish = document.getElementById('dish');
+  const status = document.getElementById('status');
+  const resetBtn = document.getElementById('resetBtn');
+
+  // ===== File names with underscores =====
+  const bunsenOff   = "bunsen.png";
+  const bunsenOnImg = "bunsenfire.png";
+  const splintOff   = "splint.png";
+  const splintOn    = "splintfire.png";
+  const popUrl      = "pop.png";
+
+  const tubeHcl     = "tube_hcl.png";
+  const tubeHclMg   = "tube_hcl_mg.png";
+
+  const dishEmpty   = "dish.png";
+  const dishMix     = "dish_hcl_mg.png";
+  const dishProduct = "dish_mgcl.png";
+
+  // ===== Drag helpers =====
+  function bindDraggable(el){
+    el.addEventListener('dragstart', e => {
+      draggedElement = e.target;
+      e.dataTransfer.effectAllowed = 'move';
+      e.target.style.opacity = '0.5';
+    });
+    el.addEventListener('dragend', e => {
+      e.target.style.opacity = '1';
+      draggedElement = null;
+    });
+  }
+  document.querySelectorAll('.draggable').forEach(bindDraggable);
+
+  function makeDroppable(zone, handler){
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('highlight'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('highlight'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('highlight');
+      if(!draggedElement) return;
+      handler(draggedElement);
+      draggedElement = null;
+    });
+  }
+
+  // ===== Test Tube Zone =====
+  makeDroppable(dropZone, item => {
+    if (item.id === 'hcl' && currentState === 'empty') {
+      testtube.src = tubeHcl;
+      currentState = 'hcl';
+      hclElement.classList.add('used');
+      popImg.style.display = 'none';
+      status.textContent = 'HCl added! Now drag the Magnesium ribbon.';
+      status.style.color = '#4CAF50';
+      return;
+    }
+
+    if (item.id === 'mg' && currentState === 'hcl') {
+      testtube.src = tubeHclMg;
+      currentState = 'complete';
+      mgElement.classList.add('used');
+      status.textContent = 'Reaction complete! Light the splint to test for H₂.';
+      status.style.color = '#FF6B6B';
+
+      // Make test tube draggable for transfer to dish
+      testtube.classList.remove('testtube-disabled');
+      testtube.classList.add('draggable');
+      testtube.setAttribute('draggable','true');
+      bindDraggable(testtube);
+      return;
+    }
+
+    if (item.id === 'splint' && splintLit && currentState === 'complete') {
+      popImg.src = popUrl;
+      popImg.style.display = 'block';
+      status.textContent = 'Pop image shown!';
+      status.style.color = '#222';
+      return;
+    }
+
+    if (item.id === 'mg' && currentState === 'empty') {
+      status.textContent = 'Add HCl first!';
+      status.style.color = '#FF6B6B';
+    } else if (item.id === 'hcl' && currentState === 'hcl') {
+      status.textContent = 'HCl already added.';
+      status.style.color = '#FFA500';
+    } else if (item.id === 'splint' && !splintLit) {
+      status.textContent = 'Light the splint first!';
+      status.style.color = '#FF6B6B';
+    }
+  });
+
+  // ===== Dish (drop completed test tube) =====
+  makeDroppable(dish, item => {
+    if (item.id === 'testtube' && currentState === 'complete') {
+      dish.src = dishMix;
+      dishState = 'mixture';
+      status.textContent = 'Mixture transferred to dish. Click the lit Bunsen to heat.';
+      status.style.color = '#4CAF50';
+    }
+  });
+
+  // ===== Bunsen click: toggle flame and heat dish =====
+  bunsen.addEventListener('click', () => {
+    bunsenOn = !bunsenOn;
+    bunsen.src = bunsenOn ? bunsenOnImg : bunsenOff;
+
+    if (bunsenOn) {
+      if (dishState === 'mixture') {
+        dish.src = dishProduct;
+        dishState = 'heated';
+        status.textContent = 'Heating complete: product formed in dish.';
+        status.style.color = '#222';
+      } else {
+        status.textContent = 'Bunsen is ON. Light the splint or heat the dish mixture.';
+        status.style.color = '#4CAF50';
+      }
+    } else {
+      status.textContent = 'Bunsen is OFF.';
+      status.style.color = '#667eea';
+    }
+  });
+
+  // ===== Light splint by dropping onto the lit Bunsen zone =====
+  makeDroppable(bunsenZone, item => {
+    if (item.id === 'splint') {
+      if (!bunsenOn) {
+        status.textContent = 'Turn on the Bunsen first.';
+        status.style.color = '#FF6B6B';
+        return;
+      }
+      splintLit = true;
+      splintElement.src = splintOn;
+      status.textContent = 'Splint is lit! Drag it to the test tube to test for hydrogen.';
+      status.style.color = '#4CAF50';
+    }
+  });
+
+  // ===== Reset =====
+  resetBtn.addEventListener('click', () => {
+    currentState = 'empty'; bunsenOn = false; splintLit = false; dishState = 'empty';
+    testtube.src = "testtube.png";
+    testtube.classList.add('testtube-disabled');
+    testtube.removeAttribute('draggable');
+    testtube.classList.remove('draggable');
+    hclElement.classList.remove('used'); mgElement.classList.remove('used');
+    bunsen.src = bunsenOff;
+    splintElement.src = splintOff;
+    dish.src = dishEmpty;
+    popImg.style.display = 'none';
+    status.textContent = 'Drag the HCl bottle to the test tube to begin';
+    status.style.color = '#667eea';
+    rescale();
+  });
+</script>
+</body>
+</html>
