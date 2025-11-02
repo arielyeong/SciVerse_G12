@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="ManageMaterials.aspx.cs" Inherits="SciVerse_G12.LearningMaterials.materials.ManageMaterials" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <%-- JAVASCRIPT WITH MODAL - PLACED IN HEAD TO ENSURE FUNCTIONS ARE DEFINED --%>
     <script type="text/javascript">
         var pendingPostBackButton = null;
         var confirmModalInstance = null;
@@ -129,12 +128,15 @@
                 if (checkedCount === 0) {
                     headerCheckbox.checked = false;
                     headerCheckbox.indeterminate = false;
-                } else if (allChecked && checkedCount === checkboxes.length) {
+                } else if (allChecked && checkedCount > 0) { // Check count > 0
                     headerCheckbox.checked = true;
                     headerCheckbox.indeterminate = false;
-                } else {
+                } else if (anyChecked) { // Use anyChecked for indeterminate
                     headerCheckbox.checked = false;
                     headerCheckbox.indeterminate = true;
+                } else { // Explicitly handle no boxes
+                    headerCheckbox.checked = false;
+                    headerCheckbox.indeterminate = false;
                 }
             }
         }
@@ -289,6 +291,8 @@
 
                 <asp:BoundField DataField="Chapter" HeaderText="Chapter" SortExpression="Chapter" />
                 <asp:BoundField DataField="Title" HeaderText="Title" SortExpression="Title" />
+                <asp:BoundField DataField="FileName" HeaderText="File Name" SortExpression="FileName" />
+                <asp:BoundField DataField="Type" HeaderText="File Type" SortExpression="Type" />
                 <asp:BoundField DataField="Description" HeaderText="Description" />
                 
                 <asp:TemplateField HeaderText="Edit">
@@ -299,7 +303,14 @@
                             CssClass="btn btn-sm btn-secondary" />
                     </ItemTemplate>
                 </asp:TemplateField>
-                
+                <asp:TemplateField HeaderText="Copy">
+                    <ItemTemplate>
+                        <asp:HyperLink ID="lnkCopy" runat="server" 
+                            NavigateUrl='<%# "CreateMaterial.aspx?CopyFromID=" + Eval("MaterialID") %>' 
+                            Text="Copy" 
+                            CssClass="btn btn-sm btn-info" />
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Delete">
                     <ItemTemplate>
                         <asp:Button ID="btnDelete" runat="server" 

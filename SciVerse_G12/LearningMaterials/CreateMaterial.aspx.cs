@@ -13,12 +13,87 @@ namespace SciVerse_G12.LearningMaterials
 {
     public partial class CreateMaterial : System.Web.UI.Page
     {
+        private string ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
             // Security Check
             if (Session["Role"] == null || Session["Role"].ToString() != "Admin")
             {
                 Response.Redirect("~/Account/Login.aspx");
+            }
+            if (!IsPostBack)
+            {
+                if (Request.QueryString["CopyFromID"] != null)
+                {
+                    int materialIdToCopy;
+                    if (int.TryParse(Request.QueryString["CopyFromID"], out materialIdToCopy))
+                    {
+                        // This is a new method you need to add
+                        LoadDataToCopy(materialIdToCopy);
+                    }
+                }
+                else
+                {
+                    PrefillNextChapter();
+                }
+            }
+        }
+
+        /// Pre-fills the form with data from an existing material to be copied.
+        private void LoadDataToCopy(int materialId)
+        {
+            const string sql = @"SELECT chapter, title, description 
+                         FROM dbo.tblLearningMaterial 
+                         WHERE materialID = @materialID";
+
+            try
+            {
+                using (var conn = new SqlConnection(ConnectionString))
+                using (var cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@materialID", materialId);
+                    conn.Open();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Pre-fill all data from the item to copy
+                            txtChapter.Text = reader["chapter"].ToString();
+                            txtTitle.Text = reader["title"].ToString();
+                            txtDescription.Text = reader["description"] != DBNull.Value ? reader["description"].ToString() : "";
+                        }
+                    }
+                }
+                // Make sure fields are editable
+                txtChapter.ReadOnly = false;
+                txtTitle.ReadOnly = false;
+            }
+            catch (Exception ex)
+            {
+                ShowStatusMessage("Could not load material data to copy: " + ex.Message, "danger");
+                txtChapter.ReadOnly = false;
+            }
+        }
+
+        private void PrefillNextChapter()
+        {
+            const string sql = @"SELECT ISNULL(MAX(chapter), 0) + 1 FROM dbo.tblLearningMaterial";
+
+            try
+            {
+                using (var conn = new SqlConnection(ConnectionString))
+                using (var cmd = new SqlCommand(sql, conn))
+                {
+                    conn.Open();
+                    object nextChapter = cmd.ExecuteScalar();
+                    txtChapter.Text = nextChapter.ToString();
+                }
+                txtChapter.ReadOnly = false;
+            }
+            catch (Exception ex)
+            {
+                ShowStatusMessage("Could not prefill Chapter: " + ex.Message, "danger");
+                txtChapter.ReadOnly = false;
             }
         }
 
@@ -34,6 +109,20 @@ namespace SciVerse_G12.LearningMaterials
                 }}
             ";
             ScriptManager.RegisterStartupScript(this, this.GetType(), "StatusMessage", script, true);
+        }
+
+        /// Checks if a file with this exact path already exists in the database.
+        private bool DoesFilePathExist(string filePath)
+        {
+            string query = @"SELECT COUNT(*) FROM tblLearningMaterial WHERE FilePath = @FilePath";
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@FilePath", filePath);
+                conn.Open();
+                int count = (int)cmd.ExecuteScalar();
+                return (count > 0);
+            }
         }
         protected void btnSave_Click(object sender, EventArgs e)
         {
@@ -51,12 +140,27 @@ namespace SciVerse_G12.LearningMaterials
 
             try
             {
-                // 1. Get form data
                 string title = txtTitle.Text;
                 string description = txtDescription.Text;
-                string chapterNum = txtChapter.Text.Trim(); // e.g., "6"
-                string chapter = "Chapter " + chapterNum;    // e.g., "Chapter 6"
+                int chapterNum;
+                if (!int.TryParse(txtChapter.Text.Trim(), out chapterNum))
+                {
+                    ShowStatusMessage("Invalid chapter number.", "danger");
+                    return;
+                }
                 string materialType = ddlType.SelectedValue;
+
+                string originalFileName = Path.GetFileName(fileUpload.PostedFile.FileName);
+                string saveDir = Server.MapPath("/LearningMaterials/materials/");
+                string savePath = Path.Combine(saveDir, originalFileName);
+                string dbFilePath = "/LearningMaterials/materials/" + originalFileName;
+
+                // 2. Check if this file *name* already exists on the server or in the DB
+                if (File.Exists(savePath) || DoesFilePathExist(dbFilePath))
+                {
+                    ShowStatusMessage("A file with this name already exists.", "danger");
+                    return;
+                }
 
                 int uploadedById = -1;
                 if (Session["RID"] != null)
@@ -69,11 +173,6 @@ namespace SciVerse_G12.LearningMaterials
                     ShowStatusMessage("Your session has expired or is invalid. Please log in again.", "danger");
                     return;
                 }
-                string fileExtension = Path.GetExtension(fileUpload.PostedFile.FileName).ToLower();
-                string newFileName = $"Chapter{chapterNum}{fileExtension}";
-                string saveDir = Server.MapPath("/LearningMaterials/materials/");
-                string savePath = Path.Combine(saveDir, newFileName);
-
                 // Create directory if it doesn't exist
                 if (!Directory.Exists(saveDir))
                 {
@@ -82,25 +181,26 @@ namespace SciVerse_G12.LearningMaterials
 
                 // 4. Save the file to the server
                 fileUpload.SaveAs(savePath);
-
-                // 5. Save the record to the database
-                string dbFilePath = "/LearningMaterials/materials/" + newFileName;
-                string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-
-                using (SqlConnection conn = new SqlConnection(connStr))
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
                 {
                     string query = @"INSERT INTO tblLearningMaterial 
-                                     (title, description, chapter, type, filePath, uploadDate, uploadedBy) 
-                                     VALUES 
-                                     (@title, @description, @chapter, @type, @filePath, @uploadDate, @uploadedBy)";
+                             (title, description, chapter, type, filePath, uploadDate, uploadedBy) 
+                             VALUES 
+                             (@title, @description, @chapter, @type, @filePath, @uploadDate, @uploadedBy)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@title", title);
-                        cmd.Parameters.AddWithValue("@description", description);
-                        cmd.Parameters.AddWithValue("@chapter", chapter);
+                        if (string.IsNullOrEmpty(description))
+                            cmd.Parameters.AddWithValue("@description", DBNull.Value);
+                        else
+                            cmd.Parameters.AddWithValue("@description", description);
+                        cmd.Parameters.AddWithValue("@chapter", chapterNum);
                         cmd.Parameters.AddWithValue("@type", materialType);
+
+                        // 4. Save the full path (with original name) to the DB
                         cmd.Parameters.AddWithValue("@filePath", dbFilePath);
+
                         cmd.Parameters.AddWithValue("@uploadDate", DateTime.Now);
                         cmd.Parameters.AddWithValue("@uploadedBy", uploadedById);
 
@@ -111,51 +211,10 @@ namespace SciVerse_G12.LearningMaterials
                 ShowStatusMessage("Learning material saved successfully! Redirecting...", "success");
                 string redirectScript = "setTimeout(function() { window.location.href = 'ManageMaterials.aspx'; }, 2000);";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "SaveSuccessRedirect", redirectScript, true);
-
             }
             catch (Exception ex)
             {
-                // Show any save errors using the new helper
                 ShowStatusMessage($"An error occurred while saving: {ex.Message}", "danger");
-            }
-        }
-
-        protected void valChapterExists_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            if (string.IsNullOrEmpty(args.Value))
-            {
-                args.IsValid = true; 
-                return;
-            }
-
-            try
-            {
-                // Format the chapter string exactly as it will be stored in the database
-                // (Your btnSave_Click logic uses "Chapter " + number)
-                string chapterForDB = "Chapter " + args.Value.Trim();
-
-                string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                using (SqlConnection conn = new SqlConnection(connStr))
-                {
-                    // Check if any record with this chapter name already exists
-                    string query = "SELECT COUNT(*) FROM tblLearningMaterial WHERE chapter = @chapter";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@chapter", chapterForDB);
-                        conn.Open();
-                        int count = (int)cmd.ExecuteScalar();
-
-                        // If count is 0, the chapter does NOT exist (which is valid)
-                        // If count is > 0, the chapter DOES exist (which is invalid)
-                        args.IsValid = (count == 0);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                // If the database check fails, play it safe and declare it invalid
-                // to prevent accidental duplicates.
-                args.IsValid = false;
             }
         }
 

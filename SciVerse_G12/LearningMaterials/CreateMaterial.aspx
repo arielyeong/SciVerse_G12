@@ -14,7 +14,7 @@
                 ddlType.value = "PDF";
             } else if (fileName.endsWith(".doc") || fileName.endsWith(".docx")) {
                 ddlType.value = "Word";
-            } else if (fileName.endsWith(".mp4")) {
+            } else if (fileName.endsWith(".mp4") || fileName.endsWith(".mov") || fileName.endsWith(".avi") || fileName.endsWith(".mkv")) {
                 ddlType.value = "Video";
             } else if (fileName.length > 0) {
                 ddlType.value = "Other";
@@ -47,7 +47,7 @@
                 <div class="card shadow-sm">
                     <div class="card-body p-4">
                         
-                        <%-- Title (No changes, this is correct) --%>
+                        <%-- Title --%>
                         <div class="mb-3">
                             <asp:Label runat="server" For="txtTitle" CssClass="form-label fw-bold">Title</asp:Label>
                             <asp:TextBox ID="txtTitle" runat="server" CssClass="form-control"></asp:TextBox>
@@ -57,24 +57,24 @@
                                 Display="Dynamic" CssClass="text-danger" ValidationGroup="CreateMaterial" />
                         </div>
 
-                        <%-- Description (No changes) --%>
+                        <%-- Description --%>
                         <div class="mb-3">
                             <asp:Label runat="server" For="txtDescription" CssClass="form-label fw-bold">Description</asp:Label>
                             <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="4"></asp:TextBox>
                         </div>
 
-                        <%-- START: UPDATED CHAPTER BLOCK --%>
+                        <%-- Chap --%>
                         <div class="mb-3">
                             <asp:Label runat="server" For="txtChapter" CssClass="form-label fw-bold">Chapter Number</asp:Label>
                             <asp:TextBox ID="txtChapter" runat="server" CssClass="form-control" TextMode="Number" placeholder="e.g., 1"></asp:TextBox>
 
-                            <%-- 1. Validation for NULL (empty) --%>
+                            <%-- 1. Validation for NULL --%>
                             <asp:RequiredFieldValidator ID="valChapterRequired" runat="server" 
                                 ControlToValidate="txtChapter" 
                                 ErrorMessage="Chapter number is required." 
                                 Display="Dynamic" CssClass="text-danger" ValidationGroup="CreateMaterial" />
                             
-                            <%-- 2. Validation for Number (no negative) --%>
+                            <%-- 2. Validation for range (no negative) --%>
                             <asp:RangeValidator ID="valChapterRange" runat="server" 
                                 ControlToValidate="txtChapter" 
                                 ErrorMessage="Chapter number must be 1 or greater."
@@ -82,17 +82,8 @@
                                 Type="Integer" 
                                 MinimumValue="1" 
                                 MaximumValue="9999" /> 
-                            <asp:CustomValidator ID="valChapterExists" runat="server"
-                                ControlToValidate="txtChapter"
-                                ErrorMessage="This chapter number already exists."
-                                Display="Dynamic" 
-                                CssClass="text-danger"
-                                ValidationGroup="CreateMaterial"
-                                OnServerValidate="valChapterExists_ServerValidate" />
                         </div>
-                        <%-- END: UPDATED CHAPTER BLOCK --%>
-                        
-                        <%-- File Upload (No changes, this is correct) --%>
+                        <%-- File Upload --%>
                         <div class="mb-3">
                             <asp:Label runat="server" For="fileUpload" CssClass="form-label fw-bold">File</asp:Label>
                             <asp:FileUpload ID="fileUpload" runat="server" CssClass="form-control" 
@@ -102,13 +93,11 @@
                                 ErrorMessage="A file is required." 
                                 Display="Dynamic" CssClass="text-danger" ValidationGroup="CreateMaterial" />
                         </div>
-                        
+                        <%-- File Type --%>
                         <div class="mb-3">
                             <asp:Label runat="server" For="ddlType" CssClass="form-label fw-bold">Material Type</asp:Label>
                             <asp:DropDownList ID="ddlType" runat="server" CssClass="form-select">
-                                <%-- 1. ADD THIS EMPTY ITEM --%>
                                 <asp:ListItem Value="" Text="-- Select Type --"></asp:ListItem>
-        
                                 <asp:ListItem Value="PDF">PDF Document</asp:ListItem>
                                 <asp:ListItem Value="Word">Word Document</asp:ListItem>
                                 <asp:ListItem Value="Video">MP4 Video</asp:ListItem>
@@ -121,7 +110,7 @@
                                 Display="Dynamic" CssClass="text-danger" ValidationGroup="CreateMaterial" />
                         </div>
 
-                        <%-- Action Buttons (No changes) --%>
+                        <%-- Action Buttons --%>
                         <div class="mt-4 text-end">
                             <asp:Button ID="btnSave" runat="server" Text="Save Material" 
                                 CssClass="btn btn-primary" OnClick="btnSave_Click" 

@@ -9,9 +9,14 @@ namespace SciVerse_G12.LearningMaterials
 {
     public partial class EditMaterial : System.Web.UI.Page
     {
+        private string ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        private int CurrentMaterialID
+        {
+            get { return ViewState["CurrentMaterialID"] != null ? (int)ViewState["CurrentMaterialID"] : 0; }
+            set { ViewState["CurrentMaterialID"] = value; }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Security Check
             if (Session["Role"] == null || Session["Role"].ToString() != "Admin")
             {
                 Response.Redirect("~/Account/Login.aspx");
@@ -19,12 +24,12 @@ namespace SciVerse_G12.LearningMaterials
 
             if (!IsPostBack)
             {
-                // Get the MaterialID from query string
                 if (Request.QueryString["ID"] != null)
                 {
                     int materialId;
                     if (int.TryParse(Request.QueryString["ID"], out materialId))
                     {
+                        CurrentMaterialID = materialId;
                         LoadMaterialData(materialId);
                     }
                     else
@@ -38,10 +43,6 @@ namespace SciVerse_G12.LearningMaterials
                 }
             }
         }
-
-        /// <summary>
-        /// Loads the existing material data from database and populates the form
-        /// </summary>
         private void LoadMaterialData(int materialId)
         {
             string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -58,26 +59,17 @@ namespace SciVerse_G12.LearningMaterials
                     {
                         if (reader.Read())
                         {
-                            // Populate form fields
                             txtTitle.Text = reader["Title"].ToString();
-                            txtDescription.Text = reader["Description"].ToString();
-
-                            // Extract chapter number from "Chapter 6" format
-                            string chapterStr = reader["Chapter"].ToString();
-                            string chapterNum = chapterStr.Replace("Chapter", "").Trim();
-                            txtChapter.Text = chapterNum;
-
+                            txtDescription.Text = reader["Description"] != DBNull.Value ? reader["Description"].ToString() : "";
+                            txtChapter.Text = reader["Chapter"].ToString();
                             ddlType.SelectedValue = reader["Type"].ToString();
+                            ddlType.Enabled = false;
 
                             // Store and display current file info
                             string filePath = reader["FilePath"].ToString();
                             hdnCurrentFilePath.Value = filePath;
-
-                            // Extract filename from path
                             string fileName = Path.GetFileName(filePath);
                             lblCurrentFileName.Text = fileName;
-
-                            // Set the view link
                             lnkViewFile.NavigateUrl = ResolveUrl(filePath);
                         }
                         else
@@ -91,9 +83,7 @@ namespace SciVerse_G12.LearningMaterials
             }
         }
 
-        /// <summary>
         /// Displays status messages to the user
-        /// </summary>
         private void ShowStatusMessage(string message, string alertType)
         {
             string cleanMessage = message.Replace("\"", "'").Replace("\r\n", " ").Replace("\n", " ");
@@ -106,9 +96,26 @@ namespace SciVerse_G12.LearningMaterials
             ScriptManager.RegisterStartupScript(this, this.GetType(), "StatusMessage", script, true);
         }
 
-        /// <summary>
+        /// Checks if a file with this exact path already exists in the database,
+        /// ignoring the material ID we are currently editing.
+        private bool DoesFilePathExist(string filePath, int materialIdToIgnore)
+        {
+            string query = @"SELECT COUNT(*) FROM tblLearningMaterial 
+                     WHERE FilePath = @FilePath 
+                     AND MaterialID != @materialIdToIgnore";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@FilePath", filePath);
+                cmd.Parameters.AddWithValue("@materialIdToIgnore", materialIdToIgnore);
+                conn.Open();
+                int count = (int)cmd.ExecuteScalar();
+                return (count > 0);
+            }
+        }
+
         /// Handles the Save button click - updates the material in database
-        /// </summary>
         protected void btnSave_Click(object sender, EventArgs e)
         {
             // Validate all fields
@@ -121,36 +128,36 @@ namespace SciVerse_G12.LearningMaterials
 
             try
             {
-                // Get MaterialID from query string
-                if (Request.QueryString["ID"] == null)
+                int materialId = CurrentMaterialID;
+                if (materialId == 0)
                 {
-                    ShowStatusMessage("Invalid material ID.", "danger");
+                    ShowStatusMessage("Invalid material ID. Session may have expired.", "danger");
                     return;
                 }
-
-                int materialId = int.Parse(Request.QueryString["ID"]);
-
-                // Get form values
                 string title = txtTitle.Text.Trim();
                 string description = txtDescription.Text.Trim();
-                string chapterNum = txtChapter.Text.Trim();
-                string chapter = "Chapter " + chapterNum;
+                int chapterNum;
+                if (!int.TryParse(txtChapter.Text.Trim(), out chapterNum))
+                {
+                    ShowStatusMessage("Invalid chapter number.", "danger");
+                    return;
+                }
                 string materialType = ddlType.SelectedValue;
 
-                // Use existing file path by default
                 string dbFilePath = hdnCurrentFilePath.Value;
                 string oldFilePath = hdnCurrentFilePath.Value;
 
-                // Check if user uploaded a new file to replace the old one
                 if (fileUpload.HasFile)
                 {
-                    // Get file extension and create new filename
-                    string fileExtension = Path.GetExtension(fileUpload.PostedFile.FileName).ToLower();
-                    string newFileName = $"Chapter{chapterNum}{fileExtension}";
+                    string originalFileName = Path.GetFileName(fileUpload.PostedFile.FileName);
                     string saveDir = Server.MapPath("/LearningMaterials/materials/");
-                    string savePath = Path.Combine(saveDir, newFileName);
-
-                    // Create directory if it doesn't exist
+                    string savePath = Path.Combine(saveDir, originalFileName);
+                    dbFilePath = "/LearningMaterials/materials/" + originalFileName;
+                    if (File.Exists(savePath) || DoesFilePathExist(dbFilePath, materialId))
+                    {
+                        ShowStatusMessage("A file with this name already exists. Please rename your file before uploading.", "danger");
+                        return;
+                    }
                     if (!Directory.Exists(saveDir))
                     {
                         Directory.CreateDirectory(saveDir);
@@ -173,24 +180,10 @@ namespace SciVerse_G12.LearningMaterials
 
                     // Save new file to server
                     fileUpload.SaveAs(savePath);
-
-                    // Update the database file path
-                    dbFilePath = "/LearningMaterials/materials/" + newFileName;
                 }
-
-                // Update the material in database
-                bool updateSuccess = UpdateMaterialInDatabase(materialId, title, description, chapter, materialType, dbFilePath);
-
-                if (updateSuccess)
-                {
-                    // Redirect immediately to ManageMaterials page
-                    Response.Redirect("ManageMaterials.aspx", false);
-                    Context.ApplicationInstance.CompleteRequest();
-                }
-                else
-                {
-                    ShowStatusMessage("Failed to update material. Please try again.", "danger");
-                }
+                UpdateMaterialInDatabase(materialId, title, description, chapterNum, materialType, dbFilePath);
+                Response.Redirect("ManageMaterials.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             }
             catch (Exception ex)
             {
@@ -198,16 +191,12 @@ namespace SciVerse_G12.LearningMaterials
             }
         }
 
-        /// <summary>
         /// Updates the material record in the database
-        /// </summary>
-        private bool UpdateMaterialInDatabase(int materialId, string title, string description, string chapter, string type, string filePath)
+        private void UpdateMaterialInDatabase(int materialId, string title, string description, int chapter, string type, string filePath)
         {
-            string connStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-
             try
             {
-                using (SqlConnection conn = new SqlConnection(connStr))
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
                 {
                     string query = @"UPDATE tblLearningMaterial 
                                    SET Title = @Title, 
@@ -220,7 +209,10 @@ namespace SciVerse_G12.LearningMaterials
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@Title", title);
-                        cmd.Parameters.AddWithValue("@Description", description);
+                        if (string.IsNullOrEmpty(description))
+                            cmd.Parameters.AddWithValue("@Description", DBNull.Value);
+                        else
+                            cmd.Parameters.AddWithValue("@Description", description);
                         cmd.Parameters.AddWithValue("@Chapter", chapter);
                         cmd.Parameters.AddWithValue("@Type", type);
                         cmd.Parameters.AddWithValue("@FilePath", filePath);
@@ -229,17 +221,23 @@ namespace SciVerse_G12.LearningMaterials
                         conn.Open();
                         int rowsAffected = cmd.ExecuteNonQuery();
 
-                        return rowsAffected > 0;
+                        // If no rows were updated, the ID was not found
+                        if (rowsAffected == 0)
+                        {
+                            throw new Exception("The material was not found in the database and could not be updated.");
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Log the error
+                // Log the error for debugging
                 System.Diagnostics.Debug.WriteLine($"Database update error: {ex.Message}");
-                return false;
+                // Re-throw the exception so btnSave_Click can catch it and show the user
+                throw;
             }
         }
+
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("ManageMaterials.aspx");

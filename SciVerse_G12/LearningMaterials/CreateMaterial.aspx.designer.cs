@@ -69,15 +69,6 @@ namespace SciVerse_G12.LearningMaterials
         protected global::System.Web.UI.WebControls.RangeValidator valChapterRange;
 
         /// <summary>
-        /// valChapterExists control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator valChapterExists;
-
-        /// <summary>
         /// fileUpload control.
         /// </summary>
         /// <remarks>

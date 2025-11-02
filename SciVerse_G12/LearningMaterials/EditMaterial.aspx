@@ -16,7 +16,7 @@
         function autoDetectType(fileUploader) {
             var ddlType = document.getElementById('<%= ddlType.ClientID %>');
             var fileName = fileUploader.value.toLowerCase();
-
+            ddlType.disabled = false;
             if (fileName.endsWith(".pdf")) {
                 ddlType.value = "PDF";
             } else if (fileName.endsWith(".doc") || fileName.endsWith(".docx")) {
@@ -25,6 +25,7 @@
                 ddlType.value = "Video";
             } else if (fileName.length > 0) {
                 ddlType.value = "Other";
+            } else {
             }
         }
     </script>
@@ -74,10 +75,9 @@
                                 MaximumValue="9999" />
                         </div>
                         
-                        <%-- UPDATED FILE UPLOAD SECTION --%>
+                        <%-- File Upload --%>
                         <div class="mb-3">
                             <asp:Label runat="server" CssClass="form-label fw-bold">Current File</asp:Label>
-                            
                             <%-- Display current file info --%>
                             <div class="current-file-box">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -100,8 +100,6 @@
                             <asp:FileUpload ID="fileUpload" runat="server" CssClass="form-control" 
                                 onchange="autoDetectType(this);" />
                             <small class="text-muted">Leave empty to keep the current file</small>
-                            
-                            <%-- Hidden field to store current file path --%>
                             <asp:HiddenField ID="hdnCurrentFilePath" runat="server" />
                         </div>
                         

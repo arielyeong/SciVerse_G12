@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.IO;
 
 namespace SciVerse_G12.LearningMaterials.materials
 {
@@ -17,19 +18,35 @@ namespace SciVerse_G12.LearningMaterials.materials
             public int MaterialID { get; set; }
             public string Title { get; set; }
             public string Description { get; set; }
-            public string Chapter { get; set; }
+            public int Chapter { get; set; }
             public string Type { get; set; }
             public string FilePath { get; set; }
+            public string FileName
+            {
+                get
+                {
+                    if (string.IsNullOrEmpty(FilePath))
+                    {
+                        return "N/A";
+                    }
+                    try
+                    {
+                        return Path.GetFileName(FilePath);
+                    }
+                    catch
+                    {
+                        return "Invalid Path";
+                    }
+                }
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // --- SECURITY CHECK ---
             if (Session["Role"] == null || Session["Role"].ToString() != "Admin")
             {
                 Response.Redirect("~/Account/Login.aspx");
             }
-            // --- END SECURITY CHECK ---
 
             if (!IsPostBack)
             {
@@ -56,8 +73,8 @@ namespace SciVerse_G12.LearningMaterials.materials
                         {
                             MaterialID = Convert.ToInt32(reader["MaterialID"]),
                             Title = reader["Title"].ToString(),
-                            Description = reader["Description"].ToString(),
-                            Chapter = reader["Chapter"].ToString(),
+                            Description = reader["Description"] != DBNull.Value ? reader["Description"].ToString() : "",
+                            Chapter = Convert.ToInt32(reader["Chapter"]),
                             Type = reader["Type"].ToString(),
                             FilePath = reader["FilePath"].ToString()
                         });
@@ -81,9 +98,7 @@ namespace SciVerse_G12.LearningMaterials.materials
             try
             {
                 int materialID = Convert.ToInt32(e.CommandArgument);
-
                 System.Diagnostics.Debug.WriteLine($"RowCommand triggered: {e.CommandName}, ID: {materialID}");
-
                 if (e.CommandName == "DeleteRow")
                 {
                     // Delete the single material
