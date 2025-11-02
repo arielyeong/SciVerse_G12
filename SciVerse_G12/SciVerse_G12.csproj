@@ -126,10 +126,10 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\Profile.aspx" />
-    <Content Include="Images\About\charlotte.png" />
-    <Content Include="Images\About\chingying.png" />
-    <Content Include="Images\About\hueyyee.png" />
-    <Content Include="Images\About\yingxin.png" />
+      <Content Include="Images\About\charlotte.png" />
+      <Content Include="Images\About\chingying.png" />
+      <Content Include="Images\About\hueyyee.png" />
+      <Content Include="Images\About\yingxin.png" />
     <Content Include="Images\down.png" />
     <Content Include="Images\myface.jpg" />
     <Content Include="Images\open air burning 1_4d398283297d45da980ae14f92221680.jpg" />
