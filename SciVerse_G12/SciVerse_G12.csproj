@@ -126,10 +126,20 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\Profile.aspx" />
-	  <Content Include="Images\About\charlotte.png" />
-	  <Content Include="Images\About\chingying.png" />
-	  <Content Include="Images\About\hueyyee.png" />
-	  <Content Include="Images\About\yingxin.png" />
+    <Content Include="Images\About\charlotte.png" />
+    <Content Include="Images\About\chingying.png" />
+    <Content Include="Images\About\hueyyee.png" />
+    <Content Include="Images\About\yingxin.png" />
+    <Content Include="Images\Quiz\force-and-motion.png" />
+    <Content Include="Images\Quiz\heat-and-temp.png" />
+    <Content Include="Images\Quiz\solar-system.png" />
+    <Content Include="Images\Quiz\the-human-body-systems.png" />
+    <Content Include="Images\Quiz\the-nature-of-matter.png" />
+    <Content Include="Images\WAPP_Logo_Header.png" />
+    <Content Include="LearningMaterials\CreateMaterial.aspx" />
+    <Content Include="LearningMaterials\EditMaterial.aspx" />
+    <Content Include="LearningMaterials\LearningMaterialList.aspx" />
+    <Content Include="LearningMaterials\ManageMaterials.aspx" />
 	  <Content Include="Images\Profile\science_register.jpg" />
 	  <Content Include="Images\Profile\WAPP_Logo_Header.png" />
 	  <Content Include="Images\science_register.png" />
@@ -150,8 +160,8 @@
     <Content Include="Styles\Admin.css" />
     <Content Include="Styles\Flashcard.css" />
     <Content Include="Styles\Profile.css" />
-    <Content Include="Flashcard\Flashcard.aspx" />
-    <Content Include="Flashcard\ViewFlashcard.aspx" />
+    <Content Include="Flashcard\FlashcardList.aspx" />
+    <Content Include="Flashcard\ViewFlashcardDetails.aspx" />
     <Content Include="Styles\Home.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -298,6 +308,34 @@
     <Compile Include="Account\Profile.aspx.designer.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LearningMaterials\CreateMaterial.aspx.cs">
+      <DependentUpon>CreateMaterial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LearningMaterials\CreateMaterial.aspx.designer.cs">
+      <DependentUpon>CreateMaterial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LearningMaterials\EditMaterial.aspx.cs">
+      <DependentUpon>EditMaterial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LearningMaterials\EditMaterial.aspx.designer.cs">
+      <DependentUpon>EditMaterial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LearningMaterials\LearningMaterialList.aspx.cs">
+      <DependentUpon>LearningMaterialList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LearningMaterials\LearningMaterialList.aspx.designer.cs">
+      <DependentUpon>LearningMaterialList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LearningMaterials\ManageMaterials.aspx.cs">
+      <DependentUpon>ManageMaterials.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LearningMaterials\ManageMaterials.aspx.designer.cs">
+      <DependentUpon>ManageMaterials.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Account\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
@@ -313,19 +351,15 @@
     <Compile Include="Quiz_Admin\CreateNewQuizPage.aspx.designer.cs">
       <DependentUpon>CreateNewQuizPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Flashcard\Flashcard.aspx.cs">
-      <DependentUpon>Flashcard.aspx</DependentUpon>
+    <Compile Include="Flashcard\FlashcardList.aspx.designer.cs">
+      <DependentUpon>FlashcardList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Flashcard\ViewFlashcardDetails.aspx.cs">
+      <DependentUpon>ViewFlashcardDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Flashcard\Flashcard.aspx.designer.cs">
-      <DependentUpon>Flashcard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Flashcard\ViewFlashcard.aspx.cs">
-      <DependentUpon>ViewFlashcard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Flashcard\ViewFlashcard.aspx.designer.cs">
-      <DependentUpon>ViewFlashcard.aspx</DependentUpon>
+    <Compile Include="Flashcard\ViewFlashcardDetails.aspx.designer.cs">
+      <DependentUpon>ViewFlashcardDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Quiz_Admin\EditQuizPage.aspx.cs">
       <DependentUpon>EditQuizPage.aspx</DependentUpon>
@@ -505,6 +539,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="LearningMaterials\materials\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
