@@ -22,6 +22,7 @@ namespace SciVerse_G12
             }
 
             string username = txtUsername.Text.Trim();
+            string email = txtEmail.Text.Trim();
             string newPassword = txtPassword.Text.Trim();
             string confirmPassword = txtConfirmPassword.Text.Trim();
 
@@ -37,18 +38,37 @@ namespace SciVerse_G12
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
-                string query = "UPDATE tblRegisteredUsers SET password = @password WHERE username = @username";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@password", newPassword);
-                cmd.Parameters.AddWithValue("@username", username);
-
                 conn.Open();
-                int rows = cmd.ExecuteNonQuery();
 
-                if (rows > 0)
+                // ✅ First, verify that the provided username and email exactly match a single account in the database
+                string checkQuery = "SELECT COUNT(*) FROM tblRegisteredUsers WHERE username = @username AND emailAddress = @email";
+                SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
+                checkCmd.Parameters.AddWithValue("@username", username);
+                checkCmd.Parameters.AddWithValue("@email", email);
+
+                int matchCount = (int)checkCmd.ExecuteScalar();
+
+                if (matchCount != 1)  // ✅ Ensure exactly one match (prevents duplicates if any)
                 {
-                    lblMessage.Text = "Password updated successfully! Redirecting to Login...";
+                    lblMessage.Text = "The provided username and email do not match any existing account!";
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
+                // ✅ If exact match found, proceed with password update using the same WHERE clause
+                string updateQuery = "UPDATE tblRegisteredUsers SET password = @password WHERE username = @username AND emailAddress = @email";
+                SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
+                updateCmd.Parameters.AddWithValue("@password", newPassword);
+                updateCmd.Parameters.AddWithValue("@username", username);
+                updateCmd.Parameters.AddWithValue("@email", email);
+
+                int rowsAffected = updateCmd.ExecuteNonQuery();
+
+                if (rowsAffected == 1)  // ✅ Confirm exactly one row was updated
+                {
+                    lblMessage.Text = "Password updated successfully for your account! Redirecting to Login...";
                     lblMessage.ForeColor = System.Drawing.Color.Green;
+                    lblMessage.CssClass = "text-success d-block mb-3 text-center message";
 
                     // Redirect after 3 seconds
                     string script = "setTimeout(function(){ window.location='Login.aspx'; }, 3000);";
@@ -56,7 +76,7 @@ namespace SciVerse_G12
                 }
                 else
                 {
-                    lblMessage.Text = "Username not found!";
+                    lblMessage.Text = "Failed to update password. Please try again or contact support.";
                     lblMessage.ForeColor = System.Drawing.Color.Red;
                 }
             }

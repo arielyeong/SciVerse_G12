@@ -140,22 +140,22 @@
     <Content Include="LearningMaterials\EditMaterial.aspx" />
     <Content Include="LearningMaterials\LearningMaterialList.aspx" />
     <Content Include="LearningMaterials\ManageMaterials.aspx" />
-	  <Content Include="Images\Profile\science_register.jpg" />
-	  <Content Include="Images\Profile\WAPP_Logo_Header.png" />
-	  <Content Include="Images\science_register.png" />
-	  <Content Include="Images\WAPP_Logo_Header.png" />
-	  <Content Include="Quiz_Admin\CreateNewQuizPage.aspx" />
-	  <Content Include="Quiz_Admin\EditQuizPage.aspx" />
-	  <Content Include="Quiz_Admin\NewQuestion.aspx" />
-	  <Content Include="Quiz_Admin\QuizReport.aspx" />
-	  <Content Include="Quiz_Admin\ViewQuizList.aspx" />
-	  <Content Include="Quiz_Student\QuizDashboardPageStudent.aspx" />
-	  <Content Include="Styles\AdminQuiz.css" />
-	  <Content Include="Simulation\AdminSimulation.aspx" />
-	  <Content Include="Simulation\EditSimulation.aspx" />
-	  <Content Include="Simulation\Experiment.aspx" />
-	  <Content Include="Simulation\SimulationDashboard.aspx" />
-	  <Content Include="Simulation\StartSimulation.aspx" />
+    <Content Include="Images\Profile\science_register.jpg" />
+    <Content Include="Images\Profile\WAPP_Logo_Header.png" />
+    <Content Include="Images\science_register.png" />
+    <Content Include="Images\WAPP_Logo_Header.png" />
+    <Content Include="Quiz_Admin\CreateNewQuizPage.aspx" />
+    <Content Include="Quiz_Admin\EditQuizPage.aspx" />
+    <Content Include="Quiz_Admin\NewQuestion.aspx" />
+    <Content Include="Quiz_Admin\QuizReport.aspx" />
+    <Content Include="Quiz_Admin\ViewQuizList.aspx" />
+    <Content Include="Quiz_Student\QuizDashboardPageStudent.aspx" />
+    <Content Include="Styles\AdminQuiz.css" />
+    <Content Include="Simulation\AdminSimulation.aspx" />
+    <Content Include="Simulation\EditSimulation.aspx" />
+    <Content Include="Simulation\Experiment.aspx" />
+    <Content Include="Simulation\SimulationDashboard.aspx" />
+    <Content Include="Simulation\StartSimulation.aspx" />
     <Content Include="Styles\site2.css" />
     <Content Include="Styles\Admin.css" />
     <Content Include="Styles\Flashcard.css" />
@@ -546,8 +546,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-	  <Folder Include="LearningMaterials\materials\" />
-	  <Folder Include="Images\Simulation\" />
+    <Folder Include="Images\Simulation\" />
+    <Folder Include="LearningMaterials\materials\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
