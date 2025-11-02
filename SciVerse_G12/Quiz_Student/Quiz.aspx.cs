@@ -16,44 +16,149 @@ namespace SciVerse_G12.Quiz_Student
         // Arrays kept in ViewState
         private int[] QIDs;                 // QuestionID[]
         private string[] QTexts;            // QuestionText[]
-        private string[] QTypes;            // "MCQ","TF","FIB"
+        private string[] QTypes;            // "MCQ","TrueFalse","FillInBlanks"
         private int[] QMarks;               // Marks per question
-        private string[][] McqOptions;      // options per MCQ question
+        private string[][] McqOptions;      // options per MCQ question (texts)
         private bool[][] McqIsCorrect;      // which option is correct
         private string[] StudentAnswers;    // captured answers
 
+        private string ConnStr => ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+        // Read RID strictly from Session (set during login)
+        private int CurrentRid
+        {
+            get
+            {
+                int rid = 0;
+                if (Session["RID"] != null)
+                    int.TryParse(Session["RID"].ToString(), out rid);
+                return rid;
+            }
+        }
+
+        // ========= STRING NORMALIZATION HELPERS (fix strict matching) =========
+        private static string Normalize(string s)
+        {
+            if (s == null) return "";
+            // Convert NBSP to normal space
+            s = s.Replace('\u00A0', ' ');
+
+            // Trim
+            s = s.Trim();
+
+            // Collapse multiple spaces to single
+            while (s.Contains("  ")) s = s.Replace("  ", " ");
+
+            return s;
+        }
+
+        private static bool TextEqual(string a, string b)
+        {
+            return string.Equals(Normalize(a), Normalize(b), StringComparison.OrdinalIgnoreCase);
+        }
+        // =====================================================================
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Enforce login for ALL requests (first load + postbacks)
+            if (Session["RID"] == null)
+            {
+                var returnUrl = Server.UrlEncode(Request.RawUrl);
+                Response.Redirect($"~/Account/Login.aspx?returnUrl={returnUrl}", false);
+                Context.ApplicationInstance.CompleteRequest();
+                return;
+            }
+
             if (!IsPostBack)
             {
-                // Optional: hide site nav area
-                var navLinks = Master?.FindControl("NavLinks");
-                if (navLinks != null) navLinks.Visible = false;
-
                 // quiz/user
                 int quizId = int.Parse(Request.QueryString["QuizID"] ?? "0");
-                int rid = int.Parse(Session["RID"]?.ToString() ?? "0");
-                if (quizId == 0 || rid == 0) { Response.Redirect("~/Default.aspx"); return; }
+                int rid = CurrentRid;
+                if (quizId == 0)
+                {
+                    // Invalid or missing quizId → back to dashboard
+                    Response.Redirect("~/Quiz_Student/QuizDashboardPageStudent.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
+                    return;
+                }
                 hfQuizID.Value = quizId.ToString();
 
+                // ===================== RESUME FROM PAUSE ======================
+                bool resuming = (Session["Paused_AttemptId"] != null);
+                if (resuming)
+                {
+                    // 1) Restore minimal state for timer + attempt
+                    int attemptId = Convert.ToInt32(Session["Paused_AttemptId"]);
+                    int pausedIdx = Convert.ToInt32(Session["Paused_Idx"] ?? 0);
+                    int remain = Convert.ToInt32(Session["Paused_Remain"] ?? 0);
+
+                    // Meta (total seconds) still needed for duration calc later
+                    LoadQuizMeta(quizId);
+
+                    // 2) Questions
+                    LoadAllQuestions(quizId);
+
+                    // 3) Restore attempt + timer hidden fields
+                    hfAttemptID.Value = attemptId.ToString();
+                    ViewState["AttemptID"] = attemptId;
+
+                    hfIsTimed.Value = (remain > 0) ? "1" : "0";
+                    hfRemainSeconds.Value = remain.ToString();
+
+                    // Toggle timer UI (label + pill container)
+                    bool showTimer = (hfIsTimed.Value == "1");
+                    lblTimer.Visible = showTimer;
+                    if (timerWrap != null) timerWrap.Visible = showTimer;
+
+                    // 4) Prepare answers array (if not yet)
+                    StudentAnswers = new string[QIDs.Length];
+                    ViewState["Ans"] = StudentAnswers;
+
+                    // 5) Show the exact paused question
+                    ShowQuestion(pausedIdx);
+
+                    // 6) One-shot cleanup
+                    Session.Remove("Paused_AttemptId");
+                    Session.Remove("Paused_QuizId");
+                    Session.Remove("Paused_Idx");
+                    Session.Remove("Paused_TotalQ");
+                    Session.Remove("Paused_Remain");
+                    Session.Remove("Paused_TotalSec");
+                    Session.Remove("Paused_Mode");
+
+                    return; // IMPORTANT: do NOT create a new attempt when resuming
+                }
+                // ===============================================================
+
+                // Fresh start path (not resuming)
                 // meta (time limit in minutes → seconds)
                 LoadQuizMeta(quizId);
 
-                // timer mode via ?mode=timed
+                // timer mode via ?mode=timed OR ?mode=untimed
                 string mode = (Request.QueryString["mode"] ?? "").ToLowerInvariant();
-                int totalSec = int.Parse(hfTotalSeconds.Value ?? "0");
-                bool isTimed = (mode == "timed" && totalSec > 0);
+
+                // If caller passed &sec for timed mode, use it. Otherwise default to full limit.
+                int totalSecMeta = int.Parse(hfTotalSeconds.Value ?? "0");
+                int secParam = 0;
+                int.TryParse(Request.QueryString["sec"], out secParam);
+
+                bool isTimed = (mode == "timed" && (secParam > 0 || totalSecMeta > 0));
+                int totalSec = isTimed ? (secParam > 0 ? secParam : totalSecMeta) : 0;
+
                 hfIsTimed.Value = isTimed ? "1" : "0";
                 hfRemainSeconds.Value = isTimed ? totalSec.ToString() : "0";
+
+                // Toggle timer UI (label + pill container)
                 lblTimer.Visible = isTimed;
+                if (timerWrap != null) timerWrap.Visible = isTimed;
 
                 // questions
                 LoadAllQuestions(quizId);
 
                 // create attempt
-                int attemptId = CreateAttempt(quizId, rid);
-                hfAttemptID.Value = attemptId.ToString();
-                ViewState["AttemptID"] = attemptId;
+                int newAttemptId = CreateAttempt(quizId, rid);
+                hfAttemptID.Value = newAttemptId.ToString();
+                ViewState["AttemptID"] = newAttemptId;
 
                 // init answers
                 StudentAnswers = new string[QIDs.Length];
@@ -64,28 +169,33 @@ namespace SciVerse_G12.Quiz_Student
             }
             else
             {
-                // restore arrays
+                // restore arrays after postback
                 QIDs = (int[])ViewState["QIDs"];
                 QTexts = (string[])ViewState["QTexts"];
                 QTypes = (string[])ViewState["QTypes"];
                 QMarks = (int[])ViewState["QMarks"];
                 McqOptions = (string[][])ViewState["Opts"];
                 McqIsCorrect = (bool[][])ViewState["IsCorr"];
+
                 StudentAnswers = ViewState["Ans"] as string[] ?? new string[QIDs.Length];
                 ViewState["Ans"] = StudentAnswers;
 
                 if (ViewState["AttemptID"] != null)
                     hfAttemptID.Value = ViewState["AttemptID"].ToString();
                 else
-                    Response.Redirect("~/Default.aspx");
+                {
+                    // If we somehow lost attempt on postback, bail to dashboard
+                    Response.Redirect("~/Quiz_Student/QuizDashboardPageStudent.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
+                    return;
+                }
             }
         }
 
         private void LoadQuizMeta(int quizId)
         {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (var con = new SqlConnection(cs))
-            using (var cmd = new SqlCommand("SELECT TimeLimit FROM tblQuiz WHERE QuizID=@QuizID", con))
+            using (var con = new SqlConnection(ConnStr))
+            using (var cmd = new SqlCommand("SELECT TimeLimit FROM dbo.tblQuiz WHERE QuizID=@QuizID", con))
             {
                 cmd.Parameters.AddWithValue("@QuizID", quizId);
                 con.Open();
@@ -97,12 +207,11 @@ namespace SciVerse_G12.Quiz_Student
 
         private void LoadAllQuestions(int quizId)
         {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (var con = new SqlConnection(cs))
+            using (var con = new SqlConnection(ConnStr))
             {
                 const string sqlQ = @"
                     SELECT QuestionID, QuestionText, QuestionType, Marks
-                    FROM tblQuestion
+                    FROM dbo.tblQuestion
                     WHERE QuizID=@QuizID
                     ORDER BY QuestionID";
 
@@ -124,12 +233,14 @@ namespace SciVerse_G12.Quiz_Student
                     DataRow r = dt.Rows[i];
                     QIDs[i] = Convert.ToInt32(r["QuestionID"]);
                     QTexts[i] = r["QuestionText"].ToString();
-                    QTypes[i] = r["QuestionType"].ToString().ToUpperInvariant();
+                    QTypes[i] = r["QuestionType"].ToString().Trim();
                     QMarks[i] = Convert.ToInt32(r["Marks"]);
 
                     if (QTypes[i] == "MCQ")
                     {
                         var (opts, corr) = LoadMcqOptions(QIDs[i]);
+                        // normalize texts once here to avoid trailing-space issues
+                        for (int k = 0; k < opts.Length; k++) opts[k] = Normalize(opts[k]);
                         McqOptions[i] = opts;
                         McqIsCorrect[i] = corr;
                     }
@@ -146,11 +257,10 @@ namespace SciVerse_G12.Quiz_Student
 
         private (string[] options, bool[] isCorrect) LoadMcqOptions(int questionId)
         {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (var con = new SqlConnection(cs))
+            using (var con = new SqlConnection(ConnStr))
             using (var cmd = new SqlCommand(@"
                     SELECT OptionText, IsCorrect
-                    FROM tblOptions
+                    FROM dbo.tblOptions
                     WHERE QuestionID=@QID
                     ORDER BY OptionID", con))
             {
@@ -174,10 +284,9 @@ namespace SciVerse_G12.Quiz_Student
 
         private int CreateAttempt(int quizId, int rid)
         {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (var con = new SqlConnection(cs))
+            using (var con = new SqlConnection(ConnStr))
             using (var cmd = new SqlCommand(@"
-                INSERT INTO tblQuizAttempt (RID, QuizID, AttemptDate, Duration, Status)
+                INSERT INTO dbo.tblQuizAttempt (RID, QuizID, AttemptDate, Duration, Status)
                 VALUES (@RID, @QuizID, GETDATE(), 0, 'InProgress');
                 SELECT CAST(SCOPE_IDENTITY() AS INT);", con))
             {
@@ -209,16 +318,16 @@ namespace SciVerse_G12.Quiz_Student
                 pMcq.Visible = true;
                 string[] opts = McqOptions[idx];
                 for (int i = 0; i < opts.Length; i++)
-                    rblMcq.Items.Add(new ListItem(opts[i], opts[i]));
+                    rblMcq.Items.Add(new ListItem(opts[i], opts[i])); // value = text (kept for now)
 
                 var layoutClass = (DefaultMcqLayout == "1x4") ? "layout-1x4" : "layout-2x2";
                 rblMcq.CssClass = $"rbl-mcq {layoutClass}";
             }
-            else if (qType == "TF")
+            else if (qType == "TrueFalse")
             {
                 pTf.Visible = true;
             }
-            else // FILL
+            else if (qType == "FillInBlanks")
             {
                 pFib.Visible = true;
             }
@@ -227,7 +336,7 @@ namespace SciVerse_G12.Quiz_Student
             if (StudentAnswers != null && StudentAnswers[idx] != null)
             {
                 if (qType == "MCQ") rblMcq.SelectedValue = StudentAnswers[idx];
-                else if (qType == "TF") rblTf.SelectedValue = StudentAnswers[idx];
+                else if (qType == "TrueFalse") rblTf.SelectedValue = StudentAnswers[idx];
                 else txtFib.Text = StudentAnswers[idx];
             }
 
@@ -252,10 +361,9 @@ namespace SciVerse_G12.Quiz_Student
         {
             string qType = QTypes[idx];
             if (qType == "MCQ") return rblMcq.SelectedItem != null;
-            if (qType == "TF") return rblTf.SelectedItem != null;
-            if (qType == "FILL")
+            if (qType == "TrueFalse") return rblTf.SelectedItem != null;
+            if (qType == "FillInBlanks")
             {
-                // Read posted value directly to avoid binding issues
                 var posted = Request.Form[txtFib.UniqueID];
                 return !string.IsNullOrWhiteSpace(posted);
             }
@@ -289,11 +397,11 @@ namespace SciVerse_G12.Quiz_Student
             string answer = null;
 
             if (qType == "MCQ" && rblMcq.SelectedItem != null)
-                answer = rblMcq.SelectedValue;
-            else if (qType == "TF" && rblTf.SelectedItem != null)
+                answer = rblMcq.SelectedValue; // currently stores text
+            else if (qType == "TrueFalse" && rblTf.SelectedItem != null)
                 answer = rblTf.SelectedValue;
-            else if (qType == "FILL")
-                answer = (Request.Form[txtFib.UniqueID] ?? "").Trim(); // <-- form-read
+            else if (qType == "FillInBlanks")
+                answer = (Request.Form[txtFib.UniqueID] ?? "").Trim();
 
             StudentAnswers[idx] = answer;
             ViewState["Ans"] = StudentAnswers;
@@ -304,17 +412,16 @@ namespace SciVerse_G12.Quiz_Student
 
         private void SaveAnswerToResult(int attemptId, int questionId, string studentAnswer)
         {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (var con = new SqlConnection(cs))
+            using (var con = new SqlConnection(ConnStr))
             using (var cmd = new SqlCommand(@"
-                IF EXISTS (SELECT 1 FROM tblQuizResult WHERE AttemptID=@AttemptID AND Question=@QID)
-                    UPDATE tblQuizResult 
+                IF EXISTS (SELECT 1 FROM dbo.tblQuizResult WHERE AttemptID=@AttemptID AND Question=@QID)
+                    UPDATE dbo.tblQuizResult 
                     SET Answer = @Ans
                     WHERE AttemptID=@AttemptID AND Question=@QID
                 ELSE
-                    INSERT INTO tblQuizResult (AttemptID, Question, Answer, Marks, Score)
+                    INSERT INTO dbo.tblQuizResult (AttemptID, Question, Answer, Marks, Score)
                     VALUES (@AttemptID, @QID, @Ans, 
-                            (SELECT Marks FROM tblQuestion WHERE QuestionID=@QID),
+                            (SELECT Marks FROM dbo.tblQuestion WHERE QuestionID=@QID),
                             0)", con))
             {
                 cmd.Parameters.AddWithValue("@AttemptID", attemptId);
@@ -330,20 +437,22 @@ namespace SciVerse_G12.Quiz_Student
             int attemptId = int.Parse(hfAttemptID.Value);
             int totalSec = int.Parse(hfTotalSeconds.Value);
             int remainSec = int.Parse(hfRemainSeconds.Value);
+
+            // For untimed quizzes totalSec == 0 → usedSec = 0
             int usedSec = totalSec > 0 ? Math.Max(0, totalSec - remainSec) : 0;
 
             UpdateAttemptRow(attemptId, usedSec);
             CalculateAndStoreScore(attemptId);
 
-            Response.Redirect($"QuizSummary.aspx?attemptId={attemptId}");
+            Response.Redirect($"QuizSummary.aspx?attemptId={attemptId}", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
 
         private void UpdateAttemptRow(int attemptId, int durationSec)
         {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (var con = new SqlConnection(cs))
+            using (var con = new SqlConnection(ConnStr))
             using (var cmd = new SqlCommand(@"
-                UPDATE tblQuizAttempt
+                UPDATE dbo.tblQuizAttempt
                 SET Duration=@Dur, Status='Submitted'
                 WHERE AttemptID=@AttemptID", con))
             {
@@ -356,8 +465,7 @@ namespace SciVerse_G12.Quiz_Student
 
         private void CalculateAndStoreScore(int attemptId)
         {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (var con = new SqlConnection(cs))
+            using (var con = new SqlConnection(ConnStr))
             {
                 con.Open();
                 for (int i = 0; i < QIDs.Length; i++)
@@ -367,25 +475,35 @@ namespace SciVerse_G12.Quiz_Student
                     string student = StudentAnswers[i];
                     int marks = QMarks[i];
 
+                    // normalize student answer once
+                    string studentNorm = Normalize(student);
                     string correctAns = "";
                     bool correct = false;
 
                     if (qType == "MCQ")
                     {
+                        // find the correct option text (already normalized in LoadAllQuestions)
                         bool[] corrArr = McqIsCorrect[i];
                         string[] optArr = McqOptions[i];
                         for (int k = 0; k < corrArr.Length; k++)
                             if (corrArr[k]) { correctAns = optArr[k]; break; }
-                        correct = (student == correctAns);
+
+                        correct = TextEqual(studentNorm, correctAns);
                     }
-                    else if (qType == "TF" || qType == "FILL")
+                    else if (qType == "TrueFalse" || qType == "FillInBlanks")
                     {
-                        correctAns = GetCorrectAnswer(qid);
-                        correct = string.Equals(student, correctAns, StringComparison.OrdinalIgnoreCase);
+                        // Support multiple correct answers (synonyms)
+                        var answers = GetAllCorrectAnswers(qid);
+                        foreach (var a in answers)
+                        {
+                            if (TextEqual(studentNorm, a)) { correct = true; correctAns = a; break; }
+                            // if none matched, still show the first correct as reference
+                            if (string.IsNullOrEmpty(correctAns)) correctAns = a;
+                        }
                     }
 
                     using (var cmd = new SqlCommand(@"
-                        UPDATE tblQuizResult
+                        UPDATE dbo.tblQuizResult
                         SET CorrectAnswer = @Corr, Score = @Sc
                         WHERE AttemptID=@AttemptID AND Question=@QID", con))
                     {
@@ -399,12 +517,35 @@ namespace SciVerse_G12.Quiz_Student
             }
         }
 
-        private string GetCorrectAnswer(int questionId)
+        // Returns ALL correct answers for a question (handles TF and FIB synonyms)
+        private string[] GetAllCorrectAnswers(int questionId)
         {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (var con = new SqlConnection(cs))
+            var list = new System.Collections.Generic.List<string>();
+            using (var con = new SqlConnection(ConnStr))
             using (var cmd = new SqlCommand(
-                "SELECT OptionText FROM tblOptions WHERE QuestionID=@QID AND IsCorrect=1", con))
+                "SELECT OptionText FROM dbo.tblOptions WHERE QuestionID=@QID AND IsCorrect=1 ORDER BY OptionID", con))
+            {
+                cmd.Parameters.AddWithValue("@QID", questionId);
+                con.Open();
+                using (var rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read())
+                    {
+                        var t = rd["OptionText"]?.ToString() ?? "";
+                        list.Add(Normalize(t));
+                    }
+                }
+            }
+            if (list.Count == 0) list.Add(""); // safe fallback
+            return list.ToArray();
+            // Note: For MCQ we already loaded + normalized texts once; TF/FIB read here is fine.
+        }
+
+        private string GetCorrectAnswer(int questionId) // kept in case other pages call it
+        {
+            using (var con = new SqlConnection(ConnStr))
+            using (var cmd = new SqlCommand(
+                "SELECT TOP(1) OptionText FROM dbo.tblOptions WHERE QuestionID=@QID AND IsCorrect=1", con))
             {
                 cmd.Parameters.AddWithValue("@QID", questionId);
                 con.Open();
@@ -418,6 +559,62 @@ namespace SciVerse_G12.Quiz_Student
             int idx = int.Parse(hfCurrentIdx.Value);
             SaveCurrentAnswer(idx);
             FinishQuiz();
+        }
+
+        protected void btnPause_Click(object sender, EventArgs e)
+        {
+            // Still enforce login on action
+            if (Session["RID"] == null)
+            {
+                var returnUrl = Server.UrlEncode(Request.RawUrl);
+                Response.Redirect($"~/Account/Login.aspx?returnUrl={returnUrl}", false);
+                Context.ApplicationInstance.CompleteRequest();
+                return;
+            }
+
+            // Safeguards
+            if (string.IsNullOrEmpty(hfAttemptID.Value) || string.IsNullOrEmpty(hfQuizID.Value))
+            {
+                Response.Redirect("~/Quiz_Student/QuizDashboardPageStudent.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
+                return;
+            }
+
+            // Gather current state from hidden fields
+            int attemptId = Convert.ToInt32(hfAttemptID.Value);
+            int quizId = Convert.ToInt32(hfQuizID.Value);
+            int idx = Convert.ToInt32(hfCurrentIdx.Value); // 0-based
+            int totalQ = (QIDs != null) ? QIDs.Length : 0;
+            int remainSec = Convert.ToInt32(string.IsNullOrEmpty(hfRemainSeconds.Value) ? "0" : hfRemainSeconds.Value);
+            int totalSec = Convert.ToInt32(string.IsNullOrEmpty(hfTotalSeconds.Value) ? "0" : hfTotalSeconds.Value);
+            string mode = (hfIsTimed.Value == "1") ? "timed" : "untimed";
+
+            // Persist to Session for QuizPause.aspx to read
+            Session["Paused_AttemptId"] = attemptId;
+            Session["Paused_QuizId"] = quizId;
+            Session["Paused_Idx"] = idx;
+            Session["Paused_TotalQ"] = totalQ;
+            Session["Paused_Remain"] = remainSec;
+            Session["Paused_TotalSec"] = totalSec;
+            Session["Paused_Mode"] = mode;
+
+            // Optional: mark attempt as Paused in DB
+            try
+            {
+                using (var con = new SqlConnection(ConnStr))
+                using (var cmd = new SqlCommand(
+                    "UPDATE dbo.tblQuizAttempt SET Status='Paused' WHERE AttemptID=@A", con))
+                {
+                    cmd.Parameters.AddWithValue("@A", attemptId);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch { /* ignore and continue */ }
+
+            // Go to Pause screen
+            Response.Redirect("~/Quiz_Student/QuizPause.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
     }
 }

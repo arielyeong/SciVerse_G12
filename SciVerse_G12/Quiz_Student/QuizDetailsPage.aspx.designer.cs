@@ -60,13 +60,31 @@ namespace SciVerse_G12.Quiz_Student
         protected global::System.Web.UI.WebControls.Literal litDescription;
 
         /// <summary>
-        /// rblTimeMode control.
+        /// rbTimed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblTimeMode;
+        protected global::System.Web.UI.WebControls.RadioButton rbTimed;
+
+        /// <summary>
+        /// rbUntimed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbUntimed;
+
+        /// <summary>
+        /// btnBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBack;
 
         /// <summary>
         /// btnStart control.

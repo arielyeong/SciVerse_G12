@@ -11,26 +11,53 @@ namespace SciVerse_G12.Quiz_Student
 {
 
 
-    public partial class QuizResultPage
+    public partial class QuizAttemptHistory
     {
 
         /// <summary>
-        /// litTitle control.
+        /// litHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litTitle;
+        protected global::System.Web.UI.WebControls.Literal litHeader;
 
         /// <summary>
-        /// phTable control.
+        /// btnBack control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phTable;
+        protected global::System.Web.UI.WebControls.Button btnBack;
+
+        /// <summary>
+        /// litSub control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litSub;
+
+        /// <summary>
+        /// phEmpty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phEmpty;
+
+        /// <summary>
+        /// litEmptyMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litEmptyMsg;
 
         /// <summary>
         /// repAttempts control.
@@ -42,12 +69,12 @@ namespace SciVerse_G12.Quiz_Student
         protected global::System.Web.UI.WebControls.Repeater repAttempts;
 
         /// <summary>
-        /// litEmpty control.
+        /// hidQuizId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litEmpty;
+        protected global::System.Web.UI.WebControls.HiddenField hidQuizId;
     }
 }

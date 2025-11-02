@@ -73,6 +73,7 @@
                                    aria-expanded="false">Quiz</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" runat="server" href="~/Quiz_Student/QuizDashboardPageStudent">Quiz</a></li>
+                                    <li><a class="dropdown-item" runat="server" href="~/Quiz_Student/QuizHistory">User Performance Details</a></li>
                                     <li><a class="dropdown-item" runat="server" href="~/Flashcard/FlashcardList">Flashcard</a></li>
                                 </ul>
                             <% } else { %>

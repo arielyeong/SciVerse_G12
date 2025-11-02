@@ -1,144 +1,138 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SciVerse_G12.Quiz_Student
 {
     public partial class QuizPause : System.Web.UI.Page
     {
-        // ---------------------------
-        // Querystring: ?quizId=123
-        // ---------------------------
-        private int QuizId
+        private string ConnStr => ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+        // Logged-in user (strictly from Session)
+        private int CurrentRid
         {
-            get { return int.TryParse(Request.QueryString["quizId"], out var q) ? q : 0; }
+            get
+            {
+                int rid = 0;
+                if (Session["RID"] != null) int.TryParse(Session["RID"].ToString(), out rid);
+                return rid;
+            }
         }
 
-        // ---------------------------
-        // Session-backed integers (NO Dictionary)
-        // These should be updated by your actual quiz runner page.
-        // ---------------------------
-        private int CurrentIndex   // 1-based question index for progress/counter
-        {
-            get { return (Session["Q_IDX"] is int v) ? v : 1; }
-            set { Session["Q_IDX"] = value; }
-        }
-
-        private int AnsweredCount  // how many answered so far
-        {
-            get { return (Session["Q_ANSWERED"] is int v) ? v : 0; }
-            set { Session["Q_ANSWERED"] = value; }
-        }
-
-        private int CorrectCount   // how many correct so far
-        {
-            get { return (Session["Q_CORRECT"] is int v) ? v : 0; }
-            set { Session["Q_CORRECT"] = value; }
-        }
-
-        private int TotalQuestions // total in this quiz (cached here for display)
-        {
-            get { return (Session["Q_TOTAL"] is int v) ? v : 0; }
-            set { Session["Q_TOTAL"] = value; }
-        }
+        // Paused state (from Session, set by Quiz.aspx)
+        private int AttemptId => Convert.ToInt32(Session["Paused_AttemptId"] ?? 0);
+        private int QuizId => Convert.ToInt32(Session["Paused_QuizId"] ?? 0);
+        private int Index => Convert.ToInt32(Session["Paused_Idx"] ?? 0);     // 0-based
+        private int TotalQ => Convert.ToInt32(Session["Paused_TotalQ"] ?? 0);
+        private int RemainSec => Convert.ToInt32(Session["Paused_Remain"] ?? 0);
+        private int TotalSec => Convert.ToInt32(Session["Paused_TotalSec"] ?? 0);
+        private string Mode => (Session["Paused_Mode"] as string) ?? "untimed";
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Enforce login for all requests
+            if (Session["RID"] == null)
+            {
+                var returnUrl = Server.UrlEncode(Request.RawUrl);
+                Response.Redirect($"~/Account/Login.aspx?returnUrl={returnUrl}", false);
+                Context.ApplicationInstance.CompleteRequest();
+                return;
+            }
+
             if (IsPostBack) return;
 
-            if (QuizId <= 0)
+            // Basic presence checks
+            if (AttemptId == 0 || QuizId == 0 || TotalQ <= 0)
             {
-                // No quiz selected
-                ResetUiNoQuiz();
+                Response.Redirect("~/Quiz_Student/QuizDashboardPageStudent.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
                 return;
             }
 
-            // Load total from DB (or keep the one already in Session if you set it elsewhere)
-            TotalQuestions = GetTotalQuestionsFromDb(QuizId);
-
-            if (TotalQuestions <= 0)
+            // Security: ensure this Attempt belongs to the current RID
+            if (!DoesAttemptBelongToRid(AttemptId, CurrentRid))
             {
-                // No questions
-                CurrentIndex = 1;
-                litCounter.Text = "0 / 0";
-                capsuleFill.Style["width"] = "0%";
-                phScore.Visible = false;
-                phNoQuestions.Visible = true;
+                // If not owned, bounce to dashboard
+                Response.Redirect("~/Quiz_Student/QuizDashboardPageStudent.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
                 return;
             }
 
-            // Clamp CurrentIndex
-            CurrentIndex = Math.Max(1, Math.Min(CurrentIndex, TotalQuestions));
+            // Populate UI
+            litOn.Text = (Index + 1).ToString();
+            litTotal.Text = TotalQ.ToString();
+            litCounter.Text = $"{Index + 1} / {TotalQ}";
 
-            // Counter like "1 / 20"
-            litCounter.Text = $"{CurrentIndex} / {TotalQuestions}";
-
-            // Progress: empty at Q1, full at last question
-            double pct = (TotalQuestions > 1)
-                ? (CurrentIndex - 1) * 100.0 / (TotalQuestions - 1)
-                : (CurrentIndex >= 1 ? 100 : 0);
+            double pct = (TotalQ > 0) ? Math.Min(100.0, ((Index + 1) * 100.0) / TotalQ) : 0;
             capsuleFill.Style["width"] = pct.ToString("0.#") + "%";
 
-            // Score only when all answered
-            bool finished = (AnsweredCount >= TotalQuestions);
-            if (finished)
+            // Optional: show remaining time if timed
+            if (RemainSec > 0 && TotalSec > 0)
             {
-                int percent = (int)Math.Round(CorrectCount * 100.0 / TotalQuestions);
-                litScore.Text = $"{CorrectCount} / {TotalQuestions} ({percent}%)";
-                phScore.Visible = true;
+                // If you have a literal for time, e.g., litRemain
+                // litRemain.Text = FormatTime(RemainSec) + " remaining";
             }
-            else
-            {
-                phScore.Visible = false;
-            }
-
-            phNoQuestions.Visible = false; // we do have questions
         }
 
-        // Buttons
+        private bool DoesAttemptBelongToRid(int attemptId, int rid)
+        {
+            using (var con = new SqlConnection(ConnStr))
+            using (var cmd = new SqlCommand("SELECT COUNT(1) FROM dbo.tblQuizAttempt WHERE AttemptID=@A AND RID=@R", con))
+            {
+                cmd.Parameters.AddWithValue("@A", attemptId);
+                cmd.Parameters.AddWithValue("@R", rid);
+                con.Open();
+                var count = (int)cmd.ExecuteScalar();
+                return count > 0;
+            }
+        }
+
         protected void btnResume_Click(object sender, EventArgs e)
         {
-            // Navigate back to your quiz runner page
-            Response.Redirect($"~/Quiz_Student/Quiz.aspx?quizId={QuizId}", false);
+            // Re-check login & ownership (in case of session race)
+            if (Session["RID"] == null || !DoesAttemptBelongToRid(AttemptId, CurrentRid))
+            {
+                var returnUrl = Server.UrlEncode(Request.RawUrl);
+                Response.Redirect($"~/Account/Login.aspx?returnUrl={returnUrl}", false);
+                Context.ApplicationInstance.CompleteRequest();
+                return;
+            }
+
+            // Mark attempt back to InProgress
+            try
+            {
+                using (var con = new SqlConnection(ConnStr))
+                using (var cmd = new SqlCommand("UPDATE dbo.tblQuizAttempt SET Status='InProgress' WHERE AttemptID=@A", con))
+                {
+                    cmd.Parameters.AddWithValue("@A", AttemptId);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch { /* swallow and continue */ }
+
+            // IMPORTANT: Do NOT clear paused session here.
+            // Quiz.aspx relies on these Paused_* values on first load to restore timer & index.
+            Response.Redirect($"~/Quiz_Student/Quiz.aspx?QuizID={QuizId}&mode={Mode}", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
 
         protected void btnSaveExit_Click(object sender, EventArgs e)
         {
-            // Save partial progress if needed then go back to list/dashboard
-            Response.Redirect("~/Quiz_Student/MyQuizzes.aspx", false);
+            // Optionally: keep attempt as 'Paused' (already set by Quiz.aspx), then return to dashboard
+            Response.Redirect("~/Quiz_Student/QuizDashboardPageStudent.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
 
-        // Helpers
-        private int GetTotalQuestionsFromDb(int quizId)
+        // Optional helper if you want to display remaining time
+        private static string FormatTime(int totalSeconds)
         {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            const string sql = @"SELECT COUNT(*) FROM dbo.tblQuestion WHERE QuizID = @id;";
-
-            using (var con = new SqlConnection(cs))
-            using (var cmd = new SqlCommand(sql, con))
-            {
-                cmd.Parameters.AddWithValue("@id", quizId);
-                con.Open();
-                return (int)cmd.ExecuteScalar();
-            }
-        }
-
-        private void ResetUiNoQuiz()
-        {
-            TotalQuestions = 0;
-            AnsweredCount = 0;
-            CorrectCount = 0;
-            CurrentIndex = 1;
-
-            litCounter.Text = "0 / 0";
-            capsuleFill.Style["width"] = "0%";
-            phScore.Visible = false;
-            phNoQuestions.Visible = true;
+            if (totalSeconds <= 0) return "00:00";
+            var ts = TimeSpan.FromSeconds(totalSeconds);
+            return (ts.TotalHours >= 1)
+                ? $"{(int)ts.TotalHours:D2}:{ts.Minutes:D2}:{ts.Seconds:D2}"
+                : $"{ts.Minutes:D2}:{ts.Seconds:D2}";
         }
     }
 }

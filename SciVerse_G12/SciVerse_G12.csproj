@@ -53,6 +53,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -149,6 +150,9 @@
     <Content Include="Quiz_Admin\NewQuestion.aspx" />
     <Content Include="Quiz_Admin\QuizReport.aspx" />
     <Content Include="Quiz_Admin\ViewQuizList.aspx" />
+    <Content Include="Quiz_Student\AnswersReview.aspx" />
+    <Content Include="Quiz_Student\Quiz.aspx" />
+    <Content Include="Quiz_Student\QuizAttemptHistory.aspx" />
     <Content Include="Quiz_Student\QuizDashboardPageStudent.aspx" />
     <Content Include="Styles\AdminQuiz.css" />
     <Content Include="Simulation\AdminSimulation.aspx" />
@@ -410,6 +414,13 @@
     <Compile Include="Quiz_Student\Quiz.aspx.designer.cs">
       <DependentUpon>Quiz.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Quiz_Student\QuizAttemptHistory.aspx.cs">
+      <DependentUpon>QuizAttemptHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Student\QuizAttemptHistory.aspx.designer.cs">
+      <DependentUpon>QuizAttemptHistory.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Quiz_Student\QuizDashboardPageStudent.aspx.cs">
       <DependentUpon>QuizDashboardPageStudent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -437,13 +448,6 @@
     </Compile>
     <Compile Include="Quiz_Student\QuizPause.aspx.designer.cs">
       <DependentUpon>QuizPause.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Quiz_Student\QuizResultPage.aspx.cs">
-      <DependentUpon>QuizResultPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Quiz_Student\QuizResultPage.aspx.designer.cs">
-      <DependentUpon>QuizResultPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Quiz_Student\QuizSummary.aspx.cs">
       <DependentUpon>QuizSummary.aspx</DependentUpon>

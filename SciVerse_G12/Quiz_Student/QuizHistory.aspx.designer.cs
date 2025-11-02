@@ -15,31 +15,22 @@ namespace SciVerse_G12.Quiz_Student
     {
 
         /// <summary>
-        /// btnBack control.
+        /// litTotalAttempts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBack;
+        protected global::System.Web.UI.WebControls.Literal litTotalAttempts;
 
         /// <summary>
-        /// litTotalQuizzes control.
+        /// litAvgPct control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litTotalQuizzes;
-
-        /// <summary>
-        /// litAvgScore control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litAvgScore;
+        protected global::System.Web.UI.WebControls.Literal litAvgPct;
 
         /// <summary>
         /// litPassed control.
@@ -69,13 +60,13 @@ namespace SciVerse_G12.Quiz_Student
         protected global::System.Web.UI.WebControls.DropDownList ddlChapter;
 
         /// <summary>
-        /// txtDate control.
+        /// dtDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDate;
+        protected global::System.Web.UI.WebControls.TextBox dtDate;
 
         /// <summary>
         /// btnFilter control.
@@ -87,6 +78,42 @@ namespace SciVerse_G12.Quiz_Student
         protected global::System.Web.UI.WebControls.Button btnFilter;
 
         /// <summary>
+        /// btnClear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClear;
+
+        /// <summary>
+        /// chartTrend control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.DataVisualization.Charting.Chart chartTrend;
+
+        /// <summary>
+        /// chartPassFail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.DataVisualization.Charting.Chart chartPassFail;
+
+        /// <summary>
+        /// chartChapterPerf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.DataVisualization.Charting.Chart chartChapterPerf;
+
+        /// <summary>
         /// gvAttempts control.
         /// </summary>
         /// <remarks>
@@ -94,50 +121,5 @@ namespace SciVerse_G12.Quiz_Student
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvAttempts;
-
-        /// <summary>
-        /// litScore control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litScore;
-
-        /// <summary>
-        /// litTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litTime;
-
-        /// <summary>
-        /// lnkView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkView;
-
-        /// <summary>
-        /// litEmpty control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litEmpty;
-
-        /// <summary>
-        /// hidRID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hidRID;
     }
 }

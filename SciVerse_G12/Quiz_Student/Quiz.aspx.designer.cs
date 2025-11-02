@@ -69,6 +69,15 @@ namespace SciVerse_G12.Quiz_Student
         protected global::System.Web.UI.WebControls.HiddenField hfCurrentIdx;
 
         /// <summary>
+        /// timerWrap control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl timerWrap;
+
+        /// <summary>
         /// lblTimer control.
         /// </summary>
         /// <remarks>
@@ -85,6 +94,15 @@ namespace SciVerse_G12.Quiz_Student
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblIndex;
+
+        /// <summary>
+        /// btnPause control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPause;
 
         /// <summary>
         /// lblQuestionText control.
@@ -148,15 +166,6 @@ namespace SciVerse_G12.Quiz_Student
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFib;
-
-        /// <summary>
-        /// rfvFib control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFib;
 
         /// <summary>
         /// lblError control.
