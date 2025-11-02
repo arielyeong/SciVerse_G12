@@ -72,7 +72,7 @@ INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age,
 VALUES ('Chen Jia Wei', 'chenjiawei@example.com', 'chenjiawei', 'wapp', 15, 'Female', 'Iceland', 'https://robohash.org/earumabvoluptatem.png?size=50x50&set=set1', '2025-09-15 07:16:42', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
-VALUES ('Li Jun Hao', 'lijunhao@example.com', 'lijunhao', 'wapp"', 16, 'Female', 'Indonesia', 'https://robohash.org/facerequivelit.png?size=50x50&set=set1', '2025-02-20 01:28:28', 'User');
+VALUES ('Li Jun Hao', 'lijunhao@example.com', 'lijunhao', 'wapp', 16, 'Female', 'Indonesia', 'https://robohash.org/facerequivelit.png?size=50x50&set=set1', '2025-02-20 01:28:28', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
 VALUES ('Wang Shi Han', 'wangshihan@example.com', 'wangshihan', 'wapp', 8, 'Female', 'China', 'https://robohash.org/magnamquiaeaque.png?size=50x50&set=set1', '2025-01-12 23:54:23', 'User');

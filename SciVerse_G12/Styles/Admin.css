@@ -265,6 +265,37 @@
     }
 }
 
+/* Add User Button */
+.btn-add-user {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 120px;
+    text-align: center;
+}
+
+    .btn-add-user:hover {
+        background: linear-gradient(135deg, #059669 0%, #065f46 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Icon styling */
+    .btn-add-user i {
+        margin-right: 8px; /* Space between icon and text */
+        font-size: 1.2rem;
+    }
+
+
 /***********************************************************
    ADMIN - VIEW MESSAGES PAGE (Improved Reviewed Badge)
 ***********************************************************/

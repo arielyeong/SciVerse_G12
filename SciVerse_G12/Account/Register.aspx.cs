@@ -38,7 +38,7 @@ namespace SciVerse_G12
                 string.IsNullOrWhiteSpace(rblGender.SelectedValue) ||
                 string.IsNullOrWhiteSpace(dlCountry.SelectedValue))
             {
-                lblMessage.Text = "⚠️ Please fill in all required fields.";
+                lblMessage.Text = "Please fill in all required fields.";
                 lblMessage.CssClass = "d-block text-center text-danger mt-2";
                 return;
             }
@@ -46,7 +46,7 @@ namespace SciVerse_G12
             // *** NEW: Require Image Upload ***
             if (!FileUploadPic.HasFile)
             {
-                lblMessage.Text = "⚠️ Please upload a profile image (required).";
+                lblMessage.Text = "Please upload a profile image (required).";
                 lblMessage.CssClass = "d-block text-center text-danger mt-2";
                 return;
             }
@@ -54,7 +54,7 @@ namespace SciVerse_G12
             // *** Email Format Validation ***
             if (!Regex.IsMatch(txtEmail.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
-                lblMessage.Text = "⚠️ Please enter a valid email address.";
+                lblMessage.Text = "Please enter a valid email address.";
                 lblMessage.CssClass = "d-block text-center text-danger mt-2";
                 return;
             }
@@ -62,21 +62,21 @@ namespace SciVerse_G12
             // *** Age Validation ***
             if (!int.TryParse(txtAge.Text, out int age) || age < 1 || age > 120)
             {
-                lblMessage.Text = "⚠️ Please enter a valid age (1-120).";
+                lblMessage.Text = "Please enter a valid age (1-120).";
                 lblMessage.CssClass = "d-block text-center text-danger mt-2";
                 return;
             }
 
             // *** Password Validation ***
-            if (txtPassword.Text.Length < 8)
+            if (txtPassword.Text.Length < 4)
             {
-                lblMessage.Text = "⚠️ Password must be at least 8 characters.";
+                lblMessage.Text = "Password must be at least 4 characters.";
                 lblMessage.CssClass = "d-block text-center text-danger mt-2";
                 return;
             }
             if (txtPassword.Text != txtConPass.Text)
             {
-                lblMessage.Text = "❌ Passwords do not match!";
+                lblMessage.Text = "Passwords do not match!";
                 lblMessage.CssClass = "d-block text-center text-danger mt-2";
                 return;
             }
@@ -84,7 +84,7 @@ namespace SciVerse_G12
             // *** Duplicate Username Check ***
             if (IsDuplicate("username", txtUsername.Text))
             {
-                lblMessage.Text = "❌ Username already exists. Please choose another.";
+                lblMessage.Text = "Username already exists. Please choose another.";
                 lblMessage.CssClass = "d-block text-center text-danger mt-2";
                 return;
             }
@@ -92,7 +92,7 @@ namespace SciVerse_G12
             // *** Duplicate Email Check ***
             if (IsDuplicate("emailAddress", txtEmail.Text))
             {
-                lblMessage.Text = "❌ Email already registered. Please use another or login.";
+                lblMessage.Text = "Email already registered. Please use another or login.";
                 lblMessage.CssClass = "d-block text-center text-danger mt-2";
                 return;
             }
@@ -103,7 +103,7 @@ namespace SciVerse_G12
             if (FileUploadPic.PostedFile.ContentLength > 5 * 1024 * 1024 ||
                 !FileUploadPic.PostedFile.ContentType.StartsWith("image/"))
             {
-                lblMessage.Text = "⚠️ Image must be <5MB and a valid image type (JPG, PNG, etc.).";
+                lblMessage.Text = "Image must be <5MB and a valid image type (JPG, PNG, etc.).";
                 lblMessage.CssClass = "d-block text-center text-danger mt-2";
                 return;
             }
@@ -122,7 +122,7 @@ namespace SciVerse_G12
             }
             catch (Exception ex)
             {
-                lblMessage.Text = "⚠️ Image upload failed: " + ex.Message;
+                lblMessage.Text = "Image upload failed: " + ex.Message;
                 lblMessage.CssClass = "d-block text-center text-danger mt-2";
                 return;
             }
@@ -137,11 +137,12 @@ namespace SciVerse_G12
                 lblMessage.Text = "✅ Registration Successful! Redirecting to login...";
                 lblMessage.CssClass = "d-block text-center text-success mt-2";
                 // Delay redirect slightly to show message
-                ClientScript.RegisterStartupScript(this.GetType(), "redirect", "setTimeout(function(){ window.location.href = '~/Account/Login.aspx'; }, 1500);", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "redirect",
+                    "setTimeout(function(){ window.location.href = '" + ResolveUrl("~/Account/Login.aspx") + "'; }, 1500);", true);
             }
             catch (Exception ex)
             {
-                lblMessage.Text = "❌ Registration failed: " + ex.Message; // Fallback for other errors
+                lblMessage.Text = "Registration failed: " + ex.Message; // Fallback for other errors
                 lblMessage.CssClass = "d-block text-center text-danger mt-2";
             }
         }
