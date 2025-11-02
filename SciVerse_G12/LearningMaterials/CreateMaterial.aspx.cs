@@ -208,8 +208,8 @@ namespace SciVerse_G12.LearningMaterials
                         cmd.ExecuteNonQuery();
                     }
                 }
-                ShowStatusMessage("Learning material saved successfully! Redirecting...", "success");
-                string redirectScript = "setTimeout(function() { window.location.href = 'ManageMaterials.aspx'; }, 2000);";
+                ShowStatusMessage("Learning material saved successfully!", "success");
+                string redirectScript = "setTimeout(function() { window.location.href = 'ManageMaterials.aspx'; }, 500);";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "SaveSuccessRedirect", redirectScript, true);
             }
             catch (Exception ex)
