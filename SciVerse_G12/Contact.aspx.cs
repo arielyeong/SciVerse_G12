@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SciVerse_G12
 {
@@ -13,7 +9,7 @@ namespace SciVerse_G12
         {
             if (!IsPostBack)
             {
-
+                lblMessageStatus.Text = "";
             }
         }
 
@@ -25,14 +21,22 @@ namespace SciVerse_G12
                 {
                     // Insert data into tblContactUs using SqlDataSource
                     SqlDataSource1.Insert();
-                    lblMessageStatus.Text = "Thank you! Your message has been saved.";
+
+                    lblMessageStatus.Text = "Thank you! Your message has been sent successfully.";
                     lblMessageStatus.CssClass = "text-success";
+
                     ClearForm();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    lblMessageStatus.Text = "Error saving message. Please try again later.";
+                    lblMessageStatus.Text = "Error saving your message. Please try again later.";
+                    lblMessageStatus.CssClass = "text-danger";
                 }
+            }
+            else
+            {
+                lblMessageStatus.Text = "Please fill in all required fields.";
+                lblMessageStatus.CssClass = "text-warning";
             }
         }
 

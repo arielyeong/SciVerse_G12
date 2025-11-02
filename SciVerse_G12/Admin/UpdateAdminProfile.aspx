@@ -12,7 +12,7 @@
 
 <style>
     .update-wrapper {
-        margin-top: -5px !important;
+        margin-top: -60px !important;
     }
  </style>
 

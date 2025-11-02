@@ -3,12 +3,12 @@
      <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Page-specific CSS -->
-<%--    <link href="<%= ResolveUrl("~/Styles/Home.css") %>" rel="stylesheet" type="text/css" />--%>
     <link href='<%= ResolveUrl("~/Styles/Profile.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
 
 </asp:Content>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">     
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
 <div class="update-wrapper">
     <div class="update-container">
         <div class="update-header">Update Profile</div>
@@ -44,7 +44,7 @@
 
                         <div class="update-item">
                             <span class="update-label">Age:</span>
-                            <asp:TextBox ID="txtAge" runat="server" CssClass="form-control update-value"></asp:TextBox>
+                            <asp:TextBox ID="txtAge" runat="server" CssClass="form-control update-value age-input"></asp:TextBox>
                         </div>
 
                         <div class="update-item gender-item">
@@ -58,7 +58,6 @@
                         <div class="update-item">
                             <span class="update-label">Country:</span>
                             <asp:DropDownList ID="dlCountry" runat="server" CssClass="form-control update-value">
-                                <asp:ListItem Value="Åland Islands">Åland Islands</asp:ListItem>
                                 <asp:ListItem Value="Albania">Albania</asp:ListItem>
                                 <asp:ListItem Value="Algeria">Algeria</asp:ListItem>
                                 <asp:ListItem Value="American Samoa">American Samoa</asp:ListItem>
@@ -312,6 +311,8 @@
                 <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn-cancel" OnClick="btnCancel_Click" CausesValidation="false" />
             </div>
 
+
+
             <asp:Label ID="lblMessage" runat="server" CssClass="update-message text-center fw-bold mt-3"></asp:Label>
         </div>
     </div>
@@ -337,7 +338,7 @@
             });
         </script>
 
-    </div>
+ 
 
     <!-- SqlDataSource -->
     <asp:SqlDataSource ID="SqlDataSource1" runat="server"

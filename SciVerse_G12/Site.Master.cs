@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -9,15 +11,19 @@ namespace SciVerse_G12
 {
     public partial class SiteMaster : MasterPage
     {
+        protected string ProfileImageUrl = "~/Images/Profile/default.png"; // Declare property here
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // Check if user should be logged out (session timeout or manual logout)
-            if (!IsPostBack)
+            if (!IsPostBack && Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString()))
             {
-                // Ensure session is properly maintained
-                if (Session["Username"] != null)
+                LoadProfileImage(Session["Username"].ToString());
+                // Directly set ImageUrl to ensure display (bypasses binding issues in conditional blocks)
+                var profileImg = this.FindControl("ProfileImg") as Image;
+                if (profileImg != null)
                 {
-                   
+                    profileImg.ImageUrl = ProfileImageUrl;
                 }
             }
         }
@@ -37,6 +43,38 @@ namespace SciVerse_G12
 
             // Redirect to login page
             Response.Redirect("~/Account/Login.aspx");
+        }
+
+        private void LoadProfileImage(string username)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    string query = "SELECT picture FROM tblRegisteredUsers WHERE username = @username";
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@username", username);
+
+                    con.Open();
+                    object result = cmd.ExecuteScalar();
+                    con.Close();
+
+                    if (result != null && result != DBNull.Value && !string.IsNullOrEmpty(result.ToString().Trim()))
+                    {
+                        ProfileImageUrl = result.ToString(); // e.g., "~/Images/Profile/user123.jpg"
+                    }
+                    else
+                    {
+                        ProfileImageUrl = "~/Images/Profile/default.png"; // Ensure this file exists
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log for debugging: Response.Write("<script>console.log('Image Load Error: " + ex.Message + "');</script>");
+                ProfileImageUrl = "~/Images/Profile/default.png"; // Fallback
+            }
         }
     }
 }
