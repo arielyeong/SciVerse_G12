@@ -354,6 +354,13 @@
     <Compile Include="Flashcard\FlashcardList.aspx.designer.cs">
       <DependentUpon>FlashcardList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Flashcard\FlashcardList.aspx.cs">
+      <DependentUpon>FlashcardList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Flashcard\FlashcardList.aspx.designer.cs">
+      <DependentUpon>FlashcardList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Flashcard\ViewFlashcardDetails.aspx.cs">
       <DependentUpon>ViewFlashcardDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
