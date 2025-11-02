@@ -13,7 +13,6 @@
             position: relative;
         }
        
-        
         /* Ensure the main content wrapper pushes footer down */
         #contentArea {
             flex: 1;
@@ -55,6 +54,13 @@
                 <asp:Button ID="btnDeleteMode" runat="server" CssClass="btn-custom btn-delete-mode me-2" Text="Delete Mode" OnClick="btnDeleteMode_Click" ToolTip="Enable delete selection" />
                 <asp:Button ID="btnConfirm" runat="server" CssClass="btn-custom btn-confirm me-2" Text="Confirm" Visible="false" OnClick="btnConfirm_Click" ToolTip="Confirm selected actions" />
                 <asp:Button ID="btnCancel" runat="server" CssClass="btn-custom btn-cancel" Text="Cancel" Visible="false" OnClick="btnCancel_Click" ToolTip="Cancel mode" />
+
+                <asp:HyperLink ID="hlAddUser" runat="server" 
+                    NavigateUrl="~/Admin/AddUser.aspx" 
+                    CssClass="btn-custom btn-add-user">
+                    <i class="fa fa-user-plus"></i> Add User
+                </asp:HyperLink>
+
             </div>
         </div>
 

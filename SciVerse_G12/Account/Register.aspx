@@ -44,7 +44,7 @@
                         <label class="form-label">Country</label>
                         <asp:DropDownList ID="dlCountry" runat="server" CssClass="form-control">
                             <asp:ListItem Value="Åland Islands">Åland Islands</asp:ListItem>
-                                <asp:ListItem Value="Albania">Albania</asp:ListItem>
+                               <asp:ListItem Value="Albania">Albania</asp:ListItem>
                                 <asp:ListItem Value="Algeria">Algeria</asp:ListItem>
                                 <asp:ListItem Value="American Samoa">American Samoa</asp:ListItem>
                                 <asp:ListItem Value="Andorra">Andorra</asp:ListItem>

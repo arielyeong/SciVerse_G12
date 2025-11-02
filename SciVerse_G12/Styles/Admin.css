@@ -265,6 +265,37 @@
     }
 }
 
+/* Add User Button */
+.btn-add-user {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 120px;
+    text-align: center;
+}
+
+    .btn-add-user:hover {
+        background: linear-gradient(135deg, #059669 0%, #065f46 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Icon styling */
+    .btn-add-user i {
+        margin-right: 8px; /* Space between icon and text */
+        font-size: 1.2rem;
+    }
+
+
 /***********************************************************
    ADMIN - VIEW MESSAGES PAGE (Improved Reviewed Badge)
 ***********************************************************/
@@ -333,5 +364,241 @@
     .message-right {
         margin-top: 1rem;
         align-self: flex-end;
+    }
+}
+
+/***********************************************************
+   ADMIN - ADD USER PAGE
+***********************************************************/
+
+/* Main Container */
+.add-user-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Light admin gray-blue */
+    margin-top: -30px !important; /* Overlap navbar like other admin pages */
+}
+
+.add-user-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    border: 1.5px solid #e6e6e6;
+    width: 900px; /* Similar to Register width */
+    max-width: 100%;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Header */
+.add-user-header {
+    background: linear-gradient(to right, #007bff, #0056b3); /* Admin blue gradient */
+    color: #ffffff !important;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #0d47a1; /* Admin blue */
+    border-left: 5px solid #007bff;
+    padding-left: 8px;
+}
+
+/* Form Layout: Row-based like Register */
+.add-user-form .row {
+    margin-bottom: 20px;
+}
+
+.add-user-form .col-md-6,
+.add-user-form .col-md-7,
+.add-user-form .col-md-5 {
+    padding: 0 10px;
+}
+
+/* Labels and Inputs */
+.add-user-form label {
+    font-weight: 500;
+    color: #084298;
+    margin-bottom: 5px;
+}
+
+.add-user-form .form-control,
+.add-user-form .form-select {
+    border-radius: 8px;
+    border: 1px solid #b5c7e3;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+    .add-user-form .form-control:focus,
+    .add-user-form .form-select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.18);
+    }
+
+/* Radio Buttons (if used; aligned horizontally) */
+.add-user-form .form-check-inline {
+    margin-right: 20px;
+}
+
+/* Image Preview Section */
+.image-preview-box {
+    text-align: center;
+    padding: 20px;
+}
+
+.img-preview {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 3px solid #bcd2ff;
+    border-radius: 12px;
+    background: #f8f9ff;
+    margin-bottom: 15px;
+}
+
+/* File Upload */
+.add-user-form .form-control[type="file"] {
+    border: 1px dashed #b5c7e3;
+    background: #f8f9ff;
+}
+
+/* Buttons */
+.btn-save-user {
+    background-color: #28a745; /* Green for success/add */
+    color: white;
+    padding: 12px 0;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    width: 80%;
+    max-width: 280px;
+    display: block;
+    margin: 20px auto 0; /* Center below form */
+    transition: 0.3s ease;
+}
+
+    .btn-save-user:hover {
+        background-color: #218838;
+        transform: translateY(-2px);
+    }
+
+.btn-back {
+    background-color: #6c757d; /* Gray for back */
+    color: white;
+    padding: 12px 0;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    width: 80%;
+    max-width: 280px;
+    display: block;
+    margin: 20px auto 0;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+    .btn-back:hover {
+        background-color: #5a6268;
+        transform: translateY(-2px);
+    }
+
+/* Message Label Styling - Enhanced for Visibility (FIXED: More !important, Bootstrap compat) */
+.lblMessage {
+    display: block !important; /* Force block */
+    visibility: visible !important; /* Force visible */
+    text-align: center !important;
+    margin: 15px 0 !important;
+    padding: 12px 20px !important;
+    border-radius: 8px !important;
+    font-size: 1.1rem !important;
+    font-weight: 500 !important;
+    min-height: 40px !important; /* Increased to ensure visibility even if text is short */
+    opacity: 1 !important;
+    width: 100% !important; /* Full width for centering */
+    transition: opacity 0.3s ease, transform 0.3s ease !important;
+    box-sizing: border-box !important; /* Prevent padding overflow */
+}
+
+    /* Error (Danger) - Red Theme */
+    .lblMessage.text-danger {
+        color: #dc3545 !important;
+        background-color: rgba(220, 53, 69, 0.1) !important;
+        border: 1px solid rgba(220, 53, 69, 0.2) !important;
+        box-shadow: 0 2px 4px rgba(220, 53, 69, 0.1) !important;
+    }
+
+    /* Success - Green Theme */
+    .lblMessage.text-success {
+        color: #198754 !important;
+        background-color: rgba(25, 135, 84, 0.1) !important;
+        border: 1px solid rgba(25, 135, 84, 0.2) !important;
+        box-shadow: 0 2px 4px rgba(25, 135, 84, 0.1) !important;
+        transform: translateY(0) !important;
+    }
+
+    /* Hide when empty (initial state) */
+    .lblMessage:empty {
+        display: none !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Fade-in Animation on Load */
+    .lblMessage:not(:empty) {
+        animation: fadeIn 0.5s ease-in-out !important;
+    }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .add-user-card {
+        padding: 20px;
+        width: 95%;
+    }
+
+    .add-user-form .row {
+        flex-direction: column;
+    }
+
+    .image-preview-box {
+        order: -1; /* Move image to top on mobile */
+        margin-bottom: 20px;
+    }
+
+    .btn-save-user,
+    .btn-back {
+        width: 100%;
+    }
+
+    .lblMessage {
+        font-size: 1rem !important; /* Smaller on mobile */
+        min-height: 35px !important;
     }
 }
