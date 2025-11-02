@@ -358,10 +358,6 @@
     <Compile Include="Quiz_Admin\CreateNewQuizPage.aspx.designer.cs">
       <DependentUpon>CreateNewQuizPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Flashcard\Flashcard.aspx.cs">
-      <DependentUpon>Flashcard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Flashcard\FlashcardList.aspx.designer.cs">
       <DependentUpon>FlashcardList.aspx</DependentUpon>
     </Compile>
@@ -549,8 +545,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="LearningMaterials\materials\" />
     <Folder Include="App_Data\" />
+    <Folder Include="LearningMaterials\materials\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
