@@ -143,10 +143,6 @@
     <Content Include="LearningMaterials\EditMaterial.aspx" />
     <Content Include="LearningMaterials\LearningMaterialList.aspx" />
     <Content Include="LearningMaterials\ManageMaterials.aspx" />
-    <Content Include="Quiz\CreateNewQuizPage.aspx" />
-    <Content Include="Quiz\EditQuizPage.aspx" />
-    <Content Include="Quiz\NewQuestion.aspx" />
-    <Content Include="Quiz\ViewQuizList.aspx" />
 	  <Content Include="Images\Profile\science_register.jpg" />
 	  <Content Include="Images\Profile\WAPP_Logo_Header.png" />
 	  <Content Include="Images\science_register.png" />
