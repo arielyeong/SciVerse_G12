@@ -83,7 +83,7 @@
                         <!-- Simulations -->
                         <li class="nav-item fw-bold">
                             <% if (Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString())) { %>
-                                <a class="nav-link" runat="server" href="~/About">Simulations</a>
+                                <a class="nav-link" runat="server" href="~/Simulation/SimulationDashboard.aspx">Simulations</a>
                             <% } else { %>
                                 <a class="nav-link" runat="server" href="~/Account/Login.aspx">Simulations</a>
                             <% } %>
