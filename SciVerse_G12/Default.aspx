@@ -272,47 +272,11 @@
             </div>
         </section>
 
- <%--       <!-- Courses Section -->
-        <section id="courses" class="courses-section py-5 bg-light">
-            <div class="container text-center">
-                <h2 class="section-title mb-4">Start Your Journey</h2>
-                <p class="section-subtitle mb-5">Choose your path and begin exploring</p>
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="course-card p-4 shadow-sm h-100">
-                            <div class="course-icon fs-1 mb-3">⚛️</div>
-                            <h3>Physics</h3>
-                            <p>Explore the fundamental forces that govern our universe.</p>
-                            <a href="#" class="btn btn-course btn-primary mt-3">Explore Physics</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="course-card p-4 shadow-sm h-100">
-                            <div class="course-icon fs-1 mb-3">🧪</div>
-                            <h3>Chemistry</h3>
-                            <p>Discover the magic of molecules and reactions in virtual labs.</p>
-                            <a href="#" class="btn btn-course btn-primary mt-3">Explore Chemistry</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="course-card p-4 shadow-sm h-100">
-                            <div class="course-icon fs-1 mb-3">🧬</div>
-                            <h3>Biology</h3>
-                            <p>Understand the living world through simulations and models.</p>
-                            <a href="#" class="btn btn-course btn-primary mt-3">Explore Biology</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>--%>
-
-
-
         <!-- CTA Section -->
         <section id="cta" class="cta-section py-5 text-center">
             <div class="container">
                 <h2 class="cta-title mb-3">Ready to Transform Your Learning?</h2>
-                <p class="cta-subtitle mb-4">Join thousands of students exploring science in a whole new way.</p>
+                <p class="cta-subtitle mb-4">Join us to explore science in a whole new way.</p>
                 <a href="<%= ResolveUrl("~/Account/Login.aspx") %>" class="btn btn-lg btn-primary">Get Started Free</a>
             </div>
         </section>

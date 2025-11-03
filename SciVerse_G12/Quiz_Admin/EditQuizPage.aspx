@@ -1,9 +1,32 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="EditQuizPage.aspx.cs" Inherits="SciVerse_G12.Quiz_Admin.EditQuizPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+/*        html, body {
+            height: 100%;
+            background: #fefefe;
+            background-attachment: fixed;
+        }*/
+    body.page-stick-footer { padding-bottom: 64px; }  /* = footer height */
+      body.page-stick-footer .footer {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 100;           /* above content */
+      }
 
-    <!-- External CSS in <head> -->
-    <link rel="stylesheet" href='<%= ResolveUrl("~/Styles/AdminQuiz.css?v=" + DateTime.Now.Ticks) %>' />   
+      /* optional: if your footer is taller/shorter on mobile */
+      @media (max-width: 576px) {
+        body.page-stick-footer { padding-bottom: 72px; }
+      }
+    </style>
+
+    <script>
+      // Tag the body only on this page so the CSS applies here
+      document.addEventListener('DOMContentLoaded', function () {
+        document.body.classList.add('page-stick-footer');
+      });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <!-- keep the current mode for postbacks -->

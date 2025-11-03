@@ -69,7 +69,7 @@
 
     </style>
     
-    <h1 class="text-center mb-4">Question Details</h1> 
+    <h1 class="text-center mb-4">Quiz Report</h1> 
     
     <!-- KPI cards --> 
     <div class="row g-3 mb-3"> 

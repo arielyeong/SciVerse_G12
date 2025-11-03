@@ -4,10 +4,11 @@
     <link href='<%= ResolveUrl("~/Styles/Flashcard.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
     <style>
         .body-content {
-            margin-top: 10px !important; 
+            margin-top: 10px !important;
+            margin-bottom: 28px !important;
         }
         .mb-6 {
-            margin-bottom: 35px !important;
+            margin-bottom: 40px !important;
         }  
     </style>
 </asp:Content>

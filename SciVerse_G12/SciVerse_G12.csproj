@@ -53,6 +53,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DataVisualization">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -140,22 +143,25 @@
     <Content Include="LearningMaterials\EditMaterial.aspx" />
     <Content Include="LearningMaterials\LearningMaterialList.aspx" />
     <Content Include="LearningMaterials\ManageMaterials.aspx" />
-	  <Content Include="Images\Profile\science_register.jpg" />
-	  <Content Include="Images\Profile\WAPP_Logo_Header.png" />
-	  <Content Include="Images\science_register.png" />
-	  <Content Include="Images\WAPP_Logo_Header.png" />
-	  <Content Include="Quiz_Admin\CreateNewQuizPage.aspx" />
-	  <Content Include="Quiz_Admin\EditQuizPage.aspx" />
-	  <Content Include="Quiz_Admin\NewQuestion.aspx" />
-	  <Content Include="Quiz_Admin\QuizReport.aspx" />
-	  <Content Include="Quiz_Admin\ViewQuizList.aspx" />
-	  <Content Include="Quiz_Student\QuizDashboardPageStudent.aspx" />
-	  <Content Include="Styles\AdminQuiz.css" />
-	  <Content Include="Simulation\AdminSimulation.aspx" />
-	  <Content Include="Simulation\EditSimulation.aspx" />
-	  <Content Include="Simulation\Experiment.aspx" />
-	  <Content Include="Simulation\SimulationDashboard.aspx" />
-	  <Content Include="Simulation\StartSimulation.aspx" />
+    <Content Include="Images\Profile\science_register.jpg" />
+    <Content Include="Images\Profile\WAPP_Logo_Header.png" />
+    <Content Include="Images\science_register.png" />
+    <Content Include="Images\WAPP_Logo_Header.png" />
+    <Content Include="Quiz_Admin\CreateNewQuizPage.aspx" />
+    <Content Include="Quiz_Admin\EditQuizPage.aspx" />
+    <Content Include="Quiz_Admin\NewQuestion.aspx" />
+    <Content Include="Quiz_Admin\QuizReport.aspx" />
+    <Content Include="Quiz_Admin\ViewQuizList.aspx" />
+    <Content Include="Quiz_Student\AnswersReview.aspx" />
+    <Content Include="Quiz_Student\Quiz.aspx" />
+    <Content Include="Quiz_Student\QuizAttemptHistory.aspx" />
+    <Content Include="Quiz_Student\QuizDashboardPageStudent.aspx" />
+    <Content Include="Styles\AdminQuiz.css" />
+    <Content Include="Simulation\AdminSimulation.aspx" />
+    <Content Include="Simulation\EditSimulation.aspx" />
+    <Content Include="Simulation\Experiment.aspx" />
+    <Content Include="Simulation\SimulationDashboard.aspx" />
+    <Content Include="Simulation\StartSimulation.aspx" />
     <Content Include="Styles\site2.css" />
     <Content Include="Styles\Admin.css" />
     <Content Include="Styles\Flashcard.css" />
@@ -354,6 +360,13 @@
     <Compile Include="Flashcard\FlashcardList.aspx.designer.cs">
       <DependentUpon>FlashcardList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Flashcard\FlashcardList.aspx.cs">
+      <DependentUpon>FlashcardList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Flashcard\FlashcardList.aspx.designer.cs">
+      <DependentUpon>FlashcardList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Flashcard\ViewFlashcardDetails.aspx.cs">
       <DependentUpon>ViewFlashcardDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -403,6 +416,13 @@
     <Compile Include="Quiz_Student\Quiz.aspx.designer.cs">
       <DependentUpon>Quiz.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Quiz_Student\QuizAttemptHistory.aspx.cs">
+      <DependentUpon>QuizAttemptHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Quiz_Student\QuizAttemptHistory.aspx.designer.cs">
+      <DependentUpon>QuizAttemptHistory.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Quiz_Student\QuizDashboardPageStudent.aspx.cs">
       <DependentUpon>QuizDashboardPageStudent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -430,13 +450,6 @@
     </Compile>
     <Compile Include="Quiz_Student\QuizPause.aspx.designer.cs">
       <DependentUpon>QuizPause.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Quiz_Student\QuizResultPage.aspx.cs">
-      <DependentUpon>QuizResultPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Quiz_Student\QuizResultPage.aspx.designer.cs">
-      <DependentUpon>QuizResultPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Quiz_Student\QuizSummary.aspx.cs">
       <DependentUpon>QuizSummary.aspx</DependentUpon>
@@ -539,8 +552,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-	  <Folder Include="LearningMaterials\materials\" />
-	  <Folder Include="Images\Simulation\" />
+    <Folder Include="Images\Simulation\" />
+    <Folder Include="LearningMaterials\materials\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -70,14 +70,14 @@
                         <li class="nav-item dropdown fw-bold">
                             <% if (Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString())) { %>
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                   aria-expanded="false">Quiz</a>
+                                    aria-expanded="false">Quiz</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" runat="server" href="~/Quiz_Student/QuizDashboardPageStudent">Quiz</a></li>
                                     <li><a class="dropdown-item" runat="server" href="~/Flashcard/FlashcardList">Flashcard</a></li>
                                 </ul>
                             <% } else { %>
                                 <a class="nav-link" runat="server" href="~/Account/Login.aspx">Quiz</a>
-                            <% } %>
+                            <% } %>
                         </li>
 
                         <!-- Simulations -->
@@ -132,7 +132,7 @@
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a runat="server" href="~/Account/QuizHistory.aspx"
+                        <a runat="server" href="~/Quiz_Student/QuizHistory"
                            class="text-light text-decoration-none d-block py-2">
                             <i class="fa fa-history me-2"></i> Quiz History
                         </a>

@@ -54,7 +54,7 @@ CREATE TABLE [dbo].[tblRegisteredUsers] (
 ----------------------------------------------------*/
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
-VALUES ('System Admin', 'admin@example.com', 'admin', 'admin123', 30, 'Male', 'Malaysia', 'https://robohash.org/admin.png?size=50x50&set=set1', GETDATE(), 'Admin');
+VALUES ('System Admin', 'admin@example.com', 'admin', 'admin123', 30, 'Male', 'Malaysia', '~/Images/Profile/AdminProfile.jpg', GETDATE(), 'Admin');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
 VALUES ('Charlotte Chen Zi Shan', 'charlotte@mail.com', 'charlotte', 'wapp', 21, 'Female', 'Colombia', 'https://robohash.org/suntquiet.png?size=50x50&set=set1', '2025-02-19 11:42:17', 'User');
@@ -66,7 +66,7 @@ INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age,
 VALUES ('Ong Ying Xin', 'yingxin@mail.com', 'yingxin', 'wapp', 21, 'Male', 'Thailand', 'https://robohash.org/sapientenihilfugit.png?size=50x50&set=set1', '2025-06-12 07:32:32', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
-VALUES ('Yeong Huey Yee', 'hueyyee@mail.com', 'hueyyee', 'wapp', 18, 'Female', 'China', 'https://robohash.org/aspernaturvelrepudiandae.png?size=50x50&set=set1', '2025-07-26 20:58:16', 'User');
+VALUES ('Yeong Huey Yee', 'hueyyee@mail.com', 'hueyyee', 'wapp', 18, 'Female', 'China', '~/Images/Profile/panda.jpg', '2025-07-26 20:58:16', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
 VALUES ('Chen Jia Wei', 'chenjiawei@example.com', 'chenjiawei', 'wapp', 15, 'Female', 'Iceland', 'https://robohash.org/earumabvoluptatem.png?size=50x50&set=set1', '2025-09-15 07:16:42', 'User');
@@ -81,7 +81,7 @@ INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age,
 VALUES ('Lin Zi Xuan', 'linzixuan@example.com', 'linzixuan', 'wapp', 11, 'Female', 'Czech Republic', 'https://robohash.org/voluptatemexet.png?size=50x50&set=set1', '2025-02-04 23:05:16', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
-VALUES ('Zhou Ya Ting', 'zhouyating', 'zhouyating@example.com', 'wapp', 8, 'Female', 'Canada', 'https://robohash.org/laborumquiain.png?size=50x50&set=set1', '2025-01-23 15:38:34', 'User');
+VALUES ('Zhou Ya Ting', 'zhouyating@example.com', 'zhouyating', 'wapp', 8, 'Female', 'Canada', 'https://robohash.org/laborumquiain.png?size=50x50&set=set1', '2025-01-23 15:38:34', 'User');
 
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
 VALUES ('Zhang Zi Chen', 'zhangzichen@example.com', 'zhangzichen', 'wapp', 18, 'Female', 'China', 'https://robohash.org/aspernaturvelrepudiandae.png?size=50x50&set=set1', '2025-07-26 20:58:16', 'User');

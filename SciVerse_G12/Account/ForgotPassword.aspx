@@ -14,7 +14,7 @@
             
             <!-- Title -->
             <h1 class="text-center mb-3" style="font-size:1.9rem; font-weight:600; color:#0d47a1;">Forgot Your Password?</h1>
-            <p class="text-center mb-4"><strong>Enter your username and new password</strong></p>
+            <p class="text-center mb-4"><strong>Enter your username, email, and new password</strong></p>
 
             <!-- Username -->
             <div class="mb-3">
@@ -22,6 +22,14 @@
                 <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" placeholder="Enter your username"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvUsername" runat="server" ControlToValidate="txtUsername" 
                     ErrorMessage="* Username is required" CssClass="text-danger small" Display="Dynamic" />
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="txtEmail" class="form-label">Email Address:</label>
+                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Enter your email" TextMode="Email"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail" 
+                    ErrorMessage="* Email is required" CssClass="text-danger small" Display="Dynamic" />
             </div>
 
             <!-- New Password -->
@@ -60,15 +68,5 @@
             </div>
         </div>
     </div>
-
-    <!-- SQLDataSource for updating password -->
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-        ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-        UpdateCommand="UPDATE [tblRegisteredUsers] SET [password] = @password WHERE [username] = @username">
-        <UpdateParameters>
-            <asp:ControlParameter Name="password" ControlID="txtPassword" PropertyName="Text" Type="String" />
-            <asp:ControlParameter Name="username" ControlID="txtUsername" PropertyName="Text" Type="String" />
-        </UpdateParameters>
-    </asp:SqlDataSource>
 
 </asp:Content>

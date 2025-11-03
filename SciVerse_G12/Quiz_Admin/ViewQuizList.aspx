@@ -1,10 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="ViewQuizList.aspx.cs" Inherits="SciVerse_G12.Quiz_Admin.ViewQuizList" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Page-specific CSS -->
-    <link href='<%= ResolveUrl("~/Styles/AdminQuiz.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="view-quiz-list">
@@ -99,11 +95,11 @@
     <div class="modal-dialog modal-dialog-centered"> <!-- Centered vertically -->
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="confirmDeleteLabel">Delete selected question(s)</h5>
+          <h5 class="modal-title" id="confirmDeleteLabel">Delete selected quiz</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Are you sure you want to delete the selected question(s)? This action cannot be undone.
+          Are you sure you want to delete the selected quiz? This action cannot be undone.
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, cancel</button>

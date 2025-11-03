@@ -110,7 +110,7 @@ namespace SciVerse_G12.Quiz_Admin
                     string safeBase = sb.Length == 0 ? "image" : sb.ToString();
                     if (safeBase.Length > 80) safeBase = safeBase.Substring(0, 80);
 
-                    // Ensure unique name (dog.png → dog(1).png)
+                    // Ensure unique name (file.png → file(1).png)
                     string finalFileName = safeBase + ext;
                     string fullPath = Path.Combine(folderPath, finalFileName);
                     int i = 1;

@@ -15,13 +15,22 @@ namespace SciVerse_G12.Quiz_Student
     {
 
         /// <summary>
-        /// litQuizTitle control.
+        /// litScoreNum control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litQuizTitle;
+        protected global::System.Web.UI.WebControls.Literal litScoreNum;
+
+        /// <summary>
+        /// litScoreDen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litScoreDen;
 
         /// <summary>
         /// litTime control.
@@ -33,15 +42,6 @@ namespace SciVerse_G12.Quiz_Student
         protected global::System.Web.UI.WebControls.Literal litTime;
 
         /// <summary>
-        /// litIncorrect control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litIncorrect;
-
-        /// <summary>
         /// litCorrect control.
         /// </summary>
         /// <remarks>
@@ -49,6 +49,15 @@ namespace SciVerse_G12.Quiz_Student
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litCorrect;
+
+        /// <summary>
+        /// litIncorrect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litIncorrect;
 
         /// <summary>
         /// btnShowAnswers control.
