@@ -11,7 +11,6 @@
             margin-top: 35px !important;
             margin-bottom: 35px !important;
         }   
-        /* In your custom CSS file (e.g., Site.css) or <style> block */
         #flashcardContainer {
             padding-left: 1rem;  
             padding-right: 1rem; 
@@ -34,7 +33,7 @@
     </div>
 </div>
 
- <div id="flashcardContainer" class="container-fluid my-7" style="height:30vh;">
+ <div id="flashcardContainer" class="container-fluid my-5" style="height:30vh;">
      <asp:Panel ID="Panel1" runat="server" 
          CssClass="mx-auto my-2 px-3 py-7 rounded d-flex flex-column justify-content-center align-items-center text-center" 
          Width="100%" Height="100%" Style="background-color:#298fba;">
