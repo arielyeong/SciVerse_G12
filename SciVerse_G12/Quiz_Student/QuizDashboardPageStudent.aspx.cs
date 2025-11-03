@@ -2,8 +2,6 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Collections.Generic;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace SciVerse_G12.Quiz_Student
@@ -48,38 +46,38 @@ namespace SciVerse_G12.Quiz_Student
         private void LoadData(string keyword = "", string chapterFilter = "")
         {
             string sql = @"
-SELECT
-    q.QuizID,
-    q.Title,
-    q.Description,
-    q.Chapter,
-    q.TimeLimit,
-    q.ImageURL,
-    q.AttemptLimit,
-    ISNULL(P.AttemptsTaken, 0) AS AttemptsTaken,
-    ISNULL(P.BestPercent, 0)   AS BestPercent
-FROM dbo.tblQuiz AS q
-LEFT JOIN (
-    /* Per-user progress:
-       1) Compute each attempt's percentage
-       2) Then aggregate per QuizID: AttemptsTaken + BestPercent (max of attempts) */
-    SELECT S.QuizID,
-           COUNT(*) AS AttemptsTaken,
-           MAX(S.AttemptPercent) AS BestPercent
-    FROM (
-        SELECT qa.QuizID,
-               qa.AttemptID,
-               CASE WHEN SUM(r.Marks) > 0
-                        THEN (SUM(r.Score) * 100.0 / SUM(r.Marks))
-                    ELSE 0 END AS AttemptPercent
-        FROM dbo.tblQuizAttempt qa
-        LEFT JOIN dbo.tblQuizResult r ON r.AttemptID = qa.AttemptID
-        WHERE qa.RID = @rid
-        GROUP BY qa.QuizID, qa.AttemptID
-    ) AS S
-    GROUP BY S.QuizID
-) AS P ON P.QuizID = q.QuizID
-WHERE 1=1 ";
+                SELECT
+                    q.QuizID,
+                    q.Title,
+                    q.Description,
+                    q.Chapter,
+                    q.TimeLimit,
+                    q.ImageURL,
+                    q.AttemptLimit,
+                    ISNULL(P.AttemptsTaken, 0) AS AttemptsTaken,
+                    ISNULL(P.BestPercent, 0)   AS BestPercent
+                FROM dbo.tblQuiz AS q
+                LEFT JOIN (
+                    /* Per-user progress:
+                       1) Compute each attempt's percentage
+                       2) Then aggregate per QuizID: AttemptsTaken + BestPercent (max of attempts) */
+                    SELECT S.QuizID,
+                           COUNT(*) AS AttemptsTaken,
+                           MAX(S.AttemptPercent) AS BestPercent
+                    FROM (
+                        SELECT qa.QuizID,
+                               qa.AttemptID,
+                               CASE WHEN SUM(r.Marks) > 0
+                                        THEN (SUM(r.Score) * 100.0 / SUM(r.Marks))
+                                    ELSE 0 END AS AttemptPercent
+                        FROM dbo.tblQuizAttempt qa
+                        LEFT JOIN dbo.tblQuizResult r ON r.AttemptID = qa.AttemptID
+                        WHERE qa.RID = @rid
+                        GROUP BY qa.QuizID, qa.AttemptID
+                    ) AS S
+                    GROUP BY S.QuizID
+                ) AS P ON P.QuizID = q.QuizID
+                WHERE 1=1 ";
 
             bool hasKeyword = !string.IsNullOrWhiteSpace(keyword);
             bool hasChapter = !string.IsNullOrWhiteSpace(chapterFilter) && chapterFilter != "0";
@@ -89,7 +87,7 @@ WHERE 1=1 ";
             if (hasChapter)
                 sql += " AND q.Chapter = @chap";
 
-            // ✅ Simple numeric sort — no duplication issue
+            // Simple numeric sort — no duplication issue
             sql += " ORDER BY q.Chapter, q.QuizID;";
 
             var dt = new DataTable();
@@ -107,7 +105,6 @@ WHERE 1=1 ";
         }
 
 
-        // === Chapter dropdown ===
         // === Chapter dropdown ===
         private void LoadChapterDropdown()
         {

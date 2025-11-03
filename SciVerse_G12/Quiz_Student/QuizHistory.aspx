@@ -4,10 +4,23 @@
     TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
-    body, .body-content, .card:first-child {
-        margin-top: 10px !important;
-        padding-top: 10px !important;
-    }
+        /* scope to this page only (optional) */
+  body.quiz-history-page .main-content-wrapper .card:first-child {
+    margin-top: 24px !important;   /* about 1.5rem space */
+}
+
+  /* remove the extra gap you added earlier */
+  body.quiz-history-page,
+  body.quiz-history-page .body-content,
+  body.quiz-history-page .card:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* also ensure the very first child inside body-content has no top margin */
+  body.quiz-history-page .body-content > *:first-child {
+    margin-top: 0 !important;
+  }
 
     .card {
         margin-top: 10px !important; /* slightly smaller spacing between cards */
@@ -22,7 +35,14 @@
     .btn{min-width:120px;height:40px;border:none;border-radius:10px;font-weight:800;cursor:pointer}
     .btn-primary{background:#2563eb;color:#fff}
     .btn-ghost{background:#f3f4f6}
+
   </style>
+    <script>
+  // tag the body so the overrides only apply on this page
+  document.addEventListener('DOMContentLoaded', function () {
+    document.body.classList.add('quiz-history-page');
+  });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="card">
