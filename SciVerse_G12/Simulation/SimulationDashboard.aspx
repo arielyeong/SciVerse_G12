@@ -2,9 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
         .dashboard-container {
-            padding: 30px 20px;
+            padding: 10px;
             max-width: 1400px;
-            margin: 0 auto;
+            margin-top: -50px;
         }
         .dashboard-title {
             text-align: center;

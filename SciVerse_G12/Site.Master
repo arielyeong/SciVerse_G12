@@ -169,7 +169,8 @@
                     <!-- About Us (always accessible) -->
                     <a href="<%= ResolveUrl("~/About.aspx") %>" class="text-white text-decoration-none mx-2">About Us</a>
                 </div>
-                <p class="mb-0">&copy; <%: DateTime.Now.Year %> - SciVerse. All Rights Reserved.</p>
+                <p class="mb-1">&copy; <%: DateTime.Now.Year %> - SciVerse. All Rights Reserved.</p>
+                <p class="mb-0 small">PhET Interactive Simulations &copy; <%: DateTime.Now.Year %> University of Colorado Boulder. <a href="https://phet.colorado.edu" target="_blank" class="text-white-50">https://phet.colorado.edu</a></p>
             </div>
         </footer>
 
