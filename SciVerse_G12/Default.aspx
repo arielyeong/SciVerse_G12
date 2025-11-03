@@ -276,7 +276,7 @@
         <section id="cta" class="cta-section py-5 text-center">
             <div class="container">
                 <h2 class="cta-title mb-3">Ready to Transform Your Learning?</h2>
-                <p class="cta-subtitle mb-4">Join thousands of students exploring science in a whole new way.</p>
+                <p class="cta-subtitle mb-4">Join us to explore science in a whole new way.</p>
                 <a href="<%= ResolveUrl("~/Account/Login.aspx") %>" class="btn btn-lg btn-primary">Get Started Free</a>
             </div>
         </section>
