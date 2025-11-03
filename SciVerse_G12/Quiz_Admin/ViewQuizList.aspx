@@ -1,6 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="ViewQuizList.aspx.cs" Inherits="SciVerse_G12.Quiz_Admin.ViewQuizList" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    
+    <style>
+    /* Make the page a flex column so the footer sits after the content */
+    html, body, form { height:100%; }
+    body { min-height:100vh; display:flex; flex-direction:column; }
+
+    /* Admin master wraps content in these; let them expand */
+    .main-content-wrapper,
+    .body-content,
+    #MainContent {
+      flex: 1 0 auto;           /* grow to fill remaining height */
+    }
+
+    /* Footer naturally drops to the bottom */
+    .footer {
+      flex: 0 0 auto;
+      margin-top: auto !important;
+      position: static !important;   /* ensure not fixed/absolute */
+    }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="view-quiz-list">
