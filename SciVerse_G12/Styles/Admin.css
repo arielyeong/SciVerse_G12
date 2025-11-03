@@ -1,7 +1,7 @@
-﻿/******/
-/*Admin View User List*/
-/******/
-/* Page Header Redesign */
+﻿/***********************************************************
+   Admin View User List
+***********************************************************/
+
 .content-header {
     background: #bbdefb;
     color: #333; /* Changed to dark for better contrast on light blue */
@@ -297,7 +297,7 @@
 
 
 /***********************************************************
-   ADMIN - VIEW MESSAGES PAGE (Improved Reviewed Badge)
+   ADMIN - VIEW MESSAGES PAGE
 ***********************************************************/
 
 /* Right Side - Reviewed Section */

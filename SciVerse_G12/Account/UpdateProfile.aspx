@@ -318,8 +318,6 @@
     </div>
 </div>
 
-            
-             <!-- ✅ Add this script here -->
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const fileUpload = document.getElementById('<%= FileUploadPic.ClientID %>');
@@ -338,7 +336,6 @@
             });
         </script>
 
- 
 
     <!-- SqlDataSource -->
     <asp:SqlDataSource ID="SqlDataSource1" runat="server"

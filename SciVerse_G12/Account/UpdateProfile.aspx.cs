@@ -104,7 +104,7 @@ namespace SciVerse_G12
                 if (FileUploadPic.PostedFile.ContentLength > 5 * 1024 * 1024 ||
                     !FileUploadPic.PostedFile.ContentType.StartsWith("image/"))
                 {
-                    lblMessage.Text = "⚠️ Image must be <5MB and a valid image type (JPG, PNG, etc.).";
+                    lblMessage.Text = "Image must be <5MB and a valid image type (JPG, PNG, etc.).";
                     lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
                     return;
                 }
@@ -127,7 +127,7 @@ namespace SciVerse_G12
                 }
                 catch (Exception ex)
                 {
-                    lblMessage.Text = "⚠️ Image upload failed: " + ex.Message;
+                    lblMessage.Text = "Image upload failed: " + ex.Message;
                     lblMessage.CssClass = "update-message text-center fw-bold mt-3 text-danger";
                     return;
                 }

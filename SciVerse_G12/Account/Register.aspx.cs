@@ -19,10 +19,10 @@ namespace SciVerse_G12
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Populate dlCountry if needed (example; adjust as per your data source)
+            
             if (!IsPostBack)
             {
-                // Example: dlCountry.Items.Add(new ListItem("USA", "USA")); etc.
+
             }
         }
 
@@ -97,7 +97,7 @@ namespace SciVerse_G12
                 return;
             }
 
-            // *** Handle Image Upload (Now Required - Validation Here) ***
+            // *** Handle Image Upload ***
             string imagePath = null;
             // Basic validation: size < 5MB, image type
             if (FileUploadPic.PostedFile.ContentLength > 5 * 1024 * 1024 ||
@@ -134,7 +134,7 @@ namespace SciVerse_G12
             try
             {
                 SqlDataSource1.Insert();
-                lblMessage.Text = "✅ Registration Successful! Redirecting to login...";
+                lblMessage.Text = "Registration Successful! Redirecting to login...";
                 lblMessage.CssClass = "d-block text-center text-success mt-2";
                 // Delay redirect slightly to show message
                 ClientScript.RegisterStartupScript(this.GetType(), "redirect",
@@ -147,9 +147,6 @@ namespace SciVerse_G12
             }
         }
 
-        /// <summary>
-        /// Checks if a value exists for a given column (username or emailAddress) in the DB.
-        /// </summary>
         private bool IsDuplicate(string columnName, string value)
         {
             try

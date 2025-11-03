@@ -7,18 +7,15 @@
     <!-- Page-specific CSS -->
     <link href='<%= ResolveUrl("~/Styles/Admin.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
 
-    <!-- FOOTER FIX STYLES -->
     <style>
         .admin-content {
             position: relative;
         }
        
-        /* Ensure the main content wrapper pushes footer down */
         #contentArea {
             flex: 1;
         }
         
-        /* Add padding to bottom of content */
         .container.body-content {
             padding-bottom: 60px;
         }
@@ -28,7 +25,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <!-- Main Content -->
     <div class="admin-content" id="contentArea">
-        <!-- Redesigned Header: Bold with icon and subtle underline -->
         <div class="content-header">
             <h1 class="page-title">
                 <i class="fa fa-users me-2"></i>View User List
@@ -36,9 +32,7 @@
             <p class="page-subtitle">Manage and monitor registered users</p>
         </div>
 
-        <!-- Redesigned Top Controls: Compact row with icon search button -->
         <div class="top-controls">
-            <!-- Left: Search Input + Icon Button -->
             <div class="search-section">
                 <div class="input-group input-group-sm" style="width: 300px;">
                     <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control search-input" Placeholder="Search..."></asp:TextBox>
@@ -48,7 +42,6 @@
                 </div>
             </div>
 
-            <!-- Right: Custom Mode Buttons (No Bootstrap colors - custom soft palette) -->
             <div class="mode-buttons">
                 <asp:Button ID="btnEditMode" runat="server" CssClass="btn-custom btn-edit-mode me-2" Text="Edit Mode" OnClick="btnEditMode_Click" ToolTip="Enable edit selection" />
                 <asp:Button ID="btnDeleteMode" runat="server" CssClass="btn-custom btn-delete-mode me-2" Text="Delete Mode" OnClick="btnDeleteMode_Click" ToolTip="Enable delete selection" />
@@ -64,7 +57,6 @@
             </div>
         </div>
 
-        <!-- Responsive Table Wrapper -->
         <div class="table-responsive">
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
                 ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
@@ -138,10 +130,8 @@
             </asp:GridView>
         </div>
 
-        <!-- Error Label -->
         <asp:Label ID="lblError" runat="server" CssClass="alert alert-danger mt-3" Visible="false"></asp:Label>
 
-        <!-- No-Results Message (Handled by EmptyDataText, but enhanced via CSS) -->
         <div id="noResults" class="no-results text-center py-5 text-muted" runat="server" visible="false">
             <i class="fa fa-search fa-3x mb-3"></i>
             <h4>No Users Found</h4>

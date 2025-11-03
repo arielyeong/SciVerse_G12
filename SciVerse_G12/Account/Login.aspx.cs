@@ -43,12 +43,12 @@ namespace SciVerse_G12
                 {
                     string loggedInUser = reader["username"].ToString();
                     string role = reader["role"].ToString();
-                    string rid = reader["RID"].ToString();   // ✅ get RID from the database
+                    string rid = reader["RID"].ToString();   // get RID from the database
 
                     // Save all values into session
                     Session["Username"] = loggedInUser;
                     Session["Role"] = role;
-                    Session["RID"] = rid;                    // ✅ store RID in session
+                    Session["RID"] = rid;                    // store RID in session
 
                     // Redirect based on role
                     if (role == "Admin")
@@ -64,7 +64,7 @@ namespace SciVerse_G12
                 }
                 else
                 {
-                    lblMessage.Text = "❌ Invalid username or password!";
+                    lblMessage.Text = "Invalid username or password!";
                     lblMessage.ForeColor = System.Drawing.Color.Red;
                 }
             }
