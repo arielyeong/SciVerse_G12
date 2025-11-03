@@ -81,6 +81,20 @@ header,
     margin-top: 90px; /* Match navbar height */
 }
 
+.navbar-nav .dropdown {
+    position: relative;
+}
+
+.navbar-nav .dropdown-menu {
+    margin-top: 0; /* Ensure dropdown doesn’t add extra margin */
+    padding: 0; /* Reset padding if needed */
+}
+
+.navbar-nav .dropdown-item {
+    padding: 8px 12px; /* Adjust item padding to your needs */
+}
+
+
 /* Footer */
 .footer-wrapper {
     width: 100%;

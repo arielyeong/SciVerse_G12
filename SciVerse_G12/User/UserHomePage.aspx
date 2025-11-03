@@ -32,7 +32,7 @@
                 <div class="row mt-5 hero-stats">
                     <div class="col-md-4">
                         <div class="stat-item">
-                            <div class="stat-number">10</div>
+                            <div class="stat-number">100+</div>
                             <div class="stat-label">Active Students</div>
                         </div>
                     </div>
