@@ -50,7 +50,6 @@ namespace SciVerse_G12.Quiz_Student
                     ddlQuiz.DataTextField = "Title";
                     ddlQuiz.DataValueField = "QuizID";
                     ddlQuiz.DataBind();
-                    ddlQuiz.Items.Insert(0, new System.Web.UI.WebControls.ListItem("All Quizzes", ""));
                 }
 
                 using (var da = new SqlDataAdapter("SELECT DISTINCT Chapter FROM dbo.tblQuiz ORDER BY Chapter", con))
@@ -61,7 +60,6 @@ namespace SciVerse_G12.Quiz_Student
                     ddlChapter.DataTextField = "Chapter";
                     ddlChapter.DataValueField = "Chapter";
                     ddlChapter.DataBind();
-                    ddlChapter.Items.Insert(0, new System.Web.UI.WebControls.ListItem("All Chapters", ""));
                 }
             }
         }
