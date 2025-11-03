@@ -140,7 +140,7 @@
                     </li>
                 </ul>
             </div>
-        <% } %>
+ 
 
         <!-- Main Content -->
         <div class="main-content-wrapper" style="flex: 1 0 auto;">

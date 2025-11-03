@@ -137,10 +137,12 @@ namespace SciVerse_G12.Quiz_Student
 
         protected void btnFlashcards_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(hidAttemptId.Value))
-                Response.Redirect($"~/Flashcard/ViewFlashcard.aspx?attemptId={hidAttemptId.Value}", false);
-            else
-                Response.Redirect($"~/Flashcard/ViewFlashcard.aspx?quizId={hidQuizId.Value}", false);
+            string flashcardId = hidQuizId.Value;
+            if(string.IsNullOrEmpty(flashcardId))
+                flashcardId = Request.QueryString["quizId"] ?? "0";
+
+            // Redirect to your existing Flashcard page with correct query param
+            Response.Redirect($"~/Flashcard/ViewFlashcardDetails.aspx?flashcard_id={flashcardId}", false);
         }
 
         protected void btnStartAgain_Click(object sender, EventArgs e)
