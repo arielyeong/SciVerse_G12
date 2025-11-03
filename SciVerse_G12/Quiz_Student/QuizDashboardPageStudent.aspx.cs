@@ -89,7 +89,8 @@ WHERE 1=1 ";
             if (hasChapter)
                 sql += " AND q.Chapter = @chap";
 
-            sql += @" ORDER BY TRY_CONVERT(int, q.Chapter), q.Chapter, q.QuizID;";
+            // ✅ Simple numeric sort — no duplication issue
+            sql += " ORDER BY q.Chapter, q.QuizID;";
 
             var dt = new DataTable();
             using (var con = new SqlConnection(connStr))
@@ -105,15 +106,16 @@ WHERE 1=1 ";
             Repeater_QuizCards.DataBind();
         }
 
+
+        // === Chapter dropdown ===
         // === Chapter dropdown ===
         private void LoadChapterDropdown()
         {
             const string sql = @"
-SELECT Chapter
-FROM dbo.tblQuiz
-WHERE Chapter IS NOT NULL AND LTRIM(RTRIM(Chapter)) <> ''
-GROUP BY Chapter
-ORDER BY TRY_CONVERT(int, Chapter), Chapter;";
+        SELECT DISTINCT Chapter
+        FROM dbo.tblQuiz
+        WHERE Chapter IS NOT NULL
+        ORDER BY Chapter;";
 
             var dt = new DataTable();
             using (var con = new SqlConnection(connStr))
@@ -128,6 +130,7 @@ ORDER BY TRY_CONVERT(int, Chapter), Chapter;";
             DropDownList_FilterByChapter.DataBind();
             DropDownList_FilterByChapter.Items.Insert(0, new ListItem("Select Chapter", "0"));
         }
+
 
         // === Search/Clear/Filter ===
         protected void btnSearch_Click(object sender, EventArgs e)
