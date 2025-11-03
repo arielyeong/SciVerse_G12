@@ -24,7 +24,7 @@ INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 
 -- Q2
 INSERT INTO tblQuestion (QuizID, QuestionText, QuestionType, Marks, Explanation)
-VALUES (1, 'An object at rest stays at rest unless acted upon by an external force.', 'TF', 2, 'This is the definition of Newton''s First Law of Motion, also known as the law of inertia.');
+VALUES (1, 'An object at rest stays at rest unless acted upon by an external force.', 'TrueFalse', 2, 'This is the definition of Newton''s First Law of Motion, also known as the law of inertia.');
 SET @QID = SCOPE_IDENTITY();
 INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 (@QID, 'True', 1),
@@ -49,7 +49,7 @@ INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 
 -- Q5
 INSERT INTO tblQuestion (QuizID, QuestionText, QuestionType, Marks, Explanation)
-VALUES (1, 'Gravity always acts toward the center of the Earth.', 'TF', 2, 'Gravity is an attractive force that pulls objects toward the center of mass. For Earth, this is its center.');
+VALUES (1, 'Gravity always acts toward the center of the Earth.', 'TrueFalse', 2, 'Gravity is an attractive force that pulls objects toward the center of mass. For Earth, this is its center.');
 SET @QID = SCOPE_IDENTITY();
 INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 (@QID, 'True', 1),
@@ -57,7 +57,7 @@ INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 
 -- Q6
 INSERT INTO tblQuestion (QuizID, QuestionText, QuestionType, Marks, Explanation)
-VALUES (1, 'A car moving at constant velocity has zero net force.', 'TF', 2, 'According to Newton''s First Law, constant velocity (including zero velocity) means the net force acting on the object is zero.');
+VALUES (1, 'A car moving at constant velocity has zero net force.', 'TrueFalse', 2, 'According to Newton''s First Law, constant velocity (including zero velocity) means the net force acting on the object is zero.');
 SET @QID = SCOPE_IDENTITY();
 INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 (@QID, 'True', 1),
@@ -92,7 +92,7 @@ INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 
 -- Q3
 INSERT INTO tblQuestion (QuizID, QuestionText, QuestionType, Marks, Explanation)
-VALUES (2, 'Evaporation occurs at the boiling point.', 'TF', 2, 'False. Evaporation is a surface phenomenon that can occur at any temperature. Boiling occurs throughout the liquid at a specific boiling point.');
+VALUES (2, 'Evaporation occurs at the boiling point.', 'TrueFalse', 2, 'False. Evaporation is a surface phenomenon that can occur at any temperature. Boiling occurs throughout the liquid at a specific boiling point.');
 SET @QID = SCOPE_IDENTITY();
 INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 (@QID, 'True', 0),
@@ -110,7 +110,7 @@ INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 
 -- Q5
 INSERT INTO tblQuestion (QuizID, QuestionText, QuestionType, Marks, Explanation)
-VALUES (2, 'Atoms of the same element are identical in mass and properties.', 'TF', 2, 'This is a fundamental concept in basic chemistry, though we now know isotopes (atoms of the same element with different neutron counts) do exist.');
+VALUES (2, 'Atoms of the same element are identical in mass and properties.', 'TrueFalse', 2, 'This is a fundamental concept in basic chemistry, though we now know isotopes (atoms of the same element with different neutron counts) do exist.');
 SET @QID = SCOPE_IDENTITY();
 INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 (@QID, 'True', 1),
@@ -118,7 +118,7 @@ INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 
 -- Q6
 INSERT INTO tblQuestion (QuizID, QuestionText, QuestionType, Marks, Explanation)
-VALUES (2, 'Condensation changes gas into [blank].', 'FIB', 2, 'Condensation is the phase change from a gaseous state to a liquid state.');
+VALUES (2, 'Condensation changes gas into [blank].', 'FillInBlanks', 2, 'Condensation is the phase change from a gaseous state to a liquid state.');
 SET @QID = SCOPE_IDENTITY();
 INSERT INTO tblOptions (QuestionID, optionText, isCorrect)
 VALUES (@QID, 'liquid', 1);
@@ -151,7 +151,7 @@ INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 
 -- Q3
 INSERT INTO tblQuestion (QuizID, QuestionText, QuestionType, Marks, Explanation)
-VALUES (3, 'Temperature is a measure of the average kinetic energy of particles.', 'TF', 2, 'This is the definition of temperature in thermodynamics.');
+VALUES (3, 'Temperature is a measure of the average kinetic energy of particles.', 'TrueFalse', 2, 'This is the definition of temperature in thermodynamics.');
 SET @QID = SCOPE_IDENTITY();
 INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 (@QID, 'True', 1),
@@ -176,7 +176,7 @@ INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 
 -- Q6
 INSERT INTO tblQuestion (QuizID, QuestionText, QuestionType, Marks, Explanation)
-VALUES (3, 'When ice melts, heat is absorbed by the ice.', 'TF', 2, 'True. This is an endothermic process. The absorbed heat is called the latent heat of fusion.');
+VALUES (3, 'When ice melts, heat is absorbed by the ice.', 'TrueFalse', 2, 'True. This is an endothermic process. The absorbed heat is called the latent heat of fusion.');
 SET @QID = SCOPE_IDENTITY();
 INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 (@QID, 'True', 1),
@@ -203,7 +203,7 @@ INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 
 -- Q2
 INSERT INTO tblQuestion (QuizID, QuestionText, QuestionType, Marks, Explanation)
-VALUES (4, 'The heart pumps blood throughout the body.', 'TF', 2, 'The heart is the central pump of the circulatory system.');
+VALUES (4, 'The heart pumps blood throughout the body.', 'TrueFalse', 2, 'The heart is the central pump of the circulatory system.');
 SET @QID = SCOPE_IDENTITY();
 INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 (@QID, 'True', 1),
@@ -228,7 +228,7 @@ INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 
 -- Q5
 INSERT INTO tblQuestion (QuizID, QuestionText, QuestionType, Marks, Explanation)
-VALUES (4, 'The skeletal system provides structure and support to the body.', 'TF', 2, 'The skeletal system also protects internal organs and allows for movement.');
+VALUES (4, 'The skeletal system provides structure and support to the body.', 'TrueFalse', 2, 'The skeletal system also protects internal organs and allows for movement.');
 SET @QID = SCOPE_IDENTITY();
 INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 (@QID, 'True', 1),
@@ -275,7 +275,7 @@ INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 
 -- Q3 (FIXED: Was T/F, now has correct T/F options)
 INSERT INTO tblQuestion (QuizID, QuestionText, QuestionType, Marks, Explanation)
-VALUES (5, 'The asteroid belt is located between Mars and Jupiter.', 'TF', 2, 'The main asteroid belt is indeed located in the gap between the orbits of Mars and Jupiter.');
+VALUES (5, 'The asteroid belt is located between Mars and Jupiter.', 'TrueFalse', 2, 'The main asteroid belt is indeed located in the gap between the orbits of Mars and Jupiter.');
 SET @QID = SCOPE_IDENTITY();
 INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 (@QID, 'True', 1),
@@ -293,7 +293,7 @@ INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 
 -- Q5
 INSERT INTO tblQuestion (QuizID, QuestionText, QuestionType, Marks, Explanation)
-VALUES (5, 'Neptune is closer to the Sun than Uranus.', 'TF', 2, 'False. The order from the Sun is: ...Uranus, Neptune. Therefore, Uranus is closer.');
+VALUES (5, 'Neptune is closer to the Sun than Uranus.', 'TrueFalse', 2, 'False. The order from the Sun is: ...Uranus, Neptune. Therefore, Uranus is closer.');
 SET @QID = SCOPE_IDENTITY();
 INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 (@QID, 'False', 1),
