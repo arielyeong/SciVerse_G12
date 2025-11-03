@@ -39,6 +39,10 @@
                     placeholder="Enter new password"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ControlToValidate="txtPassword" 
                     ErrorMessage="* Password is required" CssClass="text-danger small" Display="Dynamic" />
+                <asp:CustomValidator ID="CustomValidator1" runat="server" ControlToValidate="txtPassword"
+                    OnServerValidate="ValidatePassword" 
+                    ErrorMessage="* Password must be at least 4 characters" 
+                    CssClass="text-danger small" Display="Dynamic" />
             </div>
 
             <!-- Confirm Password -->

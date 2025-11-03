@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.Configuration;
+using System.Data.SqlClient;
+using System.Web.UI.WebControls;
 
 namespace SciVerse_G12
 {
@@ -26,7 +27,7 @@ namespace SciVerse_G12
             string newPassword = txtPassword.Text.Trim();
             string confirmPassword = txtConfirmPassword.Text.Trim();
 
-            // ✅ Double-check passwords match (for extra safety)
+            // Double-check passwords match (for extra safety)
             if (newPassword != confirmPassword)
             {
                 lblMessage.Text = "Passwords do not match!";
@@ -40,7 +41,7 @@ namespace SciVerse_G12
             {
                 conn.Open();
 
-                // ✅ First, verify that the provided username and email exactly match a single account in the database
+                // First, verify that the provided username and email exactly match a single account in the database
                 string checkQuery = "SELECT COUNT(*) FROM tblRegisteredUsers WHERE username = @username AND emailAddress = @email";
                 SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
                 checkCmd.Parameters.AddWithValue("@username", username);
@@ -48,14 +49,14 @@ namespace SciVerse_G12
 
                 int matchCount = (int)checkCmd.ExecuteScalar();
 
-                if (matchCount != 1)  // ✅ Ensure exactly one match (prevents duplicates if any)
+                if (matchCount != 1)  // Ensure exactly one match (prevents duplicates if any)
                 {
                     lblMessage.Text = "The provided username and email do not match any existing account!";
                     lblMessage.ForeColor = System.Drawing.Color.Red;
                     return;
                 }
 
-                // ✅ If exact match found, proceed with password update using the same WHERE clause
+                // If exact match found, proceed with password update using the same WHERE clause
                 string updateQuery = "UPDATE tblRegisteredUsers SET password = @password WHERE username = @username AND emailAddress = @email";
                 SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
                 updateCmd.Parameters.AddWithValue("@password", newPassword);
@@ -64,7 +65,7 @@ namespace SciVerse_G12
 
                 int rowsAffected = updateCmd.ExecuteNonQuery();
 
-                if (rowsAffected == 1)  // ✅ Confirm exactly one row was updated
+                if (rowsAffected == 1)  // Confirm exactly one row was updated
                 {
                     lblMessage.Text = "Password updated successfully for your account! Redirecting to Login...";
                     lblMessage.ForeColor = System.Drawing.Color.Green;
@@ -79,6 +80,19 @@ namespace SciVerse_G12
                     lblMessage.Text = "Failed to update password. Please try again or contact support.";
                     lblMessage.ForeColor = System.Drawing.Color.Red;
                 }
+            }
+        }
+
+        protected void ValidatePassword(object source, ServerValidateEventArgs args)
+        {
+            string password = txtPassword.Text.Trim();
+
+            // Simple length validation - at least 4 characters
+            args.IsValid = password.Length >= 4;
+
+            if (!args.IsValid)
+            {
+                CustomValidator1.ErrorMessage = $"* Password must be at least 4 characters (Current: {password.Length})";
             }
         }
     }
