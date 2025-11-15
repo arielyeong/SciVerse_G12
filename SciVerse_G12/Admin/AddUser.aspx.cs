@@ -148,7 +148,7 @@ namespace SciVerse_G12
                     {
                         conn.Open();
                         cmd.ExecuteNonQuery();
-                        ShowMessage("✅ User added successfully! Redirecting...", "success");
+                        ShowMessage("User added successfully! Redirecting...", "success");
                         // Delay redirect slightly to show message
                         ClientScript.RegisterStartupScript(this.GetType(), "redirect",
                             "setTimeout(function(){ window.location.href = '" + ResolveUrl("ViewUserList.aspx") + "'; }, 1500);", true);

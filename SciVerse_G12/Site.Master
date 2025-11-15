@@ -181,9 +181,9 @@
 
                     <!-- Contact (restricted) -->
                     <% if (Session["Username"] != null && !string.IsNullOrEmpty(Session["Username"].ToString())) { %>
-                        <a href="<%= ResolveUrl("~/Contact.aspx") %>" class="text-white text-decoration-none mx-2">Contact</a>
+                        <a href="<%= ResolveUrl("~/Contact.aspx") %>" class="text-white text-decoration-none mx-2">Contact Us</a>
                     <% } else { %>
-                        <a href="<%= ResolveUrl("~/Account/Login.aspx") %>" class="text-white text-decoration-none mx-2">Contact</a>
+                        <a href="<%= ResolveUrl("~/Account/Login.aspx") %>" class="text-white text-decoration-none mx-2">Contact Us</a>
                     <% } %>
 
                     <!-- About Us (always accessible) -->

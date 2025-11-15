@@ -190,7 +190,7 @@ namespace SciVerse_G12
                 BindGrid(txtSearch.Text?.Trim() ?? "");
                 Mode = "";
                 ToggleSelectionMode(false);
-                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Action completed successfully.');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('User deleted successfully.');", true);
             }
         }
 

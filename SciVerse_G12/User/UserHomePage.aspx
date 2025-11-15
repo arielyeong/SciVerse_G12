@@ -17,7 +17,7 @@
             <div class="container-fluid position-relative px-0">
                 <div class="hero-badge mb-3">🌟Welcome to Your Learning Space</div>
                     <h1 class="hero-title mb-3">
-                        Welcome, <span class="gradient-text"><asp:Label ID="lblFullName" runat="server"></asp:Label></span> 👋
+                        Welcome to SciVerse, <span class="gradient-text"><asp:Label ID="lblFullName" runat="server"></asp:Label></span>
                     </h1>
 
                     <p class="hero-subtitle mb-4">
@@ -281,7 +281,7 @@
             <div class="container">
                 <h2 class="cta-title mb-3">Ready to Transform Your Learning?</h2>
                 <p class="cta-subtitle mb-4">Join us to explore science in a whole new way</p>
-                <a href="<%= ResolveUrl("~/LearningMaterials/LearningMaterialList.aspx") %>" class="btn btn-lg btn-primary">Get Started</a>
+                <a href="<%= ResolveUrl("~/LearningMaterials/LearningMaterialList.aspx") %>" class="btn btn-lg btn-primary">Explore Course</a>
             </div>
         </section>
     </main>
