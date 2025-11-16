@@ -1,10 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="QuizPause.aspx.cs" Inherits="SciVerse_G12.Quiz_Student.QuizPause" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
+    :root {
+        --beige-50:#fbf7f1;
+    }
     html, body {
       height: 100%;
       margin: 0;
       overflow: hidden;            /* no scroll on tall screens */
+      background: var(--beige-50) !important;
+      background-attachment: fixed;
     }
 
     .pause-wrap {                  
@@ -22,7 +27,7 @@
         display: none !important;
     }
   
-     .pause-card {
+    .pause-card {
         position: fixed;            /* <-- anchor to viewport */
         top: 50%;
         left: 50%;

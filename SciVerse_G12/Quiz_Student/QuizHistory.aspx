@@ -4,23 +4,70 @@
     TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
-        /* scope to this page only (optional) */
-  body.quiz-history-page .main-content-wrapper .card:first-child {
-    margin-top: 24px !important;   /* about 1.5rem space */
-}
+    :root{
+        --beige-50:#fbf7f1;
+        --beige-100:#f4ecdf;
+        --beige-200:#eee2cc;
+        --ink:#1c2833;
+        --muted:#62707b;
+        --accent:#8b7aa7;
+        --accent-2:#c89a7d;
+        --ok:#2a9d8f;
+        --ok-bg:#e9fbf8;
+        --shadow:0 10px 28px rgba(28,40,51,.12);
+        --radius:18px;
+    }
 
-  /* remove the extra gap you added earlier */
-  body.quiz-history-page,
-  body.quiz-history-page .body-content,
-  body.quiz-history-page .card:first-child {
+   /* Hide site nav/footer only on this page */
+    .quiz-page .navbar .menu-toggle,
+    .quiz-page .navbar .navbar-toggler,
+    .navbar .navbar-nav{
+    display: none !important;
+    }
+    footer,
+    hr {
+        display: none !important;
+    }
+    /* kill the default HR gap if master injects it */
+    .body-content>hr{display:none!important;}
+
+    /* single, fixed background for the whole viewport */
+    html, body{height:100%;}
+    body::before{
+      content:"";
+      position:fixed; inset:0; z-index:-1;
+      background:
+        radial-gradient(900px 520px at 12% 10%, rgba(248,240,229,.95) 0%, rgba(248,240,229,0) 60%),
+        radial-gradient(800px 460px at 88% 92%, rgba(255,236,214,.55) 0%, rgba(255,236,214,0) 55%),
+        var(--beige-50);
+      background-attachment:fixed,fixed,fixed;
+    }
+    /* ensure all wrappers are transparent so the gradient shows through */
+    .body-content,
+    .content-wrapper,
+    .page-wrap,
+    form,
+    footer,
+    .footer{ background:transparent!important; }
+
+
+        /* scope to this page only (optional) */
+    body.quiz-history-page .main-content-wrapper .card:first-child {
+        margin-top: 24px !important;   /* about 1.5rem space */
+    }
+
+    /* remove the extra gap you added earlier */
+    body.quiz-history-page,
+    body.quiz-history-page .body-content,
+    body.quiz-history-page .card:first-child {
     margin-top: 0 !important;
     padding-top: 0 !important;
-  }
+    }
 
-  /* also ensure the very first child inside body-content has no top margin */
-  body.quiz-history-page .body-content > *:first-child {
+    /* also ensure the very first child inside body-content has no top margin */
+    body.quiz-history-page .body-content > *:first-child {
     margin-top: 0 !important;
-  }
+    }
 
     .card {
         margin-top: 10px !important; /* slightly smaller spacing between cards */

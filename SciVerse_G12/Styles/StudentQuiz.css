@@ -3,9 +3,15 @@ html, body {
     height: 100%;
     background: radial-gradient(900px 500px at 10% 20%, rgba(226,245,243,1) 0%, rgba(226,245,243,0) 60%), radial-gradient(800px 450px at 90% 85%, rgba(255,236,200,0.9) 0%, rgba(255,236,200,0) 55%), radial-gradient(700px 400px at 70% -10%, rgba(200,230,255,0.9) 0%, rgba(200,230,255,0) 55%), #ffffff;
     background-attachment: fixed;
-    margin: 0;
+    margin: 0; 
 }
-/* top spacing */
+ top spacing 
+.body-content {
+    margin-top: 0 !important;
+    padding-top: 10px !important;
+}
+
+/* body content spacing */
 .body-content {
     margin-top: 0 !important;
     padding-top: 10px !important;

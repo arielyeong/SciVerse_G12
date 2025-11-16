@@ -32,7 +32,7 @@ namespace SciVerse_G12.Quiz_Student
             BindKpis();
             BindGrid();
             BindCharts();
-            BindChapterPerformance(); // new graph
+            BindChapterPerformance(); 
         }
 
         // ---------------- FILTER DROPDOWNS ----------------
@@ -138,7 +138,7 @@ namespace SciVerse_G12.Quiz_Student
                             int passed = rd["Passed"] == DBNull.Value ? 0 : Convert.ToInt32(rd["Passed"]);
 
                             litTotalAttempts.Text = total.ToString();
-                            litAvgPct.Text = Math.Round(pct, 0).ToString("0");
+                            litAvgPct.Text = pct.ToString("0.00");
                             litPassed.Text = passed.ToString();
                         }
                         else
@@ -203,9 +203,19 @@ namespace SciVerse_G12.Quiz_Student
                 chartTrend.Series["Scores"].Points.Clear();
                 chartPassFail.Series["PF"].Points.Clear();
 
+                // format Y-axis labels to 2 decimals
+                chartTrend.ChartAreas[0].AxisY.LabelStyle.Format = "0.00";
+
+                // show values above the points with %
+                chartTrend.Series["Scores"].IsValueShownAsLabel = true;
+                chartTrend.Series["Scores"].LabelFormat = "0.00'%'";
+
                 foreach (DataRow r in dt.Rows)
                 {
-                    chartTrend.Series["Scores"].Points.AddXY(Convert.ToDateTime(r["AttemptDate"]), Convert.ToDouble(r["ScorePct"]));
+                    chartTrend.Series["Scores"].Points.AddXY(
+                        Convert.ToDateTime(r["AttemptDate"]),
+                        Convert.ToDouble(r["ScorePct"])
+                    );
                 }
 
                 int pass = 0, fail = 0;
@@ -242,7 +252,7 @@ namespace SciVerse_G12.Quiz_Student
                 s.Points.Clear();
                 s.ChartType = SeriesChartType.Column;
                 s.IsValueShownAsLabel = true;
-                s.LabelFormat = "0'%'";
+                s.LabelFormat = "0.00'%'";
 
                 var area = chartChapterPerf.ChartAreas["AreaChapter"];
                 area.AxisY.Minimum = 0;

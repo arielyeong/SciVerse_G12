@@ -3,6 +3,7 @@
      <style>
     :root {
       --page-bg: #f8f3e9;
+      --beige-50:#fbf7f1;
       --ink: #1c2833;
       --muted: #62707b;
       --green: #16a34a;
@@ -25,11 +26,14 @@
     .container,
     .body-content,
     #MainContent {
-      background-color: var(--page-bg) !important;
+/*      background-color: var(--page-bg) !important;*/
       background-image: none !important;
       border: none !important;
       margin: 0;
       padding: 0;
+    height: 100%;
+    background: var(--beige-50) !important;
+    background-attachment: fixed;
     }
 
     /* Remove any decorative overlays or gradients */

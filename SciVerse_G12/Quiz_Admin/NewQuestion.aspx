@@ -5,9 +5,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Page-specific CSS -->
-    <link href='<%= ResolveUrl("~/Styles/AdminQuiz.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
+    <link href='<%= ResolveUrl("~/Styles/QuizAdmin.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
     <style>
-        .card-max { max-width: 1000px; width: 100%; border-radius: 12px; }
+         Center card + make it pop slightly from background 
+        .card-max {
+            max-width: 960px;
+            width: 100%;
+            border-radius: 16px;
+            background-color: #fffdf8;       very light warm 
+            border: 1px solid #e7dcc7;
+        }
+
+        /* Optional: slightly bolder page title */
+        .card-max h1 {
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">

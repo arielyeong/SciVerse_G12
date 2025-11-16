@@ -1,9 +1,27 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="CreateNewQuizPage.aspx.cs" Inherits="SciVerse_G12.Quiz_Admin.CreateNewQuizPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- External CSS in <head> -->
-    <link rel="stylesheet" href='<%= ResolveUrl("~/Styles/AdminQuiz.css?v=" + DateTime.Now.Ticks) %>' />
+        <!-- Page-specific CSS -->
+        <link href='<%= ResolveUrl("~/Styles/QuizAdmin.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
+    <style>
+        /* ================================
+           QUIZ CREATION CARD STYLING
+        ================================= */
+        .quiz-card {
+            max-width: 1000px;
+            width: 100%;
+            background-color: #fffdf8;   /* very light warm white */
+            border: 1px solid #e8dcc7;
+            border-radius: 16px;
+        }
+
+        .quiz-card h1 {
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="d-flex justify-content-center align-items-center" style="min-height:90vh;">

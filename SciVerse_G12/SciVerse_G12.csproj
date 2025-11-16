@@ -156,12 +156,12 @@
     <Content Include="Quiz_Student\Quiz.aspx" />
     <Content Include="Quiz_Student\QuizAttemptHistory.aspx" />
     <Content Include="Quiz_Student\QuizDashboardPageStudent.aspx" />
-    <Content Include="Styles\AdminQuiz.css" />
     <Content Include="Simulation\AdminSimulation.aspx" />
     <Content Include="Simulation\EditSimulation.aspx" />
     <Content Include="Simulation\Experiment.aspx" />
     <Content Include="Simulation\SimulationDashboard.aspx" />
     <Content Include="Simulation\StartSimulation.aspx" />
+    <Content Include="Styles\QuizAdmin.css" />
     <Content Include="Styles\site2.css" />
     <Content Include="Styles\Admin.css" />
     <Content Include="Styles\Flashcard.css" />

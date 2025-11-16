@@ -2,16 +2,22 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
         :root {
-          --muted:#6b7280;
-          --ok:#16a34a;
-          --bad:#dc2626;
-          --border:#e5e7eb;
-          --shadow:0 6px 18px rgba(0,0,0,.06);
-          --primary:#1d4ed8;
-          --radius:16px;
+            --beige-50:#fbf7f1;
+            --muted:#6b7280;
+            --ok:#16a34a;
+            --bad:#dc2626;
+            --border:#e5e7eb;
+            --shadow:0 6px 18px rgba(0,0,0,.06);
+            --primary:#1d4ed8;
+            --radius:16px;
+        }
+        html, body {
+            height: 100%;
+            background: var(--beige-50) !important;
+            background-attachment: fixed;
         }
 
-        body { background:#f5f6f9; }
+/*        body { background:#f5f6f9; }*/
         .body-content { margin-top:12px!important; }
 
         .wrap {

@@ -17,7 +17,7 @@
         /* === Full beige background across entire page === */
         html, body {
             height: 100%;
-            background: var(--beige-50);
+            background: var(--beige-50) !important;
             background-attachment: fixed;
         }
 /*      === FIX TOP GAP === */

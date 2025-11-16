@@ -5,6 +5,7 @@
 
     <!-- Page-specific CSS -->
     <link href='<%= ResolveUrl("~/Styles/StudentQuiz.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="quiz-section">

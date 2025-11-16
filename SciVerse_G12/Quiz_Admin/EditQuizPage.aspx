@@ -1,32 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="EditQuizPage.aspx.cs" Inherits="SciVerse_G12.Quiz_Admin.EditQuizPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <style>
-/*        html, body {
-            height: 100%;
-            background: #fefefe;
-            background-attachment: fixed;
-        }*/
-    body.page-stick-footer { padding-bottom: 64px; }  /* = footer height */
-      body.page-stick-footer .footer {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 100;           /* above content */
-      }
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-      /* optional: if your footer is taller/shorter on mobile */
-      @media (max-width: 576px) {
-        body.page-stick-footer { padding-bottom: 72px; }
-      }
-    </style>
-
-    <script>
-      // Tag the body only on this page so the CSS applies here
-      document.addEventListener('DOMContentLoaded', function () {
-        document.body.classList.add('page-stick-footer');
-      });
-    </script>
+        <!-- Page-specific CSS -->
+        <link href='<%= ResolveUrl("~/Styles/QuizAdmin.css?v=" + DateTime.Now.Ticks) %>' rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <!-- keep the current mode for postbacks -->

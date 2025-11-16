@@ -162,6 +162,10 @@ namespace SciVerse_G12.Quiz_Admin
             foreach (DataRow row in dt.Rows)
             {
                 double pct = row["Percent"] == DBNull.Value ? 0.0 : Convert.ToDouble(row["Percent"]);
+                // convert to 2 decimal places
+                pct = Math.Round(pct, 2);
+                row["Percent"] = pct;
+
                 bool pass = pct >= PASS_THRESHOLD;
                 row["StatusText"] = pass ? "Pass" : "Fail";
                 if (pass) passCount++;
@@ -257,6 +261,9 @@ namespace SciVerse_G12.Quiz_Admin
             btnFilter_Click(sender, e);
         }
 
-        
+        protected void gvReport_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,0 +1,55 @@
+﻿/* ===== GLOBAL PAGE BACKGROUND ===== */
+html, body, form,
+.main-content-wrapper,
+.content-wrapper,
+.page-content,
+.body-content,
+#MainContent,
+main#content {
+    background-color: #fbf7ef !important; /* soft neutral */
+    margin: 0;
+    min-height: 100%;
+}
+
+/* Footer handling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+#MainContent {
+    flex: 1 0 auto;
+}
+
+footer, .footer {
+    margin-top: auto !important;
+    flex-shrink: 0;
+    position: static !important;
+}
+
+/* ===== TABLE THEME ===== */
+.view-quiz-list .table,
+.quiz-question-content .table {
+    background-color: #f8f2e8;
+    border-color: #e7dcc7;
+}
+
+    .view-quiz-list .table th,
+    .quiz-question-content .table th {
+        background-color: #efe6d7;
+        color: #2a2a2a;
+        font-weight: 700;
+        border-color: #e7dcc7;
+    }
+
+    .view-quiz-list .table td,
+    .quiz-question-content .table td {
+        background-color: #f8f2e8;
+        color: #222;
+        border-color: #eadfcd;
+    }
+
+.view-quiz-list .table-hover tbody tr:hover td,
+.quiz-question-content .table-hover tbody tr:hover td {
+    background-color: #f3ebdd !important;
+}

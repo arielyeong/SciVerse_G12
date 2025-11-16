@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
       :root{
+        --beige-50:#fbf7f1;
         --ink:#0f172a;
         --muted:#6b7280;
         --primary:#1d4ed8;
@@ -14,9 +15,14 @@
         --shadow:0 12px 36px rgba(2,6,23,.10);
         --radius:22px;
       }
-
+      /* === Full beige background across entire page === */
+        html, body {
+            height: 100%;
+            background: var(--beige-50) !important;
+            background-attachment: fixed;
+        }
       /* page */
-      body{ background:#f5f6f9; }
+/*      body{ background:#f5f6f9; }*/
       .body-content{ margin-top:8px !important; }
 
       /* card */
