@@ -16,7 +16,6 @@ namespace SciVerse_G12
             {
                 lblMessage.CssClass = "lblMessage";
                 lblMessage.Text = "";
-                // Removed: lblMessage.Style.Add("display", "none"); // Let CSS :empty rule handle hiding
             }
         }
 

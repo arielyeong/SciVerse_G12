@@ -1,4 +1,267 @@
-﻿INSERT INTO [dbo].[tblQuiz] (Title, Description, Chapter, TimeLimit, ImageURL, CreatedBy, AttemptLimit)
+﻿/*----------------------------------------------------
+ Create Registered Users Table
+----------------------------------------------------*/
+
+CREATE TABLE [dbo].[tblRegisteredUsers] (
+    [RID]          INT            IDENTITY (1, 1) NOT NULL,
+    [fullName]     NVARCHAR (100) NULL,
+    [emailAddress] NVARCHAR (50)  NULL,
+    [username]     NVARCHAR (50)  NULL,
+    [password]     NVARCHAR (50)  NULL,
+    [age]          INT            NULL,
+    [gender]       NCHAR (10)     NULL,
+    [country]      NVARCHAR (MAX) NULL,
+    [picture]      NVARCHAR (MAX) NULL,
+    [dateRegister] DATETIME       NULL,
+    [role]         NVARCHAR (20)  DEFAULT ('User') NOT NULL,
+    PRIMARY KEY CLUSTERED ([RID] ASC)
+);
+
+
+/*----------------------------------------------------
+ Insert Sample Users
+----------------------------------------------------*/
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('System Admin', 'admin@example.com', 'admin', 'admin123', 30, 'Male', 'Malaysia', '~/Images/Profile/AdminProfile.jpg', GETDATE(), 'Admin');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Charlotte Chen Zi Shan', 'charlotte@mail.com', 'charlotte', 'wapp', 21, 'Female', 'Colombia', 'https://robohash.org/suntquiet.png?size=50x50&set=set1', '2025-02-19 11:42:17', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Chong Ching Ying', 'chingying@mail.com', 'chingying', 'wapp', 21, 'Female', 'New Zealand', 'https://robohash.org/inventoreliberosit.png?size=50x50&set=set1', '2024-11-05 06:14:41', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Ong Ying Xin', 'yingxin@mail.com', 'yingxin', 'wapp', 21, 'Male', 'Thailand', 'https://robohash.org/sapientenihilfugit.png?size=50x50&set=set1', '2025-06-12 07:32:32', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Yeong Huey Yee', 'hueyyee@mail.com', 'hueyyee', 'wapp', 18, 'Female', 'China', '~/Images/Profile/panda.jpg', '2025-07-26 20:58:16', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Chen Jia Wei', 'chenjiawei@example.com', 'chenjiawei', 'wapp', 15, 'Female', 'Iceland', 'https://robohash.org/earumabvoluptatem.png?size=50x50&set=set1', '2025-09-15 07:16:42', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Li Jun Hao', 'lijunhao@example.com', 'lijunhao', 'wapp', 16, 'Female', 'Indonesia', 'https://robohash.org/facerequivelit.png?size=50x50&set=set1', '2025-02-20 01:28:28', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Wang Shi Han', 'wangshihan@example.com', 'wangshihan', 'wapp', 8, 'Female', 'China', 'https://robohash.org/magnamquiaeaque.png?size=50x50&set=set1', '2025-01-12 23:54:23', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Lin Zi Xuan', 'linzixuan@example.com', 'linzixuan', 'wapp', 11, 'Female', 'Czech Republic', 'https://robohash.org/voluptatemexet.png?size=50x50&set=set1', '2025-02-04 23:05:16', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Zhou Ya Ting', 'zhouyating@example.com', 'zhouyating', 'wapp', 8, 'Female', 'Canada', 'https://robohash.org/laborumquiain.png?size=50x50&set=set1', '2025-01-23 15:38:34', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Zhang Zi Chen', 'zhangzichen@example.com', 'zhangzichen', 'wapp', 18, 'Female', 'China', 'https://robohash.org/aspernaturvelrepudiandae.png?size=50x50&set=set1', '2025-07-26 20:58:16', 'User');
+
+/*----------------------------------------------------
+ Create Contact Us Table
+----------------------------------------------------*/
+
+CREATE TABLE [dbo].[tblContactUs] (
+    [CID]            INT            IDENTITY (1, 1) NOT NULL,
+    [contactName]    NVARCHAR (50)  NULL,
+    [contactEmail]   NVARCHAR (50)  NULL,
+    [contactMessage] NVARCHAR (MAX) NULL,
+    [RID]            INT            NULL,
+    [isReviewed]     BIT            DEFAULT ((0)) NOT NULL,
+    PRIMARY KEY CLUSTERED ([CID] ASC)
+);
+
+/*----------------------------------------------------
+ Insert Sample Contact Messages
+----------------------------------------------------*/
+
+INSERT INTO [dbo].[tblContactUs] (contactName, contactEmail, contactMessage, RID, isReviewed)
+VALUES 
+('Charlotte Chen Zi Shan', 'charlotte@mail.com', 'Hi admin! I wanted to ask if you will be adding new science quizzes soon?', 2, 0),
+
+('Chong Ching Ying', 'chingying@mail.com', 'Hello! I think the simulation game is really fun, keep it up!', 3, 1),
+
+('Ong Ying Xin', 'yingxin@mail.com', 'I encountered a small issue when submitting the quiz. The loading screen got stuck.', 4, 0),
+
+('Yeong Huey Yee', 'hueyyee@mail.com', 'HILO, just testing the contact form. Everything works great so far!', 5, 1),
+
+('Chen Jia Wei', 'chenjiawei@example.com', 'Good afternoon! Will there be any upcoming events for registered users?', 6, 0);
+
+
+--===========================================================
+-- Create Learning Materials Table
+--===========================================================
+
+CREATE TABLE [dbo].[tblLearningMaterial] (
+    [materialID]  INT            IDENTITY (1, 1) NOT NULL,
+    [title]       NVARCHAR (255) NOT NULL,
+    [description] NVARCHAR (MAX) NULL,
+    [chapter]     INT NULL,
+    [type]        NVARCHAR (50)  NULL,
+    [filePath]    NVARCHAR (500) NOT NULL,
+    [uploadDate]  DATETIME       DEFAULT (getdate()) NOT NULL,
+    [uploadedBy]  INT            NULL,
+    PRIMARY KEY CLUSTERED ([materialID] ASC),
+    FOREIGN KEY ([uploadedBy]) REFERENCES [dbo].[tblRegisteredUsers] ([RID]) ON DELETE SET NULL
+);
+
+/*----------------------------------------------------
+ Insert Learning Materials 
+----------------------------------------------------*/
+
+INSERT INTO [dbo].[tblLearningMaterial] (title, description, chapter, [type], filePath, uploadedBy)
+VALUES
+-- chap 1
+('Forces and Motion', 'Comprehensive notes on forces, motion, and Newton''s laws.', 1, 'Word', '/LearningMaterials/materials/Chapter1.docx', 10),
+('Forces and Motion', 'Comprehensive notes on forces, motion, and Newton''s laws.', 1, 'Video', '/LearningMaterials/materials/force-and-motion.mp4', 10),
+
+-- chap 2
+('The Nature of Matter', 'Detailed notes on the states of matter, atoms, and chemical properties.', 2, 'Word', '/LearningMaterials/materials/Chapter2.docx', 10),
+('The Nature of Matter', 'Detailed notes on the states of matter, atoms, and chemical properties.', 2, 'Video', '/LearningMaterials/materials/nature-of-matter.mp4', 10),
+
+-- chap 3
+('Heat and Temperature', 'In-depth notes on heat transfer, temperature, and thermodynamics.', 3, 'Word', '/LearningMaterials/materials/Chapter3.docx', 10),
+('Heat and Temperature', 'In-depth notes on heat transfer, temperature, and thermodynamics.', 3, 'Video', '/LearningMaterials/materials/heat-and-temp.mp4', 10),
+
+-- chap 4
+('The Human Body Systems', 'A complete guide to the major systems of the human body.', 4, 'Word', '/LearningMaterials/materials/Chapter4.docx', 10),
+('The Human Body Systems', 'A complete guide to the major systems of the human body.', 4, 'Video', '/LearningMaterials/materials/human-body-system.mp4', 10),
+
+-- chap 5
+('Solar System', 'Explore the planets, celestial bodies, and wonders of our solar system.', 5, 'Word', '/LearningMaterials/materials/Chapter5.docx', 10),
+('Solar System', 'Explore the planets, celestial bodies, and wonders of our solar system.', 5, 'Video', '/LearningMaterials/materials/solar-system.mp4', 10);
+
+--reset script if tbl id got prob
+DELETE FROM tblLearningMaterial;
+DBCC CHECKIDENT ('tblLearningMaterial', RESEED, 0);
+
+/*----------------------------------------------------
+ Create Experiment Simulation Table
+----------------------------------------------------*/
+
+SELECT * FROM [dbo].[tblExperimentSimulation];
+DROP TABLE [dbo].[tblExperimentSimulation];
+-- CREATE
+CREATE TABLE [dbo].[tblExperimentSimulation] (
+    [SimulationID]       INT            IDENTITY (1, 1) NOT NULL,
+    [Title]        NVARCHAR (200) NOT NULL,
+    [Description]  NVARCHAR (MAX) NULL,
+    [Chapter]      NVARCHAR (100) NULL,
+    [Instruction]  NVARCHAR (MAX) NULL,
+    [URL]          NVARCHAR (MAX) NULL,
+    [Image]        NVARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([SimulationID] ASC),
+);
+
+/*----------------------------------------------------
+ Insert Experiment Simulation
+----------------------------------------------------*/
+
+INSERT INTO [dbo].[tblExperimentSimulation](Title, Description, Chapter, Instruction,URL,Image)
+VALUES
+('My solar system', 
+'Explore how gravity controls the motion of planets, moons, and stars. Create your own solar system and observe how the objects move and interact with each other based on mass, distance, and velocity.',
+,'Chapter 5',
+'1. Select planets, moons, or stars into the simulation space. 
+ 2. Adjust the mass, velocity, and position of each object. 
+ 3. Start the simulation and observe the orbital paths formed by gravitational forces. 
+ 4. Experiment with different configurations to see how changing mass or velocity affects motion. 
+ 5. Record your observations and explain how gravitational pull keeps planets in orbit.',
+ 'https://phet.colorado.edu/sims/html/my-solar-system/latest/my-solar-system_en.html',
+ 'https://phet.colorado.edu/sims/html/my-solar-system/latest/my-solar-system-600.png'),
+
+('Reaction of acid and reactive metal','Observe how reactive metals like magnesium react with acids to produce hydrogen gas and form salts.','Chapter 2', 
+'1. Drag the Hydrochloric acid bottle to the test tube. 
+ 2. Drag the Magnesium ribbon to the test tube. 
+ 3. Click the Bunsen burner to light it. 
+ 4. Drag the wooden splint into the lit Bunsen flame to ignite it. 
+ 5. Drag the lit splint to the test tube to show the pop image.
+ 6. Drag the reacted test tube to the dish above the Bunsen.
+ 7. Click the lit Bunsen to heat the dish mixture to see the product.'
+ ,'Images/Simulation/reaction.html',
+ 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8nAOSyvPZMwgdn_pVbqDbIFhp4MuhRPllmQ&s'
+ )
+
+ /*----------------------------------------------------
+Create Access Simulation
+----------------------------------------------------*/
+
+ CREATE TABLE [dbo].[tblAccessSimulation]
+(
+	[SID]			INT         IDENTITY (1, 1) NOT NULL,
+	[RID]			INT			NULL,
+	[LastModify]	DATETIME	NULL,
+	[SimulationID]	INT			NULL 
+    PRIMARY KEY CLUSTERED ([SID] ASC),
+    FOREIGN KEY ([RID]) REFERENCES [dbo].[tblRegisteredUsers] ([RID]) ON DELETE SET NULL,
+	FOREIGN KEY ([SimulationID]) REFERENCES [dbo].[tblExperimentSimulation] ([SimulationID]) ON DELETE SET NULL
+)
+
+ /*----------------------------------------------------
+Create All QUiz Tables
+----------------------------------------------------*/
+
+CREATE TABLE [dbo].[tblQuiz] (
+    [QuizID]       INT            IDENTITY (1, 1) NOT NULL,
+    [Title]        NVARCHAR (200) NOT NULL,
+    [Description]  NVARCHAR (MAX) NULL,
+    [Chapter]      INT			  NULL,
+    [TimeLimit]    INT            NULL,
+    [ImageURL]     NVARCHAR (255) NULL,
+    [CreatedDate]  DATETIME       DEFAULT (getdate()) NULL,
+    [CreatedBy]    INT            NULL,
+    [AttemptLimit] INT            NULL,
+    PRIMARY KEY CLUSTERED ([QuizID] ASC),
+    FOREIGN KEY ([CreatedBy]) REFERENCES [dbo].[tblRegisteredUsers] ([RID]) ON DELETE SET NULL
+);
+
+CREATE TABLE [dbo].[tblQuestion] (
+    [QuestionID]   INT            IDENTITY (1, 1) NOT NULL,
+    [QuizID]       INT            NOT NULL,
+    [QuestionText] NVARCHAR (MAX) NOT NULL,
+    [QuestionType] NVARCHAR (50)  NULL,
+    [Marks]        INT            NULL,
+    [Explanation]  NVARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([QuestionID] ASC),
+    FOREIGN KEY ([QuizID]) REFERENCES [dbo].[tblQuiz] ([QuizID]) ON DELETE CASCADE
+);
+
+CREATE TABLE [dbo].[tblOptions] (
+    [OptionID]   INT            IDENTITY (1, 1) NOT NULL,
+    [QuestionID] INT            NOT NULL,
+    [OptionText] NVARCHAR (255) NOT NULL,
+    [IsCorrect]  BIT            NOT NULL,
+    PRIMARY KEY CLUSTERED ([OptionID] ASC),
+    FOREIGN KEY ([QuestionID]) REFERENCES [dbo].[tblQuestion] ([QuestionID]) ON DELETE CASCADE
+);
+
+CREATE TABLE [dbo].[tblQuizAttempt] (
+    [AttemptID]   INT           IDENTITY (1, 1) NOT NULL,
+    [RID]         INT           NULL,
+    [QuizID]      INT           NOT NULL,
+    [AttemptDate] DATETIME2 (0) DEFAULT (sysutcdatetime()) NOT NULL,
+    [Duration]    INT           DEFAULT ((0)) NOT NULL,
+    [Status]      NVARCHAR (20) DEFAULT (N'InProgress') NOT NULL,
+    PRIMARY KEY CLUSTERED ([AttemptID] ASC),
+    CONSTRAINT [FK_Attempt_User] FOREIGN KEY ([RID]) REFERENCES [dbo].[tblRegisteredUsers] ([RID]) ON DELETE SET NULL,
+    CONSTRAINT [FK_Attempt_Quiz] FOREIGN KEY ([QuizID]) REFERENCES [dbo].[tblQuiz] ([QuizID]) ON DELETE CASCADE
+);
+
+CREATE TABLE [dbo].[tblQuizResult] (
+    [ResultID]      INT            IDENTITY (1, 1) NOT NULL,
+    [AttemptID]     INT            NOT NULL,
+    [Score]         INT            NULL,
+    [Question]      NVARCHAR (255) NULL,
+    [Answer]        NVARCHAR (255) NULL,
+    [CorrectAnswer] NVARCHAR (255) NULL,
+    [Marks]         INT            NULL,
+    PRIMARY KEY CLUSTERED ([ResultID] ASC),
+    FOREIGN KEY ([AttemptID]) REFERENCES [dbo].[tblQuizAttempt] ([AttemptID]) ON DELETE CASCADE
+);
+
+--===========================================================
+-- INSERT QUESTIONS AND OPTIONS
+--===========================================================
+
+INSERT INTO [dbo].[tblQuiz] (Title, Description, Chapter, TimeLimit, ImageURL, CreatedBy, AttemptLimit)
 VALUES 
 ('Forces and Motion', 'A quiz on the fundamental concepts of forces, motion, and Newton''s laws.', 1, 0, '/Images/Quiz/force-and-motion.png', 10, 10),
 ('The Nature of Matter', 'Test your knowledge on the states of matter, atoms, and physical vs. chemical changes.', 2, 0, '/Images/Quiz/the-nature-of-matter.png', 10, 10),
@@ -312,3 +575,34 @@ VALUES (5, 'The dwarf planet located in the Kuiper Belt is [blank].', 'FillInBla
 SET @QID = SCOPE_IDENTITY();
 INSERT INTO tblOptions (QuestionID, optionText, isCorrect) VALUES
 (@QID, 'Pluto', 1);
+
+/*----------------------------------------------------
+  Database Maintenance & Reset Operations
+----------------------------------------------------*/
+
+DROP TABLE tblContactUs;
+
+DROP TABLE tblRegisteredUsers;
+
+update tblRegisteredUsers Set Password='wapp'
+
+select * from tblRegisteredUsers
+
+DELETE FROM tblRegisteredUsers;
+
+DBCC CHECKIDENT ('tblRegisteredUsers', RESEED, 0);
+
+TRUNCATE TABLE tblRegisteredUsers;
+
+DELETE FROM tblRegisteredUsers
+WHERE RID IN (13);
+
+ALTER TABLE tblRegisteredUsers
+ADD Role NVARCHAR(20) NOT NULL DEFAULT 'User';
+
+SELECT * FROM [tblContactUs]
+
+DROP TABLE tblContactUs;
+
+DROP TABLE tblRegisteredUsers;
+
