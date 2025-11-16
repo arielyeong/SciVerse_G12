@@ -55,6 +55,36 @@ VALUES ('Zhou Ya Ting', 'zhouyating@example.com', 'zhouyating', 'wapp', 8, 'Fema
 INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
 VALUES ('Zhang Zi Chen', 'zhangzichen@example.com', 'zhangzichen', 'wapp', 18, 'Female', 'China', 'https://robohash.org/aspernaturvelrepudiandae.png?size=50x50&set=set1', '2025-07-26 20:58:16', 'User');
 
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Tan Mei Ling', 'meiling@mail.com', 'meiling', 'wapp', 22, 'Female', 'Singapore', 'https://robohash.org/nesciuntvoluptasvoluptatem.png?size=50x50&set=set1', '2024-10-15 14:23:45', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Lim Wei Jie', 'weijie@example.com', 'weijie', 'wapp', 19, 'Male', 'Malaysia', '~/Images/Profile/maleprofile.jpg', '2025-03-08 09:17:32', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Huang Xiao Yu', 'xiaoyu@mail.com', 'xiaoyu', 'wapp', 17, 'Female', 'Taiwan', 'https://robohash.org/quoetaut.png?size=50x50&set=set1', '2025-05-22 16:04:19', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Goh Kai Wen', 'kaiwen@example.com', 'kaiwen', 'wapp', 24, 'Male', 'Australia', 'https://robohash.org/velitsedquia.png?size=50x50&set=set1', '2024-12-01 11:55:08', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Wong Jia Hui', 'jiahui@mail.com', 'jiahui', 'wapp', 13, 'Female', 'Hong Kong', '~/Images/Profile/femaleprofile.jpg', '2025-01-30 18:42:57', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Foo Ming Xuan', 'mingxuan@example.com', 'mingxuan', 'wapp', 20, 'Male', 'Philippines', 'https://robohash.org/explicaboeos.png?size=50x50&set=set1', '2025-04-12 13:29:41', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Ng Sze Yin', 'szeyin@mail.com', 'szeyin', 'wapp', 15, 'Female', 'Vietnam', 'https://robohash.org/estquiaet.png?size=50x50&set=set1', '2025-08-07 20:15:23', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Lau Hao Ran', 'haoran@example.com', 'haoran', 'wapp', 28, 'Male', 'Japan', '~/Images/Profile/japanprofile.jpg', '2024-09-18 07:36:14', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Chan Yi Ting', 'yiting@mail.com', 'yiting', 'wapp', 10, 'Female', 'South Korea', 'https://robohash.org/ipsumdoloremque.png?size=50x50&set=set1', '2025-11-03 12:48:09', 'User');
+
+INSERT INTO tblRegisteredUsers (fullName, emailAddress, username, password, age, gender, country, picture, dateRegister, role) 
+VALUES ('Teo Zhi Wei', 'zhiwei@example.com', 'zhiwei', 'wapp', 16, 'Male', 'United States', 'https://robohash.org/repellatdolor.png?size=50x50&set=set1', '2025-02-28 15:21:56', 'User');
+
 /*----------------------------------------------------
  Create Contact Us Table
 ----------------------------------------------------*/
@@ -137,8 +167,6 @@ DBCC CHECKIDENT ('tblLearningMaterial', RESEED, 0);
  Create Experiment Simulation Table
 ----------------------------------------------------*/
 
-SELECT * FROM [dbo].[tblExperimentSimulation];
-DROP TABLE [dbo].[tblExperimentSimulation];
 -- CREATE
 CREATE TABLE [dbo].[tblExperimentSimulation] (
     [SimulationID]       INT            IDENTITY (1, 1) NOT NULL,
@@ -159,7 +187,7 @@ INSERT INTO [dbo].[tblExperimentSimulation](Title, Description, Chapter, Instruc
 VALUES
 ('My solar system', 
 'Explore how gravity controls the motion of planets, moons, and stars. Create your own solar system and observe how the objects move and interact with each other based on mass, distance, and velocity.',
-,'Chapter 5',
+'Chapter 5',
 '1. Select planets, moons, or stars into the simulation space. 
  2. Adjust the mass, velocity, and position of each object. 
  3. Start the simulation and observe the orbital paths formed by gravitational forces. 
